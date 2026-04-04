@@ -1,0 +1,6 @@
+name: Chrome
+id: chrome
+icon: "🌐"
+url: https://www.google.com
+category: other
+ai_description: "Browse the web. Search for information. Fill forms. Extract data from websites."

@@ -1,0 +1,6 @@
+name: Google Sheets
+id: google.sheets
+icon: "📊"
+url: https://sheets.google.com
+category: productivity
+ai_description: "Create, read, and edit spreadsheets. Add rows, formulas, and charts. Analyze data."

@@ -1,0 +1,6 @@
+name: Slack
+id: slack
+icon: "💬"
+url: https://app.slack.com
+category: communication
+ai_description: "Read and send messages in channels. Search conversations. Manage notifications."

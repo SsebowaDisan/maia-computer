@@ -1,0 +1,6 @@
+name: WhatsApp
+id: whatsapp
+icon: "💬"
+url: https://web.whatsapp.com
+category: communication
+ai_description: "Read and send WhatsApp messages. View contacts. Send media."

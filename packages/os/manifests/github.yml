@@ -1,0 +1,6 @@
+name: GitHub
+id: github
+icon: "🐙"
+url: https://github.com
+category: developer
+ai_description: "Browse repositories. Create issues. Review pull requests. Manage code."

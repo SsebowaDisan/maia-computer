@@ -1,0 +1,6 @@
+name: Gmail
+id: google.gmail
+icon: "📧"
+url: https://mail.google.com
+category: productivity
+ai_description: "Read, compose, search, and organize emails. Reply automatically. Extract data from emails."
