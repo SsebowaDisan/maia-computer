@@ -1,4 +1,5 @@
 import type { IPCCommands, IPCEvents, IPCResults } from '@maia/shared'
+import type { DetailedHTMLProps, HTMLAttributes } from 'react'
 
 export interface ElectronAPI {
   invoke<TKey extends keyof IPCCommands>(
@@ -14,6 +15,16 @@ export interface ElectronAPI {
 declare global {
   interface Window {
     electronAPI?: ElectronAPI
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      webview: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> & {
+        allowpopups?: string
+        partition?: string
+        src?: string
+      }
+    }
   }
 }
 

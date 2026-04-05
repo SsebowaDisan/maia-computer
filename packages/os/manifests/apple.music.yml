@@ -1,0 +1,6 @@
+name: Apple Music
+id: apple-music
+icon: "https://www.google.com/s2/favicons?domain=music.apple.com&sz=128"
+url: https://music.apple.com
+category: media
+ai_description: "Stream music and radio. Browse albums, playlists, and artists."

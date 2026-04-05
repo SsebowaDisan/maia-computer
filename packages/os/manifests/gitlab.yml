@@ -1,0 +1,6 @@
+name: GitLab
+id: gitlab
+icon: "https://www.google.com/s2/favicons?domain=gitlab.com&sz=128"
+url: https://gitlab.com
+category: developer
+ai_description: "Git repository management. CI/CD pipelines, issues, and merge requests."

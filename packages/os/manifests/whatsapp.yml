@@ -1,6 +1,6 @@
 name: WhatsApp
 id: whatsapp
-icon: "💬"
+icon: "https://static.whatsapp.net/rsrc.php/v3/yP/r/rYZqPCBaG70.png"
 url: https://web.whatsapp.com
 category: communication
 ai_description: "Read and send WhatsApp messages. View contacts. Send media."

@@ -1,0 +1,6 @@
+name: ChatGPT
+id: chatgpt
+icon: "https://www.google.com/s2/favicons?domain=chatgpt.com&sz=128"
+url: https://chatgpt.com
+category: productivity
+ai_description: "Chat with OpenAI's AI assistant. Ask questions, generate content, brainstorm ideas."

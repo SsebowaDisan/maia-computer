@@ -1,6 +1,12 @@
-import type { InstalledApp, AppBounds, AppBadge, Space } from './apps'
+import type { AppManifest, InstalledApp, AppBounds, AppBadge, SnapZone, Space } from './apps'
 import type { ChatMessage } from './messages'
 import type { PlanStep } from './events'
+
+export interface TheatreLayoutItem {
+  appId?: string
+  windowId?: string
+  snapZone: SnapZone
+}
 
 // ── Frontend → Backend (commands) ──────────────────────────────
 
@@ -15,7 +21,7 @@ export interface IPCCommands {
   'brain:startTask': { description: string }
   'brain:stop': Record<string, never>
   'brain:getStatus': Record<string, never>
-  'chat:send': { message: string }
+  'chat:send': { message: string; replyToId?: string }
   'chat:getHistory': Record<string, never>
   'spotlight:search': { query: string }
   'spaces:list': Record<string, never>
@@ -24,6 +30,7 @@ export interface IPCCommands {
   'spaces:delete': { spaceId: string }
   'settings:get': Record<string, never>
   'settings:update': { key: string; value: unknown }
+  'appstore:getManifests': Record<string, never>
 }
 
 // ── Frontend → Backend (return types) ──────────────────────────
@@ -48,6 +55,7 @@ export interface IPCResults {
   'spaces:delete': { success: boolean }
   'settings:get': { settings: Record<string, unknown> }
   'settings:update': { success: boolean }
+  'appstore:getManifests': AppManifest[]
 }
 
 // ── Backend → Frontend (events) ────────────────────────────────
@@ -63,8 +71,12 @@ export interface IPCEvents {
   'brain:planUpdated': { stepIndex: number; status: string }
   'brain:taskCompleted': { summary: string }
   'brain:error': { message: string }
+  'brain:agentStarted': { agentId: string; appId: string; description: string }
+  'brain:agentCompleted': { agentId: string; summary: string }
   'chat:message': { message: ChatMessage }
   'cost:update': { totalCost: number; budget: number }
+  'theatre:arrange': { layout: TheatreLayoutItem[]; focusAppId?: string }
+  'theatre:focus': { appId: string }
 }
 
 // ── Search ─────────────────────────────────────────────────────

@@ -66,9 +66,25 @@ export class IntelligenceRouter {
     }
   }
 
+  async scanPage(appId: string): Promise<void> {
+    await this.dom.scanPageOnce(appId)
+  }
+
+  async highlightKeywords(appId: string, keywords: string[]): Promise<void> {
+    await this.dom.highlightKeywords(appId, keywords)
+  }
+
+  async isPageLoading(appId: string): Promise<boolean> {
+    try {
+      return await this.dom.isPageLoading(appId)
+    } catch {
+      return false
+    }
+  }
+
   async act(
     appId: string,
-    action: 'click' | 'type' | 'scroll',
+    action: 'click' | 'type' | 'scroll' | 'press_key' | 'go_back',
     target: string,
     value?: string,
   ): Promise<boolean> {
@@ -79,6 +95,10 @@ export class IntelligenceRouter {
         return this.dom.typeInElement(appId, target, value ?? '')
       case 'scroll':
         return this.dom.scrollToElement(appId, target)
+      case 'press_key':
+        return this.dom.pressKey(appId, target)
+      case 'go_back':
+        return this.dom.goBack(appId)
       default:
         return false
     }

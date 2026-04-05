@@ -1,0 +1,6 @@
+name: Zendesk
+id: zendesk
+icon: "https://www.google.com/s2/favicons?domain=zendesk.com&sz=128"
+url: https://www.zendesk.com/login
+category: productivity
+ai_description: "Customer support platform. Manage tickets and live chat."

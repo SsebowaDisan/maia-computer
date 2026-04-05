@@ -1,0 +1,6 @@
+name: Outlook
+id: outlook
+icon: "https://www.google.com/s2/favicons?domain=outlook.live.com&sz=128"
+url: https://outlook.live.com
+category: productivity
+ai_description: "Read and send emails. Manage calendar and contacts."

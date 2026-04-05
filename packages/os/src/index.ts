@@ -17,6 +17,8 @@ export { TaskPlanner } from './brain/TaskPlanner'
 export { ActionDecider } from './brain/ActionDecider'
 export { SelfHealer } from './brain/SelfHealer'
 export { CostTracker } from './brain/CostTracker'
+export { Orchestrator } from './brain/Orchestrator'
+export { buildPersonalityPrompt, getPersonality } from './brain/AgentPersonality'
 
 // LLM
 export { OpenAIAdapter } from './llm/OpenAIAdapter'
@@ -31,7 +33,7 @@ export { EventLogger } from './events/EventLogger'
 // Communication
 export { MessageBus } from './communication/MessageBus'
 export { MessageHistory } from './communication/MessageHistory'
-export { classifyIntent, isTakeoverRequest, isResumeRequest } from './communication/IntentClassifier'
+export { classifyIntent, classifyIntentWithLLM, isTakeoverRequest, isResumeRequest } from './communication/IntentClassifier'
 
 // Recording
 export { Recorder } from './recording/Recorder'

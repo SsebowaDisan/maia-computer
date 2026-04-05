@@ -1,0 +1,6 @@
+name: npm
+id: npm
+icon: "https://www.google.com/s2/favicons?domain=npmjs.com&sz=128"
+url: https://www.npmjs.com
+category: developer
+ai_description: "JavaScript package registry. Search and browse npm packages."

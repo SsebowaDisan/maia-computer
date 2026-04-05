@@ -1,0 +1,6 @@
+name: Mastodon
+id: mastodon
+icon: "https://www.google.com/s2/favicons?domain=mastodon.social&sz=128"
+url: https://mastodon.social
+category: social
+ai_description: "Decentralized social network. Post, follow, and discover content."

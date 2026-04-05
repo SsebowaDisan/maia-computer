@@ -1,0 +1,6 @@
+name: Google Docs
+id: google.docs
+icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"
+url: https://docs.google.com
+category: productivity
+ai_description: "Create, edit, and collaborate on documents. Write reports, letters, and notes."

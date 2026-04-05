@@ -1,0 +1,6 @@
+name: Postman
+id: postman
+icon: "https://www.google.com/s2/favicons?domain=postman.com&sz=128"
+url: https://web.postman.co
+category: developer
+ai_description: "API testing and development. Send requests, write tests, create docs."

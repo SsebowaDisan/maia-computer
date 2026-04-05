@@ -1,0 +1,6 @@
+name: Twitch
+id: twitch
+icon: "https://www.google.com/s2/favicons?domain=twitch.tv&sz=128"
+url: https://www.twitch.tv
+category: media
+ai_description: "Watch live streams. Browse gaming, music, and creative content."

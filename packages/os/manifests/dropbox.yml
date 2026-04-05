@@ -1,0 +1,6 @@
+name: Dropbox
+id: dropbox
+icon: "https://www.google.com/s2/favicons?domain=dropbox.com&sz=128"
+url: https://www.dropbox.com
+category: productivity
+ai_description: "Store, sync, and share files. Collaborate on documents."

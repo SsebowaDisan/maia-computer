@@ -1,0 +1,6 @@
+name: Google Maps
+id: google-maps
+icon: "https://www.google.com/s2/favicons?domain=maps.google.com&sz=128"
+url: https://www.google.com/maps
+category: other
+ai_description: "Navigate, search places, get directions, and explore street view."

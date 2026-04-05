@@ -1,0 +1,6 @@
+name: Salesforce
+id: salesforce
+icon: "https://www.google.com/s2/favicons?domain=salesforce.com&sz=128"
+url: https://login.salesforce.com
+category: productivity
+ai_description: "CRM platform. Manage contacts, leads, opportunities, and sales."

@@ -1,6 +1,6 @@
 name: GitHub
 id: github
-icon: "🐙"
+icon: "https://www.google.com/s2/favicons?domain=github.com&sz=128"
 url: https://github.com
 category: developer
 ai_description: "Browse repositories. Create issues. Review pull requests. Manage code."

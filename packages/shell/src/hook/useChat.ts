@@ -23,8 +23,8 @@ export function useChat() {
   return {
     messages,
     resetUnreadCount,
-    async sendMessage(message: string) {
-      await invoke('chat:send', { message })
+    async sendMessage(message: string, replyToId?: string) {
+      await invoke('chat:send', { message, replyToId })
     },
   }
 }

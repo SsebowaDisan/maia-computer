@@ -6,6 +6,7 @@ import { type ShellWindow } from '../../store/windowStore'
 import { getDefaultWindowBounds, getViewportBounds } from '../../windowLayout'
 
 interface WindowLayerProps {
+  activeAgentIds: string[]
   installedApps: InstalledApp[]
   messages: ChatMessage[]
   onCloseWindow: (windowId: string) => void
@@ -14,8 +15,7 @@ interface WindowLayerProps {
   onInstallApp: (app: Pick<InstalledApp, 'name' | 'icon' | 'url' | 'manifestId'>) => Promise<void>
   onMinimizeWindow: (windowId: string) => void
   onOpenItem: (itemId: string) => void
-  onReportContentBounds: (appId: string, bounds: ShellWindow['bounds']) => void
-  onSendMessage: (message: string) => Promise<void>
+  onSendMessage: (message: string, replyToId?: string) => Promise<void>
   onSnapWindow: (windowId: string, zone: ShellWindow['snapZone']) => void
   onToggleMaximize: (window: ShellWindow) => void
   onUpdateBounds: (windowId: string, bounds: ShellWindow['bounds']) => void
@@ -26,6 +26,7 @@ interface WindowLayerProps {
 }
 
 export function WindowLayer({
+  activeAgentIds,
   installedApps,
   messages,
   onCloseWindow,
@@ -34,7 +35,6 @@ export function WindowLayer({
   onInstallApp,
   onMinimizeWindow,
   onOpenItem,
-  onReportContentBounds,
   onSendMessage,
   onSnapWindow,
   onToggleMaximize,
@@ -61,11 +61,6 @@ export function WindowLayer({
           onMinimize={() => {
             onMinimizeWindow(window.id)
           }}
-          onReportContentBounds={(bounds) => {
-            if (window.appId) {
-              onReportContentBounds(window.appId, bounds)
-            }
-          }}
           onSnap={(zone) => {
             onSnapWindow(window.id, zone)
           }}
@@ -83,6 +78,7 @@ export function WindowLayer({
           window={window}
         >
           <WindowContent
+            activeAgentIds={activeAgentIds}
             installedApps={installedApps}
             messages={messages}
             onInstallApp={onInstallApp}

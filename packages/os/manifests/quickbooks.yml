@@ -1,0 +1,6 @@
+name: QuickBooks
+id: quickbooks
+icon: "https://www.google.com/s2/favicons?domain=quickbooks.intuit.com&sz=128"
+url: https://quickbooks.intuit.com
+category: finance
+ai_description: "Accounting software. Manage invoices, expenses, and reports."

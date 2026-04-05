@@ -20,6 +20,7 @@ export type {
   CommunicationEvent,
   SessionEvent,
   CostEvent,
+  OrchestratorEvent,
   PlanStep,
   StageContract,
   PlanStepStatus,
@@ -43,11 +44,14 @@ export type {
   MessagePriority,
   MessageContext,
   MessageAttachments,
+  QuestionSeverity,
+  PendingQuestion,
 } from './type/messages'
 
 export {
   MESSAGE_INTENT,
   MESSAGE_PRIORITY,
+  QUESTION_SEVERITY,
   getMessagePriority,
 } from './type/messages'
 
@@ -66,9 +70,20 @@ export type {
   IPCCommands,
   IPCResults,
   IPCEvents,
+  TheatreLayoutItem,
   SearchResult,
   SearchResultGroup,
 } from './type/ipc'
+
+// Types — Orchestrator
+export type {
+  SubTask,
+  SubTaskStatus,
+  TheatreLayout,
+  AgentPersonalityConfig,
+} from './type/orchestrator'
+
+export { SUB_TASK_STATUS } from './type/orchestrator'
 
 // Constants
 export type { AgentProfile } from './constant/agents'

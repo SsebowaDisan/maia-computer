@@ -6,10 +6,16 @@ export interface DockItem {
   icon: string
 }
 
+export const SYSTEM_ICON_PATHS = {
+  teamChat: './icon/team-chat.svg',
+  settings: './icon/settings.svg',
+  store: './icon/app-store.svg',
+} as const
+
 export const BUILTIN_ITEMS: DockItem[] = [
-  { id: 'team-chat', label: 'Team Chat', icon: '💬' },
-  { id: 'settings', label: 'Settings', icon: '⚙️' },
-  { id: 'store', label: 'App Store', icon: '⊞' },
+  { id: 'team-chat', label: 'Team Chat', icon: SYSTEM_ICON_PATHS.teamChat },
+  { id: 'settings', label: 'Settings', icon: SYSTEM_ICON_PATHS.settings },
+  { id: 'store', label: 'App Store', icon: SYSTEM_ICON_PATHS.store },
 ]
 
 function isDockItem(item: DockItem | undefined): item is DockItem {
@@ -26,17 +32,21 @@ export function buildDockSections(
     ...BUILTIN_ITEMS.map((item) => [item.id, item] as const),
   ])
 
-  const itemsLeft = recentIds
-    .map((itemId) => dockItemMap.get(itemId))
-    .filter((item) => item && !pinnedIds.includes(item.id))
+  // Left section: all installed apps (sorted by recent use, then install date)
+  const recentOrder = new Map(recentIds.map((id, i) => [id, i]))
+  const sortedApps = [...apps].sort((a, b) => {
+    const aRecent = recentOrder.get(a.id) ?? Infinity
+    const bRecent = recentOrder.get(b.id) ?? Infinity
+    if (aRecent !== bRecent) return aRecent - bRecent
+    return b.installedAt - a.installedAt
+  })
+
+  const itemsLeft = sortedApps
+    .map((app) => dockItemMap.get(app.id))
     .filter(isDockItem)
 
-  const itemsRight = [
-    ...pinnedIds.map((itemId) => dockItemMap.get(itemId)),
-    ...BUILTIN_ITEMS.filter((item) => !pinnedIds.includes(item.id)),
-  ]
-    .filter(isDockItem)
-    .filter((item, index, items) => items.findIndex((candidate) => candidate.id === item.id) === index)
+  // Right section: built-in items (Team Chat, Settings, App Store)
+  const itemsRight = BUILTIN_ITEMS
 
   return { itemsLeft, itemsRight }
 }

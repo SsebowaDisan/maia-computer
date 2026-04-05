@@ -1,6 +1,6 @@
 name: Google Sheets
 id: google.sheets
-icon: "📊"
+icon: "https://ssl.gstatic.com/docs/spreadsheets/favicon3.ico"
 url: https://sheets.google.com
 category: productivity
 ai_description: "Create, read, and edit spreadsheets. Add rows, formulas, and charts. Analyze data."

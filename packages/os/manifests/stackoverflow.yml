@@ -1,0 +1,6 @@
+name: Stack Overflow
+id: stackoverflow
+icon: "https://www.google.com/s2/favicons?domain=stackoverflow.com&sz=128"
+url: https://stackoverflow.com
+category: developer
+ai_description: "Q&A for developers. Search programming questions and answers."

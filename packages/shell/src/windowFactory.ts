@@ -1,5 +1,6 @@
 import type { ShellWindow } from './store/windowStore'
 
+import { SYSTEM_ICON_PATHS } from './shellItems'
 import { getDefaultWindowBounds, getViewportBounds, getWorkspaceBounds } from './windowLayout'
 
 export function getBuiltinWindow(kind: ShellWindow['kind'], windows: ShellWindow[]): ShellWindow {
@@ -11,7 +12,7 @@ export function getBuiltinWindow(kind: ShellWindow['kind'], windows: ShellWindow
       id: 'team-chat',
       kind: 'chat',
       title: 'Team Chat',
-      icon: '💬',
+      icon: SYSTEM_ICON_PATHS.teamChat,
       bounds: {
         x: workspace.x + workspace.width * 0.68,
         y: workspace.y,
@@ -26,7 +27,11 @@ export function getBuiltinWindow(kind: ShellWindow['kind'], windows: ShellWindow
   }
 
   const title = kind === 'store' ? 'App Store' : kind === 'settings' ? 'Settings' : 'Team Chat'
-  const icon = kind === 'store' ? '⊞' : kind === 'settings' ? '⚙️' : '💬'
+  const icon = kind === 'store'
+    ? SYSTEM_ICON_PATHS.store
+    : kind === 'settings'
+      ? SYSTEM_ICON_PATHS.settings
+      : SYSTEM_ICON_PATHS.teamChat
 
   return {
     id: kind === 'chat' ? 'team-chat' : kind,

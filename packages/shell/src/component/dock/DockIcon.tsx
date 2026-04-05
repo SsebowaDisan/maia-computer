@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 
+import { AppIcon } from '../ui/AppIcon'
 import { DockTooltip } from './DockTooltip'
 
 interface DockIconProps {
@@ -45,7 +46,7 @@ export function DockIcon({
         transition={{ duration: 0.15, ease: 'easeOut' }}
         whileHover={{ scale: 1.15 }}
       >
-        <span>{icon}</span>
+        <AppIcon icon={icon} size={28} />
         {badgeCount > 0 ? (
           <span className="absolute -right-1 -top-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-accentRed px-1 text-[11px] font-bold text-white">
             {badgeCount}

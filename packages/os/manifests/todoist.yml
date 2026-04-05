@@ -1,0 +1,6 @@
+name: Todoist
+id: todoist
+icon: "https://www.google.com/s2/favicons?domain=todoist.com&sz=128"
+url: https://app.todoist.com
+category: productivity
+ai_description: "Manage tasks and to-do lists. Set priorities and deadlines."

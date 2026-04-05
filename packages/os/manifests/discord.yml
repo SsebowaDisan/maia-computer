@@ -1,0 +1,6 @@
+name: Discord
+id: discord
+icon: "https://www.google.com/s2/favicons?domain=discord.com&sz=128"
+url: https://discord.com/app
+category: communication
+ai_description: "Chat with communities and teams. Send messages, join voice channels, share files."

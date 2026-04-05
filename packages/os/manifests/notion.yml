@@ -1,6 +1,6 @@
 name: Notion
 id: notion
-icon: "📝"
+icon: "https://www.google.com/s2/favicons?domain=notion.so&sz=128"
 url: https://notion.so
 category: productivity
 ai_description: "Create and edit pages. Manage databases. Organize notes and documents."

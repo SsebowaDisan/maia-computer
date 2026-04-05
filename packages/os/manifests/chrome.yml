@@ -1,6 +1,6 @@
-name: Chrome
-id: chrome
-icon: "🌐"
-url: https://www.google.com
+name: Web Browser
+id: web-browser
+icon: "https://www.google.com/s2/favicons?domain=google.com&sz=128"
+url: https://www.google.com/webhp
 category: other
-ai_description: "Browse the web. Search for information. Fill forms. Extract data from websites."
+ai_description: "Browse the web. Search for information. Navigate to any website. Fill forms. Extract data."

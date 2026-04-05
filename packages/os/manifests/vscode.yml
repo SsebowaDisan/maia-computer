@@ -1,0 +1,6 @@
+name: VS Code Web
+id: vscode-web
+icon: "https://www.google.com/s2/favicons?domain=vscode.dev&sz=128"
+url: https://vscode.dev
+category: developer
+ai_description: "Code editor in the browser. Edit files, install extensions, use terminal."

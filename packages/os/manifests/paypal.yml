@@ -1,0 +1,6 @@
+name: PayPal
+id: paypal
+icon: "https://www.google.com/s2/favicons?domain=paypal.com&sz=128"
+url: https://www.paypal.com
+category: finance
+ai_description: "Send and receive payments. Manage transactions and invoices."

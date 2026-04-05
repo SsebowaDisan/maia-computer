@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 import { type ShellWindow } from '../store/windowStore'
 import { getDefaultWindowBounds, getSnapBounds, getViewportBounds } from '../windowLayout'
@@ -18,13 +18,16 @@ export function useWindowShortcuts({
   updateSnapZone,
   windows,
 }: UseWindowShortcutsOptions) {
+  const windowsRef = useRef(windows)
+  windowsRef.current = windows
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!event.metaKey) {
         return
       }
 
-      const topWindow = [...windows]
+      const topWindow = [...windowsRef.current]
         .filter((window) => !window.isMinimized)
         .sort((left, right) => right.zIndex - left.zIndex)[0]
 
@@ -49,7 +52,7 @@ export function useWindowShortcuts({
 
       if (event.key === 'ArrowDown') {
         event.preventDefault()
-        updateBounds(topWindow.id, getDefaultWindowBounds(windows.length, getViewportBounds()))
+        updateBounds(topWindow.id, getDefaultWindowBounds(windowsRef.current.length, getViewportBounds()))
       }
     }
 
@@ -57,5 +60,5 @@ export function useWindowShortcuts({
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [updateBounds, updateSnapZone, windows])
+  }, [updateBounds, updateSnapZone])
 }

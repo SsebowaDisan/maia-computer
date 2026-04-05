@@ -1,0 +1,6 @@
+name: Docker Hub
+id: docker-hub
+icon: "https://www.google.com/s2/favicons?domain=hub.docker.com&sz=128"
+url: https://hub.docker.com
+category: developer
+ai_description: "Container image registry. Browse, pull, and push Docker images."

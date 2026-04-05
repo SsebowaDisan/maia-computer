@@ -17,10 +17,14 @@ export const useChatStore = create<ChatStoreState>((set) => ({
     set({ messages })
   },
   addMessage: (message) => {
-    set((state) => ({
-      messages: [...state.messages, message],
-      unreadCount: state.unreadCount + (message.sender === 'user' ? 0 : 1),
-    }))
+    set((state) => {
+      // Deduplicate — prevent the same message from appearing twice
+      if (state.messages.some((m) => m.id === message.id)) return state
+      return {
+        messages: [...state.messages, message],
+        unreadCount: state.unreadCount + (message.sender === 'user' ? 0 : 1),
+      }
+    })
   },
   resetUnreadCount: () => {
     set({ unreadCount: 0 })

@@ -1,0 +1,6 @@
+name: Netflix
+id: netflix
+icon: "https://www.google.com/s2/favicons?domain=netflix.com&sz=128"
+url: https://www.netflix.com
+category: media
+ai_description: "Stream movies and TV shows. Browse catalog and manage watchlist."

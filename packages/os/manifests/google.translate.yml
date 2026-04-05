@@ -1,0 +1,6 @@
+name: Google Translate
+id: google-translate
+icon: "https://www.google.com/s2/favicons?domain=translate.google.com&sz=128"
+url: https://translate.google.com
+category: other
+ai_description: "Translate text between languages. Detect language and listen to pronunciation."

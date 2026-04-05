@@ -9,7 +9,7 @@ interface SpaceTabProps {
 export function SpaceTab({ isActive, onClick, space }: SpaceTabProps) {
   return (
     <button
-      className={`flex items-center gap-2 rounded-full px-3 py-1 text-sm transition ${
+      className={`flex items-center gap-2 rounded-full px-3 py-1 text-sm transition [-webkit-app-region:no-drag] ${
         isActive ? 'text-white' : 'text-textSecondary hover:text-white'
       }`}
       onClick={onClick}

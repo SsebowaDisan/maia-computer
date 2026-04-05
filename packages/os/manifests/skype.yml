@@ -1,0 +1,6 @@
+name: Skype
+id: skype
+icon: "https://www.google.com/s2/favicons?domain=web.skype.com&sz=128"
+url: https://web.skype.com
+category: communication
+ai_description: "Make video calls, send messages, and share files."

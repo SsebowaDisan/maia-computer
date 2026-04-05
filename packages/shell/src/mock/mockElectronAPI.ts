@@ -104,8 +104,18 @@ const messages: ChatMessage[] = [
     receiver: 'user',
     intent: MESSAGE_INTENT.ANSWER,
     message: 'Spotlight index is warm. Search should return instantly.',
+    replyToId: 'message-1',
     context: { taskId: 'boot-sequence', step: 'status' },
     timestamp: Date.now() - 120000,
+  },
+  {
+    id: 'message-3',
+    sender: 'research',
+    receiver: 'user',
+    intent: MESSAGE_INTENT.UPDATE,
+    message: 'I can keep findings here and ask the specialist agents to reply inline when needed.',
+    context: { taskId: 'boot-sequence', step: 'handoff' },
+    timestamp: Date.now() - 80000,
   },
 ]
 
@@ -161,13 +171,14 @@ function buildSearchResults(query: string): SearchResultGroup[] {
     }))
 }
 
-function createMessage(sender: string, message: string): ChatMessage {
+function createMessage(sender: string, message: string, replyToId?: string): ChatMessage {
   return {
     id: crypto.randomUUID(),
     sender,
     receiver: 'user',
     intent: MESSAGE_INTENT.UPDATE,
     message,
+    replyToId,
     context: { taskId: brainStatus.taskDescription || 'team-chat', step: 'reply' },
     timestamp: Date.now(),
   }
@@ -259,13 +270,14 @@ export const mockElectronAPI: ElectronAPI = {
           receiver: 'team',
           intent: MESSAGE_INTENT.INSTRUCTION,
           message: request.message,
+          replyToId: request.replyToId,
           context: { taskId: brainStatus.taskDescription || 'team-chat' },
           timestamp: Date.now(),
         }
         messages.push(userMessage)
         emit('chat:message', { message: userMessage })
         window.setTimeout(() => {
-          const reply = createMessage('research', 'Plan captured. I am checking the fastest path.')
+          const reply = createMessage('research', 'Plan captured. I am checking the fastest path.', userMessage.id)
           messages.push(reply)
           emit('chat:message', { message: reply })
         }, 400)

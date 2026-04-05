@@ -6,6 +6,7 @@ import { Spotlight } from './component/spotlight/Spotlight'
 import { SpacesBar } from './component/spaces/SpacesBar'
 import { BrainStatus } from './component/ui/BrainStatus'
 import { WindowLayer } from './component/window/WindowLayer'
+import { useBrainEvents } from './hook/useBrainEvents'
 import { useChat } from './hook/useChat'
 import { useDock } from './hook/useDock'
 import { useNotifications } from './hook/useNotifications'
@@ -31,7 +32,6 @@ export function App() {
     focusWindow,
     openAppWindow,
     openBuiltinWindow,
-    reportContentBounds,
     snapWindow,
     toggleMinimized,
     updateWindowBounds,
@@ -44,11 +44,15 @@ export function App() {
   const recentIds = useDockStore((state) => state.recentIds)
   const unpinItem = useDockStore((state) => state.unpinItem)
   const settings = useSettingsStore((state) => state.settings)
+  const activeAgentIds = useTaskStore((state) => state.activeAgentIds)
   const plan = useTaskStore((state) => state.plan)
   const running = useTaskStore((state) => state.running)
   const taskDescription = useTaskStore((state) => state.taskDescription)
+  const thought = useTaskStore((state) => state.thought)
   const hasVisibleWindows = windows.some((window) => !window.isMinimized)
   const dock = useDock(hasVisibleWindows)
+
+  useBrainEvents()
   const {
     handleInstallApp,
     handleStartTask,
@@ -74,17 +78,15 @@ export function App() {
   const runningIds = windows.filter((window) => !window.isMinimized).map((window) => window.id)
 
   return (
-    <div className="h-full w-full">
+    <div className="relative flex h-full w-full flex-col overflow-hidden">
       <SpacesBar activeSpaceId={activeSpaceId} onSwitchSpace={switchSpace} spaces={spaces} />
       {!hasVisibleWindows ? (
-        <HomeScreen
-          apps={installedApps}
-          badges={badges}
-          onOpenApp={(app) => { void openAppWindow(app) }}
-          onSubmitTask={handleStartTask}
-        />
+        <div className="min-h-0 flex-1">
+          <HomeScreen onSubmitTask={handleStartTask} />
+        </div>
       ) : null}
       <WindowLayer
+        activeAgentIds={activeAgentIds}
         installedApps={installedApps}
         messages={messages}
         onCloseWindow={(windowId) => { void closeWindow(windowId) }}
@@ -93,7 +95,6 @@ export function App() {
         onInstallApp={handleInstallApp}
         onMinimizeWindow={toggleMinimized}
         onOpenItem={openDockItem}
-        onReportContentBounds={(appId, bounds) => { void reportContentBounds(appId, bounds) }}
         onSendMessage={sendMessage}
         onSnapWindow={snapWindow}
         onToggleMaximize={(window) => { snapWindow(window.id, 'maximized') }}
@@ -107,7 +108,14 @@ export function App() {
         isOpen={isOpen}
         onClose={closeSpotlight}
         onQueryChange={setQuery}
-        onSelect={(appId) => { openDockItem(appId); closeSpotlight() }}
+        onSelect={(appId) => {
+          if (appId === 'ai-task') {
+            void handleStartTask(query)
+          } else {
+            openDockItem(appId)
+          }
+          closeSpotlight()
+        }}
         query={query}
         results={results}
       />
@@ -116,7 +124,6 @@ export function App() {
           <Toast key={toast.id} toast={toast} />
         ))}
       </div>
-      <div className="fixed bottom-0 left-0 z-40 h-1 w-full" />
       <Dock
         badges={badges}
         isVisible={dock.isVisible}
@@ -136,7 +143,13 @@ export function App() {
         pinnedIds={pinnedIds}
         runningIds={runningIds}
       />
-      <BrainStatus currentStep={plan[0]?.description} isVisible={running} taskDescription={taskDescription} />
+      <BrainStatus
+        currentStep={plan.find((s) => s.status === 'in_progress')?.description ?? plan.find((s) => s.status === 'pending')?.description}
+        isVisible={running}
+        plan={plan}
+        taskDescription={taskDescription}
+        thought={thought}
+      />
     </div>
   )
 }

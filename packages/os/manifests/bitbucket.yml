@@ -1,0 +1,6 @@
+name: Bitbucket
+id: bitbucket
+icon: "https://www.google.com/s2/favicons?domain=bitbucket.org&sz=128"
+url: https://bitbucket.org
+category: developer
+ai_description: "Git repository hosting. Pull requests, pipelines, and code review."

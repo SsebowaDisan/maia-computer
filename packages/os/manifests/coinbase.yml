@@ -1,0 +1,6 @@
+name: Coinbase
+id: coinbase
+icon: "https://www.google.com/s2/favicons?domain=coinbase.com&sz=128"
+url: https://www.coinbase.com
+category: finance
+ai_description: "Cryptocurrency exchange. Buy, sell, and manage crypto assets."

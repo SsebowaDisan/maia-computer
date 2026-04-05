@@ -1,0 +1,6 @@
+name: Amazon
+id: amazon
+icon: "https://www.google.com/s2/favicons?domain=amazon.com&sz=128"
+url: https://www.amazon.com
+category: other
+ai_description: "Shop for products. Browse deals, track orders, and manage wishlist."

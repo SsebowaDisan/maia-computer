@@ -1,0 +1,6 @@
+name: ClickUp
+id: clickup
+icon: "https://www.google.com/s2/favicons?domain=clickup.com&sz=128"
+url: https://app.clickup.com
+category: productivity
+ai_description: "All-in-one project management. Tasks, docs, goals, and chat."

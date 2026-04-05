@@ -1,0 +1,6 @@
+name: GitHub Copilot
+id: github-copilot
+icon: "https://www.google.com/s2/favicons?domain=github.com&sz=128"
+url: https://github.com/features/copilot
+category: developer
+ai_description: "AI pair programming. Code suggestions and completions."

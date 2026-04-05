@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+
 import type { IPCCommands, IPCEvents, IPCResults } from '@maia/shared'
 
 import { mockElectronAPI } from '../mock/mockElectronAPI'
@@ -10,10 +12,10 @@ function getElectronAPI() {
   return mockElectronAPI
 }
 
-export function useIPC() {
-  const electronAPI = getElectronAPI()
+const electronAPI = getElectronAPI()
 
-  return {
+export function useIPC() {
+  return useMemo(() => ({
     invoke<TKey extends keyof IPCCommands>(
       channel: TKey,
       payload: IPCCommands[TKey],
@@ -26,5 +28,5 @@ export function useIPC() {
     ): () => void {
       return electronAPI.on(channel, listener)
     },
-  }
+  }), [])
 }

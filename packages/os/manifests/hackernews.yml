@@ -1,0 +1,6 @@
+name: Hacker News
+id: hackernews
+icon: "https://www.google.com/s2/favicons?domain=news.ycombinator.com&sz=128"
+url: https://news.ycombinator.com
+category: media
+ai_description: "Tech news and discussions. Browse top stories and comments."

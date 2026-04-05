@@ -1,0 +1,6 @@
+name: Jira
+id: jira
+icon: "https://www.google.com/s2/favicons?domain=atlassian.com&sz=128"
+url: https://www.atlassian.com/software/jira
+category: developer
+ai_description: "Project tracking for agile teams. Manage sprints, stories, and bugs."

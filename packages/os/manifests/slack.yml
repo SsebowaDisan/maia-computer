@@ -1,6 +1,6 @@
 name: Slack
 id: slack
-icon: "💬"
+icon: "https://www.google.com/s2/favicons?domain=slack.com&sz=128"
 url: https://app.slack.com
 category: communication
 ai_description: "Read and send messages in channels. Search conversations. Manage notifications."

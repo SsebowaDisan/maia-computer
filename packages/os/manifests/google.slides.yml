@@ -1,0 +1,6 @@
+name: Google Slides
+id: google.slides
+icon: "https://ssl.gstatic.com/docs/presentations/images/favicon5.ico"
+url: https://docs.google.com/presentation
+category: productivity
+ai_description: "Create and edit presentations. Add slides, images, and animations."

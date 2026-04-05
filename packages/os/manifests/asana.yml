@@ -1,0 +1,6 @@
+name: Asana
+id: asana
+icon: "https://www.google.com/s2/favicons?domain=asana.com&sz=128"
+url: https://app.asana.com
+category: productivity
+ai_description: "Manage projects and tasks. Track work across teams."

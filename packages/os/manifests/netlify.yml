@@ -1,0 +1,6 @@
+name: Netlify
+id: netlify
+icon: "https://www.google.com/s2/favicons?domain=netlify.com&sz=128"
+url: https://app.netlify.com
+category: developer
+ai_description: "Deploy and host web apps. Build previews and serverless functions."

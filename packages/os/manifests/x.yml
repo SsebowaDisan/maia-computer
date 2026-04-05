@@ -1,0 +1,6 @@
+name: X (Twitter)
+id: x-twitter
+icon: "https://abs.twimg.com/favicons/twitter.3.ico"
+url: https://x.com
+category: social
+ai_description: "Browse posts, follow people, post updates. Search trending topics and news."

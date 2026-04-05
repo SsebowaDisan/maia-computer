@@ -1,0 +1,6 @@
+name: Coursera
+id: coursera
+icon: "https://www.google.com/s2/favicons?domain=coursera.org&sz=128"
+url: https://www.coursera.org
+category: other
+ai_description: "Online courses from universities. Learn skills and earn certificates."

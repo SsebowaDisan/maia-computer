@@ -1,0 +1,6 @@
+name: Stripe
+id: stripe
+icon: "https://www.google.com/s2/favicons?domain=stripe.com&sz=128"
+url: https://dashboard.stripe.com
+category: finance
+ai_description: "Payment processing dashboard. Manage payments, subscriptions, and invoices."

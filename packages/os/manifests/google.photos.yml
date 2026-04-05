@@ -1,0 +1,6 @@
+name: Google Photos
+id: google-photos
+icon: "https://www.google.com/s2/favicons?domain=photos.google.com&sz=128"
+url: https://photos.google.com
+category: other
+ai_description: "View, organize, and share photos and videos. Search by people and places."

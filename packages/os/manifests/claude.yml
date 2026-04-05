@@ -1,0 +1,6 @@
+name: Claude
+id: claude
+icon: "https://www.google.com/s2/favicons?domain=claude.ai&sz=128"
+url: https://claude.ai
+category: productivity
+ai_description: "Anthropic's AI assistant. Chat, analyze, write, and code."

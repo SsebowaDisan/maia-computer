@@ -1,0 +1,6 @@
+name: SoundCloud
+id: soundcloud
+icon: "https://www.google.com/s2/favicons?domain=soundcloud.com&sz=128"
+url: https://soundcloud.com
+category: media
+ai_description: "Discover and stream music. Upload tracks and follow artists."

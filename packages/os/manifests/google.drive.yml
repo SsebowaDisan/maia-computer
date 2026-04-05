@@ -1,0 +1,6 @@
+name: Google Drive
+id: google.drive
+icon: "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_48dp.png"
+url: https://drive.google.com
+category: productivity
+ai_description: "Store, organize, and share files. Upload documents, images, and videos."

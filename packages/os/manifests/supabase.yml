@@ -1,0 +1,6 @@
+name: Supabase
+id: supabase
+icon: "https://www.google.com/s2/favicons?domain=supabase.com&sz=128"
+url: https://supabase.com/dashboard
+category: developer
+ai_description: "Open source Firebase alternative. Database, auth, storage, and functions."

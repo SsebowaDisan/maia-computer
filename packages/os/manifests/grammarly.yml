@@ -1,0 +1,6 @@
+name: Grammarly
+id: grammarly
+icon: "https://www.google.com/s2/favicons?domain=grammarly.com&sz=128"
+url: https://app.grammarly.com
+category: productivity
+ai_description: "Writing assistant. Check grammar, spelling, tone, and clarity."

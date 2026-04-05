@@ -1,0 +1,6 @@
+name: Spotify
+id: spotify
+icon: "https://www.google.com/s2/favicons?domain=spotify.com&sz=128"
+url: https://open.spotify.com
+category: media
+ai_description: "Listen to music, podcasts, and playlists. Search for songs and artists."

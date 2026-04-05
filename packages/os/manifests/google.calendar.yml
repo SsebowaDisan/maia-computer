@@ -1,6 +1,6 @@
 name: Google Calendar
 id: google.calendar
-icon: "📅"
+icon: "https://calendar.google.com/googlecalendar/images/favicons_2020q4/calendar_31_256.ico"
 url: https://calendar.google.com
 category: productivity
 ai_description: "View, create, and manage calendar events. Check availability. Schedule meetings."

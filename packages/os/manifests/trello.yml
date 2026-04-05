@@ -1,0 +1,6 @@
+name: Trello
+id: trello
+icon: "https://www.google.com/s2/favicons?domain=trello.com&sz=128"
+url: https://trello.com
+category: productivity
+ai_description: "Manage projects with boards, lists, and cards. Track tasks and deadlines."

@@ -1,0 +1,6 @@
+name: Calendly
+id: calendly
+icon: "https://www.google.com/s2/favicons?domain=calendly.com&sz=128"
+url: https://calendly.com
+category: productivity
+ai_description: "Schedule meetings without back-and-forth. Share availability."

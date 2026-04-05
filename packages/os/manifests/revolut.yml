@@ -1,0 +1,6 @@
+name: Revolut
+id: revolut
+icon: "https://www.google.com/s2/favicons?domain=revolut.com&sz=128"
+url: https://app.revolut.com
+category: finance
+ai_description: "Digital banking. Manage accounts, cards, transfers, and budgets."

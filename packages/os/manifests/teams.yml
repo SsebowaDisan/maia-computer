@@ -1,0 +1,6 @@
+name: Microsoft Teams
+id: ms-teams
+icon: "https://www.google.com/s2/favicons?domain=teams.microsoft.com&sz=128"
+url: https://teams.microsoft.com
+category: communication
+ai_description: "Chat, meet, and collaborate with your team. Share files and schedule meetings."

@@ -1,0 +1,6 @@
+name: Messenger
+id: messenger
+icon: "https://www.google.com/s2/favicons?domain=messenger.com&sz=128"
+url: https://www.messenger.com
+category: communication
+ai_description: "Chat with Facebook friends. Send messages, photos, and make calls."

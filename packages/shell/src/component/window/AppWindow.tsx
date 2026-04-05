@@ -14,7 +14,6 @@ interface AppWindowProps {
   onCommand: (command: string) => void
   onFocus: () => void
   onMinimize: () => void
-  onReportContentBounds: (bounds: ShellWindow['bounds']) => void
   onSnap: (zone: ShellWindow['snapZone']) => void
   onToggleMaximize: () => void
   onUpdateBounds: (bounds: ShellWindow['bounds']) => void
@@ -27,15 +26,13 @@ export function AppWindow({
   onCommand,
   onFocus,
   onMinimize,
-  onReportContentBounds,
   onSnap,
   onToggleMaximize,
   onUpdateBounds,
   window: shellWindow,
 }: AppWindowProps) {
-  const { contentRef, snapPreview, startDrag, startResize } = useWindowInteractions({
+  const { snapPreview, startDrag, startResize } = useWindowInteractions({
     onFocus,
-    onReportContentBounds,
     onSnap,
     onUpdateBounds,
     shellWindow,
@@ -68,12 +65,13 @@ export function AppWindow({
           onDragStart={startDrag}
           onMaximize={onToggleMaximize}
           onMinimize={onMinimize}
+          onSnap={onSnap}
           title={shellWindow.title}
         />
-        <div ref={contentRef} className="h-[calc(100%-82px)] bg-[#090b10]">
+        <div className={`bg-[#090b10] ${shellWindow.kind === 'app' ? 'h-[calc(100%-82px)]' : 'h-[calc(100%-38px)]'}`}>
           {children}
         </div>
-        <CommandBar onSubmit={onCommand} />
+        {shellWindow.kind === 'app' ? <CommandBar onSubmit={onCommand} /> : null}
         {RESIZE_HANDLES.map((handle) => (
           <div
             key={handle.direction}
