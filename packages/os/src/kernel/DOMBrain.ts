@@ -1,29 +1,35 @@
 import { pino } from 'pino'
 import type { WebContainerAPI, DOMElement } from '../app/WebContainer'
 import type { EventBus } from '../events/EventBus'
+import type { WaitResult, CursorIntent } from '@maia/shared'
 
 const logger = pino({ name: 'dom-brain' })
 
 /**
  * DOMBrain reads and controls app UI through the DOM.
  *
- * It uses the WebContainerAPI to:
- * 1. Inject a bridge script into each app's webview
- * 2. Query interactive elements (buttons, inputs, links)
- * 3. Perform actions (click, type, scroll)
+ * It uses the bridge scripts (bridge.js, scraper.js, navigator.js,
+ * performer.js) injected into each app's webview.
  *
- * This is faster and more reliable than screenshot-based approaches
- * because it reads structured data (element roles, labels, positions)
- * instead of analyzing pixels.
+ * Capabilities:
+ * - Read interactive elements (buttons, inputs, links)
+ * - Smart click by text, aria-label, or selector
+ * - Reactive wait (no fixed timers)
+ * - Visual performance (cursor, glow, highlights)
+ * - Popup/obstacle dismissal
+ * - Hover for dropdown menus
  */
 export class DOMBrain {
   private readonly containers: WebContainerAPI
   private readonly eventBus: EventBus
+  private lastScannedUrl = ''
 
   constructor(containers: WebContainerAPI, eventBus: EventBus) {
     this.containers = containers
     this.eventBus = eventBus
   }
+
+  // ── Element Reading ──────────────────────────────────────────
 
   async getElements(appId: string): Promise<DOMElement[]> {
     try {
@@ -39,14 +45,11 @@ export class DOMBrain {
     const title = await this.containers.getTitle(appId)
     const url = await this.containers.getURL(appId)
 
-    // Get page content — structured for search results, article content for other pages
     let visibleText = ''
     try {
       visibleText = await this.containers.executeJavaScript(appId, `
         (function() {
           var url = window.location.href;
-
-          // Google search results — extract structured results
           if (url.includes('google.com/search') || url.includes('google.') && url.includes('/search')) {
             var results = [];
             document.querySelectorAll('div.g, div[data-hveid]').forEach(function(el, i) {
@@ -59,36 +62,26 @@ export class DOMBrain {
               }
             });
             if (results.length > 0) {
-              // Also grab the featured snippet / knowledge panel
               var featured = document.querySelector('[data-attrid], .kp-header, .Z0LcW, .IZ6rdc, .hgKElc');
               var featuredText = featured ? 'Featured answer: ' + featured.textContent.trim().substring(0, 300) + '\\n\\n' : '';
               return featuredText + 'Search results:\\n' + results.join('\\n');
             }
           }
-
-          // Article/content page — extract only meaningful content (headings + paragraphs)
           var main = document.querySelector('article, main, [role="main"], .post-content, .article-body, .mw-parser-output, #content, .content');
           if (!main) main = document.body;
           var sections = [];
-          // Only select content elements — NOT spans/divs which match everything
           var els = main.querySelectorAll('h1, h2, h3, h4, p, li, blockquote, figcaption, dt, dd');
           for (var i = 0; i < els.length && sections.length < 40; i++) {
             var el = els[i];
             if (el.offsetParent === null) continue;
-            // Skip nav/footer/aside content
             if (el.closest('nav, footer, aside, header, [role="navigation"], [role="banner"]')) continue;
             var tag = el.tagName;
             var t = el.textContent.trim();
             if (t.length < 10) continue;
-            if (['H1','H2','H3','H4'].includes(tag)) {
-              sections.push('## ' + t.substring(0, 120));
-            } else if (t.length > 20) {
-              sections.push(t.substring(0, 300));
-            }
+            if (['H1','H2','H3','H4'].includes(tag)) { sections.push('## ' + t.substring(0, 120)); }
+            else if (t.length > 20) { sections.push(t.substring(0, 300)); }
           }
           if (sections.length > 3) return sections.join('\\n');
-
-          // Fallback: walk text nodes for pages without semantic markup
           var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
           var texts = [];
           var node;
@@ -97,9 +90,7 @@ export class DOMBrain {
             if (t2.length > 10 && t2.length < 300) {
               var parent = node.parentElement;
               if (parent && parent.offsetParent !== null && !['SCRIPT','STYLE','NOSCRIPT','NAV','FOOTER'].includes(parent.tagName)) {
-                if (!parent.closest('nav, footer, aside, header')) {
-                  texts.push(t2);
-                }
+                if (!parent.closest('nav, footer, aside, header')) { texts.push(t2); }
               }
             }
           }
@@ -120,69 +111,68 @@ export class DOMBrain {
       return `  ${i + 1}. [${el.role}] "${el.label}"${text}${value} — at (${el.position.x}, ${el.position.y})`
     })
 
-    const parts = [
-      `Page: ${title}`,
-      `URL: ${url}`,
-    ]
-
+    const parts = [`Page: ${title}`, `URL: ${url}`]
     if (elements.length > 0) {
       parts.push(`Interactive elements (${elements.length} total, showing first 30):`)
       parts.push(...elementDescriptions)
     }
-
     if (visibleText) {
       const isSearchPage = url.includes('google.com/search') || url.includes('bing.com/search')
       const textLimit = isSearchPage ? 2000 : 4000
-      parts.push('')
-      parts.push('Visible page text:')
-      parts.push(visibleText.substring(0, textLimit))
+      parts.push('', 'Visible page text:', visibleText.substring(0, textLimit))
     }
-
     return parts.join('\n')
   }
 
   async isPageLoading(appId: string): Promise<boolean> {
     try {
-      const result = await this.containers.executeJavaScript(appId,
-        'document.readyState !== "complete"',
-      ) as boolean
-      return result
+      return await this.containers.executeJavaScript(appId, 'document.readyState !== "complete"') as boolean
     } catch {
       return false
     }
   }
 
-  async clickElement(appId: string, selector: string): Promise<boolean> {
+  // ── Smart Navigation Actions ─────────────────────────────────
+
+  async smartClick(appId: string, target: string): Promise<boolean> {
     try {
-      const success = await this.containers.clickElement(appId, selector)
-
-      this.eventBus.publish({
-        type: 'app.action',
+      const success = await this.containers.executeJavaScript(
         appId,
-        action: 'click',
-        target: selector,
-        timestamp: Date.now(),
-      })
+        `window.__maia_bridge && window.__maia_bridge.smartClick ? window.__maia_bridge.smartClick(${JSON.stringify(target)}) : false`,
+      ) as boolean
 
+      this.publishAction(appId, 'click', target)
       return success
     } catch (error) {
-      logger.warn({ appId, selector, error }, 'Failed to click element')
+      logger.warn({ appId, target, error }, 'Smart click failed')
+      return false
+    }
+  }
+
+  async clickElement(appId: string, selector: string): Promise<boolean> {
+    return this.smartClick(appId, selector)
+  }
+
+  async hoverElement(appId: string, target: string): Promise<boolean> {
+    try {
+      return await this.containers.executeJavaScript(
+        appId,
+        `window.__maia_bridge && window.__maia_bridge.hoverElement ? window.__maia_bridge.hoverElement(${JSON.stringify(target)}) : false`,
+      ) as boolean
+    } catch {
       return false
     }
   }
 
   async typeInElement(appId: string, selector: string, text: string): Promise<boolean> {
     try {
-      const success = await this.containers.typeInElement(appId, selector, text)
-
-      this.eventBus.publish({
-        type: 'app.action',
+      // Use character-by-character typing for human-like behavior
+      const success = await this.containers.executeJavaScript(
         appId,
-        action: 'type',
-        target: `${selector}: "${text}"`,
-        timestamp: Date.now(),
-      })
+        `window.__maia_bridge && window.__maia_bridge.typeCharByChar ? window.__maia_bridge.typeCharByChar(${JSON.stringify(selector)}, ${JSON.stringify(text)}, 50, 100) : false`,
+      ) as boolean
 
+      this.publishAction(appId, 'type', `${selector}: "${text}"`)
       return success
     } catch (error) {
       logger.warn({ appId, selector, error }, 'Failed to type in element')
@@ -193,18 +183,10 @@ export class DOMBrain {
   async scrollToElement(appId: string, selector: string): Promise<boolean> {
     try {
       const success = await this.containers.scrollToElement(appId, selector)
-
-      this.eventBus.publish({
-        type: 'app.action',
-        appId,
-        action: 'scroll',
-        target: selector,
-        timestamp: Date.now(),
-      })
-
+      this.publishAction(appId, 'scroll', selector)
       return success
     } catch (error) {
-      logger.warn({ appId, selector, error }, 'Failed to scroll to element')
+      logger.warn({ appId, selector, error }, 'Failed to scroll')
       return false
     }
   }
@@ -212,7 +194,7 @@ export class DOMBrain {
   async goBack(appId: string): Promise<boolean> {
     try {
       await this.containers.executeJavaScript(appId, 'window.history.back()')
-      this.eventBus.publish({ type: 'app.action', appId, action: 'go_back', target: '', timestamp: Date.now() })
+      this.publishAction(appId, 'go_back', '')
       return true
     } catch (error) {
       logger.warn({ appId, error }, 'Failed to go back')
@@ -220,179 +202,178 @@ export class DOMBrain {
     }
   }
 
-  private lastScannedUrl = ''
-
-  /** Move virtual cursor to an element. */
-  async moveCursorTo(appId: string, selector: string): Promise<void> {
+  async navigate(appId: string, url: string): Promise<boolean> {
     try {
-      const safeSelector = selector.replace(/'/g, "\\'").replace(/\n/g, ' ')
-      await this.containers.executeJavaScript(appId, `
-        (function() {
-          try {
-            var target = document.querySelector('${safeSelector}');
-            if (!target) {
-              var all = document.querySelectorAll('a,button,h3');
-              for (var i = 0; i < all.length; i++) {
-                if (all[i].textContent && all[i].textContent.trim().indexOf('${safeSelector}') !== -1) {
-                  target = all[i]; break;
-                }
-              }
-            }
-            if (!target) return false;
-            var cursor = document.getElementById('maia-cursor');
-            if (!cursor) {
-              var s = document.createElement('style');
-              s.id = 'maia-cursor-style';
-              s.textContent = '#maia-cursor{position:fixed;z-index:2147483647;pointer-events:none;width:18px;height:18px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.85),rgba(59,130,246,0.2) 70%,transparent);box-shadow:0 0 10px rgba(59,130,246,0.4);transform:translate(-50%,-50%);opacity:0;}';
-              document.head.appendChild(s);
-              cursor = document.createElement('div');
-              cursor.id = 'maia-cursor';
-              document.body.appendChild(cursor);
-            }
-            var rect = target.getBoundingClientRect();
-            cursor.style.left = (rect.left + rect.width/2) + 'px';
-            cursor.style.top = (rect.top + rect.height/2) + 'px';
-            cursor.style.opacity = '1';
-            setTimeout(function() { cursor.style.opacity = '0'; }, 1500);
-            return true;
-          } catch(e) { return false; }
-        })()
-      `)
-    } catch {
-      // Non-critical
-    }
-  }
-
-  /** Fire a ripple burst at the cursor's current position. */
-  async clickRipple(appId: string): Promise<void> {
-    try {
-      await this.containers.executeJavaScript(appId, `
-        (function() {
-          try {
-            var cursor = document.getElementById('maia-cursor');
-            if (!cursor) return false;
-            var x = parseFloat(cursor.style.left) || 0;
-            var y = parseFloat(cursor.style.top) || 0;
-            if (!document.getElementById('maia-ripple-style')) {
-              var s = document.createElement('style');
-              s.id = 'maia-ripple-style';
-              s.textContent = '@keyframes maia-ripple{to{width:50px;height:50px;opacity:0;}}';
-              document.head.appendChild(s);
-            }
-            var r = document.createElement('div');
-            r.style.cssText = 'position:fixed;pointer-events:none;z-index:2147483646;width:0;height:0;border-radius:50%;transform:translate(-50%,-50%);background:rgba(59,130,246,0.3);animation:maia-ripple 400ms ease-out forwards;left:'+x+'px;top:'+y+'px;';
-            document.body.appendChild(r);
-            setTimeout(function(){r.remove()}, 500);
-            return true;
-          } catch(e) { return false; }
-        })()
-      `)
-    } catch {
-      // Non-critical
-    }
-  }
-
-  /** Run the scan line once per new page URL. */
-  async scanPageOnce(appId: string): Promise<void> {
-    try {
-      const url = await this.containers.getURL(appId)
-      if (url === this.lastScannedUrl) return
-      this.lastScannedUrl = url
-
-      await this.containers.executeJavaScript(appId, `
-        (function() {
-          var s = document.createElement('style');
-          s.textContent = '#maia-scan{position:fixed;left:0;right:0;height:3px;top:0;z-index:2147483646;pointer-events:none;background:linear-gradient(90deg,transparent 0%,rgba(59,130,246,0.15) 10%,rgba(59,130,246,0.6) 50%,rgba(59,130,246,0.15) 90%,transparent 100%);box-shadow:0 0 15px rgba(59,130,246,0.3);opacity:0;}';
-          document.head.appendChild(s);
-          var line = document.createElement('div');
-          line.id = 'maia-scan';
-          document.body.appendChild(line);
-          line.style.opacity = '1';
-          var t0 = performance.now();
-          function frame(now) {
-            var t = Math.min((now - t0) / 800, 1);
-            var e = t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t+2, 2)/2;
-            line.style.top = (e * window.innerHeight) + 'px';
-            if (t < 1) requestAnimationFrame(frame);
-            else { line.style.opacity = '0'; setTimeout(function(){line.remove()}, 300); }
-          }
-          requestAnimationFrame(frame);
-        })()
-      `)
-    } catch {
-      // Non-critical
-    }
-  }
-
-  /** Highlight exact phrases on the page (LLM-chosen). */
-  async highlightKeywords(appId: string, keywords: string[]): Promise<void> {
-    try {
-      await this.containers.executeJavaScript(appId, `
-        (function() {
-          if (typeof CSS === 'undefined' || !CSS.highlights) return 0;
-          CSS.highlights.delete('maia-found');
-          var s = document.querySelector('#maia-hl-style');
-          if (!s) { s = document.createElement('style'); s.id = 'maia-hl-style'; s.textContent = '::highlight(maia-found){background-color:rgba(250,204,21,0.35);}'; document.head.appendChild(s); }
-          var keywords = ${JSON.stringify(keywords)};
-          var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-          var ranges = [];
-          var node;
-          while ((node = walker.nextNode())) {
-            var parent = node.parentElement;
-            if (!parent || parent.offsetParent === null) continue;
-            if (['SCRIPT','STYLE','NOSCRIPT'].includes(parent.tagName)) continue;
-            var text = node.textContent;
-            for (var k = 0; k < keywords.length; k++) {
-              var idx = text.toLowerCase().indexOf(keywords[k].toLowerCase());
-              while (idx !== -1) {
-                var range = new Range();
-                range.setStart(node, idx);
-                range.setEnd(node, idx + keywords[k].length);
-                ranges.push(range);
-                idx = text.toLowerCase().indexOf(keywords[k].toLowerCase(), idx + keywords[k].length);
-              }
-            }
-          }
-          if (ranges.length > 0) CSS.highlights.set('maia-found', new Highlight(...ranges));
-          return ranges.length;
-        })()
-      `)
-    } catch {
-      // Non-critical
+      await this.containers.navigate(appId, url)
+      this.publishAction(appId, 'navigate', url)
+      return true
+    } catch (error) {
+      logger.warn({ appId, url, error }, 'Failed to navigate')
+      return false
     }
   }
 
   async pressKey(appId: string, key: string): Promise<boolean> {
     try {
-      const result = await this.containers.executeJavaScript(appId, `
-        (function() {
-          var el = document.activeElement || document.body;
-          var keyMap = { 'Enter': 13, 'Tab': 9, 'Escape': 27 };
-          var keyCode = keyMap['${key}'] || 0;
-          el.dispatchEvent(new KeyboardEvent('keydown', { key: '${key}', code: '${key}', keyCode: keyCode, bubbles: true }));
-          el.dispatchEvent(new KeyboardEvent('keypress', { key: '${key}', code: '${key}', keyCode: keyCode, bubbles: true }));
-          el.dispatchEvent(new KeyboardEvent('keyup', { key: '${key}', code: '${key}', keyCode: keyCode, bubbles: true }));
-          if ('${key}' === 'Enter') {
-            var form = el.closest('form');
-            if (form) { form.submit(); return 'form-submitted'; }
-          }
-          return 'key-dispatched';
-        })()
-      `) as string
-      console.log('[ACTION] pressKey', key, ':', result)
-
-      this.eventBus.publish({
-        type: 'app.action',
-        appId,
-        action: 'press_key',
-        target: key,
-        timestamp: Date.now(),
-      })
-
-      return true
+      // Use native OS-level key events (trusted by all sites including Google)
+      const success = await this.containers.sendNativeKeyPress(appId, key)
+      this.publishAction(appId, 'press_key', key)
+      return success
     } catch (error) {
       logger.warn({ appId, key, error }, 'Failed to press key')
       return false
     }
+  }
+
+  async findTextOnPage(appId: string, query: string): Promise<boolean> {
+    try {
+      return await this.containers.executeJavaScript(
+        appId,
+        `window.__maia_bridge && window.__maia_bridge.findTextOnPage ? window.__maia_bridge.findTextOnPage(${JSON.stringify(query)}) : false`,
+      ) as boolean
+    } catch {
+      return false
+    }
+  }
+
+  async expandContent(appId: string): Promise<number> {
+    try {
+      return await this.containers.executeJavaScript(
+        appId,
+        'window.__maia_bridge && window.__maia_bridge.expandContent ? window.__maia_bridge.expandContent() : 0',
+      ) as number
+    } catch {
+      return 0
+    }
+  }
+
+  // ── Reactive Wait ────────────────────────────────────────────
+
+  async waitForPageSettle(appId: string, timeoutMs: number = 10000): Promise<WaitResult> {
+    try {
+      const raw = await this.containers.executeJavaScript(
+        appId,
+        `window.__maia_bridge && window.__maia_bridge.waitForPageSettle ? window.__maia_bridge.waitForPageSettle(${timeoutMs}).then(JSON.stringify) : JSON.stringify({signal:'timeout',durationMs:0})`,
+      ) as string
+      return JSON.parse(raw) as WaitResult
+    } catch {
+      return { signal: 'timeout', durationMs: 0 }
+    }
+  }
+
+  // ── Visual Performance ───────────────────────────────────────
+
+  async curvedMoveTo(appId: string, target: string, intent: CursorIntent): Promise<void> {
+    try {
+      // Find element position first, then move cursor there
+      await this.containers.executeJavaScript(appId, `
+        (function() {
+          var b = window.__maia_bridge;
+          if (!b || !b.curvedMoveTo) return;
+          var el = b.findElement ? b.findElement(${JSON.stringify(target)}) : document.querySelector(${JSON.stringify(target)});
+          if (!el) return;
+          var rect = el.getBoundingClientRect();
+          return b.curvedMoveTo(rect.left + rect.width/2, rect.top + rect.height/2, ${JSON.stringify(intent)});
+        })()
+      `)
+    } catch {
+      // Non-critical visual
+    }
+  }
+
+  async glowElement(appId: string, target: string): Promise<void> {
+    try {
+      await this.containers.executeJavaScript(
+        appId,
+        `window.__maia_bridge && window.__maia_bridge.glowElement ? window.__maia_bridge.glowElement(${JSON.stringify(target)}) : null`,
+      )
+    } catch {
+      // Non-critical
+    }
+  }
+
+  async clickRipple(appId: string): Promise<void> {
+    try {
+      await this.containers.executeJavaScript(
+        appId,
+        'window.__maia_bridge && window.__maia_bridge.smartClickRipple ? window.__maia_bridge.smartClickRipple() : null',
+      )
+    } catch {
+      // Non-critical
+    }
+  }
+
+  async extractionPulse(appId: string, target: string): Promise<void> {
+    try {
+      await this.containers.executeJavaScript(
+        appId,
+        `window.__maia_bridge && window.__maia_bridge.extractionPulse ? window.__maia_bridge.extractionPulse(${JSON.stringify(target)}) : null`,
+      )
+    } catch {
+      // Non-critical
+    }
+  }
+
+  async smartScanPage(appId: string): Promise<void> {
+    try {
+      const url = await this.containers.getURL(appId)
+      if (url === this.lastScannedUrl) return
+      this.lastScannedUrl = url
+
+      await this.containers.executeJavaScript(
+        appId,
+        'window.__maia_bridge && window.__maia_bridge.smartScanPage ? window.__maia_bridge.smartScanPage(800) : null',
+      )
+    } catch {
+      // Non-critical
+    }
+  }
+
+  async progressiveHighlight(appId: string, keywords: string[]): Promise<void> {
+    try {
+      await this.containers.executeJavaScript(
+        appId,
+        `window.__maia_bridge && window.__maia_bridge.progressiveHighlight ? window.__maia_bridge.progressiveHighlight(${JSON.stringify(keywords)}, 300) : null`,
+      )
+    } catch {
+      // Non-critical
+    }
+  }
+
+  async hideCursor(appId: string): Promise<void> {
+    try {
+      await this.containers.executeJavaScript(
+        appId,
+        'window.__maia_bridge && window.__maia_bridge.smartHideCursor ? window.__maia_bridge.smartHideCursor() : null',
+      )
+    } catch {
+      // Non-critical
+    }
+  }
+
+  // ── Legacy Visual Methods (kept for compatibility) ───────────
+
+  async moveCursorTo(appId: string, selector: string): Promise<void> {
+    await this.curvedMoveTo(appId, selector, 'direct')
+  }
+
+  async scanPageOnce(appId: string): Promise<void> {
+    await this.smartScanPage(appId)
+  }
+
+  async highlightKeywords(appId: string, keywords: string[]): Promise<void> {
+    await this.progressiveHighlight(appId, keywords)
+  }
+
+  // ── Private Helpers ──────────────────────────────────────────
+
+  private publishAction(appId: string, action: string, target: string): void {
+    this.eventBus.publish({
+      type: 'app.action',
+      appId,
+      action,
+      target,
+      timestamp: Date.now(),
+    })
   }
 }

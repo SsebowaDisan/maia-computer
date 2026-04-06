@@ -4,3 +4,141 @@ icon: "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_48dp.png"
 url: https://drive.google.com
 category: productivity
 ai_description: "Store, organize, and share files. Upload documents, images, and videos."
+help_url: "https://support.google.com/drive"
+
+navigation:
+  overview: >
+    Google Drive is cloud storage for files and folders with 15GB free (shared across Gmail,
+    Drive, and Photos). The interface has a left sidebar for navigation sections, a center area
+    for file browsing in list or grid view, and a top search bar with advanced operators. Files
+    can be Google Docs/Sheets/Slides (stored natively) or uploaded files of any type. Sharing
+    supports Viewer, Commenter, and Editor permissions. URL: drive.google.com/drive/u/0/my-drive.
+
+  pages:
+    my_drive:
+      description: "The main view showing your personal files and folders."
+      url_pattern: "drive.google.com/drive/u/0/my-drive"
+      layout:
+        - "Top: search bar (input[aria-label='Search in Drive']), settings gear, support, Google Apps grid, profile"
+        - "Left sidebar: '+ New' button (large), then: My Drive, Shared with me, Recent, Starred, Spam, Trash, Storage usage meter"
+        - "Center: file/folder browser — column headers: Name, Owner, Last modified, File size. Or grid view with thumbnails"
+        - "Top of file area: breadcrumb path, view toggle (list/grid), sort button, info (i) button, filter chips"
+        - "Right panel (optional): file details/preview when info panel is open"
+      new_button:
+        selector: "button[aria-label='New']"
+        text: "'+ New' button at top of left sidebar"
+        behavior: "Opens dropdown: New folder, File upload, Folder upload, separator, Google Docs, Google Sheets, Google Slides, Google Forms, More (Google Drawings, Google My Maps, Google Sites, Google Apps Script, Connect more apps)."
+      search_bar:
+        selector: "input[aria-label='Search in Drive']"
+        behavior: "Click to focus. Type filename, content keywords, or use operators. Dropdown shows filters: Type (Documents, Spreadsheets, Presentations, Forms, Photos, PDFs), People, Modified date, Location, Name. Press Enter to search."
+      file_list:
+        behavior: "Single-click to select (blue highlight, details appear if info panel open). Double-click folders to open them. Double-click files to open in their app (Docs, Sheets, Viewer). Right-click for context menu: Share, Get link, Add shortcut to Drive, Move to, Add to Starred, Rename, Make a copy, Download, Remove. Select multiple with Ctrl+click or Shift+click."
+      sidebar_sections:
+        items:
+          - "My Drive: personal files you own"
+          - "Shared with me: files others shared with you (not in your Drive by default — add shortcut to organize)"
+          - "Recent: files opened or modified recently, sorted by last accessed"
+          - "Starred: bookmarked files for quick access"
+          - "Spam: files flagged as spam from shared drives"
+          - "Trash: deleted files (auto-purged after 30 days)"
+        behavior: "Click to navigate. Each section has its own file listing. Unread count badges appear on new shared files."
+      breadcrumb:
+        behavior: "Shows current folder path: My Drive > Projects > Design. Click any segment to navigate up. Shows folder hierarchy."
+      view_toggle:
+        behavior: "Toggle between list view (detailed rows with columns) and grid view (thumbnails with file previews). Grid shows image/document previews."
+
+    file_preview:
+      description: "Full-screen preview when opening a file that does not have a native Google editor (PDFs, images, videos)."
+      layout:
+        - "Center: file content preview (rendered document, image, or video player)"
+        - "Top: file name, Open with dropdown (select an app), Download button, Print, Share, More options"
+      open_with:
+        behavior: "Click 'Open with' to choose an application. Google Docs can open PDFs and Word files. Third-party apps installed from Google Workspace Marketplace also appear."
+
+    shared_drive:
+      description: "Team-owned shared drives where files belong to the team, not individuals."
+      url_pattern: "drive.google.com/drive/u/0/shared-drives"
+      behavior: "Files in shared drives persist even if the creator leaves. Access controlled by shared drive membership."
+
+  workflows:
+    search_files:
+      - "Click the search bar or press '/'"
+      - "Type filename or content keywords"
+      - "Use filter chips: Type (Documents, Spreadsheets, etc.), Modified (Today, Last 7 days, Last 30 days), People"
+      - "Or use operators: type:spreadsheet, owner:me, before:2026-01-01, title:'Q4 Report'"
+      - "Press Enter — results show with matching text highlighted"
+
+    upload_file:
+      - "Click '+ New' > 'File upload' (single file) or 'Folder upload' (entire folder)"
+      - "Or drag and drop files from your desktop directly into the Drive browser window"
+      - "Upload progress appears in the bottom-right corner with a progress bar per file"
+      - "Uploaded files appear in the current folder"
+
+    create_google_doc:
+      - "Click '+ New'"
+      - "Select Google Docs, Sheets, Slides, or Forms"
+      - "A new document opens in a new tab"
+      - "It is saved in the current folder (or My Drive root if created from home)"
+
+    organize_files:
+      - "Create folders: '+ New' > 'New folder' > type name > Create"
+      - "Move files: right-click > 'Move to' > navigate to destination > Move (or Cmd+Shift+M)"
+      - "Star files: right-click > 'Add to Starred' for quick access"
+      - "Color folders: right-click folder > 'Change color' > select from 24 color options"
+      - "Add shortcuts: right-click > 'Add shortcut to Drive' to reference a file from multiple folders"
+
+    share_files:
+      - "Right-click a file, select 'Share' > 'Share' (or select file and press Cmd+Shift+S)"
+      - "Enter email addresses. Set permission: Viewer, Commenter, Editor"
+      - "Click 'Copy link' to get a shareable URL"
+      - "General access: Restricted (only added people) or 'Anyone with the link' (Viewer/Commenter/Editor)"
+      - "Click gear icon in share dialog for: allow editors to change permissions, allow viewers to download/print/copy"
+
+  search_operators:
+    type: "type:document, type:spreadsheet, type:presentation, type:pdf, type:image, type:video, type:folder"
+    owner: "owner:email@example.com — files owned by a specific person"
+    title: "title:'exact name' — search by file name only"
+    is_starred: "is:starred — starred files"
+    is_trashed: "is:trashed — files in trash"
+    before: "before:2026-01-01 — modified before date"
+    after: "after:2026-01-01 — modified after date"
+    to: "to:email@example.com — files shared with a person"
+    from: "from:email@example.com — files shared by a person"
+    app: "app:'Google Sheets' — files associated with a specific app"
+    followup: "followup:suggestions — files with suggestions for you"
+
+  keyboard_shortcuts:
+    search: "/ — focus search"
+    new_folder: "Shift+F — create new folder"
+    rename: "N — rename selected file"
+    move: "Z — move selected file"
+    star: "S — star/unstar selected"
+    share: "Cmd+Shift+S — share selected"
+    navigate_up: "Ctrl+Backspace — go to parent folder"
+    select_all: "Cmd+A — select all files in view"
+    open: "Enter — open selected file"
+    details: "D — open details pane"
+
+  url_patterns:
+    my_drive: "drive.google.com/drive/u/0/my-drive"
+    shared_with_me: "drive.google.com/drive/u/0/shared-with-me"
+    recent: "drive.google.com/drive/u/0/recent"
+    starred: "drive.google.com/drive/u/0/starred"
+    trash: "drive.google.com/drive/u/0/trash"
+    search: "drive.google.com/drive/u/0/search?q=QUERY"
+    folder: "drive.google.com/drive/u/0/folders/FOLDER_ID"
+    file: "drive.google.com/file/d/FILE_ID/view"
+    shared_drives: "drive.google.com/drive/u/0/shared-drives"
+    settings: "drive.google.com/drive/u/0/settings"
+
+  tips:
+    - "Drag and drop files from your desktop directly into Drive to upload instantly"
+    - "Search operators: 'type:pdf owner:me after:2026-01-01' finds your PDFs from this year"
+    - "The 'Recent' section is the fastest way to find files you just worked on"
+    - "Starred items appear in the Starred section — use it as a quick-access bookmark bar"
+    - "Files in Trash auto-delete after 30 days — empty Trash manually for immediate deletion"
+    - "Color-code folders (right-click > Change color) for visual organization"
+    - "Add shortcuts to organize: a file can appear in multiple folders via shortcuts without duplicating"
+    - "Ctrl+click or Shift+click to select multiple files for bulk actions (move, share, delete)"
+    - "File previews work for PDFs, images, videos, and Office files without downloading"
+    - "Storage quota (15GB free) is shared across Drive, Gmail, and Photos — check usage in Settings"

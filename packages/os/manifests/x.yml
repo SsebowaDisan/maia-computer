@@ -4,3 +4,146 @@ icon: "https://abs.twimg.com/favicons/twitter.3.ico"
 url: https://x.com
 category: social
 ai_description: "Browse posts, follow people, post updates. Search trending topics and news."
+help_url: "https://help.x.com"
+
+navigation:
+  overview: >
+    X (formerly Twitter) is a social media platform for short-form posts (up to 25,000 characters
+    for Premium, 280 for free) and real-time conversation. The home timeline shows posts from
+    followed accounts and algorithmic recommendations. Key features: For You/Following feeds,
+    Spaces (live audio), Communities, long-form articles (Premium), and DMs.
+
+  pages:
+    home_timeline:
+      description: "The main feed showing posts from followed accounts and recommended content."
+      layout:
+        - "Left sidebar: X logo, Home, Explore, Notifications, Messages, Grok, Lists, Bookmarks, Communities, Premium, Profile, More, Post button"
+        - "Center: timeline tabs ('For you' and 'Following') at top, compose area, then post feed"
+        - "Right sidebar: search bar, 'Subscribe to Premium', trending topics ('What's happening'), 'Who to follow' suggestions"
+      timeline_tabs:
+        behavior: "'For you' shows algorithmically ranked mix of followed accounts, recommendations, and promoted content. 'Following' shows only posts from accounts you follow in strict reverse chronological order. Tab state persists across sessions."
+      compose_area:
+        selector: "div[data-testid='tweetTextarea_0']"
+        behavior: "Click 'What is happening?!' to open inline composer. Type text (280 chars free, 25K Premium). Toolbar below: image (up to 4), GIF, poll (2-4 options, custom duration), emoji, schedule, location. Click 'Post' to publish."
+      post_button:
+        selector: "a[data-testid='SideNav_NewTweet_Button']"
+        behavior: "Blue circular button at bottom of left sidebar. Opens a modal composer — same features as inline but floats over the feed."
+      post_in_feed:
+        behavior: "Each post: avatar, display name, @handle, relative timestamp, post text (click 'Show more' for long posts), optional media. Below: Reply (speech bubble), Repost (loop arrows), Like (heart), Bookmark (flag), Share (upload icon), Views count. Verified badge (checkmark) indicates Premium subscriber or legacy verification."
+      engagement_buttons:
+        reply: "Opens reply composer — your reply appears in the post's thread"
+        repost: "Click for options: Repost (share as-is to your followers) or Quote (add your own text around the original post)"
+        like: "Heart icon — liked posts appear in your Likes tab on your profile"
+        bookmark: "Flag icon — saves privately to your Bookmarks (only you can see)"
+        share: "Copy link, Send via DM, Share to other platforms"
+        views: "Shows how many times the post has been viewed (public count)"
+
+    explore:
+      description: "Discover trending topics, search content, and browse categories."
+      url_pattern: "x.com/explore"
+      layout:
+        - "Top: search bar"
+        - "Tabs: For You, Trending, News, Sports, Entertainment"
+        - "Center: trending topics with post counts and category labels"
+      search_bar:
+        selector: "input[data-testid='SearchBox_Search_Input']"
+        behavior: "Type query, press Enter. Results page tabs: Top (most relevant/engaged), Latest (chronological), People (accounts), Media (images/videos), Lists. Supports advanced operators."
+
+    post_thread:
+      description: "A single post with its full conversation thread and replies."
+      url_pattern: "x.com/username/status/POST_ID"
+      layout:
+        - "Top: the original post with full content and engagement counts"
+        - "Below: 'Post your reply' input"
+        - "Below: replies sorted by relevance (blue checkmarks and author replies prioritized)"
+      reply_input:
+        behavior: "Click to focus, type reply, click Reply button. Supports the same media attachments as regular posts. Replies are public and appear in the thread."
+
+    profile:
+      description: "A user's profile page showing their posts and information."
+      url_pattern: "x.com/username"
+      layout:
+        - "Top: banner image, profile photo, name, @handle, bio, location, join date, follower/following counts"
+        - "Buttons: Follow, Notify (bell), Message, More (three dots)"
+        - "Tabs: Posts, Replies, Highlights, Articles, Media, Likes"
+      follow_button:
+        behavior: "Follow adds their posts to your Following timeline. Bell icon enables notifications for their posts."
+
+    messages:
+      description: "Direct messages for private conversations."
+      url_pattern: "x.com/messages"
+      layout:
+        - "Left: conversation list with recent DMs and search"
+        - "Right: active conversation with message history and input"
+        - "Compose icon (envelope+) at top to start new DM"
+      behavior: "DMs support text, images, GIFs, and reactions. Group DMs support up to 50 people. Message requests from non-followers go to a separate requests tab."
+
+    spaces:
+      description: "Live audio conversations — X's equivalent of live radio/podcast."
+      behavior: "Spaces appear as purple bubbles at the top of the timeline or in Explore. Click to listen. Hosts can invite speakers. Listeners can request to speak (raise hand). Spaces can be recorded and replayed."
+
+  search_operators:
+    from: "from:username — posts from a specific user"
+    to: "to:username — replies to a specific user"
+    filter_media: "filter:media — only posts with images or video"
+    filter_links: "filter:links — only posts containing links"
+    min_faves: "min_faves:100 — posts with at least 100 likes"
+    min_retweets: "min_retweets:50 — posts with at least 50 reposts"
+    since: "since:2026-01-01 — posts after this date"
+    until: "until:2026-04-01 — posts before this date"
+    lang: "lang:en — posts in a specific language"
+    quotes: "\"exact phrase\" — posts containing this exact phrase"
+    exclude: "-word — exclude posts containing this word"
+
+  keyboard_shortcuts:
+    new_post: "N — open new post composer"
+    search: "/ — focus search bar"
+    like: "L — like the selected post"
+    repost: "T — repost the selected post"
+    reply: "R — reply to the selected post"
+    bookmark: "B — bookmark the selected post"
+    navigate: "J/K — move down/up through posts"
+    open_post: "Enter — open the selected post"
+    go_home: "G then H — go to Home timeline"
+    go_explore: "G then E — go to Explore"
+    go_notifications: "G then N — go to Notifications"
+    go_messages: "G then M — go to Messages"
+    go_profile: "G then P — go to Profile"
+    show_shortcuts: "? — show all keyboard shortcuts"
+
+  workflows:
+    search_topics:
+      - "Click search bar in right sidebar or press /"
+      - "Type query and press Enter"
+      - "Use 'Top' tab for most relevant, 'Latest' for chronological"
+      - "Add operators for precision: from:username, since:date, min_faves:50"
+
+    post_update:
+      - "Click 'Post' button in left sidebar or press N"
+      - "Type message in the composer"
+      - "Attach media: images (up to 4), GIF, poll, or emoji"
+      - "Click 'Post' to publish"
+
+    create_thread:
+      - "Open the composer (N key or Post button)"
+      - "Type the first post"
+      - "Click the + icon to add the next post in the thread"
+      - "Repeat for each additional post"
+      - "Click 'Post all' to publish the entire thread at once"
+
+    follow_conversation:
+      - "Click Notifications in the left sidebar (or G then N)"
+      - "Tabs: All, Verified, Mentions — filter by type"
+      - "Click any notification to jump to the relevant post"
+
+  tips:
+    - "The 'Following' tab gives a chronological feed with no algorithmic interference"
+    - "Keyboard shortcuts are powerful — press ? to see the full list"
+    - "Search operators make finding specific content much easier: from:, since:, min_faves:, filter:media"
+    - "Bookmarks are private — no one can see what you bookmark"
+    - "Trending topics are localized to your region — change in Settings > Content preferences"
+    - "Mute words, phrases, or hashtags: Settings > Privacy > Muted > Muted words"
+    - "Spaces (live audio) appear as purple bubbles — tap to listen without joining as a speaker"
+    - "Quote posts add your commentary above the original — more engagement than plain reposts"
+    - "Lists group accounts by topic — subscribe to others' lists or create your own for curated feeds"
+    - "Click the timestamp on any post to get its permanent URL for sharing"

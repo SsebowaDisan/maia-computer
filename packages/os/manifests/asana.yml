@@ -4,3 +4,104 @@ icon: "https://www.google.com/s2/favicons?domain=asana.com&sz=128"
 url: https://app.asana.com
 category: productivity
 ai_description: "Manage projects and tasks. Track work across teams."
+
+navigation:
+  overview: >
+    Asana is a project and task management platform. It organizes work into projects
+    with tasks that can be viewed as lists, boards, timelines, or calendars.
+
+  pages:
+    home:
+      description: "The Home feed showing recent updates, tasks assigned to you, and project activity."
+      layout:
+        - "Left sidebar: Home, My Tasks, Inbox, then Favorites and Projects sections"
+        - "Top: search bar, '+' Create button"
+        - "Center: Home feed with recent activity, tasks due soon, and project updates"
+      sidebar:
+        text: "Left panel with navigation links"
+        behavior: "Home shows the activity feed. My Tasks shows all tasks assigned to you. Inbox shows notifications and messages. Favorites shows starred projects for quick access. Projects lists all projects."
+      create_button:
+        text: "Orange '+ Create' button in top navigation"
+        behavior: "Click to open a dropdown with options: Task, Project, Message, Portfolio, Goal, and more. Select the type of item to create."
+      search_bar:
+        text: "Search input at top of the page"
+        behavior: "Click to focus, type a query. Press Tab+/ for quick access. Results show matching tasks, projects, and people. Click a result to open it."
+
+    my_tasks:
+      description: "Your personal task list showing everything assigned to you."
+      layout:
+        - "Top: view toggle (List, Board, Calendar)"
+        - "Center: task list grouped by Recently Assigned, Today, Upcoming, Later"
+        - "Task rows show name, due date, project, and priority"
+      task_row:
+        text: "Individual task in the list"
+        behavior: "Click the checkmark circle to complete the task. Click the task name to open the task detail pane on the right. Each row shows task name, assignee, due date, and project tags."
+
+    project:
+      description: "A project view showing all tasks within a project."
+      layout:
+        - "Top: project name, view tabs (List, Board, Timeline, Calendar, Dashboard)"
+        - "Below tabs: filter and sort options, group by options"
+        - "Center: tasks displayed in the selected view format"
+        - "Right (when task selected): task detail pane"
+      view_tabs:
+        text: "List, Board, Timeline, Calendar tabs at top"
+        behavior: "List shows tasks as rows. Board shows Kanban columns by status or section. Timeline shows a Gantt-like view with task durations. Calendar shows tasks by due date."
+      task_detail_pane:
+        text: "Right side panel showing full task details"
+        behavior: "Shows task name, description, assignee, due date, project, subtasks, attachments, comments, and custom fields. All fields are editable."
+      add_task:
+        text: "'+ Add task' button at the bottom of a section or list"
+        behavior: "Creates a new task inline. Type the task name and press Enter. The task appears in the list immediately."
+
+    task_detail:
+      description: "Full detail view of a single task (in the right pane or full page)."
+      layout:
+        - "Top: task name (editable), complete button (checkmark)"
+        - "Below: Assignee, Due date, Project, Tags, Priority fields"
+        - "Center: description editor, subtasks list, attachments"
+        - "Bottom: comments and activity log"
+      assignee_field:
+        text: "Assignee field"
+        behavior: "Click to assign the task to a team member from a searchable dropdown."
+      due_date_field:
+        text: "Due date field"
+        behavior: "Click to open a date picker. Set a due date or date range."
+      subtasks:
+        text: "Subtasks section"
+        behavior: "Add subtasks to break a task into smaller steps. Each subtask can have its own assignee and due date."
+      comment_input:
+        text: "Comment box at the bottom"
+        behavior: "Type a comment to collaborate with team members. Supports @mentions, attachments, and formatting."
+
+  workflows:
+    create_task:
+      - "Click the orange '+ Create' button and select 'Task'"
+      - "Type the task name in the title field"
+      - "Set assignee, due date, and project"
+      - "Add a description and any subtasks"
+      - "Press Enter or click away to save"
+
+    browse_project:
+      - "Click a project name in the left sidebar"
+      - "Choose a view: List for detailed rows, Board for Kanban columns, Timeline for Gantt charts"
+      - "Click any task to see its details in the right pane"
+
+    complete_tasks:
+      - "Click the checkmark circle next to a task name to mark it complete"
+      - "The task fades out and moves to the completed section"
+      - "Click 'Completed' section header to view completed tasks"
+
+    search_tasks:
+      - "Click the search bar (or press Tab+/)"
+      - "Type keywords from task names or descriptions"
+      - "Click a result to open that task"
+      - "Use filters to narrow by project, assignee, or status"
+
+  tips:
+    - "Tab+/ is the fastest way to open search from anywhere in Asana"
+    - "The 'My Tasks' view with 'Today, Upcoming, Later' sections helps prioritize daily work"
+    - "Board view works like a Kanban board — drag tasks between columns to update their status"
+    - "Custom fields on tasks let you track priority, effort, or any project-specific data"
+    - "Use rules (Asana automation) to auto-assign, move, or update tasks based on triggers"
+    - "Tasks can belong to multiple projects — useful for cross-team work tracking"

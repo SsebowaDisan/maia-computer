@@ -4,3 +4,106 @@ icon: "https://www.google.com/s2/favicons?domain=freshdesk.com&sz=128"
 url: https://freshdesk.com
 category: productivity
 ai_description: "Helpdesk software. Manage support tickets and customer queries."
+help_url: "https://support.freshdesk.com"
+
+navigation:
+  overview: >
+    Freshdesk is a helpdesk and customer support platform. Customer queries arrive as tickets
+    with properties like status, priority, agent assignment, and type. The interface has a left
+    sidebar for navigation, a ticket list with filterable views, and a ticket detail page with
+    conversation thread and properties panel. Agents respond to tickets, use canned responses,
+    and manage workflow through status transitions.
+
+  pages:
+    dashboard:
+      description: "The home page showing ticket summary widgets, overdue counts, and agent performance metrics."
+      layout:
+        - "Left sidebar: Dashboard, Tickets, Contacts, Companies, Solutions (knowledge base), Reports, Admin"
+        - "Center: summary widgets — unresolved tickets count, overdue tickets, due today, open tickets, on hold"
+        - "Below: recent ticket activity feed, agent leaderboard"
+      sidebar:
+        text: "Left navigation panel"
+        behavior: "Dashboard shows overview stats. Tickets opens the ticket list with filters. Contacts shows customer records. Companies shows organization records. Solutions is the knowledge base for self-service articles. Reports shows analytics and SLA performance."
+
+    tickets:
+      description: "The ticket list view with filter tabs, search, and sortable columns."
+      layout:
+        - "Top: filter view tabs (All Tickets, Unresolved, Overdue, Due Today, Open, On Hold, New)"
+        - "Top-right: search bar, 'New Ticket' button"
+        - "Center: table of tickets with columns — checkbox, Subject, Contact, Status, Priority, Agent, Group, Created, Due by"
+      ticket_row:
+        text: "Individual ticket row in the table"
+        behavior: "Click to open the full ticket detail view. Each row shows subject line, requester name, status badge (Open/Pending/Resolved/Closed), priority badge (Low/Medium/High/Urgent), assigned agent, and creation date. Hover to reveal quick action icons."
+      filter_views:
+        text: "Predefined filter tabs at top of the ticket list"
+        behavior: "All Tickets shows everything. Unresolved shows Open + Pending. Overdue shows tickets past their SLA deadline. Due Today shows tickets with today's SLA deadline. Custom views can be created with any filter combination and saved."
+      new_ticket_button:
+        text: "'New Ticket' button at top-right"
+        behavior: "Opens a form to manually create a ticket: requester email, subject, description, status, priority, agent assignment, and type."
+      search_bar:
+        text: "Search input at top of the ticket list"
+        behavior: "Search by ticket ID (e.g., #1234), subject keywords, or requester name. Results replace the ticket list."
+
+    ticket_detail:
+      description: "Full view of a single ticket with conversation thread, properties sidebar, and reply composer."
+      layout:
+        - "Top: ticket subject, status and priority badges, action buttons (Reply, Forward, Note)"
+        - "Center: conversation thread — alternating customer messages (left-aligned) and agent replies (right-aligned), with timestamps and agent names"
+        - "Right sidebar: ticket properties — Status, Priority, Agent, Group, Type, and custom fields"
+        - "Bottom: reply composer with formatting toolbar"
+      reply_composer:
+        text: "Reply input at the bottom of the conversation thread"
+        behavior: "Toggle between three modes: 'Reply' (sends email to customer), 'Forward' (sends to external email), 'Note' (internal, visible only to agents, shown on yellow background). Formatting toolbar supports bold, italic, lists, links, images, and file attachments."
+      canned_responses:
+        text: "Canned response button in the composer toolbar"
+        behavior: "Click to open a searchable list of pre-written response templates. Select one to insert into the composer. Templates can include dynamic placeholders like {{ticket.requester_name}} and {{ticket.id}}."
+      ticket_properties:
+        text: "Properties panel in the right sidebar"
+        behavior: "Click any property to change it: Status dropdown (Open, Pending, Resolved, Closed), Priority dropdown (Low, Medium, High, Urgent), Agent dropdown (assign to an agent), Group dropdown (assign to a team), Type dropdown (Question, Incident, Problem, Feature Request)."
+      time_tracking:
+        text: "Time entry section in the right sidebar or ticket actions"
+        behavior: "Log time spent on a ticket. Enter hours and add a note. Time entries appear in reports for workload tracking."
+      ticket_actions:
+        text: "Action buttons at the top of the ticket"
+        behavior: "Close (resolves the ticket), Merge (combine duplicate tickets), Split (separate a thread), Delete, and Scenario automations (one-click multi-action macros)."
+
+  workflows:
+    respond_to_ticket:
+      - "Open a ticket from the ticket list"
+      - "Read the customer's messages in the conversation thread"
+      - "Click 'Reply' (or ensure the composer is in Reply mode)"
+      - "Type your response (or insert a canned response)"
+      - "Click 'Send' — the customer receives the reply by email"
+
+    triage_tickets:
+      - "Go to Tickets and select the 'Unresolved' or 'New' filter view"
+      - "Open each new ticket"
+      - "Set the Priority (Low/Medium/High/Urgent) in the right sidebar"
+      - "Assign to the appropriate Agent or Group"
+      - "Set the Type (Question, Incident, Problem, Feature Request)"
+
+    add_internal_note:
+      - "Open a ticket"
+      - "Switch the composer to 'Note' mode"
+      - "Type an internal note for other agents"
+      - "Click 'Send' — the customer does not see internal notes"
+
+    search_tickets:
+      - "Click the search bar at the top of the ticket list"
+      - "Type a ticket ID (e.g., #1234), subject keyword, or customer name"
+      - "Click a result to open the ticket"
+
+    create_knowledge_base_article:
+      - "Click 'Solutions' in the left sidebar"
+      - "Select a category or create a new one"
+      - "Click 'New Article' and write the help article"
+      - "Publish it — customers can find it in the self-service portal"
+
+  tips:
+    - "Reply sends to the customer, Note is internal-only — always verify the composer mode before sending"
+    - "Overdue and Due Today views help prioritize tickets at risk of SLA breach"
+    - "Canned responses with dynamic placeholders auto-fill customer name and ticket details"
+    - "Custom filter views let you create personalized ticket queues — save them for quick access"
+    - "Scenario automations combine multiple actions (set status + assign + reply) into a single click"
+    - "The Solutions knowledge base reduces ticket volume by enabling customer self-service"
+    - "Merge duplicate tickets to keep a single clean thread per issue"

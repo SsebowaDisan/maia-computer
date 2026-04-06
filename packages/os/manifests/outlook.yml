@@ -4,3 +4,99 @@ icon: "https://www.google.com/s2/favicons?domain=outlook.live.com&sz=128"
 url: https://outlook.live.com
 category: productivity
 ai_description: "Read and send emails. Manage calendar and contacts."
+help_url: "https://support.microsoft.com/outlook"
+
+navigation:
+  overview: >
+    Outlook is Microsoft's email client with integrated calendar, contacts, and task management.
+    The web interface uses a three-column layout: folder sidebar, email list, and reading pane.
+    Focused Inbox separates important emails from informational ones. The bottom-left icons
+    switch between Mail, Calendar, People, and To Do views.
+
+  pages:
+    inbox:
+      description: "The main email view with folder sidebar, email list, and reading pane."
+      layout:
+        - "Left sidebar: folder tree (Favorites section at top, then Inbox, Drafts, Sent Items, Deleted Items, Junk Email, Archive, custom folders)"
+        - "Center column: email list with sender avatar, sender name, subject line, preview snippet, date/time, and flag icon"
+        - "Right column: reading pane showing selected email's full content with headers and action buttons"
+        - "Top bar: search input, 'New mail' button, filter/sort controls"
+        - "Bottom-left: app switcher icons (Mail, Calendar, People, To Do, Files)"
+      new_mail_button:
+        text: "'New mail' button at top-left of the email list area"
+        behavior: "Opens a compose form overlaid on the reading pane with To, Cc/Bcc, Subject, and body fields. Formatting toolbar appears above the message body."
+      search_bar:
+        selector: "input[aria-label*='Search'], input[placeholder*='Search']"
+        text: "Search input at the top of the page"
+        behavior: "Click to focus and type keywords, sender name, or subject. Results replace the email list. Filter chips appear for narrowing by date, has attachments, from specific sender, or folder scope (current folder vs all folders)."
+      email_list:
+        text: "Emails in the center column"
+        behavior: "Click an email to view it in the reading pane. Unread emails have bold subject lines and a blue left border. Hover to reveal quick action icons: archive, delete, flag, pin, mark as read/unread. Right-click for full context menu."
+      folder_sidebar:
+        text: "Left sidebar with email folders"
+        behavior: "Favorites section at top contains pinned folders. Below: Inbox, Drafts, Sent Items, Deleted Items, Junk Email, Archive. Click any folder to view its contents. Right-click to create subfolders, rename, or move folders. Drag emails onto folders to move them."
+      focused_inbox:
+        text: "'Focused' and 'Other' tabs at the top of the email list"
+        behavior: "Focused tab shows emails Outlook considers important (from frequent contacts, direct messages). Other tab shows newsletters, automated emails, and lower-priority messages. Toggle Focused Inbox on/off in View settings."
+      reading_pane:
+        text: "Right panel showing the selected email's full content"
+        behavior: "Displays sender, recipients, date, subject, and full message body. Action buttons at the top: Reply, Reply All, Forward, Delete, Archive, Move to, and more (three-dot menu). Attachments appear as clickable cards below the header."
+
+    compose:
+      description: "The email compose form with recipient fields, subject, body, and formatting tools."
+      layout:
+        - "Top: To field (with autocomplete), Cc/Bcc toggle link"
+        - "Below: Subject line input"
+        - "Center: message body with formatting toolbar (bold, italic, underline, lists, alignment, insert link, insert image)"
+        - "Bottom bar: Send button, Discard button, attachment button (paperclip), options menu"
+      send_button:
+        text: "'Send' button at the bottom-left of the compose form"
+        behavior: "Sends the email immediately and closes the compose form. The email appears in Sent Items."
+      attachment_button:
+        text: "Paperclip icon in the compose toolbar"
+        behavior: "Click to attach files from your computer, OneDrive, or recent files. Files appear as cards above the compose area."
+
+    calendar:
+      description: "Calendar view accessible from the bottom-left calendar icon."
+      layout:
+        - "Center: calendar grid (day, work week, week, or month view)"
+        - "Left: mini calendar for date navigation, other calendars list"
+        - "Top: 'New event' button, view toggles"
+      new_event:
+        text: "'New event' button at top-left"
+        behavior: "Opens event creation form with title, date/time, location, attendees, and description fields."
+
+  workflows:
+    send_email:
+      - "Click 'New mail' at the top-left"
+      - "Type the recipient email in the To field (autocomplete suggests contacts)"
+      - "Type a subject in the Subject field"
+      - "Write the message body"
+      - "Click 'Send' at the bottom"
+
+    search_emails:
+      - "Click the search bar at the top"
+      - "Type keywords, sender name, or subject"
+      - "Press Enter — results replace the email list"
+      - "Use filter chips to narrow by date, attachments, or sender"
+      - "Click 'All folders' to search beyond the current folder"
+
+    reply_to_email:
+      - "Click an email in the inbox to view it in the reading pane"
+      - "Click 'Reply' (or 'Reply all') at the top of the reading pane"
+      - "Type your reply in the compose area that appears"
+      - "Click 'Send'"
+
+    organize_with_folders:
+      - "Right-click a folder in the sidebar to create a new subfolder"
+      - "Drag emails from the list onto folder names to move them"
+      - "Or right-click an email and select 'Move to' for folder selection"
+
+  tips:
+    - "Focused Inbox separates important emails from noise — check the 'Other' tab for newsletters and automated messages"
+    - "Keyboard shortcuts: N for new mail, R for reply, Shift+R for reply all, Ctrl+E to focus search"
+    - "Pin important emails to keep them at the top of the list regardless of date"
+    - "Flag emails to create follow-up tasks — flagged items appear in the To Do integration"
+    - "The bottom-left icons switch between Mail, Calendar, People (contacts), and To Do without leaving Outlook"
+    - "Drag emails to calendar dates to create events linked to that email"
+    - "Search filter 'hasattachment:true' finds all emails with attachments"

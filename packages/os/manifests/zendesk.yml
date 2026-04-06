@@ -4,3 +4,113 @@ icon: "https://www.google.com/s2/favicons?domain=zendesk.com&sz=128"
 url: https://www.zendesk.com/login
 category: productivity
 ai_description: "Customer support platform. Manage tickets and live chat."
+help_url: "https://support.zendesk.com"
+
+navigation:
+  overview: >
+    Zendesk is a customer support platform built around a ticket workspace. Agents work from views
+    (filtered ticket lists), open tickets in a tabbed workspace, and manage properties like status,
+    priority, assignee, and tags. The interface supports macros (one-click multi-action automations),
+    triggers (event-based automations), and a knowledge base (Guide) for self-service articles.
+
+  pages:
+    dashboard:
+      description: "The agent home dashboard showing open tickets, stats, and satisfaction scores."
+      layout:
+        - "Left sidebar: Home (dashboard), Views, Reporting, Admin center icon, Guide (knowledge base)"
+        - "Center: ticket statistics — open tickets, pending, solved this week, satisfaction score"
+        - "Below: recent ticket activity, tickets requiring attention"
+      sidebar:
+        text: "Left navigation panel"
+        behavior: "Home shows the dashboard overview. Views shows filtered ticket lists (the primary work area). Reporting shows analytics, SLA compliance, and agent performance. Admin center has system settings. Guide links to the knowledge base."
+
+    views:
+      description: "Filtered ticket lists — the primary work area for agents."
+      layout:
+        - "Left panel: list of saved views (Your unsolved tickets, Unassigned tickets, All unsolved tickets, Recently updated, Pending tickets, Recently solved)"
+        - "Center: ticket table for the selected view with columns — Subject, Requester, Requested (date), Type, Priority, Status"
+      view_list:
+        text: "Saved views in the left panel"
+        behavior: "Click a view to load its filtered ticket list. 'Your unsolved tickets' shows tickets assigned to you. 'Unassigned tickets' shows tickets needing an owner. 'All unsolved tickets' shows everything not yet solved. Custom views can be created with any filter criteria."
+      ticket_table:
+        text: "Table of tickets in the selected view"
+        behavior: "Shows subject, requester name, creation date, type, priority badge, and status badge. Click a ticket to open it in the workspace. Bulk-select tickets with checkboxes for batch actions (assign, change status, apply macro)."
+
+    ticket_workspace:
+      description: "Full ticket view with conversation thread, properties, and reply composer in a tabbed interface."
+      layout:
+        - "Top: ticket tabs (multiple tickets can be open simultaneously)"
+        - "Left/Center: conversation thread — customer messages and agent replies in chronological order, with timestamps, avatars, and channel indicators (email, chat, phone)"
+        - "Right sidebar: ticket properties — Requester, Assignee, Status, Type, Priority, Tags, custom fields"
+        - "Bottom: reply composer with channel selector and formatting tools"
+        - "Bottom-left: 'Submit as' button with status dropdown"
+      conversation_thread:
+        text: "Message thread in the center/left area"
+        behavior: "Shows the full conversation history. Each message indicates its channel (email, chat, social). Public replies are visible to the customer. Internal notes (yellow background) are visible only to agents. Events like status changes and assignments appear inline."
+      reply_composer:
+        text: "Reply input at the bottom of the ticket"
+        behavior: "Toggle between 'Public reply' (sends to the customer via their original channel) and 'Internal note' (yellow background, agent-only). Formatting toolbar: bold, italic, lists, links, images, attachments. The CC field adds additional recipients."
+      submit_button:
+        text: "'Submit as' button at the bottom-left"
+        behavior: "Click the dropdown arrow to select the status transition: Submit as Open, Submit as Pending, Submit as Solved, Submit as On-hold. This sends the reply AND changes the ticket status in one action."
+      ticket_properties:
+        text: "Properties panel in the right sidebar"
+        behavior: "Requester: the customer who created the ticket. Assignee: the agent responsible (click to reassign). Status: New/Open/Pending/Solved/Closed. Type: Question/Incident/Problem/Task. Priority: Low/Normal/High/Urgent. Tags: freeform labels for categorization and automation triggers."
+      macros:
+        text: "Macro button in the ticket toolbar (or Apply macro option)"
+        behavior: "Macros are saved action sets that apply in one click: insert a response, set status, assign agent, add tags, and more. Search or browse macros from the dropdown. Common examples: 'Close and mark solved', 'Escalate to tier 2', 'Request more info'."
+      ticket_tabs:
+        text: "Tabs at the top of the workspace"
+        behavior: "Multiple tickets can be open in tabs simultaneously. Click a tab to switch between tickets. A '+' tab opens a new ticket search. Unsaved changes show a dot on the tab."
+
+    search:
+      description: "Global search for tickets, users, and organizations."
+      layout:
+        - "Top bar: search icon/input"
+        - "Results: filterable by type (tickets, users, organizations), status, date, and more"
+      search_input:
+        text: "Search icon in the top navigation bar"
+        behavior: "Click to open the search interface. Type a ticket number (e.g., #54321), requester name, subject keywords, or tag. Results are categorized by type. Advanced search supports operators: status:open, priority:high, assignee:agent_name, tags:billing."
+
+  workflows:
+    respond_to_ticket:
+      - "Click 'Views' in the left sidebar"
+      - "Select 'Your unsolved tickets' (or another relevant view)"
+      - "Click a ticket to open it in the workspace"
+      - "Read the conversation thread"
+      - "Ensure the composer is in 'Public reply' mode (not 'Internal note')"
+      - "Type your response"
+      - "Click 'Submit as Open' (or select another status from the dropdown)"
+
+    apply_macro:
+      - "Open a ticket in the workspace"
+      - "Click the macro button in the toolbar"
+      - "Search or browse for the appropriate macro"
+      - "Click to apply — the macro fills in the response and sets properties"
+      - "Review the changes and click Submit"
+
+    triage_unassigned:
+      - "Go to Views > 'Unassigned tickets'"
+      - "Open each ticket and assess the issue"
+      - "Set Priority, Type, and Tags in the right sidebar"
+      - "Assign to the appropriate agent or group"
+
+    search_tickets:
+      - "Click the search icon in the top bar"
+      - "Type a ticket number, requester name, or subject keyword"
+      - "Use operators for precision: status:open, priority:urgent, tags:billing"
+      - "Click a result to open the ticket"
+
+    bulk_update:
+      - "In a view, check the boxes next to multiple tickets"
+      - "Use the bulk action bar that appears at the top"
+      - "Apply a macro, change status, or reassign in bulk"
+
+  tips:
+    - "'Public reply' sends to the customer; 'Internal note' is visible only to agents — always check the toggle"
+    - "'Submit as' changes the ticket status when you send — use 'Submit as Pending' when waiting for customer response"
+    - "Macros save significant time — use them for common responses and multi-step actions"
+    - "Tags enable powerful automation — triggers and automations can fire based on tag changes"
+    - "Ticket tabs let you work on multiple tickets simultaneously without losing context"
+    - "SLA indicators show time remaining before breach — prioritize tickets with expiring SLAs"
+    - "Views are your primary work queue — customize them with filters for your specific workflow"

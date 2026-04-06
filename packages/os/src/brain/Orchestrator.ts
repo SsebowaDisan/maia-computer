@@ -2,6 +2,7 @@ import {
   AGENT_PROFILES,
   MESSAGE_INTENT,
   SUB_TASK_STATUS,
+  type AppManifest,
   type ChatMessage,
   type InstalledApp,
   type SubTask,
@@ -25,6 +26,7 @@ export class Orchestrator {
   private readonly llm: ProviderRegistry
   private readonly messageBus: MessageBus
   private readonly installedApps: () => InstalledApp[]
+  private readonly appManifests: AppManifest[]
   private agents = new Map<string, Brain>()
   private subTasks: SubTask[] = []
   private taskId = ''
@@ -39,12 +41,14 @@ export class Orchestrator {
     llm: ProviderRegistry,
     messageBus: MessageBus,
     installedApps: () => InstalledApp[],
+    appManifests: AppManifest[] = [],
   ) {
     this.intelligence = intelligence
     this.eventBus = eventBus
     this.llm = llm
     this.messageBus = messageBus
     this.installedApps = installedApps
+    this.appManifests = appManifests
 
     this.eventBus.subscribePattern('orchestrator.*', (event) => {
       if (event.type === 'orchestrator.discussion_started') {
@@ -280,7 +284,7 @@ respond with a json array only:
       const ackResponse = await this.llm.sendMessage([
         { role: 'system', content: `you are ${subTask.agentId}, a teammate. the user just asked something and you've been assigned to look it up. write a one-sentence casual acknowledgment (like texting a coworker). examples: "okay — let me look into this and get back to you", "on it, give me a sec", "sure thing, checking now". lowercase, casual, short.` },
         { role: 'user', content: cleanDesc },
-      ], { maxTokens: 60, temperature: 0.7 })
+      ], { model: 'gpt-4o-mini', maxTokens: 60, temperature: 0.7 })
       this.postAgentResponse(subTask.agentId, ackResponse.content.trim().replace(/^["']|["']$/g, ''))
     } catch {
       this.postAgentResponse(subTask.agentId, 'okay — let me look into this')
@@ -385,10 +389,17 @@ respond with a json array only:
   }
 
   private createAgent(subTask: SubTask): Brain {
+    // Look up the app manifest for navigation guides
+    const app = this.installedApps().find((a) => a.id === subTask.appId)
+    const manifest = app ? this.appManifests.find((m) => m.id === app.manifestId) : undefined
+
     const brain = new Brain(this.intelligence, this.eventBus, this.llm, {
       taskId: this.taskId,
       appId: subTask.appId,
       agentId: subTask.agentId,
+      messageBus: this.messageBus,
+      appNavigation: manifest?.navigation,
+      appName: manifest?.name ?? app?.name,
     })
 
     this.agents.set(subTask.agentId, brain)
@@ -509,7 +520,7 @@ respond with a json array only:
         const response = await this.llm.sendMessage([
           { role: 'system', content: personality },
           { role: 'user', content: discussPrompt },
-        ], { maxTokens: 256, temperature: 0.5 })
+        ], { model: 'gpt-4o-mini', maxTokens: 256, temperature: 0.5 })
 
         const text = response.content.trim()
         if (text && text !== 'SKIP') {
@@ -544,7 +555,7 @@ respond with a json array only:
       const response = await this.llm.sendMessage([
         { role: 'system', content: personality },
         { role: 'user', content: responsePrompt },
-      ], { maxTokens: 256, temperature: 0.5 })
+      ], { model: 'gpt-4o-mini', maxTokens: 256, temperature: 0.5 })
 
       this.postAgentResponse(agentId, response.content.trim())
     } catch {

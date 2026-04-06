@@ -1,6 +1,8 @@
 import { create } from 'zustand'
 
-import type { PlanStep, PlanStepStatus } from '@maia/shared'
+import type { ChatMessage, PlanStep, PlanStepStatus } from '@maia/shared'
+
+import { buildResearchSnapshot, emptyResearchSnapshot, type ResearchSnapshot } from '../lib/researchSignals'
 
 interface TaskStoreState {
   running: boolean
@@ -8,6 +10,7 @@ interface TaskStoreState {
   thought: string
   plan: PlanStep[]
   activeAgentIds: string[]
+  research: ResearchSnapshot
   setStatus: (running: boolean, taskDescription: string) => void
   setThought: (thought: string) => void
   setPlan: (plan: PlanStep[]) => void
@@ -15,6 +18,8 @@ interface TaskStoreState {
   addAgent: (agentId: string) => void
   removeAgent: (agentId: string) => void
   clearAgents: () => void
+  rebuildResearch: (messages: ChatMessage[], thought?: string) => void
+  resetResearch: () => void
 }
 
 export const useTaskStore = create<TaskStoreState>((set) => ({
@@ -23,10 +28,11 @@ export const useTaskStore = create<TaskStoreState>((set) => ({
   thought: '',
   plan: [],
   activeAgentIds: [],
+  research: emptyResearchSnapshot(),
   setStatus: (running, taskDescription) => {
     set({ running, taskDescription })
     if (!running) {
-      set({ activeAgentIds: [] })
+      set({ activeAgentIds: [], research: emptyResearchSnapshot() })
     }
   },
   setThought: (thought) => {
@@ -56,5 +62,13 @@ export const useTaskStore = create<TaskStoreState>((set) => ({
   },
   clearAgents: () => {
     set({ activeAgentIds: [] })
+  },
+  rebuildResearch: (messages, thought) => {
+    set((state) => ({
+      research: buildResearchSnapshot(messages, thought ?? state.thought),
+    }))
+  },
+  resetResearch: () => {
+    set({ research: emptyResearchSnapshot() })
   },
 }))

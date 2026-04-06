@@ -4,3 +4,107 @@ icon: "https://www.google.com/s2/favicons?domain=npmjs.com&sz=128"
 url: https://www.npmjs.com
 category: developer
 ai_description: "JavaScript package registry. Search and browse npm packages."
+help_url: "https://docs.npmjs.com"
+
+navigation:
+  overview: >
+    npm (Node Package Manager) is the world's largest software registry with over 2 million
+    JavaScript and TypeScript packages. The website lets you search packages, read documentation
+    (README), check download stats, review dependencies, compare versions, and manage your own
+    published packages. Every package page shows an install command ready to copy.
+
+  pages:
+    home:
+      description: "Landing page with a prominent search bar."
+      url_pattern: "www.npmjs.com"
+      layout:
+        - "Center: large search input with 'Search packages' placeholder"
+        - "Below: featured packages, popular categories, ecosystem statistics"
+      search_bar:
+        behavior: "Type a package name, keyword, or description and press Enter. Autocomplete suggestions appear as you type. Supports scoped packages (@scope/package)."
+
+    search_results:
+      description: "Package search results with sorting and filtering."
+      url_pattern: "www.npmjs.com/search?q={query}"
+      layout:
+        - "Center: list of package cards"
+        - "Top: search input (editable), sort dropdown"
+        - "Each card: package name (clickable), version, description, keywords, author, publish date, weekly downloads"
+      sort_options:
+        optimal: "Default — balanced ranking considering popularity, quality, and maintenance"
+        popularity: "Sort by weekly download count — finds the most used packages"
+        quality: "Sort by code quality metrics: tests, documentation, linting, type definitions"
+        maintenance: "Sort by update frequency and issue response time"
+      result_card:
+        behavior: "Shows package name (with scope if any), latest version number, description, keyword tags, author name, last publish date, and weekly download sparkline chart. Click the name to open the package detail page."
+
+    package_detail:
+      description: "Full package page with README, stats, and metadata."
+      url_pattern: "www.npmjs.com/package/{name}"
+      layout:
+        - "Center: rendered README.md — the primary documentation"
+        - "Right sidebar: install command, weekly downloads chart, version, license, unpacked size, total files, issues, pull requests, homepage, repository link"
+        - "Tabs: Readme, Code, N Versions, N Dependencies, N Dependents"
+      install_command:
+        text: "Install box in right sidebar"
+        behavior: "Shows 'npm i {package-name}'. Click the copy icon to copy. For yarn: 'yarn add {package-name}'. For pnpm: 'pnpm add {package-name}'."
+      weekly_downloads:
+        text: "Downloads chart in right sidebar"
+        behavior: "Sparkline chart showing weekly download trend over the past year. The number shows current weekly downloads. Millions = very popular, thousands = niche, hundreds = possibly unmaintained."
+      readme_tab:
+        behavior: "Rendered markdown from the package's README.md file. This is the primary documentation — usage instructions, API reference, examples, configuration, and changelog."
+      code_tab:
+        text: "'Code' tab"
+        behavior: "Browse the published package's actual files as they exist in the npm registry. Shows the file tree with package.json, source files, and type definitions."
+      versions_tab:
+        text: "'Versions' tab (shows count)"
+        behavior: "Lists all published versions chronologically. Shows version number, publish date, and dist-tags (latest, next, beta, etc.). Click a version to see its specific README and metadata. Deprecated versions are marked."
+      dependencies_tab:
+        text: "'Dependencies' tab (shows count)"
+        behavior: "Lists all runtime dependencies (dependencies in package.json) with their required version ranges. Click any dependency to navigate to its package page. Fewer dependencies = simpler supply chain."
+      dependents_tab:
+        text: "'Dependents' tab (shows count)"
+        behavior: "Lists packages that depend on this one. High dependent count indicates the package is a foundational part of the ecosystem."
+      metadata_sidebar:
+        license: "The package license (MIT, Apache-2.0, ISC, etc.). Important for commercial use."
+        unpacked_size: "Total size of the package when installed."
+        repository: "Link to the source code on GitHub/GitLab. Click to review the actual codebase."
+        homepage: "Link to the official documentation site or project homepage."
+
+    organization:
+      description: "Organization page showing published packages and members."
+      url_pattern: "www.npmjs.com/org/{name}"
+      behavior: "Lists all packages published under the organization scope (@org/package). Shows member list and public packages."
+
+  workflows:
+    find_a_package:
+      - "Type a descriptive term in the search bar (e.g., 'http client', 'date formatting', 'state management react')"
+      - "Press Enter to see results"
+      - "Sort by Popularity to find the most widely used option"
+      - "Click a package to read its README"
+      - "Check the sidebar: weekly downloads (is it popular?), last publish (is it maintained?), license (is it compatible?)"
+
+    evaluate_a_package:
+      - "Open the package detail page"
+      - "Read the README for usage instructions and API"
+      - "Check weekly downloads — millions = industry standard, thousands = solid niche, hundreds = risky"
+      - "Check last publish date — within 6 months = actively maintained"
+      - "Click Dependencies tab — fewer is better for security and bundle size"
+      - "Click the repository link to check open issues, stars, and recent commits on GitHub"
+      - "Check if TypeScript types are included (look for 'TypeScript' badge or @types/ package)"
+
+    compare_packages:
+      - "Search for the first package and note its downloads, last publish, and dependency count"
+      - "Search for alternatives (e.g., 'axios' vs 'got' vs 'ky' for HTTP)"
+      - "Compare: weekly downloads, maintenance frequency, bundle size, dependency count, TypeScript support"
+      - "Choose based on your priorities: popularity, size, features, or maintenance"
+
+  tips:
+    - "Weekly download count is the best quick indicator of a package's adoption and reliability"
+    - "Last publish date reveals maintenance status — packages untouched for 2+ years may be abandoned"
+    - "The Repository link in the sidebar goes to the source code — check GitHub stars and open issues"
+    - "Sorting by Quality highlights well-tested, well-documented packages with type definitions"
+    - "The 'Code' tab shows the actual published files — useful for checking if types are bundled"
+    - "Scoped packages (@org/name) belong to organizations — they often indicate official packages"
+    - "Check the Dependents tab to see who uses a package — popular dependents = battle-tested"
+    - "Use npmjs.com/package/@types/{name} to check if DefinitelyTyped has type definitions for untyped packages"

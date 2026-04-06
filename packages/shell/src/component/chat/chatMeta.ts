@@ -92,7 +92,7 @@ export function isMessageContinuation(previous: ChatMessage | undefined, current
     return false
   }
 
-  return current.timestamp - previous.timestamp < 5 * 60 * 1000
+  return current.timestamp - previous.timestamp < 30 * 1000
 }
 
 function getInitials(name: string): string {

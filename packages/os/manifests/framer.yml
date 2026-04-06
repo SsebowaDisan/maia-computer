@@ -4,3 +4,106 @@ icon: "https://www.google.com/s2/favicons?domain=framer.com&sz=128"
 url: https://framer.com
 category: productivity
 ai_description: "Design and publish websites. No-code website builder with animations."
+help_url: "https://www.framer.com/docs"
+
+navigation:
+  overview: >
+    Framer is a no-code website builder with a visual canvas editor. It combines design tools
+    with hosting and publishing. The editor has a layers panel on the left, a freeform canvas
+    in the center, and a properties panel on the right. Framer supports responsive variants,
+    scroll-based animations, reusable components, CMS collections, and code overrides for
+    advanced customization. Sites publish directly to Framer hosting or custom domains.
+
+  pages:
+    dashboard:
+      description: "The home page showing website projects as cards with previews."
+      layout:
+        - "Top: '+ New Project' button, search, profile menu"
+        - "Center: grid of project cards with site previews, names, and last edited dates"
+        - "Left sidebar: team/workspace selector"
+      project_card:
+        text: "Individual project cards"
+        behavior: "Click to open the project in the canvas editor. Each card shows a site thumbnail, name, and status. Hover to see options (duplicate, delete, settings)."
+      new_project:
+        text: "'+ New Project' button"
+        behavior: "Creates a new website project. Choose from a blank canvas, community templates, or AI-generated starter sites."
+
+    editor:
+      description: "The visual website editor with layers, canvas, and properties panels."
+      layout:
+        - "Left panel: Pages list (top section), Layers panel (component tree for the current page), CMS collections"
+        - "Center: freeform canvas showing the website layout with selectable, draggable elements"
+        - "Right panel: properties panel — Design tab (style), Layout tab (positioning), and Insert tab (add elements)"
+        - "Top toolbar: breakpoint selector (desktop/tablet/phone), preview button, publish button, undo/redo"
+        - "Top-right: 'Publish' button"
+      canvas:
+        text: "The central freeform design canvas"
+        behavior: "Click elements to select them (blue outline with resize handles). Drag to move. Resize with corner/edge handles. Double-click text to enter inline editing. The canvas shows a 1:1 live preview of the website. Zoom with scroll wheel + Ctrl/Cmd. Pan by holding Space + drag."
+      layers_panel:
+        text: "Left panel showing the component tree for the current page"
+        behavior: "Hierarchical list of all elements: frames, text, images, components, stacks. Click to select on canvas. Drag to reorder or re-parent. Eye icon toggles visibility. Lock icon prevents selection on canvas. Right-click for duplicate, copy, delete, group."
+      pages_list:
+        text: "Pages section at the top of the left panel"
+        behavior: "Lists all pages in the site. Click to switch pages. Add new pages with the '+' button. Pages can be organized in folders. CMS pages and utility pages (404) are listed separately."
+      properties_panel:
+        text: "Right panel showing properties for the selected element"
+        behavior: "Design tab: fill (background color/gradient/image), border, border radius, shadow, opacity, blur, rotation, and overflow. Layout tab: width, height, position (relative/absolute/fixed/sticky), flex/grid properties, padding, gap. Text elements show font, size, weight, color, alignment, line height. The panel updates contextually based on the selected element type."
+      insert_menu:
+        text: "Insert menu or '+' button for adding new elements"
+        behavior: "Add elements: Frame (container/div), Text, Image, Video, Icon, Code embed, Input, Button, Stack (flex container). Drag from the insert menu onto the canvas or click to add at selection."
+      components:
+        text: "Components section in the left panel or assets"
+        behavior: "Reusable elements (headers, footers, cards, buttons). Create a component from any element via right-click > 'Create Component'. Instances of a component stay linked — editing the master updates all instances. Variants allow different states (hover, active, mobile)."
+      responsive_variants:
+        text: "Breakpoint selector in the top toolbar (desktop, tablet, phone icons)"
+        behavior: "Switch between device sizes. Each breakpoint can have different layout, sizing, and visibility settings. Desktop is the primary breakpoint. Changes at smaller breakpoints are overrides."
+      code_overrides:
+        text: "Code section in the properties panel or left panel"
+        behavior: "Write custom React code that overrides component behavior. Useful for dynamic data fetching, custom animations, and interactive logic beyond what the visual editor supports."
+      publish_button:
+        text: "'Publish' button at top-right"
+        behavior: "Opens the publish dialog. Publish to a framer.site subdomain or a custom domain. Changes require re-publishing to go live. Published sites are automatically optimized for performance."
+      cms:
+        text: "CMS section in the left panel"
+        behavior: "Create collections (e.g., blog posts, team members) with typed fields. Bind collection data to page templates. CMS items can be edited directly in Framer or via the CMS API."
+
+  workflows:
+    design_page:
+      - "Open a project from the dashboard"
+      - "Select or create a page from the Pages list"
+      - "Add elements using the insert menu (frames, text, images, stacks)"
+      - "Click elements on the canvas to select them"
+      - "Use the properties panel on the right to set styles, layout, and spacing"
+      - "Double-click text to edit content"
+      - "Click 'Publish' to deploy"
+
+    create_component:
+      - "Design an element (e.g., a card or button) on the canvas"
+      - "Right-click and select 'Create Component'"
+      - "The element becomes a reusable component available in the components library"
+      - "Drag instances onto other pages — they stay linked to the master"
+      - "Add variants for different states (hover, pressed, mobile)"
+
+    responsive_design:
+      - "Design the desktop layout first"
+      - "Switch to tablet breakpoint in the toolbar"
+      - "Adjust layout, sizes, and visibility for tablet"
+      - "Switch to phone breakpoint and adjust for mobile"
+      - "Preview each breakpoint to verify the responsive behavior"
+
+    add_animations:
+      - "Select an element on the canvas"
+      - "In the properties panel, find the 'Effects' or 'Animate' section"
+      - "Choose a trigger: appear (scroll into view), hover, tap, or scroll-linked"
+      - "Set animation properties: opacity, scale, position, rotation"
+      - "Preview the animation in the editor"
+
+  tips:
+    - "Changes in the editor are not live until you click Publish"
+    - "Components keep your design consistent — edit the master and all instances update"
+    - "The layers panel helps select deeply nested or overlapping elements that are hard to click on canvas"
+    - "Stacks (flex containers) are the primary layout primitive — use them for rows and columns"
+    - "Responsive variants let you completely restructure layout per breakpoint"
+    - "Code overrides unlock advanced interactivity when the visual editor reaches its limits"
+    - "Framer sites are automatically optimized for performance (lazy loading, code splitting)"
+    - "CMS collections enable template-driven dynamic content like blogs, portfolios, and product pages"

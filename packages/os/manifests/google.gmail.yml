@@ -4,3 +4,187 @@ icon: "https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico"
 url: https://mail.google.com
 category: productivity
 ai_description: "Read, compose, search, and organize emails. Reply automatically. Extract data from emails."
+help_url: "https://support.google.com/mail"
+
+navigation:
+  overview: >
+    Gmail is Google's email service handling over 1.8 billion users. The interface centers on an
+    inbox view with a left sidebar for labels, a top search bar with powerful operators, and a
+    floating compose window. Gmail supports keyboard shortcuts (must be enabled in Settings),
+    conversation threading, labels as tags (not folders), filters for automation, and multiple
+    account delegation. The URL structure is mail.google.com/mail/u/0/#inbox for the primary
+    account and /u/1/ for the second account.
+
+  pages:
+    inbox:
+      description: "The main view showing email threads grouped by date, newest first. Tabs may appear (Primary, Social, Promotions, Updates) if category tabs are enabled."
+      layout:
+        - "Top: search bar (input[aria-label='Search mail']), settings gear, Google Apps grid (3x3 dots), profile avatar"
+        - "Left sidebar: Compose button (large, top), then labels — Inbox, Starred, Snoozed, Sent, Drafts, More. Below: Meet and Chat sections, Labels list"
+        - "Center: email list — each row has checkbox, star, sender, subject+snippet, date. Unread rows are bold with white background. Read rows have gray background"
+        - "Right: optional side panel with Calendar, Keep, Tasks, Contacts icons"
+        - "Category tabs (if enabled): Primary, Social, Promotions, Updates, Forums — above the email list"
+      compose_button:
+        selector: "div[gh='cm']"
+        text: "'Compose' — large button at top of left sidebar, may show pencil icon in collapsed sidebar"
+        behavior: "Opens a floating compose window at the bottom-right. Window stays open while browsing. Multiple compose windows can be open simultaneously. Keyboard shortcut: 'c' (when shortcuts enabled)."
+      search_box:
+        selector: "input[aria-label='Search mail']"
+        behavior: "Click to focus, type query, press Enter. Supports full operator syntax. Click the dropdown arrow at right of search box to open Advanced Search with fields for From, To, Subject, Has words, Date range, Has attachment, Size. Keyboard shortcut: '/' focuses search."
+      email_row:
+        behavior: "Click to open the full thread. Hover reveals quick-action icons: Archive (box), Delete (trash), Mark read/unread (envelope), Snooze (clock). Right-click for context menu with Label, Move to, Mute, Filter."
+      star_icon:
+        behavior: "Click to star/unstar. Stars have multiple types (yellow star, blue info, red bang, etc.) — configure in Settings > General > Stars. Keyboard shortcut: 's' stars/unstars selected email."
+      checkbox:
+        behavior: "Select emails for bulk actions. When selected, a toolbar appears: Archive, Report spam, Delete, Move to, Labels, More. Select all with the checkbox in the toolbar header. Keyboard shortcut: 'x' selects the current conversation."
+      settings_gear:
+        behavior: "Opens Quick Settings panel sliding from right: Density (Default/Comfortable/Compact), Theme, Inbox type. Click 'See all settings' for full settings with tabs: General, Labels, Inbox, Accounts and Import, Filters and Blocked Addresses, Forwarding and POP/IMAP, Add-ons, Chat and Meet, Advanced, Offline, Themes."
+      sidebar_labels:
+        text: "Inbox, Starred, Snoozed, Sent, Drafts, More"
+        behavior: "Click to view that label. 'More' expands: All Mail, Spam, Trash, Categories, custom labels. Unread counts appear in parentheses. Right-click labels for edit, remove, sublabel options."
+
+    compose_window:
+      description: "A floating panel at bottom-right for writing new emails. Can be expanded to full screen or popped out."
+      layout:
+        - "Top: 'New Message' title bar with minimize (—), expand (diagonal arrows), close (X)"
+        - "Fields: To, Cc/Bcc (click links to reveal), Subject"
+        - "Center: message body with formatting toolbar (hidden by default, click 'A' underline icon to show)"
+        - "Bottom: Send button (blue), formatting toggle (A), attach files (paperclip), insert link, insert emoji, insert Drive files, insert photo, toggle confidential mode, more options (...)"
+      to_field:
+        selector: "input[aria-label='To recipients'], textarea[aria-label='To recipients']"
+        behavior: "Type email addresses. Autocomplete suggests contacts after 2+ characters. Press Tab or comma to confirm a recipient. Multiple recipients separated by commas. Click 'Cc' or 'Bcc' text links to show those fields."
+      subject_field:
+        selector: "input[name='subjectbox']"
+        behavior: "Type the email subject line. This appears in recipients' inbox preview."
+      message_body:
+        selector: "div[aria-label='Message Body']"
+        behavior: "Rich text area. Type message. Formatting toolbar provides Bold (Cmd+B), Italic (Cmd+I), Underline (Cmd+U), text color, lists, indent, quote, strikethrough, font, size. Supports pasting images inline."
+      send_button:
+        text: "'Send' (blue button, bottom-left)"
+        behavior: "Sends immediately. 'Message sent' toast appears with 'Undo' link for 5-30 seconds (configurable in Settings > General > Undo Send). Keyboard shortcut: Cmd+Enter (or Ctrl+Enter)."
+      schedule_send:
+        behavior: "Click the dropdown arrow next to Send button to schedule sending for a later time. Options: Tomorrow morning, Tomorrow afternoon, Monday morning, or Pick date & time."
+
+    email_thread:
+      description: "Full conversation view. Gmail threads related messages together by subject line."
+      layout:
+        - "Top: back arrow, Archive, Report spam, Delete, Move to, Labels buttons, then More (...)"
+        - "Center: thread with each message showing sender avatar, name, timestamp, expand/collapse arrow"
+        - "Bottom: Reply, Reply All, Forward buttons. Quick reply box below."
+      reply_button:
+        behavior: "Opens inline reply editor at thread bottom. Pre-fills To with sender. Keyboard shortcut: 'r'."
+      reply_all_button:
+        behavior: "Same as reply but includes all original recipients. Keyboard shortcut: 'a'."
+      forward_button:
+        behavior: "Opens compose with quoted message. Empty To field. Keyboard shortcut: 'f'."
+      back_arrow:
+        behavior: "Returns to previous view. Keyboard shortcut: 'u'."
+
+    settings:
+      description: "Full settings page with multiple tabs accessible via gear icon > See all settings."
+      url_pattern: "mail.google.com/mail/u/0/#settings/general"
+      tabs:
+        - "General: language, images, undo send time, default reply behavior, stars, keyboard shortcuts toggle, signature, vacation responder"
+        - "Labels: manage system and custom labels visibility"
+        - "Inbox: inbox type (Default, Important first, Unread first, Starred first, Priority), category tabs, reading pane"
+        - "Accounts: send mail as, check other accounts, grant access"
+        - "Filters: create and manage email filter rules"
+
+  workflows:
+    compose_and_send:
+      - "Press 'c' (with shortcuts enabled) or click 'Compose'"
+      - "Type recipient email in To field — autocomplete suggests contacts"
+      - "Tab to Subject, type subject line"
+      - "Tab to body, type message"
+      - "Press Cmd+Enter to send (or click blue Send button)"
+
+    search_emails:
+      - "Press '/' or click search bar"
+      - "Type query using operators: from:person@email.com subject:invoice has:attachment after:2026/01/01"
+      - "Press Enter — results show with filter chips below for refinement"
+      - "Click any result to open the thread"
+
+    reply_to_email:
+      - "Open email by clicking it (or press Enter on selected email)"
+      - "Press 'r' to reply or 'a' to reply all"
+      - "Type reply in the inline editor"
+      - "Press Cmd+Enter to send"
+
+    label_and_organize:
+      - "Select emails with 'x' key or checkboxes"
+      - "Press 'l' to open label picker, type label name, press Enter to apply"
+      - "Press 'e' to archive selected emails"
+      - "Press '#' to delete selected emails"
+
+    create_filter:
+      - "Open an email, click three-dot menu, select 'Filter messages like these'"
+      - "Adjust filter criteria (from, to, subject, has words)"
+      - "Click 'Create filter' and choose actions: skip inbox, apply label, mark read, star, forward, delete, categorize"
+
+  keyboard_shortcuts:
+    compose: "c — compose new email"
+    reply: "r — reply to current email"
+    reply_all: "a — reply all"
+    forward: "f — forward"
+    archive: "e — archive selected"
+    delete: "# — delete selected"
+    star: "s — star/unstar"
+    select: "x — select conversation"
+    search: "/ — focus search box"
+    next: "j — move to older conversation"
+    previous: "k — move to newer conversation"
+    open: "o or Enter — open conversation"
+    back: "u — return to conversation list"
+    label: "l — open label picker"
+    mark_unread: "Shift+u — mark as unread"
+    mute: "m — mute conversation"
+    go_inbox: "g then i — go to inbox"
+    go_starred: "g then s — go to starred"
+    go_sent: "g then t — go to sent"
+    go_drafts: "g then d — go to drafts"
+    undo: "z — undo last action"
+    select_all: "* then a — select all"
+
+  search_operators:
+    from: "from:sender@email.com — emails from a specific sender"
+    to: "to:recipient@email.com — emails to a specific recipient"
+    subject: "subject:keyword — emails with keyword in subject"
+    has_attachment: "has:attachment — emails with attachments"
+    filename: "filename:pdf — emails with specific attachment types"
+    before: "before:2026/01/01 — emails before a date"
+    after: "after:2026/01/01 — emails after a date"
+    older_than: "older_than:1y — emails older than 1 year (also 1d, 1m)"
+    newer_than: "newer_than:7d — emails from the last 7 days"
+    label: "label:work — emails with a specific label"
+    is_unread: "is:unread — unread emails"
+    is_starred: "is:starred — starred emails"
+    is_important: "is:important — important emails"
+    in_anywhere: "in:anywhere — search all mail including spam and trash"
+    has_drive: "has:drive — emails with Google Drive attachments"
+    larger: "larger:10M — emails larger than 10MB"
+    smaller: "smaller:1M — emails smaller than 1MB"
+    category: "category:primary — emails in the Primary tab"
+
+  url_patterns:
+    inbox: "mail.google.com/mail/u/0/#inbox"
+    starred: "mail.google.com/mail/u/0/#starred"
+    sent: "mail.google.com/mail/u/0/#sent"
+    drafts: "mail.google.com/mail/u/0/#drafts"
+    label: "mail.google.com/mail/u/0/#label/LABEL_NAME"
+    search: "mail.google.com/mail/u/0/#search/QUERY"
+    settings: "mail.google.com/mail/u/0/#settings/general"
+    compose: "mail.google.com/mail/u/0/?compose=new"
+    thread: "mail.google.com/mail/u/0/#inbox/THREAD_ID"
+    second_account: "mail.google.com/mail/u/1/#inbox"
+
+  tips:
+    - "Enable keyboard shortcuts in Settings > General > Keyboard shortcuts ON — this unlocks single-key shortcuts like c, r, e, j, k"
+    - "Combine search operators for precision: 'from:boss@company.com subject:Q4 has:attachment after:2026/01/01'"
+    - "The Undo Send window is configurable: Settings > General > Undo Send > 5/10/20/30 seconds"
+    - "Gmail labels work as tags, not folders — one email can have multiple labels"
+    - "Use 'Shift+?' to see the full keyboard shortcuts cheat sheet overlay"
+    - "Schedule Send lets you compose now but deliver later — click the arrow next to Send"
+    - "The '+' trick works for filtering: yourname+project@gmail.com delivers to your inbox but lets you filter by the +project suffix"
+    - "Dots in Gmail addresses are ignored: first.last@gmail.com = firstlast@gmail.com"
+    - "Snooze emails to reappear later: select email, click clock icon or press Shift+s"
+    - "Confidential mode (lock icon in compose) sets expiration dates and revokes access to sent emails"

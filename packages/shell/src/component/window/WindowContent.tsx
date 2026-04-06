@@ -7,7 +7,6 @@ import { StoreScreen } from '../../screen/StoreScreen'
 import { type ShellWindow } from '../../store/windowStore'
 
 interface WindowContentProps {
-  activeAgentIds: string[]
   installedApps: InstalledApp[]
   messages: ChatMessage[]
   onInstallApp: (app: Pick<InstalledApp, 'name' | 'icon' | 'url' | 'manifestId'>) => Promise<void>
@@ -15,7 +14,6 @@ interface WindowContentProps {
   onSendMessage: (message: string, replyToId?: string) => Promise<void>
   onUpdateSetting: (key: string, value: unknown) => Promise<void>
   settings: Record<string, unknown>
-  taskDescription: string
   window: ShellWindow
 }
 
@@ -34,7 +32,6 @@ function AppPlaceholder({ appId }: { appId: string }) {
 }
 
 export function WindowContent({
-  activeAgentIds,
   installedApps,
   messages,
   onInstallApp,
@@ -42,11 +39,10 @@ export function WindowContent({
   onSendMessage,
   onUpdateSetting,
   settings,
-  taskDescription,
   window,
 }: WindowContentProps) {
   if (window.kind === 'chat') {
-    return <ChatApp activeAgentIds={activeAgentIds} activeTask={taskDescription} messages={messages} onSendMessage={onSendMessage} />
+    return <ChatApp messages={messages} onSendMessage={onSendMessage} />
   }
 
   if (window.kind === 'store') {

@@ -2,9 +2,8 @@ import { SNAP_ZONE, type AppBounds, type SnapZone } from '@maia/shared'
 
 export const TITLE_BAR_HEIGHT = 38
 export const COMMAND_BAR_HEIGHT = 44
-export const SPACES_BAR_HEIGHT = 32
-export const DOCK_HEIGHT = 76
 export const DESKTOP_PADDING = 24
+export const DOCK_CLEARANCE = 12
 export const MIN_WINDOW_WIDTH = 400
 export const MIN_WINDOW_HEIGHT = 300
 const WINDOW_BORDER_WIDTH = 1
@@ -42,9 +41,9 @@ export function getViewportBounds(): ViewportBounds {
 export function getWorkspaceBounds(viewport: ViewportBounds): AppBounds {
   return normalizeBounds({
     x: DESKTOP_PADDING,
-    y: SPACES_BAR_HEIGHT + DESKTOP_PADDING,
+    y: DESKTOP_PADDING,
     width: viewport.width - DESKTOP_PADDING * 2,
-    height: viewport.height - SPACES_BAR_HEIGHT - DOCK_HEIGHT - DESKTOP_PADDING * 2,
+    height: viewport.height - DOCK_CLEARANCE - DESKTOP_PADDING * 2,
   })
 }
 
@@ -110,8 +109,8 @@ export function getSnapZoneForPoint(
   const threshold = 20
   const isLeft = pointX <= threshold
   const isRight = pointX >= viewport.width - threshold
-  const isTop = pointY <= SPACES_BAR_HEIGHT + threshold
-  const isBottom = pointY >= viewport.height - DOCK_HEIGHT - threshold
+  const isTop = pointY <= threshold
+  const isBottom = pointY >= viewport.height - threshold
 
   if (isTop && pointX > viewport.width * 0.35 && pointX < viewport.width * 0.65) {
     return SNAP_ZONE.MAXIMIZED

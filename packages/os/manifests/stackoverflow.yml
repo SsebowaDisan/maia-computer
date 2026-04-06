@@ -4,3 +4,126 @@ icon: "https://www.google.com/s2/favicons?domain=stackoverflow.com&sz=128"
 url: https://stackoverflow.com
 category: developer
 ai_description: "Q&A for developers. Search programming questions and answers."
+help_url: "https://stackoverflow.com/help"
+
+navigation:
+  overview: >
+    Stack Overflow is the largest Q&A platform for programmers with over 23 million questions.
+    Questions are answered by the community, with the best answers voted up and optionally
+    marked as accepted. The reputation system incentivizes quality answers. Search supports
+    powerful tag-based filtering using bracket syntax like [python] [django].
+
+  pages:
+    home:
+      description: "Landing page showing a feed of recent and interesting questions."
+      url_pattern: "stackoverflow.com or stackoverflow.com/questions"
+      layout:
+        - "Top: Stack Overflow logo, Products menu, search bar (center), profile/login (right)"
+        - "Left sidebar: Home, Questions, Tags, Users, Companies, Collectives, Explore"
+        - "Center: question list with tabs (Interesting, Bountied, Hot, Week, Month)"
+        - "Right sidebar: The Overflow Blog, Featured/Hot Network Questions"
+      search_bar:
+        selector: "input[name='q'], .s-input__search"
+        type: "input"
+        behavior: "Type keywords or use advanced syntax. Press Enter to search. Autocomplete shows matching tags and suggestions."
+        search_syntax:
+          tag_filter: "[python] — filters to questions tagged 'python'. Combine: [python] [pandas]"
+          multiple_tags: "[javascript] or [typescript] — matches either tag"
+          exclude_tag: "-[jquery] — excludes questions with this tag"
+          exact_phrase: "\"exact phrase\" — matches the exact phrase"
+          user_filter: "user:123456 — questions/answers by a specific user"
+          score_filter: "score:3 — minimum score of 3"
+          answer_filter: "is:answer — searches only answers, not questions"
+          no_answers: "answers:0 — questions with no answers"
+          accepted: "hasaccepted:no — questions without an accepted answer"
+          is_closed: "closed:yes — closed questions"
+      question_card:
+        behavior: "Each shows: vote count (left, bold number), answer count (middle, green background if has accepted answer), view count, question title (blue link), excerpt, tags (colored badges), author avatar + name + reputation, time asked/modified."
+
+    question_page:
+      description: "Single question with all answers, comments, and metadata."
+      url_pattern: "stackoverflow.com/questions/QUESTION_ID/slug-title"
+      layout:
+        - "Top: question title (h1), 'Ask Question' button (top-right)"
+        - "Below title: Asked/Modified/Viewed metadata"
+        - "Question body: vote arrows (left), question text with code blocks (center), tags, share/edit/follow links, author card (bottom-right)"
+        - "Below question: 'N Answers' header with sort tabs"
+        - "Answer list: each answer with vote arrows, text, code blocks, comments"
+      vote_buttons:
+        behavior: "Up arrow upvotes (+1 reputation to author). Down arrow downvotes. The number between shows net score. Requires 15+ reputation to upvote, 125+ to downvote."
+      accepted_answer:
+        behavior: "Marked with a green checkmark to the left of the answer. Chosen by the question asker as the solution. Always appears first regardless of sort order. Awards +15 reputation to the answerer. Other answers may have higher votes — always check."
+      answer_sort_tabs:
+        options: "Highest score (default), Trending (recent votes), Date modified (newest), Date created (oldest)"
+        behavior: "Click a tab to re-sort answers. 'Highest score' is usually best for finding the top solution."
+      code_blocks:
+        behavior: "Syntax-highlighted code with a copy button on hover (top-right of the code block). Code is formatted with language-specific highlighting. Inline code uses gray background monospace font."
+      comments:
+        behavior: "Small text below questions and answers. Show clarifications, corrections, and discussion. Click 'Add a comment' (requires 50+ reputation). Click 'Show N more comments' to reveal hidden comments. Useful for caveats and edge cases."
+      question_tags:
+        behavior: "Colored tag badges below the question text. Click a tag to see all questions with that tag. Tags indicate the technologies involved (e.g., python, javascript, react, sql)."
+      share_link:
+        behavior: "Click 'Share' below a question or answer to get a direct link. The link includes your user ID for the Announcer/Booster badges."
+      edit_link:
+        behavior: "Click 'Edit' to suggest changes to the question or answer. Edits by users with <2000 reputation go through a review queue. Editing is encouraged to improve clarity."
+      related_sidebar:
+        behavior: "Right sidebar shows 'Linked' questions (referenced in this question) and 'Related' questions (similar topics). Both are valuable for finding additional solutions."
+
+    tag_page:
+      description: "Page for a specific technology tag showing all questions and a wiki."
+      url_pattern: "stackoverflow.com/questions/tagged/python"
+      layout:
+        - "Top: tag name, tag wiki excerpt, question count, watchers"
+        - "Tabs: Newest, Active, Bountied, Unanswered, Frequent, Votes"
+        - "Center: question list filtered to this tag"
+      tag_wiki:
+        behavior: "Click 'Learn more' or 'info' to see the full tag wiki with description, usage guidance, and related tags. Useful for understanding when to use the tag."
+
+    ask_question:
+      description: "Form for asking a new question."
+      url_pattern: "stackoverflow.com/questions/ask"
+      layout:
+        - "Title input, body editor (Markdown with preview), tags input"
+        - "Right sidebar: How to Ask guide, Similar Questions suggestions"
+      behavior: "Title should be a clear, specific question. Body supports Markdown with code blocks (indent 4 spaces or use triple backticks). Add 1-5 relevant tags. Similar Questions panel updates as you type the title — check if your question already exists."
+
+  workflows:
+    search_for_solution:
+      - "Click the search bar or start typing"
+      - "Type your error message or programming question"
+      - "Add tag filters for specificity: [python] my error message"
+      - "Press Enter to search"
+      - "Look for questions with high vote counts and accepted answers (green checkmark)"
+      - "Click a question title to see all answers"
+      - "Check the accepted answer first, then compare with higher-voted alternatives"
+
+    read_and_evaluate_answers:
+      - "Open a question page"
+      - "Check the accepted answer (green checkmark) — but note it may not be the best"
+      - "Compare vote counts across all answers — the highest-voted may be better or more current"
+      - "Read comments below answers for caveats, edge cases, and corrections"
+      - "Check the answer date — older answers may use deprecated approaches"
+      - "Copy code from code blocks using the hover copy button"
+
+    browse_by_technology:
+      - "Click a tag on any question (e.g., 'python', 'react', 'typescript')"
+      - "The tag page shows all questions for that technology"
+      - "Use tabs: Newest (latest questions), Votes (all-time best), Unanswered (needs help)"
+      - "The tag wiki provides an overview and usage guidance"
+
+  url_patterns:
+    question: "stackoverflow.com/questions/QUESTION_ID/slug-title"
+    search: "stackoverflow.com/search?q=your+query"
+    tagged: "stackoverflow.com/questions/tagged/python"
+    user: "stackoverflow.com/users/USER_ID/username"
+    ask: "stackoverflow.com/questions/ask"
+
+  tips:
+    - "Tag-based search is extremely powerful: '[python] [pandas] merge dataframe' finds precisely tagged questions"
+    - "The accepted answer (green checkmark) is chosen by the asker — higher-voted answers may actually be better or more current"
+    - "Check answer dates — older answers may use deprecated APIs or patterns"
+    - "Duplicate questions link to canonical answers — follow 'Marked as duplicate of' for the definitive version"
+    - "The 'Linked' and 'Related' sections in the right sidebar lead to relevant questions"
+    - "Code blocks have a copy button on hover — no need to manually select text"
+    - "Comments below answers often contain important corrections and edge cases"
+    - "answers:0 in search finds unanswered questions — useful if you want to contribute"

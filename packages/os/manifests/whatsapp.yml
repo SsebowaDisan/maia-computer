@@ -4,3 +4,101 @@ icon: "https://static.whatsapp.net/rsrc.php/v3/yP/r/rYZqPCBaG70.png"
 url: https://web.whatsapp.com
 category: communication
 ai_description: "Read and send WhatsApp messages. View contacts. Send media."
+help_url: "https://faq.whatsapp.com"
+
+navigation:
+  overview: >
+    WhatsApp Web mirrors the mobile app in a two-panel layout — chat list on the left,
+    active conversation on the right. It requires linking to a phone via QR code on first use.
+    All messages are end-to-end encrypted. Supports individual chats, group chats, and broadcast lists.
+
+  pages:
+    qr_code:
+      description: "The linking screen shown when WhatsApp Web is not connected to a phone."
+      layout:
+        - "Center: QR code with instructions"
+        - "Steps: Open WhatsApp on phone > Settings > Linked Devices > Link a Device > Scan QR"
+      behavior: "Once scanned, conversations load within a few seconds. Up to 4 linked devices can be active simultaneously. Multi-device mode allows the web client to work even when the phone is offline."
+
+    main:
+      description: "The two-panel messaging interface with chat list and conversation view."
+      layout:
+        - "Left panel header: profile photo, status icon, channels icon, new chat icon (pencil), menu (three dots)"
+        - "Left panel: search/filter bar, chat list sorted by most recent message"
+        - "Right panel: active conversation with messages and input at bottom"
+        - "Right panel header: contact name, last seen/online status, video call, voice call, search in chat, menu"
+      search_bar:
+        selector: "div[data-testid='chat-list-search']"
+        behavior: "Type a contact name, phone number, or message keyword. Chat list filters live as you type. Shows matching contacts and messages. Press Escape to clear the search."
+      chat_list:
+        behavior: "Each entry: contact/group name, last message preview (with sender name in groups), timestamp, unread count badge (green circle). Pinned chats stay at top (up to 3). Archived chats accessible via 'Archived' at the top. Muted chats show a speaker-off icon."
+      message_input:
+        selector: "div[data-testid='conversation-compose-box-input']"
+        behavior: "Click to focus, type message, Enter to send. Shift+Enter for new line. Supports text formatting: *bold*, _italic_, ~strikethrough~, ```monospace```. Paste images directly from clipboard."
+      emoji_button:
+        selector: "button[data-testid='smiley']"
+        behavior: "Opens emoji picker with tabs: Emoji, GIFs, Stickers. Recently used emojis appear first. Search within the picker by typing."
+      attachment_button:
+        selector: "button[data-testid='clip']"
+        behavior: "Opens attachment menu: Photos & Videos, Camera, Document (any file type), Contact, Poll, Sticker. Documents up to 2GB. Images are compressed unless sent as documents."
+      voice_message:
+        selector: "button[data-testid='ptt-btn']"
+        behavior: "Hold the microphone icon to record. Release to send. Drag left to cancel. Drag up to lock recording mode (hands-free). Preview before sending in locked mode."
+      message_bubbles:
+        behavior: "Outgoing messages (right, green/light) show delivery status: single gray check = sent to server, double gray checks = delivered to device, double blue checks = read. In groups, click the checks to see per-person delivery/read status."
+      contact_header:
+        behavior: "Click contact name or avatar to open contact info panel — profile photo, phone number, shared media/links/docs tabs, starred messages, mute/block options. For groups: member list, group description, admin controls."
+
+    group_info:
+      description: "Group settings and member management panel."
+      behavior: "Shows group name, icon, description, member list with admin badges. Admins can: edit group info, add/remove members, make others admin, change group settings (who can send messages, edit info)."
+
+    status_tab:
+      description: "WhatsApp Status — ephemeral photo/video updates that disappear after 24 hours."
+      behavior: "Click the circle icon in the left panel header. Shows status updates from contacts. Create your own status with text, photo, or video."
+
+  workflows:
+    send_message:
+      - "Click a conversation in the chat list (or search for a contact)"
+      - "Click the message input at the bottom"
+      - "Type message, press Enter to send"
+
+    start_new_chat:
+      - "Click the pencil (new chat) icon in the left panel header"
+      - "Search for a contact by name or phone number"
+      - "Click the contact to open a conversation"
+
+    send_media:
+      - "Open a conversation"
+      - "Click the paperclip (attachment) icon"
+      - "Select type: Photos & Videos, Document, Camera, Contact, or Poll"
+      - "Choose file, add optional caption, click Send (green arrow)"
+
+    search_within_chat:
+      - "Open a conversation"
+      - "Click the magnifying glass icon in the conversation header"
+      - "Type keyword — matching messages are highlighted"
+      - "Use up/down arrows to navigate between matches"
+
+    create_group:
+      - "Click the new chat icon (pencil) in the left panel header"
+      - "Click 'New group'"
+      - "Select members (up to 1024), click green arrow"
+      - "Set group name and optional icon, click green checkmark"
+
+    voice_or_video_call:
+      - "Open a conversation"
+      - "Click the phone icon (voice) or camera icon (video) in the header"
+      - "Call starts immediately — supports up to 32 participants in group calls"
+
+  tips:
+    - "Delivery indicators: single gray check = sent, double gray = delivered, double blue = read"
+    - "Format text: *bold*, _italic_, ~strikethrough~, ```monospace```"
+    - "Star important messages: hover > down arrow > Star message — find in Starred Messages"
+    - "Reply to specific messages: hover > down arrow > Reply — shows quoted context"
+    - "Forward messages to other chats: hover > down arrow > Forward message"
+    - "Pin up to 3 chats to keep them at the top of your chat list"
+    - "Disappearing messages can be enabled per-chat: contact info > Disappearing messages"
+    - "Broadcast lists send a message to multiple contacts individually (they do not see each other)"
+    - "Paste images from clipboard directly into the message input to send quickly"
+    - "Keyboard shortcut: Ctrl+Shift+M to mute/unmute a chat"

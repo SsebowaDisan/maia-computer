@@ -4,3 +4,101 @@ icon: "https://www.google.com/s2/favicons?domain=web.telegram.org&sz=128"
 url: https://web.telegram.org
 category: communication
 ai_description: "Send messages, share files, join groups and channels."
+help_url: "https://telegram.org/faq"
+
+navigation:
+  overview: >
+    Telegram Web is a cloud-based messaging platform with a two-panel layout — chat list on the left,
+    active conversation on the right. Supports individual chats, groups (up to 200K members),
+    channels (broadcast-only), bots, and massive file sharing (up to 2GB per file). Syncs from the
+    cloud independently — no phone connection required after initial setup.
+
+  pages:
+    main:
+      description: "The two-panel messaging interface with chat list and conversation."
+      layout:
+        - "Left panel header: hamburger menu (three lines), search icon"
+        - "Left panel: chat list sorted by most recent (pinned chats at top)"
+        - "Right panel: active conversation with messages, input at bottom"
+        - "Right panel header: contact/group name, member count or last seen, phone/video call icons, search in chat, three-dot menu"
+      hamburger_menu:
+        behavior: "Opens side menu with: Saved Messages, My Stories, Contacts, New Group, New Channel, Calls, People Nearby, Settings, Night Mode toggle. Saved Messages acts as a personal notepad/bookmark space."
+      search_icon:
+        behavior: "Opens search field in the left panel. Type contact name, group name, @username, or message keyword. Results show matching chats first, then global search results. Filter by chat type (channels, groups, people, bots)."
+      chat_list:
+        behavior: "Each entry shows: avatar, name, last message preview, timestamp, unread badge (blue number). Chat types: individuals (single avatar), groups (group icon or multi-avatar), channels (megaphone icon), bots (bot icon). Pinned chats (up to 5) stick to top. Archived chats accessible via 'Archived Chats' folder. Chat folders organize conversations by category."
+      message_input:
+        selector: "div.input-message-input"
+        behavior: "Type message, Enter to send. Shift+Enter for new line. Supports markdown-style formatting: **bold**, __italic__, ~~strikethrough~~, `inline code`, ```code block```. Paste images from clipboard."
+      emoji_button:
+        behavior: "Opens panel with tabs: Emoji, Stickers, GIFs. Search within each tab. Sticker sets can be added from the sticker store. Premium users get exclusive animated emoji and sticker packs."
+      attachment_button:
+        behavior: "Opens options: Photo or Video, Document, Poll, Contact. Documents support any file type up to 2GB. Photos can be sent compressed or as files (to preserve quality). Polls support multiple choice, quiz mode, and anonymous voting."
+      voice_message:
+        behavior: "Hold the microphone icon to record. Release to send. Supports voice messages and video messages (round video circles)."
+      reply_and_edit:
+        behavior: "Swipe right on a message to reply (mobile-style). Right-click for context menu: Reply, Edit (your messages, no time limit), Pin, Forward, Delete, Select. Edited messages show an 'edited' label."
+
+    chat_folders:
+      description: "Custom folders to organize chats by category."
+      behavior: "Settings > Folders. Create folders like 'Work', 'Friends', 'Channels'. Folders appear as tabs at the top of the chat list. Each folder filters the chat list to matching conversations. Auto-include/exclude by chat type (groups, channels, bots, contacts)."
+
+    supergroup:
+      description: "Large group with advanced features — up to 200,000 members."
+      behavior: "Supports admin roles, slow mode (limits how often members can post), anti-spam, invite links, topics (forum-style threads within the group), pinned messages (unlimited), and member permissions. Topics subdivide the group into threaded categories."
+
+    channel:
+      description: "Broadcast-only chat — admins post, subscribers read."
+      behavior: "Channels show post views count instead of read receipts. Subscribers see posts but cannot reply unless discussion group is linked. Channel posts can have reactions enabled. Admins can schedule posts and set silent notifications."
+
+    bot_interaction:
+      description: "Chatting with a Telegram bot."
+      behavior: "Bots may show inline keyboards (buttons within messages), reply keyboards (custom button rows replacing the keyboard), and inline mode (type @botname in any chat to invoke the bot). Common bots: @gif for GIFs, @pic for images, @vid for YouTube videos."
+
+  keyboard_shortcuts:
+    search: "Cmd+F — search in current chat"
+    global_search: "Cmd+K — global search across all chats"
+    next_chat: "Cmd+Down — go to next chat"
+    prev_chat: "Cmd+Up — go to previous chat"
+    close_chat: "Escape — close current chat or panel"
+
+  workflows:
+    send_message:
+      - "Click a conversation in the chat list"
+      - "Type in the message input, press Enter"
+
+    search_conversations:
+      - "Click the search icon at the top of the left panel"
+      - "Type a contact name, @username, or keyword"
+      - "Click a result to open that conversation"
+      - "For global public channel/group search, type the query and scroll past local results"
+
+    share_file:
+      - "Open a conversation"
+      - "Click the paperclip icon"
+      - "Select Document for any file (up to 2GB) or Photo/Video for media"
+      - "Choose file, add optional caption, click Send"
+
+    create_poll:
+      - "Open a group conversation"
+      - "Click the paperclip > Poll"
+      - "Enter question and options (up to 10)"
+      - "Toggle: multiple answers, quiz mode, anonymous voting"
+      - "Click Create to send"
+
+    use_bot_inline:
+      - "In any chat's message input, type @botname followed by a query"
+      - "Example: @gif funny cat — shows GIF results inline"
+      - "Click a result to send it in the current chat"
+
+  tips:
+    - "Saved Messages (hamburger > Saved Messages) is your personal cloud notepad — forward anything there"
+    - "Telegram supports files up to 2GB — much larger than most messaging platforms"
+    - "Secret chats (available on mobile) are device-to-device encrypted with self-destruct timers"
+    - "Chat folders organize conversations: Settings > Folders > Create Folder"
+    - "Bots can do almost anything — payments, games, file conversion, RSS feeds, automation"
+    - "Edit messages any time with no time limit — right-click > Edit"
+    - "Scheduled messages: type message, then right-click the Send button > Schedule Message"
+    - "Slow mode in groups limits posting frequency — admins set the interval (30s to 1 hour)"
+    - "Channel posts show view count, not individual read receipts"
+    - "Telegram Web works independently from the phone — cloud sync means all devices stay in sync"

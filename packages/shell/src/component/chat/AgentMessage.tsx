@@ -1,7 +1,10 @@
 import type { ChatMessage } from '@maia/shared'
 
+import { parseComparisonGroup, inferConfidence, isResearchTimelineMessage } from '../../lib/researchSignals'
 import { ReplyPreview } from './ReplyPreview'
+import { ComparisonGroup } from './ComparisonGroup'
 import { formatMessageTime, getSenderMeta } from './chatMeta'
+import { ConfidenceBadge } from '../ui/ConfidenceBadge'
 
 interface AgentMessageProps {
   isContinuation: boolean
@@ -19,9 +22,13 @@ export function AgentMessage({
   replyToMessage,
 }: AgentMessageProps) {
   const profile = getSenderMeta(message.sender)
+  const comparisonGroup = parseComparisonGroup(message.message)
+  const confidence = inferConfidence(message.message)
+  const showConfidence = comparisonGroup || /\bconfidence|checked \d+ (?:sites?|sources?)|cross-reference|cross reference|pretty confident|just started|checking more/i.test(message.message)
+  const isTimelineRow = isContinuation && isResearchTimelineMessage(message.message)
 
   return (
-    <div className="group flex gap-3 rounded-2xl px-3 py-2 transition hover:bg-white/[0.03]">
+    <div className={`group flex gap-3 rounded-2xl px-3 transition hover:bg-white/[0.03] ${isTimelineRow ? 'py-1' : 'py-2'}`}>
       <div className="w-10 shrink-0">
         {isContinuation ? null : (
           <div
@@ -44,6 +51,7 @@ export function AgentMessage({
               </span>
             ) : null}
             <span className="text-xs text-textMuted">{formatMessageTime(message.timestamp)}</span>
+            {showConfidence ? <ConfidenceBadge confidence={confidence} /> : null}
           </div>
         ) : null}
         {replyToMessage ? (
@@ -57,9 +65,15 @@ export function AgentMessage({
           </div>
         ) : null}
         <div className="flex items-start gap-3">
-          <p className="min-w-0 whitespace-pre-wrap break-words text-[15px] leading-6 text-textPrimary">
-            {message.message}
-          </p>
+          <div className="min-w-0 flex-1">
+            {comparisonGroup ? (
+              <ComparisonGroup group={comparisonGroup} />
+            ) : (
+              <p className="min-w-0 whitespace-pre-wrap break-words text-[15px] leading-6 text-textPrimary">
+                {isTimelineRow ? `-> ${message.message}` : message.message}
+              </p>
+            )}
+          </div>
           <button
             className="shrink-0 rounded-full border border-border bg-[#10131a] px-3 py-1.5 text-xs font-medium text-textSecondary opacity-0 transition hover:border-borderHover hover:text-textPrimary focus:opacity-100 group-hover:opacity-100"
             onClick={() => {

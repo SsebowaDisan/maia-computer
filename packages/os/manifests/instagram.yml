@@ -4,3 +4,124 @@ icon: "https://www.google.com/s2/favicons?domain=instagram.com&sz=128"
 url: https://www.instagram.com
 category: social
 ai_description: "Browse photos and stories. Follow people. Send direct messages."
+help_url: "https://help.instagram.com"
+
+navigation:
+  overview: >
+    Instagram is a photo and video sharing platform owned by Meta. The web version provides
+    a feed of posts, Stories, Reels, Explore discovery, and Direct Messages. Content types
+    include single photos, carousels (up to 20 images), Reels (short videos), Stories (24-hour
+    ephemeral content), and live streams. The left sidebar is the primary navigation.
+
+  pages:
+    home_feed:
+      description: "The main feed showing posts from followed accounts and suggested content."
+      layout:
+        - "Left sidebar: Instagram logo, Home, Search, Explore, Reels, Messages, Notifications (heart), Create (+), Profile"
+        - "Center: Stories bar (circular avatars) at top, then scrollable post feed"
+        - "Right sidebar (sometimes): suggested accounts to follow"
+      stories_bar:
+        behavior: "Horizontal row of circular profile pictures with colored ring (unseen) or gray ring (seen). Click any circle to view their Story. Stories auto-advance every 5 seconds. Tap right side to skip forward, left to go back. Press and hold to pause. Your own story circle appears first with a + icon to add a new Story."
+      post_card:
+        behavior: "Each post: author avatar + username + three dots menu (top), photo/video content (center), engagement row (bottom). Carousel posts show dots below the image — swipe or click arrows to navigate. Video posts auto-play on scroll."
+      engagement_row:
+        heart: "Click to like (or double-tap the photo). Heart fills red when liked."
+        comment: "Click speech bubble to view/add comments. Opens the post detail page."
+        share: "Click paper plane icon to send the post via DM to another user."
+        bookmark: "Click flag icon (right side) to save to your Saved collection."
+      post_header:
+        behavior: "Click the username to visit their profile. Three dots menu offers: Report, Unfollow, Go to post, Share to, Copy link, Embed, About this account."
+
+    explore:
+      description: "Discovery page with a masonry grid of trending and suggested content."
+      url_pattern: "instagram.com/explore/"
+      layout:
+        - "Top: search bar for accounts, hashtags, and places"
+        - "Center: grid of photos, videos, and Reels from accounts you may like"
+      search:
+        behavior: "Type username, hashtag (e.g., #photography), or location. Results tabs: Top, Accounts, Tags, Places. Clicking a hashtag shows a feed of all public posts with that tag, sorted by Top and Recent."
+
+    reels:
+      description: "Full-screen vertical video feed — Instagram's TikTok competitor."
+      url_pattern: "instagram.com/reels/"
+      layout:
+        - "Center: full-screen vertical video, auto-plays with sound"
+        - "Right side: like, comment, share, save, three dots, audio info"
+        - "Bottom: creator info, caption, audio track name"
+      behavior: "Scroll down for next Reel, up for previous. Click the audio name at bottom to see other Reels using the same audio. Like, comment, share, and save work the same as regular posts."
+
+    profile:
+      description: "A user's profile page showing their posts, Reels, and tagged content."
+      url_pattern: "instagram.com/username/"
+      layout:
+        - "Top: profile photo, username, Edit Profile/Follow/Message buttons, settings gear"
+        - "Stats: posts count, followers count, following count"
+        - "Bio: name, description, links, category"
+        - "Highlights: circular story collections below the bio (permanent)"
+        - "Tabs: Posts (grid icon), Reels (clapboard), Tagged (person icon)"
+      follow_button:
+        behavior: "Follow the account. Their posts appear in your feed. For private accounts, a follow request is sent instead."
+      highlights:
+        behavior: "Permanent Story collections below the bio. Each highlight has a cover image and name. Click to view the saved Stories within. Creators use these to organize content by topic."
+
+    messages:
+      description: "Direct Messages (DM) interface for private conversations."
+      url_pattern: "instagram.com/direct/inbox/"
+      layout:
+        - "Left: conversation list with search, compose (pencil) icon"
+        - "Right: active conversation with messages and input"
+      message_input:
+        behavior: "Type message, press Enter to send. Supports text, emoji, GIFs, photos, voice messages, and disappearing photos/videos. React to messages by double-tapping or hovering. Reply to specific messages by swiping."
+      message_requests:
+        behavior: "Messages from accounts you do not follow go to Message Requests. Accessible from the top of the DM list. You can accept, delete, or block."
+
+    create:
+      description: "Content creation flow for posts, Reels, and Stories."
+      behavior: "Click the + (Create) icon in the left sidebar. Options: Post, Reel, Story. For posts: select photos/videos (up to 20 for carousel), apply filters, write caption, add location, tag people, set audience. Click 'Share' to publish."
+
+  workflows:
+    browse_feed:
+      - "Click Home in the left sidebar"
+      - "Scroll through posts from followed accounts"
+      - "Double-tap photos to like"
+      - "Click the comment icon to view or add comments"
+
+    view_stories:
+      - "Click any profile circle in the Stories bar at the top"
+      - "Stories auto-play — tap right to skip forward, left to go back"
+      - "Press and hold to pause on a Story"
+      - "Swipe up (or click the message input) to reply to a Story via DM"
+
+    search_accounts_and_hashtags:
+      - "Click Search or Explore in the left sidebar"
+      - "Type username, #hashtag, or location in the search bar"
+      - "Click Accounts tab for profiles, Tags tab for hashtags, Places for locations"
+
+    send_direct_message:
+      - "Click Messages in the left sidebar"
+      - "Click a conversation or the compose (pencil) icon for new DM"
+      - "Type message, press Enter to send"
+
+    create_post:
+      - "Click the + (Create) icon in the left sidebar"
+      - "Select Post, then choose photo(s) or video"
+      - "Apply filters and crop"
+      - "Write caption, add #hashtags, tag people, add location"
+      - "Click 'Share' to publish"
+
+    save_and_organize:
+      - "Click the bookmark icon on any post to save it"
+      - "Access saved posts from your Profile > Saved (bookmark icon)"
+      - "Organize saved posts into collections by topic"
+
+  tips:
+    - "Double-tap any photo to like it instantly"
+    - "Bookmark posts for later — organize into collections from Profile > Saved"
+    - "Hashtag pages show all public posts using that tag — useful for topic discovery"
+    - "Stories disappear after 24 hours, but Highlights on profiles are permanent collections"
+    - "Carousel posts allow up to 20 images/videos — swipe or click arrows to browse"
+    - "The web version supports posting (photos, carousels, Reels) — click the + icon"
+    - "Reply to Stories by swiping up — the reply goes as a DM to the creator"
+    - "Reel audio pages show all Reels using the same sound — tap the audio name at the bottom"
+    - "Message requests from non-followers go to a separate inbox — check periodically"
+    - "Close Friends list (settings) lets you share Stories with a select group only (green ring)"

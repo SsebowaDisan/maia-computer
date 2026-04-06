@@ -4,3 +4,56 @@ icon: "https://www.google.com/s2/favicons?domain=excalidraw.com&sz=128"
 url: https://excalidraw.com
 category: productivity
 ai_description: "Hand-drawn style whiteboard. Sketch diagrams, wireframes, and notes."
+
+navigation:
+  overview: >
+    Excalidraw is a virtual whiteboard for sketching diagrams, wireframes, and notes in a
+    hand-drawn style. It opens directly to a blank infinite canvas ready for drawing.
+
+  pages:
+    canvas:
+      description: "The main drawing canvas with tools and infinite space."
+      layout:
+        - "Top center: toolbar with drawing tools (select, rectangle, diamond, ellipse, arrow, line, text, image, eraser)"
+        - "Center: infinite canvas for drawing"
+        - "Below toolbar (when element selected): properties bar for color, stroke, fill"
+        - "Bottom-left: zoom controls"
+        - "Top-left: hamburger menu for file operations"
+      toolbar:
+        text: "Tool icons at top center"
+        behavior: "Click a tool to select it, then click and drag on the canvas. Selection tool (V) selects and moves. Rectangle (R), Diamond (D), Ellipse (O) draw shapes. Arrow (A) and Line (L) draw connectors. Text (T) adds text. Press number keys 1-9 for quick tool switching."
+      canvas:
+        text: "The infinite drawing area"
+        behavior: "Click and drag to draw with the selected tool. Scroll or use Space+drag to pan. Ctrl/Cmd+scroll to zoom. Click elements to select them. Drag to move. Resize with corner handles."
+      properties_bar:
+        text: "Context bar below toolbar (appears when an element is selected)"
+        behavior: "Change stroke color, background fill, stroke width, stroke style (solid, dashed, dotted), corner rounding, and font properties for text."
+      menu:
+        text: "Hamburger menu (top-left)"
+        behavior: "Open files, save, export as PNG/SVG, share collaboration link, toggle dark mode, and access settings."
+      zoom_controls:
+        text: "+/- buttons at bottom-left"
+        behavior: "Zoom in and out. Click the percentage to reset to 100%."
+
+  workflows:
+    draw_diagram:
+      - "Select a shape tool (rectangle, ellipse, diamond) from the toolbar"
+      - "Click and drag on the canvas to draw the shape"
+      - "Select the arrow tool to draw connections between shapes"
+      - "Select the text tool and click to add labels"
+      - "Use the properties bar to change colors and styles"
+
+    export_drawing:
+      - "Click the hamburger menu (top-left)"
+      - "Select 'Export image'"
+      - "Choose format (PNG or SVG)"
+      - "Adjust export settings (background, scale)"
+      - "Download the file"
+
+  tips:
+    - "Hold Space and drag to pan the canvas without switching tools"
+    - "Ctrl/Cmd+D duplicates selected elements"
+    - "The hand-drawn style is the default — it gives diagrams a natural, informal look"
+    - "Drawings are stored in the browser by default — export or share to save permanently"
+    - "Collaboration links let multiple people draw on the same canvas in real time"
+    - "Press number keys (1-9) to quickly switch between tools"

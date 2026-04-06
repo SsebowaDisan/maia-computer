@@ -4,3 +4,55 @@ icon: "https://www.google.com/s2/favicons?domain=wise.com&sz=128"
 url: https://wise.com
 category: finance
 ai_description: "International money transfers. Send money abroad at low rates."
+
+navigation:
+  overview: >
+    Wise (formerly TransferWise) is an international money transfer service with multi-currency
+    accounts. It shows balances in different currencies and provides low-cost transfers.
+
+  pages:
+    home:
+      description: "Account overview showing currency balances and recent activity."
+      layout:
+        - "Top: navigation with Home, Card, Recipients, Activity"
+        - "Center: currency balance cards, 'Send money' button"
+        - "Below: recent transactions"
+      send_button:
+        text: "Green 'Send money' button"
+        behavior: "Opens the transfer flow. Enter amount, select source and destination currencies, see exchange rate and fees in real time, continue to add recipient details, then confirm."
+      currency_cards:
+        text: "Currency balance cards"
+        behavior: "Each card shows the balance held in a specific currency (USD, EUR, GBP, etc.). Click a card to see its transaction history and account details."
+      balance_total:
+        text: "Total balance display"
+        behavior: "Shows the equivalent total of all currencies in your primary currency."
+
+    transfer_flow:
+      description: "Multi-step form for sending money."
+      layout:
+        - "Step 1: amount and currency selection"
+        - "Step 2: recipient details"
+        - "Step 3: review (exchange rate, fees, delivery time)"
+        - "Step 4: payment method and confirmation"
+      exchange_display:
+        text: "Exchange rate and fees shown during the transfer"
+        behavior: "Updates in real time as you type the amount. Shows the exact amount the recipient will get, the fee, and the exchange rate."
+
+  workflows:
+    send_money:
+      - "Click the 'Send money' button"
+      - "Enter the amount and select currencies"
+      - "Review the exchange rate and fees"
+      - "Click 'Continue' and enter recipient details"
+      - "Confirm and pay"
+
+    check_balances:
+      - "Currency cards on the home page show all balances"
+      - "Click a currency card for transaction history"
+      - "The total at the top shows the aggregate in your primary currency"
+
+  tips:
+    - "Exchange rates and fees are shown transparently during the transfer flow"
+    - "Recipient details vary by country — the form adapts based on the destination"
+    - "Wise offers mid-market exchange rates, which are typically better than bank rates"
+    - "You can hold balances in multiple currencies and convert between them"

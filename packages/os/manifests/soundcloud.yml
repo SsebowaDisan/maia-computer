@@ -4,3 +4,59 @@ icon: "https://www.google.com/s2/favicons?domain=soundcloud.com&sz=128"
 url: https://soundcloud.com
 category: media
 ai_description: "Discover and stream music. Upload tracks and follow artists."
+
+navigation:
+  overview: >
+    SoundCloud is a music streaming and sharing platform. It features both mainstream and
+    independent artists, with a focus on discovery and community.
+
+  pages:
+    home:
+      description: "The stream feed showing tracks from followed artists and recommendations."
+      layout:
+        - "Top: search bar, navigation (Home, Stream, Library)"
+        - "Center: track feed with waveform players, artist names, and engagement stats"
+        - "Bottom: persistent player bar"
+      search_bar:
+        text: "Search input at top"
+        behavior: "Type an artist, track, or genre. Results show tabs: Everything, Tracks, People, Albums, Playlists."
+      track_card:
+        text: "Individual tracks in the feed"
+        behavior: "Shows waveform visualization, track title, artist name, play count, and like count. Click the play button to start playback."
+      player_bar:
+        text: "Persistent player at the bottom"
+        behavior: "Shows currently playing track with waveform progress, play/pause, skip, volume, and repeat. Click the track title to open the full track page."
+
+    track_page:
+      description: "Full page for a single track."
+      layout:
+        - "Top: track artwork, title, artist, play button, waveform"
+        - "Below: description, tags, related tracks, comments"
+      waveform:
+        text: "Audio waveform visualization"
+        behavior: "Click anywhere on the waveform to jump to that point in the track. The colored portion shows playback progress."
+
+    search_results:
+      description: "Results page with tabs for different content types."
+      layout:
+        - "Tabs: Everything, Tracks, People, Albums, Playlists"
+        - "Center: results matching your query"
+
+  workflows:
+    search_and_play:
+      - "Click the search bar"
+      - "Type an artist or track name"
+      - "Click the 'Tracks' tab to filter for music"
+      - "Click the play button on any track"
+
+    browse_feed:
+      - "Scroll the home/stream feed"
+      - "Click play on tracks that interest you"
+      - "The bottom player persists as you browse"
+
+  tips:
+    - "The waveform doubles as a progress bar — click anywhere to jump to that point"
+    - "The bottom player persists across pages — navigate freely while music plays"
+    - "Independent and emerging artists often release music on SoundCloud before other platforms"
+    - "Some tracks are subscriber-only (SoundCloud Go)"
+    - "Click an artist name to visit their profile and see all their tracks"

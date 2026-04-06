@@ -4,3 +4,99 @@ icon: "https://www.google.com/s2/favicons?domain=perplexity.ai&sz=128"
 url: https://www.perplexity.ai
 category: productivity
 ai_description: "AI-powered search engine. Ask questions and get sourced answers."
+help_url: "https://www.perplexity.ai/hub"
+
+navigation:
+  overview: >
+    Perplexity is an AI-powered answer engine that synthesizes information from multiple web sources
+    and presents it with inline citations. The home page has a centered search input. Answers include
+    numbered source references, follow-up suggestions, and a thread-based conversation model for
+    drilling deeper into topics.
+
+  pages:
+    home:
+      description: "The search landing page with centered input, focus mode selector, and sidebar navigation."
+      layout:
+        - "Center: large search textarea with placeholder text"
+        - "Below input: focus mode icons (All, Academic, Writing, Wolfram, YouTube, Reddit)"
+        - "Below: suggested trending topics and example queries"
+        - "Left sidebar: Home, Discover, Library (threads and collections), profile"
+      search_input:
+        selector: "textarea"
+        type: "Large textarea centered on the page"
+        behavior: "Click to focus, type a question in natural language, press Enter to search. Perplexity researches multiple web sources and generates a synthesized answer with citations. Autocomplete suggestions may appear as you type."
+      focus_modes:
+        text: "Row of focus mode icons below the search input"
+        behavior: "Select a focus before searching to control source types. 'All' (default) searches the entire web. 'Academic' prioritizes scholarly papers and journals. 'Writing' generates text without web search. 'Wolfram' uses Wolfram Alpha for math and computation. 'YouTube' searches video content. 'Reddit' searches Reddit discussions."
+      pro_search_toggle:
+        text: "Pro Search toggle near the search input"
+        behavior: "When enabled, Perplexity performs a multi-step research process: clarifying the question, searching multiple queries, and synthesizing a more thorough answer. Uses more compute but produces deeper results. Available to Pro subscribers."
+      sidebar:
+        text: "Left navigation panel"
+        behavior: "Home returns to the search page. Discover shows trending topics and popular threads. Library contains your saved threads and collections."
+
+    answer:
+      description: "The answer page showing AI-generated response with source citations and follow-up options."
+      layout:
+        - "Top: the original question"
+        - "Below question: source cards showing referenced websites with favicons and titles"
+        - "Center: AI-generated answer with inline numbered citations [1], [2], [3]"
+        - "Below answer: suggested follow-up questions"
+        - "Bottom: follow-up input for continuing the thread"
+        - "Right (on wide screens): related topics panel"
+      source_cards:
+        text: "Row of source website cards above the answer"
+        behavior: "Each card shows a favicon, site name, and page title. Click any source card to open that webpage in a new tab. The number on each card corresponds to inline citations in the answer text."
+      answer_text:
+        text: "The main AI-synthesized answer"
+        behavior: "Read the answer which includes numbered citations like [1], [2]. Hover over a citation number to see a preview of the source. Click it to open the full source page. The answer is formatted with markdown: headings, lists, code blocks, and bold text."
+      follow_up_input:
+        text: "Input field below the answer"
+        behavior: "Type a follow-up question to continue the research thread. Follow-ups maintain context from the entire thread, enabling iterative deep research."
+      suggested_questions:
+        text: "Suggested follow-up questions below the answer"
+        behavior: "Click any suggestion to instantly search it as a follow-up within the same thread."
+
+    library:
+      description: "Your saved threads and collections."
+      layout:
+        - "Tabs: Threads, Collections"
+        - "Center: list of saved threads with titles and dates"
+      collections:
+        text: "Collections tab in the Library"
+        behavior: "Organize threads into named collections for different topics or projects. Create a new collection and add threads to it for organized reference."
+
+  workflows:
+    search_topic:
+      - "Click the search input on the home page"
+      - "Type your question in natural language"
+      - "Optionally select a focus mode (Academic, YouTube, Reddit, etc.)"
+      - "Press Enter"
+      - "Read the synthesized answer and check source citations for verification"
+
+    deep_research:
+      - "Enable Pro Search toggle before searching"
+      - "Type your research question"
+      - "Read the thorough multi-source answer"
+      - "Use follow-up questions to explore subtopics"
+      - "Each follow-up builds on the full thread context"
+
+    academic_research:
+      - "Select 'Academic' focus mode"
+      - "Type your research question"
+      - "Results prioritize peer-reviewed papers and scholarly sources"
+      - "Citations link directly to academic papers and publications"
+
+    organize_research:
+      - "After getting an answer, the thread is saved to your Library"
+      - "Go to Library and create collections for different topics"
+      - "Add threads to relevant collections"
+
+  tips:
+    - "Natural language questions get better results than keyword searches — ask complete questions"
+    - "Hover over citation numbers [1], [2] to preview the source before clicking"
+    - "Pro Search performs multi-step research — use it for complex or nuanced questions"
+    - "Follow-up questions maintain thread context, so you can drill deeper without repeating background"
+    - "Focus modes dramatically change source types — Academic for papers, Reddit for community opinions, YouTube for video content"
+    - "Collections in the Library help organize research across different projects"
+    - "Threads are shareable — click the share button to get a link others can view"

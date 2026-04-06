@@ -4,3 +4,108 @@ icon: "https://www.google.com/s2/favicons?domain=webflow.com&sz=128"
 url: https://webflow.com
 category: productivity
 ai_description: "Visual web design tool. Build responsive websites without code."
+help_url: "https://university.webflow.com"
+
+navigation:
+  overview: >
+    Webflow is a visual website builder that generates production-quality HTML, CSS, and JavaScript.
+    The Designer is the core editor with a three-panel layout: left panel for elements/navigator/pages,
+    center canvas for live preview, and right panel for styles/settings. Webflow supports responsive
+    breakpoints, CMS collections for dynamic content, interactions/animations, and direct publishing
+    to Webflow hosting or custom domains.
+
+  pages:
+    dashboard:
+      description: "Home page showing workspace projects as site cards with thumbnails."
+      layout:
+        - "Top bar: workspace name, search, account"
+        - "Center: grid of project cards with site thumbnails, names, and status indicators"
+        - "Left sidebar: workspaces list, team members"
+      project_card:
+        text: "Individual project/site cards"
+        behavior: "Click to open the project. Each card shows a site thumbnail, name, published status, and last edited date. Hover to reveal a settings gear icon and open-in-new-tab link."
+      new_site:
+        text: "'+ New Site' button"
+        behavior: "Creates a new project. Choose from a blank canvas, a Webflow template, or clone an existing site."
+
+    designer:
+      description: "The visual website editor with element panels, canvas, and style controls."
+      layout:
+        - "Left panel (toggleable tabs): Add elements (+ icon), Navigator (layers tree), Pages list, CMS Collections, Assets/images, Components"
+        - "Center: canvas showing the live website preview at the current breakpoint"
+        - "Right panel (toggleable tabs): Style panel (CSS properties), Settings panel (element config), Interactions panel (animations)"
+        - "Top toolbar: breakpoint switcher (1280px/desktop, 992px/tablet, 768px/landscape, 478px/portrait), preview button, publish button, page selector"
+      canvas:
+        text: "Central design canvas"
+        behavior: "Shows the website exactly as it will appear live. Click elements to select them (blue outline + selection label). Drag to move elements within or between parent containers. Double-click text to enter inline editing mode. Hover shows element outlines. The canvas updates in real time as you change styles."
+      add_elements_panel:
+        text: "Left panel opened via the '+' icon — element library"
+        behavior: "Organized into categories: Layout (section, container, columns, grid, div block), Basic (heading, paragraph, text block, link, button, image, video), Forms (form, input, textarea, select, checkbox, radio), Components (navbar, slider, tabs, dropdown, lightbox). Drag elements from this panel onto the canvas to add them."
+      navigator:
+        text: "Left panel tab showing the page's DOM tree structure"
+        behavior: "Hierarchical view of all elements on the page. Click an element in the navigator to select it on the canvas. Drag to reorder or re-parent elements. Right-click for duplicate, copy/paste, delete. The navigator is essential for selecting elements that are hard to click on the canvas (overlapping, hidden, or zero-size elements)."
+      style_panel:
+        text: "Right panel showing CSS properties for the selected element"
+        behavior: "Organized into sections: Layout (display, flex, grid, positioning, float), Spacing (margin, padding — click values to edit), Size (width, height, min/max), Typography (font, size, weight, color, line-height), Backgrounds (color, gradient, image), Borders (width, radius, style), Effects (opacity, shadows, filters, transforms). All changes update the canvas in real time."
+      classes:
+        text: "Class selector at the top of the style panel"
+        behavior: "Elements are styled via classes (like CSS classes). Type a class name to create or select one. Multiple classes can be stacked (combo classes). Styles applied to a class affect ALL elements with that class — this is how you maintain consistent styling. A green label indicates inherited styles from a base class."
+      settings_panel:
+        text: "Right panel tab showing element-specific settings"
+        behavior: "Configure element attributes: ID, custom attributes, link destination, image source/alt text, form settings. For CMS-bound elements, bind fields to collection data here."
+      interactions_panel:
+        text: "Right panel tab for animations and interactions"
+        behavior: "Create animations triggered by events: page load, scroll into view, mouse hover, click. Animation timeline editor lets you keyframe opacity, position, scale, rotation, and other properties. Scroll-based animations tie progress to scroll position."
+      breakpoints:
+        text: "Breakpoint icons in the top toolbar (desktop, tablet, landscape phone, portrait phone)"
+        behavior: "Click a breakpoint to switch the canvas to that viewport width. Styles set at a breakpoint cascade DOWN to smaller sizes. Desktop is the base breakpoint. Set overrides at smaller breakpoints for responsive design."
+      pages_panel:
+        text: "Pages tab in the left panel"
+        behavior: "Lists all pages in the site. Click to switch between pages. Add new pages, folders, and utility pages (404, password). Static pages and CMS template pages are listed separately."
+      cms_panel:
+        text: "CMS Collections tab in the left panel"
+        behavior: "Lists CMS collections (e.g., Blog Posts, Team Members, Products). Click a collection to view its items. CMS items can be bound to page templates for dynamic content. Collection fields define the data schema (text, image, date, reference, etc.)."
+      publish_button:
+        text: "'Publish' button at top-right of the Designer"
+        behavior: "Opens a publish dialog showing staging and production domains. Select which domains to publish to and click 'Publish to selected domains'. Only published changes are live — the canvas is a preview."
+
+  workflows:
+    design_page:
+      - "Open a project from the dashboard"
+      - "Select a page from the Pages panel"
+      - "Add elements by dragging from the Add panel (+) onto the canvas"
+      - "Click elements to select them"
+      - "Use the Style panel on the right to set layout, typography, colors, and spacing"
+      - "Double-click text elements to edit content"
+      - "Click 'Publish' when ready to go live"
+
+    responsive_design:
+      - "Design the desktop layout first (base breakpoint)"
+      - "Click the tablet breakpoint icon in the toolbar"
+      - "Adjust styles that need to change at tablet size"
+      - "Click the phone breakpoints to adjust mobile styles"
+      - "Styles cascade down — only override what needs to change"
+
+    create_cms_content:
+      - "Open the CMS panel in the left sidebar"
+      - "Create a new collection (e.g., Blog Posts) with fields (title, body, image, date)"
+      - "Add items to the collection"
+      - "Create a CMS template page that binds to the collection"
+      - "Elements on the template pull data from collection fields dynamically"
+
+    add_interactions:
+      - "Select an element on the canvas"
+      - "Open the Interactions panel on the right"
+      - "Choose a trigger (scroll into view, hover, click, page load)"
+      - "Build an animation timeline with keyframes for opacity, position, scale, etc."
+      - "Preview the animation and publish"
+
+  tips:
+    - "Changes require publishing to go live — the Designer canvas is a preview only"
+    - "Classes are the foundation of Webflow styling — reuse classes across elements for consistency"
+    - "The Navigator panel (left) is essential for selecting deeply nested or overlapping elements"
+    - "Breakpoint styles cascade down: desktop styles apply everywhere unless overridden at smaller sizes"
+    - "CMS collections enable dynamic, template-driven content like blogs and product catalogs"
+    - "Combo classes let you create variations (e.g., 'button' + 'primary' vs 'button' + 'secondary')"
+    - "Use the preview button (eye icon) to test the site without selection outlines before publishing"
+    - "Webflow generates clean, semantic HTML and CSS — you can export the code if needed"

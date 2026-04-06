@@ -4,3 +4,66 @@ icon: "https://www.google.com/s2/favicons?domain=codepen.io&sz=128"
 url: https://codepen.io
 category: developer
 ai_description: "Online code editor. Build and share HTML, CSS, and JavaScript demos."
+
+navigation:
+  overview: >
+    CodePen is an online code editor for HTML, CSS, and JavaScript. It provides a live preview
+    as you type, making it ideal for creating and sharing web demos and experiments.
+
+  pages:
+    home:
+      description: "The feed showing trending pens, editor picks, and popular creations."
+      layout:
+        - "Top: navigation with Pen, Search, and profile links"
+        - "Center: grid of pen cards with live preview thumbnails, titles, and author names"
+      pen_card:
+        text: "Individual pen cards in the feed"
+        behavior: "Shows a live preview thumbnail, pen title, author name, and like/view counts. Click to open the pen in the editor."
+
+    editor:
+      description: "The code editor with three panels and a live preview."
+      layout:
+        - "Top (or left): three code panels — HTML, CSS, JavaScript"
+        - "Bottom (or right): live preview showing the rendered output"
+        - "Top bar: pen title, Save button, Settings gear, Fork button"
+      html_panel:
+        text: "HTML code panel"
+        behavior: "Type HTML code. The preview updates in real time as you type."
+      css_panel:
+        text: "CSS code panel"
+        behavior: "Type CSS code. Styles apply to the preview immediately."
+      js_panel:
+        text: "JavaScript code panel"
+        behavior: "Type JavaScript code. Scripts execute in the preview automatically."
+      preview:
+        text: "Live preview area"
+        behavior: "Shows the rendered result of your HTML + CSS + JS code. Updates automatically as you edit."
+      settings_button:
+        text: "Gear icon in each panel header"
+        behavior: "Opens settings for that panel: choose preprocessors (SCSS, TypeScript, Pug), add external CSS/JS libraries, and configure behavior."
+      save_button:
+        text: "'Save' button in the top bar"
+        behavior: "Saves the current pen. Requires a CodePen account."
+      fork_button:
+        text: "'Fork' button"
+        behavior: "Creates a copy of the pen in your account for editing."
+
+  workflows:
+    create_pen:
+      - "Click 'Pen' in the top navigation"
+      - "Type HTML in the HTML panel, CSS in the CSS panel, JS in the JS panel"
+      - "Watch the preview update in real time"
+      - "Click 'Save' to save your pen"
+
+    search_pens:
+      - "Click the search icon in the top navigation"
+      - "Type a keyword or technology name"
+      - "Browse result cards with live preview thumbnails"
+      - "Click a pen to view and edit it"
+
+  tips:
+    - "The preview updates in real time as you type — useful for rapid prototyping"
+    - "External libraries (jQuery, React, etc.) are added via Settings, not script tags"
+    - "The layout can be toggled between top/bottom and left/right split in the Settings"
+    - "Fork a pen to create your own copy for experimenting without affecting the original"
+    - "Console errors appear in a console panel at the bottom — toggle it for debugging"

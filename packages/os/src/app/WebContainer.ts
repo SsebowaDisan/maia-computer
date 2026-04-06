@@ -62,4 +62,5 @@ export interface WebContainerAPI {
   clickElement(appId: string, selector: string): Promise<boolean>
   typeInElement(appId: string, selector: string, text: string): Promise<boolean>
   scrollToElement(appId: string, selector: string): Promise<boolean>
+  sendNativeKeyPress(appId: string, key: string): Promise<boolean>
 }

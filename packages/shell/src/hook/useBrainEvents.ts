@@ -15,6 +15,8 @@ export function useBrainEvents() {
   const setPlan = useTaskStore((state) => state.setPlan)
   const updatePlanStep = useTaskStore((state) => state.updatePlanStep)
   const setStatus = useTaskStore((state) => state.setStatus)
+  const rebuildResearch = useTaskStore((state) => state.rebuildResearch)
+  const resetResearch = useTaskStore((state) => state.resetResearch)
   const addAgent = useTaskStore((state) => state.addAgent)
   const removeAgent = useTaskStore((state) => state.removeAgent)
   const addMessage = useChatStore((state) => state.addMessage)
@@ -31,6 +33,7 @@ export function useBrainEvents() {
     const unsubs = [
       on('brain:thinking', (_, payload) => {
         setThought(payload.thought)
+        rebuildResearch(useChatStore.getState().messages, payload.thought)
       }),
 
       on('brain:planCreated', (_, payload) => {
@@ -44,6 +47,7 @@ export function useBrainEvents() {
       on('brain:taskCompleted', (_, payload) => {
         setStatus(false, '')
         setThought('')
+        resetResearch()
         addMessage({
           id: `done_${Date.now()}`,
           sender: 'computer',
@@ -57,6 +61,7 @@ export function useBrainEvents() {
 
       on('brain:error', (_, payload) => {
         setThought('')
+        resetResearch()
         addMessage({
           id: `err_${Date.now()}`,
           sender: 'computer',
@@ -123,5 +128,5 @@ export function useBrainEvents() {
         unsub()
       }
     }
-  }, [addAgent, addMessage, focusWindow, invoke, on, removeAgent, setPlan, setStatus, setThought, updatePlanStep, updateSnapZone, upsertWindow])
+  }, [addAgent, addMessage, focusWindow, invoke, on, rebuildResearch, removeAgent, resetResearch, setPlan, setStatus, setThought, updatePlanStep, updateSnapZone, upsertWindow])
 }

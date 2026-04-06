@@ -6,6 +6,7 @@ import { AppIcon } from '../component/ui/AppIcon'
 import { Button } from '../component/ui/Button'
 import { Input } from '../component/ui/Input'
 import { useIPC } from '../hook/useIPC'
+import { resolveAppIcon } from '../lib/appIcons'
 
 interface StoreScreenProps {
   installedApps: InstalledApp[]
@@ -29,7 +30,16 @@ export function StoreScreen({ installedApps, onInstallApp, onOpenApp }: StoreScr
 
   useEffect(() => {
     void invoke('appstore:getManifests', {}).then((result) => {
-      setManifests(result as unknown as ManifestApp[])
+      const nextManifests = (result as unknown as ManifestApp[]).map((app) => ({
+        ...app,
+        icon: resolveAppIcon({
+          appId: app.id,
+          icon: app.icon,
+          name: app.name,
+          url: app.url,
+        }),
+      }))
+      setManifests(nextManifests)
     })
   }, [invoke])
 

@@ -10,6 +10,7 @@ import {
   NetworkBrain,
   DOMBrain,
   VisionBrain,
+  PageScraper,
   IntelligenceRouter,
   SearchIndex,
   Brain,
@@ -31,6 +32,9 @@ const SHELL_DIST = join(ROOT, 'packages', 'shell', 'dist')
 const OS_DIR = join(ROOT, 'packages', 'os')
 const MANIFEST_DIR = join(OS_DIR, 'manifests')
 const BRIDGE_SCRIPT_PATH = join(OS_DIR, 'src', 'bridge', 'bridge.js')
+const SCRAPER_SCRIPT_PATH = join(OS_DIR, 'src', 'bridge', 'scraper.js')
+const NAVIGATOR_SCRIPT_PATH = join(OS_DIR, 'src', 'bridge', 'navigator.js')
+const PERFORMER_SCRIPT_PATH = join(OS_DIR, 'src', 'bridge', 'performer.js')
 
 // ── State (initialized in init()) ──────────────────────────────
 
@@ -50,6 +54,7 @@ let domBrain: DOMBrain
 let visionBrain: VisionBrain
 let intelligence: IntelligenceRouter
 let bridgeScript = ''
+let appManifests: Awaited<ReturnType<typeof loadManifests>> = []
 
 function normalizeBounds(bounds: AppBounds): AppBounds {
   const x = Math.floor(bounds.x)
@@ -85,12 +90,18 @@ function init(): void {
   // Initialize Intelligence Layer (must be after eventBus, llm, networkBrain)
   domBrain = new DOMBrain(containerAPI, eventBus)
   visionBrain = new VisionBrain(containerAPI, llm)
-  intelligence = new IntelligenceRouter(networkBrain, domBrain, visionBrain)
+  const pageScraper = new PageScraper(containerAPI, networkBrain)
+  intelligence = new IntelligenceRouter(networkBrain, domBrain, visionBrain, pageScraper)
 
+  // Load all bridge scripts — core + scraper + navigator + performer
   try {
-    bridgeScript = readFileSync(BRIDGE_SCRIPT_PATH, 'utf-8')
+    const scripts = [BRIDGE_SCRIPT_PATH, SCRAPER_SCRIPT_PATH, NAVIGATOR_SCRIPT_PATH, PERFORMER_SCRIPT_PATH]
+    bridgeScript = scripts
+      .filter((p) => existsSync(p))
+      .map((p) => readFileSync(p, 'utf-8'))
+      .join('\n;\n')
   } catch {
-    console.warn('Bridge script not found at', BRIDGE_SCRIPT_PATH)
+    console.warn('Failed to load bridge scripts')
   }
 }
 
@@ -441,6 +452,46 @@ const containerAPI: WebContainerAPI = {
       return false
     }
   },
+
+  async sendNativeKeyPress(appId, key) {
+    const wc = getAppWebContents(appId)
+    if (!wc) return false
+    try {
+      // Electron sendInputEvent needs different values for keyDown/keyUp vs char
+      // keyDown/keyUp use key names, char uses the actual character
+      const keyNameMap: Record<string, string> = {
+        Enter: 'Return',
+        Tab: 'Tab',
+        Escape: 'Escape',
+        Backspace: 'Backspace',
+        Delete: 'Delete',
+        ArrowUp: 'Up',
+        ArrowDown: 'Down',
+        ArrowLeft: 'Left',
+        ArrowRight: 'Right',
+        Space: ' ',
+      }
+      const charMap: Record<string, string> = {
+        Enter: '\r',
+        Tab: '\t',
+        Space: ' ',
+      }
+      const keyName = keyNameMap[key] ?? key
+      const charValue = charMap[key] ?? key
+
+      // Send trusted OS-level key events via Electron API
+      wc.sendInputEvent({ type: 'keyDown', keyCode: keyName })
+      if (charMap[key]) {
+        wc.sendInputEvent({ type: 'char', keyCode: charValue })
+      }
+      wc.sendInputEvent({ type: 'keyUp', keyCode: keyName })
+      console.log('[ACTION] nativeKeyPress', key, '→', keyName)
+      return true
+    } catch (e) {
+      console.log('[ACTION] nativeKeyPress error:', (e as Error).message)
+      return false
+    }
+  },
 }
 
 /** Get webContents for an app — from BrowserView or by scanning all webContents */
@@ -606,9 +657,17 @@ function setupIPC(): void {
 
   // Brain
   ipcMain.handle('brain:execute', async (_event, payload: { appId: string; command: string }) => {
+    // Look up the app's manifest for navigation guides
+    const app = registry.getAllApps().find((a) => a.id === payload.appId)
+    const manifest = app ? appManifests.find((m) => m.id === app.manifestId) : undefined
+
     const brain = new Brain(intelligence, eventBus, llm, {
       taskId: `task_${Date.now()}`,
       appId: payload.appId,
+      messageBus,
+      appNavigation: manifest?.navigation,
+      appName: manifest?.name ?? app?.name,
+      helpUrl: manifest?.helpUrl,
     })
 
     // Events are forwarded globally via setupEventForwarding()
@@ -632,6 +691,7 @@ function setupIPC(): void {
       orchestrator = new Orchestrator(
         intelligence, eventBus, llm, messageBus,
         () => registry.getAllApps(),
+        appManifests,
       )
       console.log('Orchestrator created, apps:', registry.getAllApps().length)
     } catch (e) {
@@ -764,9 +824,9 @@ function setupEventForwarding(): void {
 // ── App Manifests ──────────────────────────────────────────────
 
 async function loadAppStore(): Promise<void> {
-  const manifests = await loadManifests(MANIFEST_DIR)
+  appManifests = await loadManifests(MANIFEST_DIR)
   // Store manifests for the app store UI
-  ipcMain.handle('appstore:getManifests', () => manifests)
+  ipcMain.handle('appstore:getManifests', () => appManifests)
 }
 
 // ── Window Creation ────────────────────────────────────────────

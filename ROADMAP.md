@@ -113,9 +113,10 @@ maia-computer/
 │   │   │   │   └── AppManifest.ts         # Parse YAML manifests
 │   │   │   │
 │   │   │   ├── kernel/            # Intelligence Layer
-│   │   │   │   ├── NetworkBrain.ts        # HTTP proxy + traffic analysis
-│   │   │   │   ├── DOMBrain.ts            # Bridge injection + element access
+│   │   │   │   ├── NetworkBrain.ts        # HTTP proxy + traffic analysis + prefetch intelligence
+│   │   │   │   ├── DOMBrain.ts            # Bridge injection + element access + advanced DOM
 │   │   │   │   ├── VisionBrain.ts         # Screenshot + LLM fallback
+│   │   │   │   ├── PageScraper.ts         # Full page comprehension — structure, content, metadata
 │   │   │   │   ├── IntelligenceRouter.ts  # Routes to fastest brain
 │   │   │   │   ├── ProxyServer.ts         # Local HTTP/HTTPS proxy
 │   │   │   │   ├── TrafficParser.ts       # Parse API responses to structured data
@@ -123,9 +124,10 @@ maia-computer/
 │   │   │   │   └── Memory.ts             # Learned patterns + preferences
 │   │   │   │
 │   │   │   ├── brain/             # AI reasoning
-│   │   │   │   ├── Brain.ts               # Main reasoning loop
-│   │   │   │   ├── TaskPlanner.ts         # Break task into steps
-│   │   │   │   ├── ActionDecider.ts       # Decide next action from app state
+│   │   │   │   ├── Brain.ts               # Adaptive reasoning loop with research memory
+│   │   │   │   ├── ResearchMemory.ts      # Cross-page findings scratchpad
+│   │   │   │   ├── TaskPlanner.ts         # Break task into steps (flexible, not rigid)
+│   │   │   │   ├── ActionDecider.ts       # Decide next action + visual behavior
 │   │   │   │   ├── SelfHealer.ts          # Detect failures, adapt, retry
 │   │   │   │   ├── Orchestrator.ts        # Multi-agent task decomposition
 │   │   │   │   └── AgentPersonality.ts    # Role, priorities, style per agent
@@ -152,7 +154,10 @@ maia-computer/
 │   │   │   │   └── VerifiedRegistry.ts    # Tag data with source + proof
 │   │   │   │
 │   │   │   ├── bridge/            # Injected into web apps
-│   │   │   │   └── bridge.js              # DOM reader + AI command receiver
+│   │   │   │   ├── bridge.js              # Core DOM reader + AI command receiver
+│   │   │   │   ├── scraper.js             # Page scraper — full content extraction
+│   │   │   │   ├── navigator.js           # Smart click, reactive wait, popup dismiss
+│   │   │   │   └── performer.js           # Visual performance — cursor, typing, glow, highlights
 │   │   │   │
 │   │   │   └── ipc/               # Electron IPC handlers
 │   │   │       ├── AppHandlers.ts         # app:install, app:open, etc.
@@ -379,6 +384,60 @@ dom:getValue         → reads an element's current value
 intelligence:query   → asks a question about an app, routes to best brain
 intelligence:act     → performs an action in an app, routes to best brain
 ```
+
+### B5b. Page Scraper
+
+| Task | Details |
+|---|---|
+| `scraper.js` | New bridge script that reads full page content — headings, text, tables, lists, prices, ratings, images (alt text). Organized by semantic landmarks (`<header>`, `<nav>`, `<main>`, `<aside>`, `<footer>`). |
+| JSON-LD / Schema.org extraction | Read `<script type="application/ld+json">` for structured data — hotel prices, product info, article metadata. Machine-readable data already on the page. |
+| Meta tag reading | Extract `<meta description>`, Open Graph tags, `<link rel="canonical">`, publication dates |
+| Page type detection | Classify page as `search_results`, `listing`, `article`, `product`, `form`, `dashboard`, `media`, `error` based on URL patterns + DOM structure |
+| Scroll state | Report viewport position, total page height, whether more content exists below the fold |
+| Active states | Report selected tabs, open dropdowns, checked checkboxes, expanded accordions |
+| `PageScraper.ts` | Backend class that calls `scraper.js` in webview, combines with Network Brain data, returns structured page model |
+
+### B5c. Smart Navigator
+
+| Task | Details |
+|---|---|
+| `navigator.js` | New bridge script for advanced navigation actions |
+| Text-based clicking | Click elements by visible text content, not just CSS selector. Priority chain: text → aria-label → data-testid → role+context → CSS selector |
+| Reactive wait system | MutationObserver + PerformanceObserver + URL change detection. Replaces all fixed wait times. Agent moves at page speed. |
+| Popup dismissal | Auto-detect and dismiss cookie banners, newsletter popups, chat widgets, GDPR overlays. Runs before every action. |
+| Hover support | `hoverElement(target)` — trigger mouseover/mouseenter events to reveal dropdown menus, tooltips, preview cards |
+| Navigate to URL | `navigate(url)` action — go directly to a URL without searching |
+| Find text on page | `findText(query)` — Ctrl+F equivalent, jump to specific content |
+| Content discovery | Detect "Show more" buttons, collapsed sections, pagination, lazy-load triggers. Expand hidden content proactively. |
+| Filter/sort usage | Detect filter controls on listing pages. Apply filters strategically. |
+| Ad detection | Identify sponsored content via "Sponsored" labels, ad containers, tracking URL parameters. Skip automatically. |
+| Smart search | Query refinement (add year, use search operators), direct URL construction for known sites |
+
+### B5d. Visual Performer
+
+| Task | Details |
+|---|---|
+| `performer.js` | New bridge script for visual performance animations |
+| Curved cursor movement | Cubic bezier curves with acceleration, slight arc, micro-overshoot, settle. Variable duration by distance. |
+| Variable speed by intent | Fast+direct (known target), slow+drifting (scanning), medium+decisive (chosen), quick flick (going back) |
+| Gaze simulation | Cursor drifts over search results before clicking chosen one |
+| Character-by-character typing | 50-100ms per char, variable speed, thinking pauses before proper nouns |
+| Element glow | 300ms blue outline on target element before click (recognition phase) |
+| Progressive highlighting | Highlights appear as scan line passes over them, synced with reading |
+| Content extraction animation | Brief blue pulse when data is captured for Research Memory |
+| Scroll with purpose | Variable speed: slow on content, fast on headers, pause on interesting items |
+
+### B5e. Research Memory
+
+| Task | Details |
+|---|---|
+| `ResearchMemory.ts` | Scratchpad that persists across page navigations within a task |
+| Findings storage | Store extracted data per source: { source, url, data[], credibility, timestamp } |
+| Search history | Track searches tried so far, pages visited, which were useful |
+| Cross-reference | Compare findings across sources (same hotel on Booking vs TripAdvisor) |
+| Confidence tracking | Track confidence level based on source diversity and data consistency |
+| ActionDecider integration | Full Research Memory included in LLM prompt so agent knows what it already found |
+| Live comparison output | Structured comparison data sent to Team Chat as research progresses |
 
 ### B6. LLM Integration
 
@@ -641,6 +700,7 @@ Where backend and frontend must align:
 | M1 | B1 | F1-F3 | Electron launches. Dark theme. Dock. Home screen. |
 | M2 | B2 | F4-F6 | Install Gmail. Sign in. Stays logged in. App window with title bar. |
 | M3 | B3-B5 | — | Network + DOM Brain read Gmail data instantly. No screenshots. |
+| M3b | B5b-B5e | — | **Intelligence Upgrade.** Page Scraper reads full pages. Research Memory persists across navigations. Smart Navigator clicks by text, waits reactively, dismisses popups. Visual Performer shows human-like cursor, typing, highlights. Agent browses like a smart human. |
 | M4 | B6-B7 | F4 (command bar) | "Reply to John" works in Gmail via command bar. |
 | M5 | B8-B9 | F7 | Agents talk in Team Chat. User participates. |
 | M6 | — | F5, F8-F9 | Window snapping. Spotlight search. Spaces. |

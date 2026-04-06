@@ -4,3 +4,117 @@ icon: "https://www.google.com/s2/favicons?domain=railway.app&sz=128"
 url: https://railway.app
 category: developer
 ai_description: "Deploy apps and databases. Infrastructure platform for developers."
+help_url: "https://docs.railway.app"
+
+navigation:
+  overview: >
+    Railway is a cloud platform for deploying applications and provisioning infrastructure.
+    Projects are visualized as a canvas where services (web apps, workers) and databases
+    (PostgreSQL, MySQL, Redis, MongoDB) appear as connected nodes. Railway auto-detects
+    frameworks (Node.js, Python, Go, Rust, etc.) and configures builds automatically via
+    Nixpacks. Each project can have multiple environments (production, staging, dev).
+
+  pages:
+    dashboard:
+      description: "Home page showing all projects and their status."
+      url_pattern: "railway.app/dashboard"
+      layout:
+        - "Top: 'New Project' button, team selector, usage indicator"
+        - "Center: grid of project cards with name, service count, active environment, and status"
+      project_card:
+        behavior: "Each card shows: project name, number of services, environment badges, and latest deploy status. Click to open the project canvas."
+      new_project:
+        text: "'New Project' button"
+        behavior: "Options: Deploy from GitHub repo, Deploy a template (databases, starters, full stacks), Empty project. Templates include PostgreSQL, Redis, MongoDB, and common app stacks."
+
+    project_canvas:
+      description: "Visual canvas showing services and databases as connected nodes — the core Railway experience."
+      url_pattern: "railway.app/project/{id}"
+      layout:
+        - "Center: canvas with draggable service cards and database cards"
+        - "Top bar: project name, environment tabs (production, staging, etc.), settings gear"
+        - "Bottom or side: '+ New' button to add services"
+      service_card:
+        behavior: "Each card shows: service name, deployment status (green dot = live, yellow = deploying, red = failed), source (GitHub repo or Docker image), and domain URL if assigned. Click a card to open the service detail panel."
+      database_card:
+        behavior: "Database plugin cards (PostgreSQL, MySQL, Redis, MongoDB). Shows connection status. Click to see connection string, credentials, data browser, and query interface."
+      environment_tabs:
+        text: "Environment tabs at the top of the canvas"
+        behavior: "Switch between environments: each has its own deployments, variables, and domains. Click '+' to create a new environment. Changes in one environment don't affect others."
+      add_service:
+        text: "'+ New' button on the canvas"
+        behavior: "Add: GitHub Repo (auto-deploy from a repo), Docker Image, Database (PostgreSQL, MySQL, Redis, MongoDB), Empty Service. Databases are provisioned instantly."
+
+    service_detail:
+      description: "Detail panel for a deployed service, opened by clicking a service card."
+      layout:
+        - "Tabs: Deployments, Variables, Settings, Metrics, Networking"
+      deployments_tab:
+        behavior: "List of all deployments with status (Success/Failed/Deploying/Removed), trigger (Git push, manual, config change), commit info, build time, and timestamp. Click a deployment to see build and runtime logs."
+      variables_tab:
+        behavior: "Environment variables as key-value pairs. Raw editor mode or GUI editor. Variables are per-service and per-environment. Reference other services with ${{service.VARIABLE}} syntax. Shared variables apply across services."
+      settings_tab:
+        behavior: "Service configuration: build command, start command, root directory, watch paths, healthcheck path, restart policy, region, replicas, resource limits (CPU, memory)."
+      metrics_tab:
+        behavior: "Real-time and historical metrics: CPU usage, memory usage, network I/O, disk usage. Graphs show usage over time. Useful for right-sizing resources."
+      networking_tab:
+        behavior: "Configure public domains (railway.app subdomain or custom domain), private networking between services, and port configuration. TCP proxy for non-HTTP services."
+
+    deploy_logs:
+      description: "Build and runtime logs for a specific deployment."
+      layout:
+        - "Top toggle: Build Logs / Deploy Logs"
+        - "Center: scrollable log output with timestamps"
+      build_logs:
+        behavior: "Shows the Nixpacks build process: detecting framework, installing dependencies, building, and creating the container image. Errors appear in red."
+      deploy_logs:
+        behavior: "Runtime application output (stdout/stderr). Real-time streaming. Filter by log level. Useful for debugging crashes and monitoring application behavior."
+
+    database_detail:
+      description: "Database plugin detail panel."
+      layout:
+        - "Tabs: Data, Variables, Settings, Metrics"
+      data_tab:
+        behavior: "For PostgreSQL and MySQL: a query interface to browse tables and run SQL. Shows table list, row data, and schema information."
+      variables_tab:
+        behavior: "Auto-generated connection variables: DATABASE_URL, PGHOST, PGPORT, PGUSER, PGPASSWORD, PGDATABASE. These are automatically available to services connected on the canvas."
+
+  workflows:
+    deploy_from_github:
+      - "Click 'New Project' on the dashboard"
+      - "Select 'Deploy from GitHub repo'"
+      - "Authorize Railway and select the repository"
+      - "Railway auto-detects the framework and configures the build"
+      - "The service appears on the canvas and deploys automatically"
+      - "Set environment variables in the Variables tab"
+      - "Generate a domain in the Networking tab"
+
+    add_database:
+      - "Open a project canvas"
+      - "Click '+ New' and select a database (PostgreSQL, Redis, etc.)"
+      - "Database provisions instantly and appears as a card on the canvas"
+      - "Connection variables are automatically injected into linked services"
+      - "Click the database card to see credentials and the data browser"
+
+    check_deployment:
+      - "Open the project canvas"
+      - "Click the service card"
+      - "Go to the Deployments tab"
+      - "Click a deployment to view build and runtime logs"
+      - "Check Metrics tab for CPU/memory usage"
+
+    configure_environment:
+      - "Click environment tabs at the top of the canvas"
+      - "Click '+' to create a new environment (e.g., staging)"
+      - "Each environment gets its own variables, deployments, and domains"
+      - "Set environment-specific variables in each service's Variables tab"
+
+  tips:
+    - "Railway auto-detects your framework via Nixpacks — no Dockerfile needed for most projects"
+    - "Environment variables from database plugins are auto-injected into connected services"
+    - "Each environment is fully isolated — test in staging before promoting to production"
+    - "The ${{service.VARIABLE}} syntax references variables from other services on the canvas"
+    - "Railway auto-deploys on Git push when connected to a GitHub repository"
+    - "Custom domains require a CNAME record pointing to your Railway-assigned domain"
+    - "The Metrics tab helps right-size your service — check if you're over or under-provisioned"
+    - "Use 'railway run' CLI command to run commands with your Railway environment variables locally"

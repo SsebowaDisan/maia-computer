@@ -4,3 +4,84 @@ icon: "https://www.google.com/s2/favicons?domain=intercom.com&sz=128"
 url: https://app.intercom.com
 category: productivity
 ai_description: "Customer messaging platform. Live chat, bots, and support."
+help_url: "https://www.intercom.com/help"
+
+navigation:
+  overview: >
+    Intercom is a customer messaging platform for live chat support, automated bots, and proactive
+    messaging. The core interface is an inbox of customer conversations with a three-panel layout:
+    conversation list, active conversation thread, and customer profile sidebar. Agents respond
+    to customers in real time, add internal notes, use saved replies, and manage conversation
+    assignment and status.
+
+  pages:
+    inbox:
+      description: "The main inbox showing customer conversations with list, thread, and profile panels."
+      layout:
+        - "Left nav: Inbox, Messages, Articles, Help Center, Reports, Contacts icons"
+        - "Left panel: conversation list with customer name/avatar, last message preview, time, assignment indicator"
+        - "Center panel: active conversation thread with full message history"
+        - "Right panel: customer profile sidebar with details, attributes, and conversation history"
+        - "Bottom of center: reply composer with mode toggle and formatting tools"
+      conversation_list:
+        text: "List of conversations in the left panel"
+        behavior: "Click a conversation to open the full thread in the center panel. Each entry shows customer name, avatar, last message snippet, timestamp, and assignment status. Unread conversations have bold text. Conversations are sorted by most recent activity."
+      inbox_sections:
+        text: "Section tabs above the conversation list: Unassigned, Assigned to me, All, Mentions"
+        behavior: "Unassigned shows conversations needing an agent. 'Assigned to me' shows your active conversations. All shows every conversation. Mentions shows conversations where you were @mentioned. Custom inboxes can be created for teams or topics."
+      reply_composer:
+        text: "Reply input at the bottom of the conversation thread"
+        behavior: "Type a response to the customer. Important: toggle between 'Reply' (sends to customer, white background) and 'Note' (internal-only, yellow background). Notes are visible only to teammates. Formatting toolbar supports bold, italic, links, code, lists, images, and emojis. Press Enter to send (Shift+Enter for new line)."
+      saved_replies:
+        text: "Lightning bolt icon in the composer toolbar"
+        behavior: "Click to open a searchable list of pre-written response templates. Select one to insert it into the composer. Templates can include dynamic variables like customer name. Type # in the composer to quick-search saved replies."
+      customer_sidebar:
+        text: "Right panel showing the customer profile"
+        behavior: "Displays customer name, email, company, location, browser/OS, signup date, custom attributes, and tags. Below: conversation history with this customer, notes from other agents, and linked company data. Click any field to edit it."
+      macros:
+        text: "Macro actions available from the conversation header or three-dot menu"
+        behavior: "Macros perform multiple actions at once: send a reply, change assignment, close conversation, add tags. Useful for common workflows like 'escalate to engineering' or 'close with satisfaction survey'."
+      conversation_actions:
+        text: "Action buttons in the conversation header"
+        behavior: "Assign (person icon) assigns to an agent or team. Snooze (clock icon) hides the conversation until a set time. Close (checkmark) resolves the conversation. Priority (flag) marks as high priority."
+
+  workflows:
+    respond_to_customer:
+      - "Click a conversation in the inbox list"
+      - "Read the customer's messages in the thread"
+      - "Ensure the composer is in 'Reply' mode (not 'Note')"
+      - "Type your response (or use # to search saved replies)"
+      - "Press Enter to send"
+
+    add_internal_note:
+      - "Open a conversation"
+      - "Switch the composer to 'Note' mode (yellow background)"
+      - "Type an internal note for your team"
+      - "Press Enter — the customer will not see this"
+
+    use_saved_reply:
+      - "Open a conversation"
+      - "Click the lightning bolt icon in the composer (or type #)"
+      - "Search for the relevant saved reply template"
+      - "Click to insert it into the composer"
+      - "Customize the template if needed and send"
+
+    assign_conversation:
+      - "Open a conversation"
+      - "Click the assign icon (person) in the conversation header"
+      - "Select an agent or team from the dropdown"
+      - "The conversation moves to their inbox"
+
+    close_conversation:
+      - "Open a resolved conversation"
+      - "Click the close button (checkmark) in the conversation header"
+      - "The conversation moves to the Closed section and can be reopened if the customer replies"
+
+  tips:
+    - "Reply mode (white) sends to the customer; Note mode (yellow) is internal-only — always check the toggle"
+    - "Type # in the composer to quick-search saved replies without clicking the lightning bolt"
+    - "Snooze conversations to follow up later — they reappear in your inbox at the snoozed time"
+    - "The customer sidebar shows full context: previous conversations, company data, and custom attributes"
+    - "Macros chain multiple actions (reply + close + tag) into a single click for common workflows"
+    - "Keyboard shortcuts: Ctrl+Enter to send, Ctrl+Shift+N to toggle Note mode, Ctrl+K to insert link"
+    - "Closed conversations reopen automatically if the customer sends a new message"

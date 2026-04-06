@@ -1,6 +1,7 @@
 // Types — Apps
 export type {
   AppManifest,
+  AppNavigation,
   AppCategory,
   InstalledApp,
   AppBadge,
@@ -84,6 +85,43 @@ export type {
 } from './type/orchestrator'
 
 export { SUB_TASK_STATUS } from './type/orchestrator'
+
+// Types — Intelligence (Page Scraper, Research Memory, Smart Navigation, Visual Performance)
+export type {
+  PageType,
+  PageMetadata,
+  PageSection,
+  PageContentItem,
+  ScrollState,
+  ActiveStates,
+  ScrapedElement,
+  ScrapedPage,
+  ObstacleType,
+  PageObstacle,
+  SourceCredibility,
+  ResearchFinding,
+  ResearchDataItem,
+  VisitedPage,
+  ResearchMemoryState,
+  SmartAction,
+  WaitSignal,
+  WaitResult,
+  CursorIntent,
+  CursorMove,
+  TypingConfig,
+  GlowConfig,
+  HighlightConfig,
+  VisualAction,
+  SmartDecisionResult,
+} from './type/intelligence'
+
+export {
+  PAGE_TYPE,
+  OBSTACLE_TYPE,
+  SOURCE_CREDIBILITY,
+  WAIT_SIGNAL,
+  CURSOR_INTENT,
+} from './type/intelligence'
 
 // Constants
 export type { AgentProfile } from './constant/agents'

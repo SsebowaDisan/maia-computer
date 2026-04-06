@@ -35,16 +35,15 @@ export function Dock({
 
   return (
     <>
-      {/* Invisible hover trigger zone at the bottom of the screen */}
       <div
         onMouseEnter={() => {
           setHovered(true)
           onPointerEnter()
         }}
-        className="fixed inset-x-0 bottom-0 z-[60] h-3 bg-transparent"
+        className="fixed inset-x-0 bottom-0 z-[60] h-8 bg-transparent"
       />
       <div
-        className="pointer-events-none fixed inset-x-0 bottom-0 z-50 flex justify-center"
+        className="pointer-events-none fixed inset-x-0 bottom-5 z-50 flex justify-center px-4"
       >
         <div
           onMouseEnter={() => {
@@ -55,8 +54,8 @@ export function Dock({
             setHovered(false)
             onPointerLeave()
           }}
-          className="pointer-events-auto flex items-center gap-0 rounded-t-2xl border border-[#222222] border-b-0 bg-[rgba(17,17,17,0.9)] px-3 py-2 shadow-[-0_4px_24px_rgba(0,0,0,0.5)] backdrop-blur-[20px] transition-transform duration-300 ease-out"
-          style={{ transform: `translateY(${show ? 0 : 100}px)` }}
+          className={`flex items-center gap-0 rounded-[28px] border border-[#262626] bg-[rgba(12,12,12,0.78)] px-3 py-3 shadow-[0_20px_60px_rgba(0,0,0,0.5)] backdrop-blur-[26px] transition-[transform,opacity] duration-200 ease-out ${show ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}
+          style={{ transform: `translateY(${show ? 0 : 32}px)` }}
         >
           <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px' }}>
             {itemsLeft.map((item) => (

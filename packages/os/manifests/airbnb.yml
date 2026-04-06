@@ -4,3 +4,105 @@ icon: "https://www.google.com/s2/favicons?domain=airbnb.com&sz=128"
 url: https://www.airbnb.com
 category: other
 ai_description: "Book stays and experiences. Search homes, apartments, and unique places."
+help_url: "https://www.airbnb.com/help"
+
+navigation:
+  overview: >
+    Airbnb is a marketplace for vacation rentals, long-term stays, and experiences. The interface
+    uses a multi-step search flow (Where, When, Who) with results shown as a split view of listing
+    cards and an interactive map. Listings include entire homes, private rooms, shared rooms, and
+    unique stays like treehouses and houseboats.
+
+  pages:
+    home:
+      description: "Landing page with expanded search bar, category tabs, and featured listing grid."
+      layout:
+        - "Top: Airbnb logo, center search bar ('Where | Check in | Check out | Who | Search'), right: host link, globe (language), profile menu"
+        - "Below search: horizontal scrolling category icons (Icons, Trending, Beach, Cabins, Pools, Amazing views, Countryside, Lakefront, Mansions, etc.)"
+        - "Below categories: 'Filters' button (right), 'Display total before taxes' toggle"
+        - "Center: responsive grid of listing cards"
+      search_bar:
+        behavior: "Click the search bar to expand it into a multi-step panel. Step 1: 'Where' — type a destination (city, region, country) with autocomplete suggestions, or click 'I'm flexible' for a category-based search. Step 2: 'Check in' / 'Check out' — calendar date picker (click dates), or 'Flexible' tab for approximate dates (weekend, week, month). Step 3: 'Who' — increment/decrement for Adults, Children, Infants, Pets. Step 4: Click the red magnifying glass 'Search' button."
+      category_tabs:
+        behavior: "Horizontal scrolling row of category icons (Beach, Cabins, Trending, etc.). Click to filter listings by category. Scroll with arrow buttons at edges. Over 60 categories available."
+      listing_card:
+        behavior: "Photo carousel (left/right dots, swipe/click arrows), heart icon to save (requires login). Below photos: location, distance from you, available dates, price per night, star rating. Click anywhere on the card to open the listing detail page."
+      filters_button:
+        behavior: "Opens a modal with all filters: Price range (slider + histogram), Type of place (Entire place, Private room, Shared room, Hotel room), Rooms and beds (min bedrooms, beds, bathrooms), Property type (House, Apartment, Guesthouse, Hotel), Amenities (Wifi, Kitchen, Washer, Pool, Hot tub, etc.), Booking options (Instant Book, Self check-in, Free cancellation), Accessibility features, Host language."
+
+    search_results:
+      description: "Split view with listing cards (left) and interactive map (right)."
+      url_pattern: "airbnb.com/s/Destination/homes?checkin=YYYY-MM-DD&checkout=YYYY-MM-DD&adults=N"
+      layout:
+        - "Left panel: scrollable list of listing cards (usually 18 per page)"
+        - "Right panel: interactive map with price markers at listing locations"
+        - "Top: filter bar, sort options"
+      map:
+        behavior: "Price tags on the map correspond to listing cards. Click a price tag to see a mini preview card (photo, title, rating, price). Zoom and pan to explore. Moving the map updates the listing results if 'Search as I move the map' is checked. Clusters show the number of listings in dense areas."
+      sort_options:
+        behavior: "Not prominently displayed — Airbnb defaults to 'Best match'. Some views offer sorting by price, rating."
+      pagination:
+        behavior: "Scroll to the bottom and click 'Next' or page numbers. URL parameter: &items_offset=18."
+
+    listing_detail:
+      description: "Full listing page with photos, description, amenities, reviews, and booking card."
+      url_pattern: "airbnb.com/rooms/LISTING_ID"
+      layout:
+        - "Top: 5-photo grid (1 large + 4 small), 'Show all photos' button"
+        - "Left column: title, host info (name, photo, Superhost badge, response rate), description, sleeping arrangements, amenities grid, calendar, reviews, location map, house rules, cancellation policy"
+        - "Right column (sticky): booking card — price per night, date selector, guest selector, 'Reserve' button, price breakdown"
+      photo_gallery:
+        behavior: "Click 'Show all photos' to open a fullscreen scrollable gallery with all listing photos. Click any photo in the grid to also open the gallery."
+      booking_card:
+        behavior: "Shows price per night. Click date fields to open an inline calendar. Set guest count. Click 'Reserve' — goes to a confirmation page showing total price with cleaning fee, service fee, taxes. 'You won't be charged yet' note appears before final confirmation."
+      amenities_section:
+        behavior: "Grid of amenities with icons (Wifi, Kitchen, Free parking, Pool, etc.). Click 'Show all X amenities' to see the full list in a modal, organized by category."
+      reviews_section:
+        behavior: "Shows overall rating and breakdown by category: Cleanliness, Accuracy, Check-in, Communication, Location, Value. Each rated out of 5.0. Individual guest reviews below with name, date, and text. Click 'Show all X reviews' for the full list."
+      calendar:
+        behavior: "Inline calendar showing available (white) and unavailable (gray/crossed) dates. Minimum stay may be enforced. Scroll forward to see future months."
+      host_section:
+        behavior: "Shows host name, photo, join date, reviews count, verification badges, Superhost status. 'Contact Host' button opens a messaging form for questions before booking."
+
+    experiences:
+      description: "Activities and tours hosted by locals."
+      url_pattern: "airbnb.com/s/experiences"
+      behavior: "Searchable separately from stays. Categories include Cooking, Sports, Art, Nature. Each experience card shows photo, title, rating, price per person, duration."
+
+  workflows:
+    search_stays:
+      - "Click the search bar to expand it"
+      - "Type a destination in the 'Where' field (autocomplete suggests locations)"
+      - "Click check-in and check-out dates on the calendar"
+      - "Set guest count (Adults, Children, Infants, Pets)"
+      - "Click the red Search button"
+      - "Browse results — use filters (Price, Type of place, Amenities) to narrow"
+      - "Use the map to see listing locations relative to landmarks"
+
+    compare_and_book:
+      - "Click listing cards to view full details"
+      - "Compare total prices (including cleaning fee, service fee, taxes)"
+      - "Check ratings by category (Cleanliness, Location, Value)"
+      - "Read recent reviews for current guest experiences"
+      - "Click 'Reserve', review the price breakdown, confirm booking"
+
+    contact_host:
+      - "On the listing page, click 'Contact Host' in the host section"
+      - "Type your question (about check-in, amenities, neighborhood, etc.)"
+      - "Send the message — the host typically responds within 24 hours"
+
+  url_patterns:
+    search: "airbnb.com/s/City-Name/homes?checkin=YYYY-MM-DD&checkout=YYYY-MM-DD&adults=N"
+    listing: "airbnb.com/rooms/LISTING_ID"
+    experiences: "airbnb.com/s/experiences"
+    wishlists: "airbnb.com/wishlists"
+
+  tips:
+    - "Prices on cards are per night before fees — always check the total on the listing page"
+    - "Map pins and listing cards are linked — hovering one highlights the other"
+    - "Superhost badges indicate experienced hosts with 4.8+ rating and low cancellation rate"
+    - "'I'm flexible' in the Where field lets you search by category (Beach, Mountains, etc.) without a specific destination"
+    - "Flexible dates option helps find cheaper dates within a range"
+    - "Instant Book listings can be reserved without waiting for host approval"
+    - "Free cancellation policies vary by listing — check the cancellation policy section before booking"
+    - "The 'Type of place' filter is important: Entire place (whole home), Private room (your own room in a shared home), Shared room (shared sleeping space)"

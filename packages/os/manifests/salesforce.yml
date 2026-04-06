@@ -4,3 +4,74 @@ icon: "https://www.google.com/s2/favicons?domain=salesforce.com&sz=128"
 url: https://login.salesforce.com
 category: productivity
 ai_description: "CRM platform. Manage contacts, leads, opportunities, and sales."
+
+navigation:
+  overview: >
+    Salesforce is an enterprise CRM platform for managing customer relationships, sales pipelines,
+    and business processes. Data is organized as objects (Accounts, Contacts, Leads, Opportunities).
+
+  pages:
+    home:
+      description: "The home tab with assistant panel, recent records, and performance charts."
+      layout:
+        - "Top: navigation tabs (Home, Accounts, Contacts, Leads, Opportunities, Reports, Dashboards)"
+        - "Top-left: App Launcher (grid icon)"
+        - "Center: assistant panel, recent records, tasks"
+      search_bar:
+        text: "Search input at top center"
+        behavior: "Search across all objects — contacts, accounts, opportunities, leads. Results grouped by type."
+      navigation_tabs:
+        text: "Horizontal tabs (Home, Accounts, Contacts, Leads, Opportunities)"
+        behavior: "Click a tab to see its list view showing all records of that type."
+      app_launcher:
+        text: "Grid icon (top-left)"
+        behavior: "Opens a panel showing all available apps and objects. Search within it to find specific items."
+
+    list_view:
+      description: "Table view of records for a specific object type."
+      layout:
+        - "Center: table of records with sortable columns"
+        - "Top: view selector dropdown, search, 'New' button"
+      record_row:
+        text: "Individual records in the table"
+        behavior: "Click a record name to open its detail page."
+      new_button:
+        text: "'New' button"
+        behavior: "Opens a form to create a new record of the current object type."
+
+    record_detail:
+      description: "Full detail page for a single record."
+      layout:
+        - "Top: record name, type, action buttons (Edit, Delete, Clone)"
+        - "Left: record fields organized in sections"
+        - "Right: activity timeline (emails, tasks, calls, events)"
+        - "Below: related lists (linked records from other objects)"
+      activity_timeline:
+        text: "Activity feed on the right"
+        behavior: "Shows all interactions: logged calls, emails, tasks, and events. Add new activities using the 'Log a Call' or 'New Task' buttons."
+
+  workflows:
+    search_records:
+      - "Click the search bar at the top"
+      - "Type a name, email, or ID"
+      - "Results appear grouped by object type"
+      - "Click a result to open the record detail"
+
+    navigate_objects:
+      - "Click a tab (Accounts, Contacts, Leads, Opportunities) in the top navigation"
+      - "Browse the list view table"
+      - "Use the view selector dropdown for different filtered views"
+      - "Click a record to see its details"
+
+    create_record:
+      - "Navigate to the appropriate tab (e.g., Contacts)"
+      - "Click 'New'"
+      - "Fill in the required fields"
+      - "Click 'Save'"
+
+  tips:
+    - "The App Launcher (grid icon) lets you access all objects and apps — useful when tabs are hidden"
+    - "List views can be customized — use 'Recently Viewed' or create custom filtered views"
+    - "Related lists on record detail pages show connections to other objects (e.g., a Contact's Opportunities)"
+    - "Global search finds records across all object types"
+    - "The activity timeline on records gives a complete history of all interactions"

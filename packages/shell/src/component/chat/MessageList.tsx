@@ -56,7 +56,7 @@ export function MessageList({ messages, onReply }: MessageListProps) {
       className="min-h-0 flex-1 overflow-y-auto bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.08),transparent_28%)]"
       onScroll={handleScroll}
     >
-      <div className="mx-auto flex min-h-full w-full max-w-5xl flex-col px-4 py-5">
+      <div className="mx-auto flex min-h-full w-full max-w-5xl flex-col px-4 py-3">
         {messages.length === 0 ? (
           <div className="flex min-h-full flex-1 items-center justify-center px-8 py-12 text-center">
             <div className="max-w-md rounded-3xl border border-border bg-white/[0.03] px-8 py-10">

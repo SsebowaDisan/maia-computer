@@ -4,3 +4,149 @@ icon: "https://www.google.com/s2/favicons?domain=meet.google.com&sz=128"
 url: https://meet.google.com
 category: productivity
 ai_description: "Start or join video meetings. Screen share and collaborate."
+help_url: "https://support.google.com/meet"
+
+navigation:
+  overview: >
+    Google Meet is a video conferencing service supporting up to 100 participants (free) or
+    500 (Workspace). Meetings are identified by codes in the format xxx-xxxx-xxx. The interface
+    has a landing page for creating/joining meetings, a preview screen for camera/mic check,
+    and the in-meeting view with video grid and bottom toolbar. Supports screen sharing,
+    captions, breakout rooms, Q&A, polls, recording, and hand raise reactions. Integrates
+    with Google Calendar for scheduled meetings.
+
+  pages:
+    landing:
+      description: "The Meet home page for creating or joining meetings."
+      url_pattern: "meet.google.com"
+      layout:
+        - "Left: 'New meeting' button (with dropdown arrow), meeting code input ('Enter a code or link'), upcoming meetings from Calendar"
+        - "Right: illustration or promotional content"
+        - "Top: Google Meet logo, current time/date, settings gear, profile avatar"
+      new_meeting_button:
+        selector: "button[data-action-type='new_meeting']"
+        text: "'New meeting' with video camera icon"
+        behavior: "Click opens dropdown with three options: (1) 'Create a meeting for later' — generates a link without starting, copies to clipboard. (2) 'Start an instant meeting' — opens preview then starts immediately. (3) 'Schedule in Google Calendar' — opens Calendar event editor with Meet link pre-attached."
+      meeting_code_input:
+        selector: "input[aria-label='Enter a code or link']"
+        behavior: "Type a meeting code (xxx-xxxx-xxx) or paste full URL (meet.google.com/xxx-xxxx-xxx). A 'Join' button appears after entering text. Codes are case-insensitive. The full URL also works."
+      join_button:
+        behavior: "Appears after entering a code. Navigates to the preview screen for that meeting."
+      upcoming_meetings:
+        behavior: "Lists upcoming Calendar events that have Meet links. Shows event title, time, and 'Join' button. Synced from Google Calendar."
+
+    preview:
+      description: "Camera preview screen shown before entering a meeting. Lets you check audio/video setup."
+      url_pattern: "meet.google.com/xxx-xxxx-xxx"
+      layout:
+        - "Center: live camera preview (your video feed in a large rectangle)"
+        - "Below preview: camera toggle button, microphone toggle button"
+        - "Right side: 'Join now' button (green), or 'Ask to join' (if not organizer)"
+        - "Below join: meeting link to copy and share, 'Present' button for presentation-only join"
+        - "Bottom-right: audio/video settings (gear icon) for selecting camera, microphone, and speaker devices"
+      camera_toggle:
+        selector: "button[aria-label='Turn off camera'], button[aria-label='Turn on camera']"
+        behavior: "Toggle camera on/off. Red slash through icon = camera off. Preview updates in real-time."
+      mic_toggle:
+        selector: "button[aria-label='Turn off microphone'], button[aria-label='Turn on microphone']"
+        behavior: "Toggle microphone on/off. Red slash through icon = muted. Audio level indicator shows when sound is detected."
+      join_now_button:
+        selector: "button[data-action-type='join']"
+        behavior: "'Join now' enters immediately. 'Ask to join' sends a request to the organizer — you see a waiting screen until admitted. 'Present' joins with screen share only, no camera."
+      audio_video_settings:
+        behavior: "Gear icon opens device selection: Camera dropdown (list of connected cameras), Microphone dropdown, Speaker dropdown, audio test."
+
+    in_meeting:
+      description: "The active meeting view with video feeds and control bar."
+      layout:
+        - "Center: video tiles — auto-layout (speaker focus) or tiled layout (grid). Active speaker highlighted"
+        - "Bottom toolbar: microphone, camera, captions (CC), emoji reactions, screen share (up arrow), more (...), hang up (red phone)"
+        - "Top-right: meeting info (i), participant count, clock"
+        - "Right panel (toggled): People, Chat, Activities (Q&A, Polls, Breakout rooms, Recording)"
+      mic_button:
+        selector: "button[aria-label='Turn off microphone'], button[aria-label='Turn on microphone']"
+        keyboard: "Cmd+D — toggle microphone"
+        behavior: "Toggle mute/unmute. Long-press spacebar for push-to-talk (unmutes temporarily while held)."
+      camera_button:
+        selector: "button[aria-label='Turn off camera'], button[aria-label='Turn on camera']"
+        keyboard: "Cmd+E — toggle camera"
+        behavior: "Toggle camera on/off during meeting."
+      present_button:
+        selector: "button[aria-label='Present now']"
+        behavior: "Opens share dialog: 'Your entire screen', 'A window', 'A tab' (Chrome tab with audio option). After selecting, your share begins with a blue border indicating what is shared. 'Stop sharing' button appears at bottom."
+      chat_button:
+        selector: "button[aria-label='Chat with everyone']"
+        behavior: "Opens chat panel on the right. Messages visible to all participants. Supports links. Chat messages are not saved after the meeting ends (unless recorded)."
+      people_button:
+        selector: "button[aria-label='Show everyone']"
+        behavior: "Opens participant list. Shows who is in the call. Organizer can: mute participants, remove participants, pin/unpin video. 'Add people' button to invite by email."
+      captions_button:
+        selector: "button[aria-label='Turn on captions']"
+        behavior: "Toggles real-time speech-to-text captions at the bottom of the video. Supports multiple languages. Captions are generated locally and not recorded."
+      reactions_button:
+        behavior: "Opens emoji reaction picker. Reactions float across the screen for all participants. Includes thumbs up, clap, laugh, heart, surprised, and hand raise. Hand raise stays until manually lowered."
+      leave_button:
+        selector: "button[aria-label='Leave call']"
+        behavior: "Red phone icon. Leaves meeting immediately. If you are the last person, the meeting ends."
+      activities_button:
+        behavior: "Opens Activities panel: Whiteboarding (opens Jam), Q&A (participants submit questions, host pins/answers), Polls (create multiple choice polls), Breakout rooms (split into smaller groups, host assigns), Recording (Workspace feature)."
+      layout_button:
+        behavior: "Click the three-dot menu > 'Change layout'. Options: Auto (Google decides), Tiled (grid showing multiple participants), Spotlight (full-screen active speaker), Sidebar (speaker large, others small on side)."
+
+  workflows:
+    start_instant_meeting:
+      - "Click 'New meeting' > 'Start an instant meeting'"
+      - "Check camera and mic on preview screen"
+      - "Click 'Join now' to enter"
+      - "Copy the meeting link from the meeting info (i) icon to share with others"
+
+    join_meeting:
+      - "Paste meeting code or URL into the input field"
+      - "Click 'Join' button"
+      - "Check camera/mic on preview screen"
+      - "Click 'Join now' or 'Ask to join'"
+
+    share_screen:
+      - "Click 'Present now' (up arrow icon) in bottom toolbar"
+      - "Choose: entire screen, window, or tab"
+      - "If sharing a tab, check 'Share tab audio' for sound"
+      - "Content appears for all participants"
+      - "Click 'Stop sharing' (blue bar at bottom) when done"
+
+    use_breakout_rooms:
+      - "Click Activities > Breakout rooms (organizer only)"
+      - "Set number of rooms"
+      - "Assign participants manually or let Meet shuffle randomly"
+      - "Click 'Open rooms' to start breakout sessions"
+      - "Send messages to all rooms, join any room, close rooms to bring everyone back"
+
+    record_meeting:
+      - "Click three-dot menu > 'Record meeting' (Workspace accounts only)"
+      - "All participants see a recording indicator"
+      - "Click 'Stop recording' when done"
+      - "Recording saves to organizer's Google Drive in a 'Meet Recordings' folder"
+
+  keyboard_shortcuts:
+    toggle_mic: "Cmd+D — mute/unmute microphone"
+    toggle_camera: "Cmd+E — toggle camera on/off"
+    push_to_talk: "Hold spacebar — temporary unmute while held"
+    toggle_captions: "Cmd+Shift+C — toggle captions"
+    toggle_chat: "Cmd+Alt+C — open/close chat"
+    toggle_people: "Cmd+Alt+P — open/close people panel"
+
+  url_patterns:
+    landing: "meet.google.com"
+    meeting: "meet.google.com/xxx-xxxx-xxx"
+    meeting_code_format: "Three groups of letters: abc-defg-hij"
+
+  tips:
+    - "Hold spacebar to push-to-talk when muted — unmutes temporarily while key is held"
+    - "Cmd+D toggles microphone, Cmd+E toggles camera — fastest way to mute/unmute"
+    - "Create a meeting for later to get a reusable link — useful for recurring standup meetings"
+    - "Pin a participant's video by clicking the pin icon on their tile — keeps them visible regardless of active speaker"
+    - "The 'Hand raise' reaction stays visible until manually lowered — use it to signal you want to speak"
+    - "Sharing a Chrome tab includes the tab's audio — check 'Share tab audio' for videos/presentations with sound"
+    - "Change layout to 'Tiled' for grid view showing all participants equally"
+    - "Meeting links follow the format meet.google.com/xxx-xxxx-xxx and are reusable"
+    - "Captions work in real-time and support translation to other languages in some Workspace plans"
+    - "The meeting info (i) icon shows the meeting link, phone dial-in numbers, and attached documents"

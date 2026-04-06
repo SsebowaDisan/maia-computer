@@ -6,7 +6,6 @@ import { type ShellWindow } from '../../store/windowStore'
 import { getDefaultWindowBounds, getViewportBounds } from '../../windowLayout'
 
 interface WindowLayerProps {
-  activeAgentIds: string[]
   installedApps: InstalledApp[]
   messages: ChatMessage[]
   onCloseWindow: (windowId: string) => void
@@ -21,12 +20,10 @@ interface WindowLayerProps {
   onUpdateBounds: (windowId: string, bounds: ShellWindow['bounds']) => void
   onUpdateSetting: (key: string, value: unknown) => Promise<void>
   settings: Record<string, unknown>
-  taskDescription: string
   windows: ShellWindow[]
 }
 
 export function WindowLayer({
-  activeAgentIds,
   installedApps,
   messages,
   onCloseWindow,
@@ -41,7 +38,6 @@ export function WindowLayer({
   onUpdateBounds,
   onUpdateSetting,
   settings,
-  taskDescription,
   windows,
 }: WindowLayerProps) {
   return (
@@ -78,7 +74,6 @@ export function WindowLayer({
           window={window}
         >
           <WindowContent
-            activeAgentIds={activeAgentIds}
             installedApps={installedApps}
             messages={messages}
             onInstallApp={onInstallApp}
@@ -86,7 +81,6 @@ export function WindowLayer({
             onSendMessage={onSendMessage}
             onUpdateSetting={onUpdateSetting}
             settings={settings}
-            taskDescription={taskDescription}
             window={window}
           />
         </AppWindow>

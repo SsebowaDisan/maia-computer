@@ -4,3 +4,126 @@ icon: "https://www.google.com/s2/favicons?domain=gitlab.com&sz=128"
 url: https://gitlab.com
 category: developer
 ai_description: "Git repository management. CI/CD pipelines, issues, and merge requests."
+help_url: "https://docs.gitlab.com"
+
+navigation:
+  overview: >
+    GitLab is a complete DevOps platform providing Git repository hosting, CI/CD pipelines,
+    issue tracking, merge requests, container registry, and package registry — all in one
+    application. Projects are organized under groups (similar to GitHub organizations). The
+    left sidebar is context-sensitive and changes between global, group, and project views.
+
+  pages:
+    dashboard:
+      description: "The home page showing your projects, activity, and assigned work items."
+      layout:
+        - "Left sidebar: Search (or '/'), Projects, Groups, Activity, Milestones, Snippets, Explore"
+        - "Center: your projects list, activity feed, assigned merge requests and issues"
+        - "Top-right: '+' create menu, To-Do list bell, profile avatar"
+      search:
+        shortcut: "Press '/' anywhere"
+        behavior: "Global search across projects, issues, merge requests, code, commits, users, and milestones. Use the scope selector to limit search to current project or group."
+      create_menu:
+        text: "'+' button in top nav"
+        behavior: "Quick-create: New project/repository, New group, New snippet, New issue, New merge request."
+      todo_list:
+        text: "Checklist icon in top nav"
+        behavior: "Shows your to-do items — review requests, mentions, assigned issues. Click a to-do to navigate to the relevant page. Mark as done to clear."
+
+    project:
+      description: "A project page — the main hub for a repository and all its DevOps tools."
+      url_pattern: "gitlab.com/{group}/{project}"
+      layout:
+        - "Left sidebar changes to project-specific navigation:"
+        - "  Plan: Issues, Issue Boards, Milestones, Wiki"
+        - "  Code: Repository (Files, Commits, Branches, Tags, Compare, Graph), Merge Requests, Snippets"
+        - "  Build: Pipelines, Jobs, Pipeline Editor, Artifacts"
+        - "  Deploy: Releases, Container Registry, Package Registry"
+        - "  Monitor: Error Tracking, Metrics"
+        - "  Settings: General, Members, Repository, CI/CD, Access Tokens"
+        - "Center: content for the selected sidebar item, defaults to repository file view"
+      repository_files:
+        text: "Code > Repository > Files"
+        behavior: "File tree browser. Click folders to navigate, files to view with syntax highlighting. Branch/tag selector dropdown at top. 'Web IDE' button opens a browser-based editor."
+      merge_requests:
+        text: "Code > Merge Requests"
+        behavior: "List of MRs (GitLab's term for pull requests). Shows title, author, labels, approvals needed/given, pipeline status, and merge conflicts indicator. Click to open."
+      pipelines:
+        text: "Build > Pipelines"
+        behavior: "CI/CD pipeline runs visualized as connected stages (build, test, deploy). Each stage contains jobs shown as circles — green (passed), red (failed), yellow (running), gray (pending). Click a job to see its log output."
+      issue_boards:
+        text: "Plan > Issue Boards"
+        behavior: "Kanban-style board with customizable columns. Drag issues between columns. Multiple boards can be created for different workflows."
+
+    merge_request_detail:
+      description: "A single merge request page with discussion, commits, changes, and pipeline."
+      url_pattern: "gitlab.com/{group}/{project}/-/merge_requests/{number}"
+      layout:
+        - "Top: MR title, '!number', Open/Merged/Closed badge, source -> target branch"
+        - "Tabs: Overview, Commits, Pipelines, Changes"
+        - "Overview: description, discussion thread, approval status, merge widget"
+        - "Changes: file diff with inline commenting"
+      merge_widget:
+        behavior: "Shows merge readiness: pipeline status, approval status, merge conflicts. Green 'Merge' button when all conditions met. Options: Merge commit, Merge when pipeline succeeds, Squash commits."
+      approval_section:
+        behavior: "Shows required approvals and who has approved. Approval rules can require specific users or groups to approve before merging."
+
+    web_ide:
+      description: "Browser-based code editor accessible from any file view."
+      behavior: "Click 'Web IDE' button on repository page. Opens a VS Code-like editor in the browser with file tree, multi-tab editing, and commit interface. Changes are committed directly from the IDE."
+
+    wiki:
+      text: "Plan > Wiki"
+      behavior: "Markdown-based documentation pages. Create, edit, and organize pages. Supports file attachments and a sidebar table of contents."
+
+    snippets:
+      text: "Code > Snippets"
+      behavior: "Shareable code snippets (similar to GitHub Gists). Can be project-scoped or personal. Support multiple files per snippet."
+
+  workflows:
+    browse_code:
+      - "Click a project from the dashboard"
+      - "Code > Repository > Files in the left sidebar"
+      - "Navigate through folders and click files to view"
+      - "Use the branch/tag selector to switch branches"
+      - "Click 'Web IDE' for in-browser editing"
+
+    review_merge_request:
+      - "Go to Code > Merge Requests in the project sidebar"
+      - "Click a merge request to open it"
+      - "Read the description on the Overview tab"
+      - "Check the Pipelines tab for CI/CD status"
+      - "Click 'Changes' tab to review the diff"
+      - "Click on a line to add an inline comment"
+      - "Click 'Approve' or 'Submit review'"
+
+    check_pipeline:
+      - "Go to Build > Pipelines"
+      - "Click a pipeline row to see its stages"
+      - "Click a job circle to see its log output"
+      - "Failed jobs show the error output — click 'Retry' to re-run"
+
+    create_issue:
+      - "Go to Plan > Issues"
+      - "Click 'New issue'"
+      - "Enter title and markdown description"
+      - "Set labels, milestone, assignee, due date, and weight"
+      - "Click 'Create issue'"
+
+  url_patterns:
+    project: "gitlab.com/{group}/{project}"
+    files: "gitlab.com/{group}/{project}/-/tree/{branch}"
+    file: "gitlab.com/{group}/{project}/-/blob/{branch}/{path}"
+    merge_requests: "gitlab.com/{group}/{project}/-/merge_requests"
+    pipelines: "gitlab.com/{group}/{project}/-/pipelines"
+    issues: "gitlab.com/{group}/{project}/-/issues"
+
+  tips:
+    - "The left sidebar is context-sensitive — it changes between global, group, and project views"
+    - "Merge requests are GitLab's equivalent of GitHub pull requests"
+    - "CI/CD pipelines run automatically when a .gitlab-ci.yml file exists in the repo root"
+    - "'/' keyboard shortcut focuses search from anywhere"
+    - "Issue boards provide a Kanban view — create custom boards for different workflows"
+    - "The Pipeline Editor (Build > Pipeline Editor) provides a visual editor for .gitlab-ci.yml"
+    - "Quick Actions in comments: /assign @user, /label ~bug, /close, /milestone %v1.0"
+    - "The Web IDE lets you edit and commit code without leaving the browser"

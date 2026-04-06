@@ -5,6 +5,7 @@ import type { LLMProvider, LLMMessage, LLMOptions, LLMResponse, LLMContentBlock 
 const logger = pino({ name: 'openai-adapter' })
 
 const DEFAULT_MODEL = 'gpt-4o'
+const FAST_MODEL = 'gpt-4o-mini'
 const DEFAULT_MAX_TOKENS = 1024
 const DEFAULT_TEMPERATURE = 0.3
 

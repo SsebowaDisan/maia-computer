@@ -11,13 +11,15 @@
 3. [System Overview](#3-system-overview)
 4. [The 10 Core Features](#4-the-10-core-features)
 5. [Intelligence Layer (The Kernel)](#5-intelligence-layer-the-kernel)
-6. [App System](#6-app-system)
-7. [Brain & Orchestrator](#7-brain--orchestrator)
-8. [Theatre (The Desktop Environment)](#8-theatre-the-desktop-environment)
-9. [Team Communication](#9-team-communication)
-10. [Tech Stack](#10-tech-stack)
-11. [Product Phases](#11-product-phases)
-12. [Key Differentiators](#12-key-differentiators)
+6. [Smart Navigation System](#6-smart-navigation-system)
+7. [Visual Performance System](#7-visual-performance-system)
+8. [App System](#8-app-system)
+9. [Brain & Orchestrator](#9-brain--orchestrator)
+10. [Theatre (The Desktop Environment)](#10-theatre-the-desktop-environment)
+11. [Team Communication](#11-team-communication)
+12. [Tech Stack](#12-tech-stack)
+13. [Product Phases](#13-product-phases)
+14. [Key Differentiators](#14-key-differentiators)
 
 ---
 
@@ -263,6 +265,33 @@ Share a Maia space with your team. Shared apps, shared AI brain, shared workflow
 
 The Intelligence Layer is what makes Maia an OS, not just a browser. Every app's input/output passes through it. The AI can read and act on everything.
 
+The Intelligence Layer has six subsystems:
+
+```
+┌─ Intelligence Layer ────────────────────────────────────────────────┐
+│                                                                      │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐              │
+│  │ Network Brain │  │  DOM Brain   │  │ Vision Brain │              │
+│  │ (API traffic) │  │ (page DOM)   │  │ (screenshots)│              │
+│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘              │
+│         │                 │                  │                       │
+│         ▼                 ▼                  ▼                       │
+│  ┌─────────────────────────────────────────────────┐                │
+│  │              Page Scraper                        │                │
+│  │  Combines all sources into structured page model │                │
+│  └──────────────────────┬──────────────────────────┘                │
+│                         │                                            │
+│         ┌───────────────┼───────────────┐                           │
+│         ▼               ▼               ▼                           │
+│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐                │
+│  │  Research     │ │   Smart      │ │   Visual     │                │
+│  │  Memory       │ │  Navigator   │ │  Performer   │                │
+│  │ (scratchpad)  │ │ (navigation) │ │ (animations) │                │
+│  └──────────────┘ └──────────────┘ └──────────────┘                │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
+```
+
 ### 5.1 Network Brain
 
 ```
@@ -272,7 +301,7 @@ Network Brain intercepts ALL of them.
 Gmail sends: GET /api/messages
 Network Brain: "User has 15 unread emails. Latest from CEO: 'Need Q3 numbers'"
 
-Slack sends: POST /api/chat.postMessage  
+Slack sends: POST /api/chat.postMessage
 Network Brain: "Message sent to #general by user"
 
 Google Flights responds: { flights: [{ airline: "ANA", price: 487 }] }
@@ -289,6 +318,8 @@ Network Brain: "Found 12 flight results. Cheapest: ANA $487 direct"
 **Speed:** Reading API responses = 1-5ms. No screenshots. No vision model.
 
 **Learning:** Network Brain remembers API patterns per app. After a week of use, it knows exactly how Gmail's API works, how Slack's API works, etc. It gets faster over time.
+
+**Prefetch Intelligence:** Network Brain doesn't just read responses after page load — it watches prefetch requests to predict what's behind a link before the agent clicks it. If a search results page pre-loads hotel prices via API, the agent knows "this link leads to a $210 hotel" without visiting the page.
 
 ### 5.2 DOM Brain
 
@@ -319,6 +350,19 @@ DOM Brain can:
 
 **Speed:** Reading DOM = 5-50ms. Acting via DOM = 1-10ms. No screenshots.
 
+**Advanced DOM capabilities (beyond basic element reading):**
+
+| Capability | How | What it unlocks |
+|---|---|---|
+| CSS computed style reading | `getComputedStyle()` — `cursor:pointer` = clickable, `overflow:auto` = scrollable | Finds interactive elements that lack semantic HTML (e.g., `<div onclick>`) |
+| Event listener introspection | Detect attached event handlers on any element | Discovers all interactive elements, even generic `<div>` with click handlers |
+| Shadow DOM piercing | Recursively traverse shadow roots | Reads content inside Google, YouTube, and modern web components |
+| iframe content access | Access iframe document when same-origin or via Electron privileges | Reads booking widgets, maps, embedded review sections |
+| Intersection Observer | Track which elements are in the visible viewport | Knows exactly what the agent can "see" vs what's below the fold |
+| MutationObserver | Watch for DOM changes in real-time | Detects when an action completed (new content appeared, loading finished) — replaces fixed wait times |
+| CSS transition/animation events | Listen for `transitionend`, `animationend` | Knows when visual transitions finish — moves at page speed, not timer speed |
+| Performance Observer | Largest Contentful Paint, resource timing | Knows precisely when a page is truly done rendering |
+
 ### 5.3 Vision Brain (Fallback)
 
 ```
@@ -331,7 +375,204 @@ Used only when Network + DOM brains can't handle it:
 
 **Speed:** 3-5 seconds per action (screenshot + LLM vision). Used for less than 5% of actions.
 
-### 5.4 Memory Brain
+### 5.4 Page Scraper
+
+The Page Scraper is the agent's eyes. It combines data from Network Brain, DOM Brain, and page metadata to build a **structured model** of every page the agent visits. This is not just a list of interactive elements — it's a full comprehension of what the page says, what it contains, and how it's organized.
+
+**What the Page Scraper reads:**
+
+```
+Page Scraper output for a Booking.com hotel listing:
+
+{
+  pageType: "listing",
+  url: "https://booking.com/searchresults?city=Brussels",
+  title: "Brussels Hotels — Booking.com",
+
+  metadata: {
+    description: "Book hotels in Brussels...",
+    language: "en",
+    datePublished: null,
+    jsonLd: [{ "@type": "Hotel", "name": "Hotel Amigo", "priceRange": "€€€" }]
+  },
+
+  structure: {
+    header:  { text: "Brussels: 342 properties found", hasSearch: true },
+    filters: { options: ["Stars", "Price", "Rating"], activeFilters: ["4+ stars"] },
+    sidebar: { type: "map", content: "Map showing hotel locations" },
+    main:    { type: "results", itemCount: 25 },
+    pagination: { current: 1, total: 14, nextUrl: "...&offset=25" }
+  },
+
+  content: [
+    {
+      type: "hotel_listing",
+      title: "Hotel Amigo",
+      price: "€210/night",
+      rating: "9.1 — Wonderful",
+      reviewCount: 2847,
+      location: "Grand Place, Brussels Center",
+      amenities: ["Free WiFi", "Spa", "Restaurant"],
+      image: "Luxury hotel exterior with Grand Place view",
+      link: "/hotel/be/amigo.html"
+    },
+    {
+      type: "hotel_listing",
+      title: "NH Collection Brussels Centre",
+      price: "€168/night",
+      rating: "8.7 — Excellent",
+      ...
+    }
+  ],
+
+  scrollState: {
+    viewportTop: 0,
+    viewportBottom: 45,
+    totalHeight: 100,
+    hasMoreBelow: true,
+    lazyLoadTrigger: "scroll"
+  },
+
+  interactiveElements: [
+    { role: "searchbox", label: "Destination", selector: "#ss", value: "Brussels" },
+    { role: "button", label: "Search", selector: ".sb-searchbox__button" },
+    { role: "link", text: "Hotel Amigo", href: "/hotel/be/amigo.html" },
+    ...
+  ]
+}
+```
+
+**How the Page Scraper works:**
+
+| Data source | What it provides |
+|---|---|
+| **DOM structure** | Headings, paragraphs, lists, tables, forms — organized by semantic landmarks (`<header>`, `<nav>`, `<main>`, `<aside>`, `<footer>`) |
+| **Schema.org / JSON-LD** | Machine-readable structured data — product prices, hotel ratings, article authors, event dates. Already on the page, just nobody reads it. |
+| **Open Graph / meta tags** | Page description, type, language, publication date |
+| **Network Brain** | API responses with structured data (prices, availability, search results as JSON) |
+| **CSS computed styles** | Which elements are clickable (`cursor:pointer`), scrollable (`overflow:auto`), hidden (`display:none`), fixed (`position:fixed`) |
+| **Intersection Observer** | Which elements are currently visible in the viewport |
+| **Link hrefs** | Where every link leads — parsed for structure (e.g., `/hotel/be/amigo` = hotel page, Belgium, Amigo) |
+| **Image alt text / captions** | What images represent |
+| **Tab order** | Logical flow of interactive elements |
+| **Active states** | Selected tabs, open dropdowns, checked checkboxes, expanded accordions (`aria-expanded`) |
+
+**Page type detection:**
+
+The scraper classifies every page into a type so the Brain knows how to behave:
+
+| Page type | How detected | Agent behavior |
+|---|---|---|
+| `search_results` | URL contains `search`, `q=`, `/results`; content is a list of links with snippets | Scan results, pick best, click through |
+| `listing` | Repeating card/row structure with prices, ratings; filter sidebar | Read listings, use filters, compare items |
+| `article` | Long-form text with headings; `<article>` tag; Schema.org Article type | Read content, extract key facts, highlight important text |
+| `product` | Single item with price, images, buy button; Schema.org Product type | Extract product details, compare with research memory |
+| `form` | Multiple input fields, submit button; `<form>` element | Identify form type (search, login, checkout), fill systematically |
+| `dashboard` | Multiple widgets, charts, stats; navigation tabs | Read visible data, switch tabs if needed |
+| `media` | Video, audio, image gallery; `<video>`, `<canvas>` | Fall back to Vision Brain |
+| `error` | 404/500 status, error message text | Go back, try different approach |
+
+### 5.5 Research Memory
+
+Research Memory is the agent's scratchpad. It persists across page navigations so the agent can compare information gathered from different websites.
+
+**The problem it solves:**
+
+```
+WITHOUT Research Memory:
+  Agent visits booking.com → finds Hotel Amigo €210
+  Agent navigates to tripadvisor.com → forgets everything about booking.com
+  Agent cannot compare. Agent cannot cross-reference. Agent cannot research.
+
+WITH Research Memory:
+  Agent visits booking.com → stores: { source: "booking.com", hotel: "Hotel Amigo", price: "€210", rating: 9.1 }
+  Agent visits tripadvisor.com → reads scratchpad: "I already found Hotel Amigo at €210 on Booking"
+  Agent compares, cross-references, builds a recommendation across sources
+```
+
+**Research Memory structure:**
+
+```
+ResearchMemory {
+  task: "Find best hotels in Brussels"
+
+  findings: [
+    {
+      source: "booking.com",
+      url: "https://booking.com/searchresults?city=Brussels",
+      visitedAt: 1712419200000,
+      data: [
+        { name: "Hotel Amigo", price: "€210/night", rating: "9.1", location: "Grand Place", notes: "luxury, top-rated" },
+        { name: "NH Collection", price: "€168/night", rating: "8.7", location: "Central Station", notes: "good value" },
+      ],
+      credibility: "high",
+      pageType: "listing"
+    },
+    {
+      source: "tripadvisor.com",
+      url: "https://tripadvisor.com/Hotels-Brussels",
+      visitedAt: 1712419260000,
+      data: [
+        { name: "Hotel Amigo", ranking: "#3 in Brussels", reviewCount: 2847, sentiment: "mostly positive" },
+      ],
+      credibility: "high",
+      pageType: "listing"
+    }
+  ],
+
+  searchesTriedSoFar: [
+    "best hotels brussels",
+    "luxury hotels brussels city center"
+  ],
+
+  pagesVisited: [
+    { url: "google.com/search?q=best+hotels+brussels", useful: true },
+    { url: "randomtravelblog.com/brussels", useful: false, reason: "outdated, 2019" },
+    { url: "booking.com/searchresults?city=Brussels", useful: true },
+    { url: "tripadvisor.com/Hotels-Brussels", useful: true },
+  ],
+
+  openQuestions: [
+    "What dates is the user traveling?",
+    "What's the budget?"
+  ],
+
+  confidence: "medium — found good options but haven't checked availability or specific dates"
+}
+```
+
+**How the Brain uses Research Memory:**
+
+Every time the ActionDecider makes a decision, it receives the full Research Memory in its prompt:
+
+```
+What you know so far:
+- booking.com: Hotel Amigo €210 (9.1), NH Collection €168 (8.7), Hotel Bloom €145 (8.3)
+- tripadvisor.com: Hotel Amigo ranked #3, 2847 reviews
+- Searches tried: "best hotels brussels", "luxury hotels brussels center"
+- Pages visited: 4 (2 useful, 1 outdated blog skipped, 1 Google results)
+
+What you see on this page: [page scraper output]
+The user wants: "find best hotels in Brussels"
+
+What should you do next?
+```
+
+The Brain can now reason: "I have pricing from Booking and rankings from TripAdvisor. I should cross-reference — do the TripAdvisor rankings match the Booking ratings? Let me also check if there's a better deal on Hotels.com before giving my recommendation."
+
+**Source credibility ranking:**
+
+| Source type | Credibility | Example |
+|---|---|---|
+| First-party booking site | High | booking.com, hotels.com, expedia.com |
+| Major review platform | High | tripadvisor.com, yelp.com, google reviews |
+| Official business website | High | hotelamigo.com |
+| News / established media | Medium | nytimes.com, bbc.com travel section |
+| Blog / affiliate site | Low | "top10brusselshotels.com", listicle blogs |
+| Forum / social | Low-Medium | reddit.com, quora.com (useful for real opinions) |
+| Outdated content (>1 year) | Deprioritized | Any page with old publication date |
+
+### 5.6 Memory Brain
 
 ```
 Remembers everything:
@@ -350,19 +591,451 @@ Privacy: Nothing leaves the machine unless the user explicitly shares it
 
 | Method | Speed | Cost per action | Used for |
 |---|---|---|---|
-| Network Brain | 1-5ms | Free (local) | Reading app data, replaying API calls |
-| DOM Brain | 5-50ms | Free (local) | Clicking, typing, reading page content |
+| Network Brain | 1-5ms | Free (local) | Reading app data, replaying API calls, prefetch intelligence |
+| DOM Brain | 5-50ms | Free (local) | Clicking, typing, reading page content, state detection |
+| Page Scraper | 50-100ms | Free (local) | Full page comprehension — structure, content, metadata, data |
+| Research Memory | 1ms | Free (local) | Cross-page comparison, findings persistence, confidence tracking |
 | Memory Brain | 1ms | Free (local) | Recall patterns, preferences |
 | Vision Brain | 3-5 seconds | ~$0.01 | CAPTCHAs, verification, complex visuals |
 | LLM Reasoning | 500ms-2s | ~$0.003 | Deciding WHAT to do (not HOW) |
 
-**95% of actions use Network + DOM Brain (instant, free). LLM is used for thinking, not seeing.**
+**95% of actions use Network + DOM + Page Scraper (instant, free). LLM is used for thinking, not seeing.**
 
 ---
 
-## 6. App System
+## 6. Smart Navigation System
 
-### 6.1 App Container (Sandboxed WebContainer)
+The Smart Navigator controls how the agent moves through web pages — clicking, scrolling, typing, hovering, going back, opening tabs. Every action is designed to be reliable, adaptive, and visually impressive.
+
+### 6.1 Action Types
+
+The agent's full action vocabulary:
+
+| Action | Description | When used |
+|---|---|---|
+| `click(target)` | Click an element by text, selector, or aria-label | Navigating links, pressing buttons, selecting items |
+| `type(target, text)` | Type text character-by-character into an input | Search boxes, forms, chat inputs |
+| `scroll(direction/target)` | Scroll the page or a specific container | Exploring content below the fold, reaching elements |
+| `hover(target)` | Hover over an element to reveal hidden content | Dropdown menus, tooltips, preview cards |
+| `press_key(key)` | Press a keyboard key | Enter to submit, Escape to close, Tab to move focus |
+| `go_back()` | Navigate to the previous page | Leaving unhelpful pages, returning to search results |
+| `navigate(url)` | Go directly to a URL | Direct site access (booking.com), skipping Google |
+| `find_text(query)` | Ctrl+F equivalent — jump to text on the page | Finding specific content on long pages |
+| `open_tab(url)` | Open a link in a background tab for later review | Opening multiple search results to compare |
+| `switch_tab(index)` | Switch to a different open tab | Reviewing tabs opened earlier |
+| `dismiss_popup()` | Close cookie banners, modals, newsletter popups | Clearing obstacles before interacting |
+| `use_filter(name, value)` | Apply a filter or sort option on listing pages | Narrowing results by price, rating, distance |
+| `expand(target)` | Click "Show more", expand accordion, open collapsed section | Revealing hidden content |
+| `select_option(target, value)` | Choose from a dropdown/select element | Forms, filter dropdowns |
+| `right_click(target)` | Open context menu on an element | Accessing secondary actions |
+| `drag(source, destination)` | Drag an element to another location | App Fusion, reordering, file uploads |
+
+### 6.2 Smart Click System
+
+Clicking is the most common action and the most fragile. The current system relies on CSS selectors that break constantly. The Smart Click System uses a priority chain:
+
+```
+Click priority (try each, fall through to next):
+
+1. Text match       → Find element whose visible text matches the target
+                       "Click 'Hotel Amigo'" → finds the link/button with that text
+                       Most reliable. Text rarely changes between page loads.
+
+2. Aria-label match → Find element with matching aria-label attribute
+                       "Click the search button" → finds [aria-label="Search"]
+                       Stable across UI redesigns.
+
+3. data-testid      → Find element with matching data-testid or data-qa
+                       Most stable for apps that use testing attributes.
+
+4. Role + context   → Find element by ARIA role near specific text
+                       "Click the button near 'Check availability'"
+                       Handles cases where the button itself has no text.
+
+5. CSS selector     → Direct CSS selector as last resort
+                       Only used when the LLM returns a specific selector.
+                       Most fragile — breaks on CSS class changes.
+
+6. Position fallback → Click at coordinates relative to a known landmark
+                       Emergency fallback. Used < 1% of actions.
+```
+
+**Text-based clicking example:**
+
+```
+LLM says: click("Hotel Amigo")
+
+Bridge.js:
+  1. querySelectorAll('a, button, [role="button"], [role="link"]')
+  2. For each: does .textContent.trim() contain "Hotel Amigo"?
+  3. Found: <a href="/hotel/amigo">Hotel Amigo — Luxury 5-Star</a>
+  4. Click it with full event sequence
+
+Much more reliable than: click(".sr-card__name > a.hotel-name-link:nth-child(1)")
+```
+
+### 6.3 Reactive Wait System
+
+No more fixed wait times. The agent waits for the page to respond, not for a timer.
+
+```
+CURRENT (fixed timers):
+  click() → wait 2000ms → read page → maybe it loaded, maybe not
+
+NEW (reactive):
+  click() → start watching for:
+    ├── URL changed? (navigation)
+    ├── MutationObserver: new elements added to DOM? (content loaded)
+    ├── Network requests completed? (API responses finished)
+    ├── Performance Observer: LCP fired? (main content rendered)
+    ├── CSS transitions ended? (animations finished)
+    └── aria-busy changed to false? (loading indicator removed)
+  → First signal that matches = page is ready
+  → Maximum wait: 10 seconds (timeout fallback)
+  → Average wait: 200-800ms (much faster than fixed 2000ms)
+```
+
+**How it works in bridge.js:**
+
+```javascript
+// After every action, bridge.js watches for completion:
+function waitForPageSettle() {
+  return new Promise(resolve => {
+    let settled = false
+
+    // Watch for DOM mutations (new content)
+    const observer = new MutationObserver(mutations => {
+      if (mutations.some(m => m.addedNodes.length > 0)) {
+        debounce(() => { settled = true; resolve('dom_changed') }, 300)
+      }
+    })
+    observer.observe(document.body, { childList: true, subtree: true })
+
+    // Watch for network idle
+    const perfObserver = new PerformanceObserver(list => {
+      for (const entry of list.getEntries()) {
+        if (entry.entryType === 'largest-contentful-paint') {
+          settled = true; resolve('lcp_fired')
+        }
+      }
+    })
+    perfObserver.observe({ entryTypes: ['largest-contentful-paint'] })
+
+    // Watch for URL change (navigation)
+    const originalUrl = location.href
+    const urlCheck = setInterval(() => {
+      if (location.href !== originalUrl) { settled = true; resolve('url_changed') }
+    }, 50)
+
+    // Timeout fallback
+    setTimeout(() => { if (!settled) resolve('timeout') }, 10000)
+  })
+}
+```
+
+### 6.4 Popup & Obstacle Dismissal
+
+Before the agent can interact with a page, it often needs to dismiss obstacles:
+
+| Obstacle | Detection | Dismissal |
+|---|---|---|
+| Cookie consent banner | Elements with text "Accept", "Cookie", "Consent"; `z-index > 1000` | Click "Accept" or "Accept all" button |
+| Newsletter popup | `role="dialog"` or modal overlay appearing after delay | Click close button (✕), or press Escape |
+| Login wall | Form with email/password fields blocking content | Go back, try a different source |
+| Chat widget | Fixed-position element in bottom-right, typically iframe | Click minimize/close |
+| Notification prompt | Browser permission dialog | Dismiss via Electron API |
+| GDPR overlay | Full-screen overlay with privacy text | Click "Accept" or "Reject all" |
+| Paywall | Content truncated with "Subscribe to read more" | Go back, try a different source |
+
+The agent dismisses obstacles automatically before attempting any other action on the page.
+
+### 6.5 Smart Search Behavior
+
+When the agent needs to search, it doesn't just type the user's words into Google:
+
+**Query refinement:**
+```
+User says: "find best hotels in brussels"
+
+Agent's search strategy:
+  Search 1: "best hotels brussels 2026" (add year for fresh results)
+  Search 2: "brussels hotels booking.com" (target reliable source)
+  Search 3: "brussels boutique hotels city center" (refine based on findings)
+```
+
+**Search operator usage:**
+- `site:booking.com hotels brussels` — search within a specific site
+- `"Hotel Amigo" brussels reviews` — exact match for cross-referencing
+- `hotels brussels -pinterest -tiktok` — exclude noise sites
+
+**Direct navigation:**
+For well-known sites, skip Google entirely:
+- User says "check booking.com" → `navigate("https://booking.com")`
+- User says "search on tripadvisor" → `navigate("https://tripadvisor.com/Hotels-Brussels")`
+
+**Search results intelligence:**
+- Read titles AND snippets before clicking (snippets often contain the answer)
+- Skip ads — detect "Sponsored" labels, ad containers, tracking URLs
+- Prioritize first-party results over aggregators
+- Check URLs before clicking — `/hotel/` = detail page, `/search` = listing page
+
+### 6.6 Content Discovery
+
+The agent proactively discovers hidden content:
+
+| Pattern | Detection | Action |
+|---|---|---|
+| Below the fold | Intersection Observer: more content exists below viewport | Scroll down to see it |
+| Lazy loading | Scroll triggers new content (infinite scroll) | Scroll to trigger, then read |
+| "Show more" buttons | Button/link with text "Show more", "Load more", "See all" | Click to expand |
+| Collapsed sections | `aria-expanded="false"`, accordion patterns, `+` icons | Click to expand |
+| Tabbed content | `role="tab"`, tab panels with hidden sections | Click tabs to see each section |
+| Pagination | Page numbers, "Next" button, `rel="next"` | Navigate to additional pages if needed |
+| Dropdown menus | `aria-haspopup="true"`, hover-triggered content | Hover to reveal options |
+| Filters not applied | Filter controls with default values | Apply relevant filters to narrow results |
+
+### 6.7 Form Intelligence
+
+When the agent encounters forms, it understands them as a unit — not individual fields:
+
+**Form type recognition:**
+
+| Form type | Detection | Behavior |
+|---|---|---|
+| Search form | Single text input + submit; `role="search"` | Type query, press Enter |
+| Login form | Email/username + password + submit | Detect login wall, go back if not authorized |
+| Multi-step form | Multiple pages/sections; progress indicator; "Next" button | Fill current section, advance, fill next |
+| Filter form | Checkboxes, dropdowns, range sliders; no submit (auto-apply) | Select relevant filters, wait for results to update |
+| Checkout form | Payment fields, `autocomplete="cc-number"` | Requires user approval before filling |
+| Contact form | Name, email, message fields | Fill if instructed by user |
+
+**Form field mapping:**
+The agent reads `autocomplete` attributes and `<label>` elements to understand what each field expects:
+- `autocomplete="email"` → email address
+- `autocomplete="given-name"` → first name
+- `<label for="checkin">Check-in date</label>` → date picker for arrival
+
+### 6.8 Navigation History
+
+The agent maintains a navigation history within each task — not just URLs visited, but what was found and whether it was useful:
+
+```
+Navigation history for "find best hotels in Brussels":
+
+  1. google.com/search?q=best+hotels+brussels+2026
+     → useful: yes (found booking.com and tripadvisor links)
+     → extracted: nothing yet, just identified promising results
+
+  2. booking.com/searchresults?city=Brussels
+     → useful: yes
+     → extracted: Hotel Amigo €210 (9.1), NH Collection €168 (8.7), Hotel Bloom €145 (8.3)
+
+  3. randomtravelblog.com/brussels-hotels
+     → useful: no (outdated content from 2019, affiliate links)
+     → action: went back after 3 seconds
+
+  4. tripadvisor.com/Hotels-Brussels
+     → useful: yes
+     → extracted: Hotel Amigo ranked #3, 2847 reviews, mostly positive
+
+  Current: Deciding whether to check one more source or synthesize findings
+```
+
+This history feeds into the ActionDecider so the agent never revisits useless pages and always knows where it's been.
+
+---
+
+## 7. Visual Performance System
+
+The Visual Performance System controls how the agent's actions look to the user. Every click, scroll, type, and pause is animated to look like a smart human working. This is not cosmetic — the visual behavior IS the intelligence made visible.
+
+### 7.1 Cursor Movement
+
+The cursor moves in human-like curves, not straight lines:
+
+```
+Straight (robotic):     A ───────────────────→ B
+
+Human (Maia):           A ~~→ ~~~→ ~~~~→ ~~→ B
+                          (accelerate, slight arc, overshoot, settle)
+```
+
+**Cursor movement uses cubic bezier curves with:**
+- Acceleration from rest (slow start)
+- Slight arc (not perfectly straight — humans don't move in straight lines)
+- Micro-overshoot at the target (2-4px past, then correct back)
+- Variable speed based on distance (short = 200ms, medium = 350ms, long = 500ms)
+
+### 7.2 Variable Speed by Intent
+
+The cursor speed changes based on what the agent is doing:
+
+| Intent | Speed | Behavior |
+|---|---|---|
+| Going to a known target (search box, back button) | Fast, direct | The agent knows exactly where to go |
+| Scanning search results | Slow, drifting downward | Reading each result, pausing on promising ones |
+| Choosing a result to click | Medium, decisive | Made a decision, moving with purpose |
+| Skipping an ad | Quick veer away | Briefly moves toward it, then deliberately avoids it |
+| Reading article content | Slow horizontal tracking | Following the text like eyes reading |
+| Going back (disappointed) | Quick flick to back button | "This page wasn't useful" |
+
+### 7.3 Gaze Simulation
+
+Before clicking a search result, the cursor drifts over the results list — pausing on each one briefly:
+
+```
+Search results:
+  1. Hotel Amigo — Booking.com          ← cursor pauses 400ms (reading)
+  2. Brussels Hotels — TripAdvisor       ← cursor pauses 300ms (reading)
+  3. 10 Best Hotels — Random Blog        ← cursor passes quickly (skipping)
+  4. NH Collection — Booking.com         ← cursor pauses 200ms (noting)
+  ↓
+  Cursor moves decisively to result #1   ← chose the best one
+```
+
+The user sees: "it considered all the options and picked the best one."
+
+### 7.4 Typing Animation
+
+Typing appears character-by-character at variable speed:
+
+```
+"best hotels in brussels"
+
+b [70ms] e [55ms] s [80ms] t [60ms]   [50ms]
+h [65ms] o [75ms] t [55ms] e [60ms] l [70ms] s [55ms]   [50ms]
+i [60ms] n [50ms]   [pause 180ms — thinking]
+b [70ms] r [60ms] u [80ms] s [55ms] s [65ms] e [70ms] l [55ms] s [60ms]
+```
+
+**Typing personality:**
+- Variable per-character delay (50-100ms, randomized)
+- Slightly longer pauses before proper nouns and numbers
+- Occasional 150-250ms thinking pause mid-word
+- Speed increases for common words ("the", "in", "of")
+
+### 7.5 Element Glow
+
+Before clicking any element, it gets a subtle blue glow for 300ms:
+
+```
+Timeline of a click:
+  0ms:     Cursor arrives at element
+  0-300ms: Element gets 2px blue (#3B82F6) outline glow (recognition)
+  300ms:   Click event dispatched
+  300-700ms: Ripple animation expands from click point (confirmation)
+  700ms:   Done — page reaction begins
+```
+
+Two distinct visual phases: **recognition** (I see this element) → **action** (I'm clicking it). The user sees intentionality, not random clicking.
+
+### 7.6 Progressive Highlighting
+
+When the agent finds important information on a page, highlights appear progressively as the scan line passes over them — like watching someone use a highlighter:
+
+```
+Timeline on a hotel listing page:
+  0ms:      Scan line starts at top of page
+  800ms:    Scan line reaches "€210/night" → price glows yellow
+  1200ms:   Scan line reaches "9.1 Wonderful" → rating glows yellow
+  1600ms:   Scan line reaches "Grand Place" → location glows yellow
+  2000ms:   Scan line reaches bottom, fades out
+  
+  Three key facts highlighted — user sees exactly what the agent noticed
+```
+
+### 7.7 Scroll With Purpose
+
+Scrolling behavior changes based on what the agent is looking for:
+
+| Scroll type | Behavior |
+|---|---|
+| Exploring | Smooth, medium speed, pauses when passing interesting content |
+| Searching for specific content | Fast scroll, stops abruptly when target found |
+| Reading a page top-to-bottom | Slow, steady, follows the scan line |
+| Skipping to a section | Quick scroll, then slow approach to target |
+| Scrolling back up | Quick — "wait, I need to re-read that" |
+
+### 7.8 Content Extraction Animation
+
+When the agent captures a piece of data for Research Memory, show a brief visual:
+
+```
+Agent reads: "€210/night"
+  → Text briefly pulses with a soft blue glow (200ms)
+  → Small "captured" indicator appears (floating ↑ icon)
+  → Fades after 500ms
+  → Team chat shows: "got it — Hotel Amigo €210/night"
+```
+
+### 7.9 Live Comparison Tables
+
+As the agent visits multiple sources, the team chat builds a comparison in real-time:
+
+```
+🔍 Research
+checking booking.com...
+
+  Hotel Amigo     ★ 9.1  €210/night  📍 Grand Place
+  NH Collection   ★ 8.7  €168/night  📍 Central Station
+
+🔍 Research
+now checking tripadvisor for reviews...
+
+  Hotel Amigo     ★ 9.1  €210/night  📍 Grand Place    #3 on TripAdvisor
+  NH Collection   ★ 8.7  €168/night  📍 Central Station
+  Hotel Bloom     ★ 8.3  €145/night  📍 Botanical Garden
+
+🔍 Research
+ok here's my recommendation across 3 sites:
+
+  🏆 Hotel Amigo — €210/night
+     9.1 on Booking, ranked #3 on TripAdvisor, 2847 reviews
+     right on Grand Place, luxury 5-star. only downside: no pool
+
+  💰 NH Collection — €168/night
+     8.7 rating, near Central Station, great breakfast included
+     best value pick
+
+  🎨 Hotel Bloom — €145/night
+     cheapest option, modern artsy design, slightly further from center
+
+want me to check availability for specific dates?
+```
+
+### 7.10 Confidence Signals
+
+The agent expresses confidence in its findings through team chat:
+
+```
+High confidence:
+  "booking.com and tripadvisor both agree Hotel Amigo is top-rated
+   and the price is consistent across sites — pretty confident in this one"
+
+Low confidence:
+  "only found this hotel on one blog, let me verify on a proper booking site"
+
+Research incomplete:
+  "checked 2 sites so far, want me to look at one more before deciding?"
+```
+
+### 7.11 Back Navigation With Reasoning
+
+When the agent goes back, the team chat explains why:
+
+```
+"this page is mostly ads and affiliate links, going back to try tripadvisor"
+"outdated — last updated 2019, let me find something more recent"
+"paywall — can't read the full article, trying another source"
+```
+
+The user sees the agent making intelligent decisions, not just randomly clicking around.
+
+---
+
+## 8. App System
+
+### 8.1 App Container (Sandboxed WebContainer)
 
 Each installed app runs in its own **isolated sandbox** — a separate Electron BrowserView with its own process, storage, and network.
 
@@ -390,7 +1063,7 @@ Sandbox rules:
 - **Privacy** — each app's data is encrypted separately on disk
 - **Clean** — uninstalling an app removes everything, no leftover data
 
-### 6.2 App Manifest
+### 8.2 App Manifest
 
 Every app in the Maia App Store has a manifest:
 
@@ -418,7 +1091,7 @@ ai_description: >
   Extract data from emails. Reply automatically.
 ```
 
-### 6.3 App Lifecycle
+### 8.3 App Lifecycle
 
 ```
 Install:   Create container → load URL → user signs in → persist session → register
@@ -427,7 +1100,7 @@ Close:     Hide window → keep container alive (for Ghost Mode and notification
 Uninstall: Destroy container → delete session data → remove from registry
 ```
 
-### 6.4 Cross-App Data Flow (App Fusion)
+### 8.4 Cross-App Data Flow (App Fusion)
 
 ```
 Source App (e.g., Gmail)
@@ -451,9 +1124,9 @@ Target App (e.g., Sheets)
 
 ---
 
-## 7. Brain & Orchestrator
+## 9. Brain & Orchestrator
 
-### 7.1 Brain
+### 9.1 Brain
 
 The Brain is the AI reasoning engine. It decides WHAT to do. The Intelligence Layer handles HOW to do it.
 
@@ -477,7 +1150,7 @@ Total time: 15-30 seconds for a task that would take a human 5 minutes
 
 **Key difference from other agents:** The Brain calls the LLM for THINKING (text-based, cheap, fast). It does NOT call the LLM for SEEING (vision-based, expensive, slow). The Intelligence Layer provides structured text data instead of screenshots.
 
-### 7.2 Orchestrator (Phase 2)
+### 9.2 Orchestrator (Phase 2)
 
 For complex tasks, the Orchestrator decomposes the task and coordinates multiple parallel operations.
 
@@ -494,7 +1167,7 @@ Orchestrator:
   Results are combined and presented in the chat sidebar.
 ```
 
-### 7.3 LLM Provider Abstraction
+### 9.3 LLM Provider Abstraction
 
 Provider-agnostic. Start with OpenAI, swap providers without changing code.
 
@@ -505,7 +1178,41 @@ Cost tracking: Every call logged with token count and cost
 Budget guardrails: Auto-pause at 80% of budget, hard stop at 100%
 ```
 
-### 7.4 Self-Healing
+### 9.4 Adaptive Browsing Loop
+
+The Brain no longer follows a rigid step-by-step plan. Instead, it operates in an adaptive research loop:
+
+```
+Traditional (rigid plan):
+  Step 1: Search Google → Step 2: Click result → Step 3: Read → Step 4: Report
+  Problem: Can't backtrack, can't refine, can't explore
+
+Adaptive loop:
+  LOOP:
+    1. What do I know? (read Research Memory)
+    2. What do I see? (read Page Scraper output)
+    3. What do I still need? (compare knowledge vs user's goal)
+    4. What should I do next? (choose from full action vocabulary)
+       → Search with better terms?
+       → Click into a result to read more?
+       → Go back because this page is useless?
+       → Scroll down to see more options?
+       → Use filters to narrow results?
+       → I have enough — synthesize and share findings?
+    5. Do it → observe result → back to step 1
+  UNTIL: confident enough to answer, or user intervenes
+```
+
+The TaskPlanner still creates an initial plan for structure, but the Brain can deviate from it at any time. The plan is a guide, not a script.
+
+**Decision factors:**
+- Research Memory completeness — "Do I have enough data to compare?"
+- Source diversity — "I've only checked one site, should I verify elsewhere?"
+- Confidence level — "All sources agree → high confidence → ready to report"
+- Time spent — "I've been researching for 30 seconds, should I wrap up?"
+- User patience — "The user is watching, I should share progress updates"
+
+### 9.5 Self-Healing
 
 When an action fails, the Brain doesn't retry blindly:
 
@@ -519,22 +1226,22 @@ When an action fails, the Brain doesn't retry blindly:
 
 ---
 
-## 8. Theatre (The Desktop Environment)
+## 10. Theatre (The Desktop Environment)
 
 Theatre is the desktop environment of Maia Computer. It includes the home screen, app windows with split-screen support, dock, spotlight, spaces, and command bar. The Team Chat is a full app — not a sidebar.
 
-### 8.1 Home Screen
+### 10.1 Home Screen
 
 The default view when no app is open. Shows installed apps and the command input.
 
-### 8.2 App Windows
+### 10.2 App Windows
 
 Each open app gets a window with:
 - Title bar (app icon, name, window controls: minimize, maximize, close)
 - App content (the real web app in a webview, sandboxed)
 - Command bar at the bottom (type commands for this specific app)
 
-### 8.3 Window Management (Split Screen)
+### 10.3 Window Management (Split Screen)
 
 Apps snap into position like Windows/macOS split view. Multiple apps run side-by-side. Users drag windows to edges or use keyboard shortcuts.
 
@@ -584,7 +1291,7 @@ Apps snap into position like Windows/macOS split view. Multiple apps run side-by
 | Top edge center | Maximize |
 | Double-click title bar | Toggle maximize/restore |
 
-### 8.4 Team Chat (Full App)
+### 10.4 Team Chat (Full App)
 
 Team Chat is a full app — it has its own icon in the dock, its own window, and can be snapped alongside other apps. It is NOT a sidebar.
 
@@ -608,7 +1315,7 @@ Team Chat is a full app — it has its own icon in the dock, its own window, and
 
 **Typical split:** User works in Gmail (left 70%) with Team Chat snapped right (30%). Agents discuss in the chat while the user reads emails.
 
-### 8.5 Dock
+### 10.5 Dock
 
 macOS-style dock at the bottom. Auto-hides — appears when the user hovers at the bottom edge.
 
@@ -642,7 +1349,7 @@ macOS-style dock at the bottom. Auto-hides — appears when the user hovers at t
 - Right-click: Pin / Unpin / Close / App Info
 - Drag icons to reorder pinned section
 
-### 8.6 Spotlight AI
+### 10.6 Spotlight AI
 
 Cmd+Space opens a universal search bar overlay. Searches across all installed apps using the Intelligence Layer.
 
@@ -668,7 +1375,7 @@ Cmd+Space opens a universal search bar overlay. Searches across all installed ap
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-### 8.7 Spaces
+### 10.7 Spaces
 
 Top bar shows available spaces. Click to switch. Each space has its own apps, sessions, and AI context.
 
@@ -680,11 +1387,11 @@ Top bar shows available spaces. Click to switch. Each space has its own apps, se
 
 Switching spaces changes: which apps are visible, which accounts are active, what the AI knows about the context.
 
-### 8.8 Picture-in-Picture
+### 10.8 Picture-in-Picture
 
 When AI is working in one app and the user is working in another, a small floating window shows the AI's activity. User can glance, expand, or dismiss.
 
-### 8.9 Command Bar
+### 10.9 Command Bar
 
 Present at the bottom of every app window. The user types natural language commands specific to the current app:
 
@@ -697,13 +1404,13 @@ In Chat:    💬 "Book the ANA flight, use my Amex"
 
 ---
 
-## 9. Team Communication
+## 11. Team Communication
 
-### 9.1 Chat Sidebar
+### 11.1 Chat Sidebar
 
 The chat sidebar shows all AI activity — what it's thinking, what it's doing, what it needs. The user and AI communicate here like teammates.
 
-### 9.2 Message Structure
+### 11.2 Message Structure
 
 ```
 {
@@ -716,11 +1423,11 @@ The chat sidebar shows all AI activity — what it's thinking, what it's doing, 
 }
 ```
 
-### 9.3 Agent Personalities (Phase 2)
+### 11.3 Agent Personalities (Phase 2)
 
 In multi-agent mode, different agents have different roles and priorities. They discuss, challenge each other, and collaborate — visible in the chat sidebar.
 
-### 9.4 Graduated Human Control
+### 11.4 Graduated Human Control
 
 | Level | Name | Behavior |
 |---|---|---|
@@ -733,7 +1440,7 @@ In multi-agent mode, different agents have different roles and priorities. They 
 
 ---
 
-## 10. Tech Stack
+## 12. Tech Stack
 
 ### Desktop App
 
@@ -761,7 +1468,7 @@ Electron gives us everything we need:
 
 ---
 
-## 11. Product Phases
+## 13. Product Phases
 
 ### Phase 1 — The Computer (MVP)
 
@@ -833,7 +1540,7 @@ Open it up.
 
 ---
 
-## 12. Key Differentiators
+## 14. Key Differentiators
 
 ### What exists today vs. what Maia builds
 

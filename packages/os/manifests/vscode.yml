@@ -1,6 +1,131 @@
 name: VS Code Web
 id: vscode-web
-icon: "https://www.google.com/s2/favicons?domain=vscode.dev&sz=128"
+icon: "./icon/vscode.svg"
 url: https://vscode.dev
 category: developer
 ai_description: "Code editor in the browser. Edit files, install extensions, use terminal."
+help_url: "https://code.visualstudio.com/docs"
+
+navigation:
+  overview: >
+    VS Code Web (vscode.dev) is a full browser-based version of Visual Studio Code. It provides
+    the same editor experience as the desktop app: file explorer, multi-tab editing, integrated
+    search, source control, extensions, command palette, and keyboard shortcuts. Note that
+    vscode.dev has no terminal — use github.dev (which adds terminal support via Codespaces).
+
+  pages:
+    editor:
+      description: "The main interface with activity bar, sidebar, editor area, panel, and status bar."
+      layout:
+        - "Far left: Activity Bar — vertical icon strip (Explorer, Search, Source Control, Run/Debug, Extensions, plus installed extension icons)"
+        - "Left panel: Sidebar — content changes based on active Activity Bar icon"
+        - "Center: Editor area — open file tabs at top, code below with line numbers and minimap on right"
+        - "Bottom panel (toggle with Cmd+J): Terminal, Output, Problems, Debug Console"
+        - "Bottom: Status Bar — branch name, errors/warnings count, line:column, language mode, encoding, spaces/tabs, notifications"
+      activity_bar:
+        icons:
+          explorer: "File icon (top) — opens file tree sidebar"
+          search: "Magnifying glass — opens find-in-files"
+          source_control: "Branch icon — shows Git changes, staging, commit"
+          run_debug: "Play+bug icon — debug configurations and launch"
+          extensions: "Squares icon — search and install extensions"
+        behavior: "Click an icon to open its sidebar panel. Click the same icon again to toggle the sidebar closed."
+      explorer_sidebar:
+        behavior: "Shows the directory tree of the open project. Click files to open in editor. Right-click for context menu (New File, New Folder, Rename, Delete). Drag files to reorder or move."
+        sections:
+          - "OPEN EDITORS: list of currently open file tabs"
+          - "PROJECT NAME: the file tree"
+          - "OUTLINE: shows symbols/headings in the active file"
+          - "TIMELINE: shows git history for the active file"
+      editor_area:
+        behavior: "Tabbed interface. Click tabs to switch files. Drag tabs to reorder. Right-click tab for Close, Close Others, Close All, Split. Middle-click to close. Unsaved files show a dot on the tab."
+        minimap: "Scrollable thumbnail of the entire file on the right edge. Click to jump to a section. Can be hidden via View > Minimap."
+        breadcrumbs: "Path breadcrumb bar above the code showing file path and symbol hierarchy. Click any segment to navigate."
+      status_bar:
+        behavior: "Bottom bar shows current branch (click to switch), errors/warnings count (click to open Problems panel), cursor position (Ln:Col), language mode (click to change), encoding, indentation."
+
+    command_palette:
+      shortcut: "Cmd+Shift+P (Ctrl+Shift+P)"
+      description: "The most powerful feature — access every command in VS Code."
+      behavior: "Opens a searchable list of all available commands. Type to filter. Commands show their keyboard shortcuts on the right. Prefix with '>' for commands (default), '@' for symbols in file, '#' for symbols in workspace, ':' for go to line."
+
+    quick_open:
+      shortcut: "Cmd+P (Ctrl+P)"
+      description: "Fast file switcher by fuzzy name matching."
+      behavior: "Type partial filename to find any file in the project. Results ranked by recency and match quality. Press Enter to open. Press Cmd+Enter to open in a split editor."
+
+    search_panel:
+      shortcut: "Cmd+Shift+F (Ctrl+Shift+F)"
+      description: "Find and replace across all files in the project."
+      layout:
+        - "Search input with regex toggle, case-sensitive toggle, whole-word toggle"
+        - "Replace input (expand with arrow)"
+        - "Files to include/exclude filters"
+        - "Results grouped by file with line previews"
+      behavior: "Type to search. Results update live. Click a result to jump to that file and line. Use the replace field for find-and-replace across the project."
+
+    source_control:
+      shortcut: "Ctrl+Shift+G"
+      description: "Git integration panel for staging, committing, and viewing diffs."
+      layout:
+        - "Top: commit message input with Commit button"
+        - "Changes section: list of modified files with status icons (M modified, U untracked, D deleted)"
+      behavior: "Click a file to see its diff. Click '+' next to a file to stage it. Type a commit message and click the checkmark to commit. Pull/Push via the '...' menu."
+
+    settings:
+      shortcut: "Cmd+, (Ctrl+,)"
+      description: "Editor settings with search, categorized options, and JSON view."
+      behavior: "Search for any setting by name. Toggle between UI view and JSON view. User settings apply globally, Workspace settings apply to the current project only."
+
+  workflows:
+    open_and_edit:
+      - "Open vscode.dev or github.dev/{owner}/{repo}"
+      - "Use Explorer sidebar to navigate the file tree"
+      - "Click a file to open it in the editor"
+      - "Edit code — changes are tracked in Source Control"
+      - "Save with Cmd+S"
+
+    find_and_replace_across_files:
+      - "Press Cmd+Shift+F to open Search"
+      - "Type the search term"
+      - "Click the arrow to expand Replace input"
+      - "Type the replacement"
+      - "Click replace icons next to individual results, or 'Replace All'"
+
+    multi_cursor_editing:
+      - "Place cursor on a word"
+      - "Press Cmd+D to select the next occurrence (repeat for more)"
+      - "Type to edit all selections simultaneously"
+      - "Or: Alt+Click to place cursors at arbitrary positions"
+
+    split_view:
+      - "Right-click a tab and choose 'Split Right' or 'Split Down'"
+      - "Or drag a tab to the edge of the editor area"
+      - "View two files side by side for comparison"
+
+  keyboard_shortcuts:
+    - "Cmd+Shift+P — Command Palette (access any command)"
+    - "Cmd+P — Quick Open (fuzzy file search)"
+    - "Cmd+Shift+F — Find in files"
+    - "Cmd+B — Toggle sidebar visibility"
+    - "Cmd+J — Toggle bottom panel"
+    - "Cmd+, — Open Settings"
+    - "Cmd+D — Select next occurrence of current word"
+    - "Cmd+Shift+L — Select all occurrences of current word"
+    - "Alt+Up/Down — Move line up/down"
+    - "Cmd+Shift+K — Delete entire line"
+    - "Cmd+/ — Toggle line comment"
+    - "Cmd+Shift+[ — Fold code block"
+    - "Cmd+Shift+] — Unfold code block"
+    - "Ctrl+` — Toggle terminal (desktop/github.dev only)"
+    - "Cmd+\\ — Split editor"
+
+  tips:
+    - "Cmd+P (Quick Open) is the fastest way to open files — type partial names for fuzzy matching"
+    - "Cmd+Shift+P (Command Palette) gives access to every editor command — learn this first"
+    - "github.dev adds terminal support via Codespaces — vscode.dev does not have a terminal"
+    - "Type '@' in Quick Open to jump to symbols in the current file, '#' for workspace symbols"
+    - "Extensions can be installed for language support, themes, linters, and formatters"
+    - "Cmd+D for multi-cursor select is one of the most powerful editing features — select word, press Cmd+D repeatedly to select more occurrences, then type to replace all at once"
+    - "The Problems panel (Cmd+Shift+M) shows all errors and warnings across the project"
+    - "Use Cmd+K Cmd+S to open Keyboard Shortcuts and customize any binding"

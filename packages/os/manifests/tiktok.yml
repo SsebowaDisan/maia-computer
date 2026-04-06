@@ -4,3 +4,120 @@ icon: "https://www.google.com/s2/favicons?domain=tiktok.com&sz=128"
 url: https://www.tiktok.com
 category: social
 ai_description: "Watch and discover short videos. Browse trending content."
+help_url: "https://support.tiktok.com"
+
+navigation:
+  overview: >
+    TikTok is a short-form video platform where videos play one at a time in a vertical feed.
+    The algorithm-driven For You page is the core experience, showing personalized recommendations.
+    Content ranges from 15 seconds to 10 minutes. Features include duets, stitches, live streams,
+    TikTok Shop, and a powerful search/discover system.
+
+  pages:
+    for_you:
+      description: "The main feed showing algorithmically recommended videos one at a time."
+      layout:
+        - "Left sidebar: For You, Following, Explore, LIVE, Profile, suggested accounts, trending hashtags, footer links"
+        - "Center: video player showing one video at a time (vertical format)"
+        - "Right side of video: profile avatar (+follow), heart (like), comment bubble, bookmark, share arrow, spinning disc (audio)"
+        - "Bottom of video: @username, caption text, #hashtags, audio track name with music note icon"
+        - "Top-right: search icon (magnifying glass)"
+      video_feed:
+        behavior: "Videos auto-play with sound. Scroll down (mouse wheel or down arrow) for next video. Scroll up for previous. Click the video to pause/resume. Videos loop automatically. The algorithm adjusts recommendations based on watch time, likes, shares, and completion rate."
+      engagement_buttons:
+        like: "Heart icon — click to like, tap again to unlike. Like count shown below."
+        comment: "Speech bubble — opens comment panel from the right side. Shows comments sorted by Top or Newest. Reply to comments with text or video."
+        bookmark: "Flag icon — save video to your Favorites collection for later viewing."
+        share: "Arrow icon — opens share sheet: copy link, send to friends, share to other platforms. Embed option available."
+        audio_disc: "Spinning disc at bottom-right — click to see all videos using this sound."
+      creator_info:
+        behavior: "Click the @username or avatar to visit the creator's profile. Click the + icon on the avatar to follow. Caption may contain #hashtags (clickable) and @mentions."
+
+    following:
+      description: "Feed showing videos only from accounts you follow."
+      behavior: "Click 'Following' in the left sidebar. Shows a chronological (not algorithmic) feed from followed creators. Same video interaction as For You page."
+
+    explore:
+      description: "Discovery page with trending topics, sounds, and hashtags."
+      url_pattern: "tiktok.com/explore"
+      layout:
+        - "Top: search bar"
+        - "Categories: trending hashtags, popular sounds, trending effects"
+        - "Below: curated content grids organized by topic"
+      behavior: "Browse trending content by category. Click any hashtag to see all videos with that tag. Click a sound to see all videos using it."
+
+    search:
+      description: "Search results page with multi-tab filtering."
+      url_pattern: "tiktok.com/search?q=your+query"
+      layout:
+        - "Top: search bar with query"
+        - "Tabs: Top, Users, Videos, Sounds, LIVE, Hashtags"
+        - "Filter options: date range, sort by relevance/likes/date"
+      behavior: "Type query in search bar, press Enter. Top shows mixed results. Users shows creator profiles. Videos shows matching content. Sounds shows audio tracks. LIVE shows active livestreams. Hashtags shows related tags with view counts."
+
+    profile:
+      description: "A creator's profile page with their video grid."
+      url_pattern: "tiktok.com/@username"
+      layout:
+        - "Top: profile photo, @username, display name, bio, link"
+        - "Stats: Following count, Followers count, Total Likes count"
+        - "Buttons: Follow, Message (if enabled), three dots"
+        - "Tabs: Videos, Favorites (if public), Liked (if public), Reposts"
+        - "Below: grid of video thumbnails with view counts"
+      behavior: "Click any video thumbnail to play it. Videos open in the same vertical scroll interface. Follow button subscribes to their content in the Following feed."
+
+    live:
+      description: "Live streaming section."
+      url_pattern: "tiktok.com/live"
+      behavior: "Click LIVE in the left sidebar. Shows active livestreams. Click to join as a viewer. Send comments, gift virtual items, and follow the creator. Live streams can be filtered by category (Gaming, Music, Daily Life, etc.)."
+
+    video_detail:
+      description: "Full page view of a single video with comments."
+      url_pattern: "tiktok.com/@username/video/VIDEO_ID"
+      layout:
+        - "Left: video player (large)"
+        - "Right: comments section, creator info, engagement stats"
+      behavior: "This view appears when opening a direct link or clicking a video from search/profile. Shows full comment thread, related videos below, and detailed engagement counts."
+
+  workflows:
+    browse_videos:
+      - "The For You page auto-plays videos on load"
+      - "Scroll down for next video, up for previous"
+      - "Like by clicking the heart icon"
+      - "Tap comment icon to read and leave comments"
+      - "Share by clicking the arrow icon"
+
+    search_content:
+      - "Click the search icon (top-right) or the search bar"
+      - "Type a keyword, hashtag, creator name, or sound"
+      - "Browse results by tab: Top, Videos, Users, Sounds"
+      - "Click a video to watch, or a user to visit their profile"
+
+    explore_sounds:
+      - "Click the spinning audio disc on any video"
+      - "See all videos using the same sound"
+      - "Or search for a song/sound name in the search bar"
+      - "Click Sounds tab in results to find specific audio tracks"
+
+    watch_live:
+      - "Click LIVE in the left sidebar"
+      - "Browse active livestreams by category"
+      - "Click to join as a viewer"
+      - "Send comments in the chat, follow the creator"
+
+    save_favorites:
+      - "Click the bookmark icon on any video to save to Favorites"
+      - "Access Favorites from your Profile > Favorites tab"
+      - "Organize into collections by topic"
+
+  tips:
+    - "Videos auto-play with sound — click the video to pause, scroll to move on"
+    - "The For You algorithm learns from watch time — watching a video fully signals interest"
+    - "Following tab shows a chronological feed without algorithmic interference"
+    - "Hashtag pages show all videos with that tag plus the total view count for the hashtag"
+    - "Click the spinning disc (audio) to discover all videos using the same sound"
+    - "Long-press a video for options: not interested, save, add to favorites, share, report"
+    - "TikTok search is increasingly used as a discovery engine — search for how-tos, recipes, reviews"
+    - "Creator profiles show total likes across all videos — a quick quality indicator"
+    - "Comments can be liked and replied to — top comments often add context to the video"
+    - "LIVE streams are browsable by category and show viewer count in real-time"

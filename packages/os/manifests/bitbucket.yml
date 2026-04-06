@@ -4,3 +4,115 @@ icon: "https://www.google.com/s2/favicons?domain=bitbucket.org&sz=128"
 url: https://bitbucket.org
 category: developer
 ai_description: "Git repository hosting. Pull requests, pipelines, and code review."
+help_url: "https://support.atlassian.com/bitbucket-cloud"
+
+navigation:
+  overview: >
+    Bitbucket is Atlassian's Git repository hosting service, deeply integrated with Jira and
+    Trello for project management. Repositories are organized under workspaces (team accounts).
+    It provides pull requests with inline code review, built-in CI/CD via Bitbucket Pipelines,
+    branch permissions, and deployment tracking.
+
+  pages:
+    dashboard:
+      description: "The home page showing recent repositories, pull requests to review, and workspace activity."
+      layout:
+        - "Top nav: Bitbucket logo, Workspaces dropdown, Repositories dropdown, Explore link, search icon, '+' create button, avatar"
+        - "Center: recent repositories list, pull requests you need to review, your recent activity"
+      workspace_dropdown:
+        text: "Workspaces dropdown in top nav"
+        behavior: "Lists all workspaces you belong to. Click one to switch context. Each workspace has its own set of repositories, projects, and members."
+      create_button:
+        text: "'+' button in top nav"
+        behavior: "Quick-create: Repository, Workspace, Project, Snippet, Import repository."
+
+    repository:
+      description: "A repository page with source code, commits, branches, and pull requests."
+      url_pattern: "bitbucket.org/{workspace}/{repo}"
+      layout:
+        - "Left sidebar: Source, Commits, Branches, Pull Requests, Pipelines, Deployments, Downloads, Settings"
+        - "Center: depends on selected view — Source shows file tree with README below"
+        - "Top: repository name, breadcrumb, clone button"
+      source_browser:
+        text: "'Source' in left sidebar"
+        behavior: "File tree with folder/file navigation. Branch selector dropdown at top. Click files to view with syntax highlighting and line numbers. 'Edit' button opens an in-browser editor."
+      commits:
+        text: "'Commits' in left sidebar"
+        behavior: "Commit history with author avatar, message, hash, and timestamp. Click a commit to see the full diff. Filter by branch using the branch selector."
+      branches:
+        text: "'Branches' in left sidebar"
+        behavior: "Lists all branches with last commit, behind/ahead counts relative to main branch, and build status. 'Create branch' button at top. Delete merged branches from here."
+      pull_requests:
+        text: "'Pull Requests' in left sidebar"
+        behavior: "Lists open PRs with title, author, reviewers, approval status, and build status. Tabs: Open, Merged, Declined, Superseded."
+      pipelines:
+        text: "'Pipelines' in left sidebar"
+        behavior: "CI/CD pipeline runs triggered by pushes. Shows step-by-step build output with pass/fail status, duration, and branch. Configured via bitbucket-pipelines.yml in repo root."
+      compare:
+        text: "Compare feature (accessible via Branches or Create PR flow)"
+        behavior: "Select two branches to see the diff between them. Shows files changed, commits, and a full code diff."
+
+    pull_request_detail:
+      description: "A pull request page with description, diff, approvals, and discussion."
+      url_pattern: "bitbucket.org/{workspace}/{repo}/pull-requests/{id}"
+      layout:
+        - "Top: PR title, '#id', Open/Merged/Declined badge, source -> destination branch"
+        - "Tabs: Overview, Diff, Commits, Activity"
+        - "Overview: description, build status, approval status, merge button"
+        - "Diff: side-by-side or unified file diff with inline commenting"
+      diff_tab:
+        behavior: "Shows all changed files. Click a file to expand its diff. Click a line to add an inline comment. Toggle between side-by-side and unified views. 'Viewed' toggle per file."
+      approval:
+        behavior: "Reviewers click 'Approve' to indicate code is ready. Some repos require a minimum number of approvals. 'Request changes' adds a blocker."
+      merge_button:
+        text: "'Merge' button on Overview tab"
+        behavior: "Merges the PR. Strategy options: Merge commit, Squash, Fast-forward. Option to close the source branch after merge. Disabled if approvals or pipeline checks are pending."
+
+    deployments:
+      text: "'Deployments' in left sidebar"
+      behavior: "Shows deployment history across environments (Test, Staging, Production). Each deployment linked to a pipeline run and commit."
+
+  workflows:
+    browse_code:
+      - "Click a repository from the dashboard or workspace"
+      - "Click 'Source' in the left sidebar"
+      - "Navigate folders and click files to view code"
+      - "Use the branch selector dropdown to switch branches"
+
+    create_pull_request:
+      - "Click 'Pull Requests' in the repo sidebar"
+      - "Click 'Create pull request'"
+      - "Select source and destination branches"
+      - "Enter title and description"
+      - "Add reviewers"
+      - "Click 'Create pull request'"
+
+    review_pull_request:
+      - "Open a pull request"
+      - "Read the Overview for context and build status"
+      - "Click 'Diff' tab to review code changes"
+      - "Click on lines to add inline comments"
+      - "Click 'Approve' when satisfied, or 'Request changes'"
+
+    check_pipeline:
+      - "Click 'Pipelines' in the repo sidebar"
+      - "Click a pipeline run to see step-by-step output"
+      - "Failed steps show error logs — click to expand"
+      - "Re-run a pipeline from the pipeline detail page"
+
+  url_patterns:
+    repository: "bitbucket.org/{workspace}/{repo}"
+    source: "bitbucket.org/{workspace}/{repo}/src/{branch}/"
+    file: "bitbucket.org/{workspace}/{repo}/src/{branch}/{path}"
+    pull_requests: "bitbucket.org/{workspace}/{repo}/pull-requests"
+    pipelines: "bitbucket.org/{workspace}/{repo}/pipelines"
+    commits: "bitbucket.org/{workspace}/{repo}/commits/{branch}"
+
+  tips:
+    - "Repositories are organized under workspaces — check the active workspace in the top nav"
+    - "Pipelines run automatically on push when bitbucket-pipelines.yml exists in the repo"
+    - "Branch permissions (Settings > Branch permissions) restrict who can push to specific branches"
+    - "Bitbucket integrates deeply with Jira — mention JIRA-123 in commits to auto-link"
+    - "Snippets are Bitbucket's equivalent of GitHub Gists — shareable code fragments"
+    - "The compare feature shows the exact diff between any two branches before creating a PR"
+    - "Deploy keys and access tokens are managed in Repository Settings > Access keys"

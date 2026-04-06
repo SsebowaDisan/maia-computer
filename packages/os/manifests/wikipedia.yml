@@ -4,3 +4,113 @@ icon: "https://www.google.com/s2/favicons?domain=wikipedia.org&sz=128"
 url: https://www.wikipedia.org
 category: other
 ai_description: "Free encyclopedia. Search and read articles on any topic."
+help_url: "https://en.wikipedia.org/wiki/Help:Contents"
+
+navigation:
+  overview: >
+    Wikipedia is a free multilingual encyclopedia with over 60 million articles across 300+
+    languages. The main portal (wikipedia.org) is a language selection page. The English Wikipedia
+    (en.wikipedia.org) is the largest with 6.8+ million articles. Articles follow a consistent
+    structure: lead section, table of contents, body sections, references, and categories.
+
+  pages:
+    portal:
+      description: "The main wikipedia.org language selection portal."
+      layout:
+        - "Center: Wikipedia globe logo, 'Wikipedia' text, tagline"
+        - "Below logo: top 10 languages arranged in a circle by article count (English, Cebuano, German, Swedish, French, Dutch, Russian, Spanish, Italian, Egyptian Arabic)"
+        - "Below circle: central search box with language dropdown"
+        - "Further below: more language links organized by article count tiers"
+      search_box:
+        behavior: "Type a topic, select language from the dropdown (defaults to English), press Enter. Navigates directly to the article if an exact title match exists, or to search results."
+
+    article:
+      description: "A Wikipedia article page with structured encyclopedic content."
+      url_pattern: "en.wikipedia.org/wiki/Article_Title (spaces become underscores)"
+      layout:
+        - "Top-left: article title (h1), edit/view history tabs"
+        - "Right side (optional): infobox — structured data card with image, key facts, quick reference"
+        - "Below title: lead section — 1-4 summary paragraphs (the most important overview)"
+        - "Below lead: table of contents (collapsible, auto-generated from section headings)"
+        - "Body: sections with h2/h3 headings, paragraphs, images, tables, lists, blockquotes"
+        - "Bottom: See also, References, Further reading, External links, Categories"
+      search_box:
+        selector: "#searchInput"
+        type: "input"
+        behavior: "Located in the top-right or top area (depends on skin). Type a topic, press Enter. Exact title match opens the article directly. Otherwise shows search results. Autocomplete suggestions appear as you type."
+        keyboard: "Alt+Shift+F (most browsers) focuses the search box."
+      table_of_contents:
+        selector: "#toc, .vector-toc"
+        behavior: "Auto-generated from section headings. Each entry is a clickable link that scrolls to that section. Collapsible with toggle button. In the Vector 2022 skin, it appears as a sticky sidebar on the left."
+      infobox:
+        selector: ".infobox"
+        behavior: "Structured data panel on the right side. For people: photo, birth/death dates, nationality, occupation, notable works. For places: map, population, area, coordinates. For companies: logo, industry, founders, revenue. Not all articles have infoboxes."
+      blue_links:
+        behavior: "Blue text links to other Wikipedia articles. Red links indicate articles that don't exist yet. This cross-linking is how you explore related topics. Hovering over a link shows a popup preview (in modern skins) with the first few sentences of the linked article."
+      references:
+        behavior: "Superscript numbers [1] [2] in article text are citation markers. Click to jump to the References section at the bottom. Each reference shows the source (book, journal, website). Click 'back' arrow (^) next to the reference to return to where it was cited."
+      edit_button:
+        behavior: "Click 'Edit' or the pencil icon to edit the article (requires account for some articles). 'View history' shows all past revisions. 'Talk' tab leads to the article's discussion page."
+      language_links:
+        behavior: "In the left sidebar (or under 'Languages' at the top), links to the same article in other languages. Click to read the article in another language."
+      categories:
+        behavior: "At the very bottom of the article. Blue links to category pages that group related articles. Useful for finding articles on related topics."
+
+    search_results:
+      description: "Search results when no exact article title matches."
+      url_pattern: "en.wikipedia.org/w/index.php?search=your+query"
+      layout:
+        - "Top: search input with query, search button"
+        - "Center: list of matching articles — each shows title (link), excerpt with matched terms highlighted, word count, last edit date"
+        - "Sidebar: search filters (Content pages, Multimedia, Help, etc.)"
+      result_item:
+        behavior: "Click the title to open that article. The excerpt shows context around matched terms. Results are ranked by relevance. 'Did you mean' suggestion appears for misspellings."
+
+    special_pages:
+      random_article:
+        url: "en.wikipedia.org/wiki/Special:Random"
+        behavior: "Navigates to a random article. Useful for exploration."
+      main_page:
+        url: "en.wikipedia.org/wiki/Main_Page"
+        behavior: "The English Wikipedia main page. Shows featured article, in the news, on this day, today's featured picture, and did you know sections. Updated daily."
+
+  workflows:
+    search_and_read:
+      - "Navigate to en.wikipedia.org or use the portal search"
+      - "Type your topic in the search box (#searchInput)"
+      - "Press Enter — if an exact title match exists, the article opens directly"
+      - "Otherwise, browse search results and click the most relevant article"
+      - "Start with the lead section for a quick overview"
+      - "Use the table of contents to jump to specific sections of interest"
+
+    deep_research:
+      - "Read the main article on your topic"
+      - "Check the infobox on the right for quick structured facts"
+      - "Follow blue links to explore related concepts"
+      - "Scroll to References at the bottom for primary sources"
+      - "Check 'See also' for closely related articles"
+      - "Browse Categories at the bottom to find articles in the same topic area"
+
+    verify_information:
+      - "Find the claim in the article text"
+      - "Click the superscript citation number [N] next to it"
+      - "Read the reference at the bottom — it shows the source"
+      - "Click the source URL to visit the original publication"
+      - "Check 'View history' to see when the claim was added and by whom"
+
+  url_patterns:
+    article: "en.wikipedia.org/wiki/Article_Title"
+    search: "en.wikipedia.org/w/index.php?search=your+query"
+    random: "en.wikipedia.org/wiki/Special:Random"
+    main_page: "en.wikipedia.org/wiki/Main_Page"
+    other_language: "XX.wikipedia.org/wiki/Article_Title (XX = language code: fr, de, es, ja, etc.)"
+
+  tips:
+    - "The lead section (first paragraphs) is always the most concise summary — read it first"
+    - "URL pattern is predictable: en.wikipedia.org/wiki/Your_Topic (spaces are underscores)"
+    - "Infoboxes provide structured quick-reference data without reading the full article"
+    - "Hover over blue links to see a popup preview of the linked article (Vector 2022 skin)"
+    - "Citation numbers [1][2] link to verifiable sources — check them for detailed evidence"
+    - "The 'View history' tab shows every edit ever made to the article with timestamps"
+    - "Categories at the very bottom group related articles — useful for finding similar topics"
+    - "Some sections may be collapsed — click [show] or [expand] to reveal hidden content"

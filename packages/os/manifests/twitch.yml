@@ -4,3 +4,126 @@ icon: "https://www.google.com/s2/favicons?domain=twitch.tv&sz=128"
 url: https://www.twitch.tv
 category: media
 ai_description: "Watch live streams. Browse gaming, music, and creative content."
+help_url: "https://help.twitch.tv"
+
+navigation:
+  overview: >
+    Twitch is the leading live streaming platform with 7+ million monthly streamers. Primarily
+    gaming but also music, art, cooking, talk shows (Just Chatting), and IRL content. Every stream
+    has a real-time chat alongside the video. The interface has a left sidebar for followed channels,
+    top navigation for browsing and search, and a stream page with video + chat side by side.
+
+  pages:
+    home:
+      description: "Personalized home page with recommended live streams and followed channels."
+      url_pattern: "twitch.tv"
+      layout:
+        - "Top nav: Twitch logo (home), 'Browse' link, search bar (center), 'Get Bits'/'Prime Gaming' buttons, login/profile (right)"
+        - "Left sidebar: Followed Channels list (green dot = currently live, gray = offline), Recommended Channels"
+        - "Center: featured/promoted stream at top, then rows of recommended live streams, categories, and clips"
+      search_bar:
+        selector: "input[type='search'], input[aria-label='Search Input']"
+        behavior: "Click to focus. Type a channel name, game, or keyword. Results appear in a dropdown: Channels, Categories, Tags. Click a result or press Enter to search."
+      followed_sidebar:
+        behavior: "Shows channels you follow. Green dot next to the name means currently live (with viewer count). Channels sorted by live status, then viewer count. Click a channel to start watching. Collapse sidebar by clicking the collapse arrow."
+      stream_card:
+        behavior: "Shows live preview thumbnail (with viewer count overlay), streamer name, game/category name, tags. Red 'LIVE' badge. Hover over the thumbnail to see a live preview with audio. Click to start watching."
+
+    stream_page:
+      description: "Live stream player with chat panel, streamer info, and related streams."
+      url_pattern: "twitch.tv/CHANNEL_NAME"
+      layout:
+        - "Left/Center: video player with live stream"
+        - "Right: chat panel — messages streaming in real time, chat input at bottom"
+        - "Below video: streamer avatar + name, Follow/Subscribe buttons, viewer count, category/game, tags"
+        - "Below that: About panel (bio, schedule, social links), other recommended channels"
+      video_player:
+        behavior: "Shows the live broadcast. Hover for controls: pause (creates delay from live), volume slider, quality selector (160p to source/1080p60), clip button (scissors), theater mode, fullscreen. Click the player to pause/unpause."
+        keyboard_shortcuts:
+          spacebar: "Play/pause"
+          f: "Toggle fullscreen"
+          m: "Mute/unmute"
+          up_arrow: "Volume up"
+          down_arrow: "Volume down"
+          escape: "Exit fullscreen"
+          alt_t: "Theater mode toggle"
+      quality_selector:
+        behavior: "Gear icon in player controls. Options: Auto, Source (highest), 1080p60, 720p60, 480p, 360p, 160p. Auto adjusts based on bandwidth."
+      chat_panel:
+        behavior: "Messages from viewers scroll in real time. Type in the input at the bottom, press Enter to send (requires logged-in Twitch account). Emotes can be typed by name (e.g., Kappa, PogChamp) or selected from the emote picker (smiley face icon). Chat may be emote-only, subscriber-only, or follower-only depending on streamer settings."
+      emote_picker:
+        behavior: "Smiley face icon next to the chat input. Opens a panel with emote categories: Twitch Global, Channel, BetterTTV, FrankerFaceZ (if extensions installed). Click an emote to insert it."
+      follow_button:
+        behavior: "Click 'Follow' to follow the channel. You see the channel in your sidebar when they go live. Heart icon turns filled when following. Bell icon next to it controls notification preferences."
+      subscribe_button:
+        behavior: "Click 'Subscribe' to pay a monthly subscription ($4.99/$9.99/$24.99 tiers). Benefits vary by channel: ad-free viewing, subscriber emotes, badges, subscriber-only chat. Amazon Prime members get one free subscription per month via Prime Gaming."
+      clip_button:
+        behavior: "Scissors icon in the player. Click to capture a 5-60 second clip of the stream. A clip editor opens where you set the start/end points and title. Published clips are shareable via URL."
+      channel_points:
+        behavior: "Points icon below the player (if enabled by streamer). Earn points by watching. Redeem for channel-specific rewards set by the streamer. Click the icon to see available rewards and point balance."
+
+    browse:
+      description: "Category/game browsing directory."
+      url_pattern: "twitch.tv/directory"
+      layout:
+        - "Top: tabs — Categories, Live Channels"
+        - "Below tabs: sort/filter options, tag filters"
+        - "Center: grid of category cards (for Categories) or stream cards (for Live Channels)"
+      category_card:
+        behavior: "Shows game/category cover art, name, viewer count, and tags. Click to see all live streams in that category. Sort by Viewers (High to Low) or newly streaming."
+      tags:
+        behavior: "Colored tag badges on streams and categories (e.g., English, FPS, Competitive, Speedrun). Click a tag to filter all live streams by that tag."
+
+    vods:
+      description: "Past broadcasts and videos for a channel."
+      url_pattern: "twitch.tv/CHANNEL_NAME/videos"
+      layout:
+        - "Tabs: Past Broadcasts, Highlights, Clips"
+        - "Center: grid of video thumbnails with titles, dates, and durations"
+      behavior: "Past Broadcasts are full stream recordings (auto-deleted after 14-60 days depending on subscription status). Highlights are streamer-curated segments. Clips are viewer-created short segments."
+
+  workflows:
+    find_and_watch_stream:
+      - "Check the left sidebar for followed channels with green dots (= live)"
+      - "Or click 'Browse' in the top nav to browse categories"
+      - "Click a category to see all live streams in it"
+      - "Click a stream card to start watching"
+      - "Chat appears on the right — type and press Enter to participate"
+
+    search_channel:
+      - "Click the search bar at the top"
+      - "Type a channel name or game title"
+      - "Click a result from the dropdown"
+      - "If the channel is live, the stream starts playing"
+      - "If offline, you see their page with past broadcasts and info"
+
+    create_clip:
+      - "While watching a stream, click the scissors icon in the player controls"
+      - "A clip editor opens with the last 90 seconds of the stream"
+      - "Drag the selection handles to set the clip start and end (5-60 seconds)"
+      - "Enter a title and click 'Publish'"
+      - "Copy the clip URL to share"
+
+    watch_vod:
+      - "Go to a channel page (twitch.tv/CHANNEL_NAME)"
+      - "Click 'Videos' below the stream/offline screen"
+      - "Select 'Past Broadcasts' tab for full stream recordings"
+      - "Click a video to watch — supports seeking and speed control"
+
+  url_patterns:
+    home: "twitch.tv"
+    channel: "twitch.tv/CHANNEL_NAME"
+    browse: "twitch.tv/directory"
+    category: "twitch.tv/directory/game/GAME_NAME"
+    videos: "twitch.tv/CHANNEL_NAME/videos"
+    clip: "twitch.tv/CHANNEL_NAME/clip/CLIP_SLUG"
+
+  tips:
+    - "Green dots in the sidebar mean a followed channel is live — check there first"
+    - "Theater mode (Alt+T) maximizes the video and minimizes chat — good for viewing"
+    - "Chat emotes are a core part of Twitch culture — Kappa (sarcasm), PogChamp (excitement), LUL (laughter)"
+    - "Quality settings in the gear icon let you lower stream quality on slow connections"
+    - "Clips (scissors icon) capture 5-60 second moments — great for sharing highlights"
+    - "Prime Gaming (Amazon Prime benefit) gives one free channel subscription per month"
+    - "Channel points accumulate while watching — check the streamer's rewards"
+    - "Past broadcasts are available under Videos but may expire after 14-60 days"

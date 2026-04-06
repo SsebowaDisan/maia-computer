@@ -4,3 +4,62 @@ icon: "https://www.google.com/s2/favicons?domain=udemy.com&sz=128"
 url: https://www.udemy.com
 category: other
 ai_description: "Online courses marketplace. Learn programming, design, business, and more."
+
+navigation:
+  overview: >
+    Udemy is an online course marketplace with thousands of courses on programming, design,
+    business, and personal development. Courses are instructor-led with video content.
+
+  pages:
+    home:
+      description: "Home page with featured courses, categories, and recommendations."
+      layout:
+        - "Top: search bar, Categories dropdown"
+        - "Center: featured courses, trending categories, personalized recommendations"
+      search_bar:
+        text: "Search input at top"
+        behavior: "Type a topic, skill, or instructor name. Press Enter for results."
+      categories:
+        text: "'Categories' in the top navigation"
+        behavior: "Hover to see a dropdown of all course categories (Development, Business, IT, Design, etc.). Click a category for subcategories and top courses."
+
+    search_results:
+      description: "Course results matching your search."
+      layout:
+        - "Left: filter sidebar (Rating, Duration, Level, Price, Features)"
+        - "Center: course cards with thumbnail, title, instructor, rating, price"
+      course_card:
+        text: "Individual course cards"
+        behavior: "Shows course thumbnail, title, instructor name, star rating, review count, price. Hover for a expanded preview with description. Click to open the course detail page."
+      filters:
+        text: "Left sidebar filters"
+        behavior: "Filter by star rating, video duration, level (Beginner, Intermediate, Advanced), price range, and features (subtitles, quizzes)."
+
+    course_detail:
+      description: "Full detail page for a course."
+      layout:
+        - "Top: course title, instructor, rating, enrollment count, 'Add to cart' / 'Buy now' buttons"
+        - "Center: description, what you'll learn, curriculum (section list with lectures), instructor bio"
+        - "Below: student reviews"
+      curriculum:
+        text: "Course curriculum section"
+        behavior: "Shows sections and lectures within each section. Expand sections to see individual lecture titles and durations. Some lectures may be free to preview."
+
+  workflows:
+    search_courses:
+      - "Type a topic in the search bar and press Enter"
+      - "Use filters to narrow by rating, level, and price"
+      - "Click a course card for full details"
+      - "Review the curriculum and student ratings"
+
+    preview_course:
+      - "Open a course detail page"
+      - "Scroll to the curriculum section"
+      - "Some lectures have a 'Preview' button — click to watch a free sample"
+
+  tips:
+    - "Udemy frequently has sales — course prices can drop from $100+ to $10-15 during promotions"
+    - "Check the 'Last updated' date on courses to ensure content is current"
+    - "Rating count matters more than rating alone — a 4.5 with 10,000 reviews is more reliable than 5.0 with 10"
+    - "The 30-day money-back guarantee applies to all courses"
+    - "Free preview lectures help assess instructor quality before purchasing"

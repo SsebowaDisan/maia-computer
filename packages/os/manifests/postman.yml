@@ -4,3 +4,112 @@ icon: "https://www.google.com/s2/favicons?domain=postman.com&sz=128"
 url: https://web.postman.co
 category: developer
 ai_description: "API testing and development. Send requests, write tests, create docs."
+help_url: "https://learning.postman.com"
+
+navigation:
+  overview: >
+    Postman is the most widely used API development and testing platform. It provides a powerful
+    request builder for sending HTTP requests, organizing them in collections, managing environments
+    with variables, writing automated tests, and generating API documentation. The web version
+    (web.postman.co) mirrors the desktop app with some limitations on localhost access.
+
+  pages:
+    workspace:
+      description: "The workspace view — a shared space for collections, environments, and APIs."
+      url_pattern: "web.postman.co/workspace/{id}"
+      layout:
+        - "Left sidebar: Collections, APIs, Environments, Mock Servers, Monitors, History"
+        - "Center: workspace overview or active request tabs"
+        - "Top: workspace name and type (Personal/Team), 'New' button, Import button, search"
+      collections_sidebar:
+        behavior: "Collections are organized groups of saved requests. Click the arrow to expand a collection and see its folders and requests. Drag to reorder. Right-click for rename, duplicate, export, run, or delete."
+      environments_sidebar:
+        behavior: "Environments store variable sets (e.g., dev, staging, prod). Each has key-value pairs. Click the eye icon to quick-look current variable values."
+      history:
+        behavior: "Chronological list of every request sent. Click to re-open. Requests persist even if not saved to a collection."
+
+    request_builder:
+      description: "The core tool — build, configure, and send HTTP requests."
+      layout:
+        - "Top row: HTTP method dropdown (GET/POST/PUT/PATCH/DELETE/HEAD/OPTIONS), URL input bar, blue 'Send' button, 'Save' button"
+        - "Below URL: tabs for Params, Authorization, Headers, Body, Pre-request Script, Tests, Settings"
+        - "Bottom half: response panel with Body, Cookies, Headers, Test Results tabs"
+      method_dropdown:
+        text: "HTTP method selector (leftmost element)"
+        behavior: "Click to select: GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS. Method determines request semantics — POST/PUT typically need a body."
+      url_bar:
+        text: "URL input field"
+        behavior: "Type the full URL including path and query params. Supports environment variables: {{base_url}}/api/users. Variables resolve from the active environment. Path variables use :param syntax."
+      params_tab:
+        text: "'Params' tab"
+        behavior: "GUI for query parameters. Add key-value pairs that get appended to the URL as ?key=value&key2=value2. Checkbox to enable/disable individual params."
+      authorization_tab:
+        text: "'Authorization' tab"
+        behavior: "Configure auth: Bearer Token, Basic Auth, OAuth 2.0, API Key, AWS Signature, and more. Auth headers are auto-generated. Can inherit from parent collection."
+      headers_tab:
+        text: "'Headers' tab"
+        behavior: "Key-value pairs for HTTP headers. Common: Content-Type, Accept, Authorization. Some are auto-generated (Content-Type for body). Toggle visibility with checkboxes."
+      body_tab:
+        text: "'Body' tab"
+        behavior: "Request body options: none, form-data (file uploads), x-www-form-urlencoded, raw (JSON/XML/Text/HTML/JavaScript), binary, GraphQL. For JSON: select raw > JSON, then type the JSON body. Syntax highlighting and validation included."
+      pre_request_script:
+        text: "'Pre-request Script' tab"
+        behavior: "JavaScript that runs before the request sends. Use pm.environment.set() to set variables dynamically. Useful for generating timestamps, tokens, or computed values."
+      tests_tab:
+        text: "'Tests' tab"
+        behavior: "JavaScript that runs after the response. Use pm.test() for assertions, pm.response for response data. Example: pm.test('Status 200', () => pm.response.to.have.status(200)). Snippets on the right provide common test patterns."
+      send_button:
+        text: "Blue 'Send' button"
+        behavior: "Executes the request. Response appears in the bottom panel. Shows status code, response time, and response size in the header bar."
+      response_panel:
+        layout:
+          - "Body tab: formatted response (Pretty/Raw/Preview modes for JSON, HTML, XML, images)"
+          - "Cookies tab: response cookies"
+          - "Headers tab: response headers"
+          - "Test Results tab: pass/fail results from Tests script"
+        behavior: "Pretty mode auto-formats JSON with syntax highlighting and collapsible nodes. Click 'Preview' for HTML responses to render them. Status codes are color-coded: 2xx green, 4xx orange, 5xx red."
+
+    environment_manager:
+      description: "Environment variable editor."
+      behavior: "Create environments (dev, staging, prod) with variable key-value pairs. Variables used in requests via {{variable_name}} syntax. Switch active environment using the dropdown in the top-right. 'Globals' are variables available regardless of which environment is active."
+
+    collection_runner:
+      description: "Run all requests in a collection sequentially."
+      behavior: "Select a collection and environment. Set iteration count and delay between requests. Results show pass/fail for each request's tests. Export results as JSON. Useful for automated API testing."
+
+    console:
+      description: "Postman Console for debugging (View > Show Postman Console)."
+      behavior: "Shows raw HTTP request and response details, console.log output from scripts, redirects, and certificate info. Essential for debugging when requests don't work as expected."
+
+  workflows:
+    send_api_request:
+      - "Click '+' to open a new request tab (or Cmd+T)"
+      - "Select the HTTP method (GET, POST, etc.)"
+      - "Enter the URL (e.g., https://api.example.com/users)"
+      - "Add headers, params, or body as needed using the tabs"
+      - "Click 'Send'"
+      - "Read the response: check status code, body content, and headers"
+
+    use_environment_variables:
+      - "Click the Environments section in the sidebar"
+      - "Create an environment (e.g., 'Development')"
+      - "Add variables: base_url = https://dev.api.example.com, api_key = abc123"
+      - "Select the environment from the top-right dropdown"
+      - "Use {{base_url}} and {{api_key}} in URLs and headers"
+      - "Switch environments to instantly change all variable values"
+
+    organize_and_test:
+      - "Create a collection ('+' > New Collection)"
+      - "Save requests into the collection (Cmd+S after building)"
+      - "Add test scripts to validate responses"
+      - "Use Collection Runner to execute all requests and verify tests pass"
+
+  tips:
+    - "Environment variables ({{var}}) let you switch between dev/staging/prod without editing URLs or headers"
+    - "The 'Tests' tab snippets (right sidebar) provide ready-made assertions — click to insert"
+    - "Console (View > Show Postman Console) shows raw HTTP traffic — essential for debugging"
+    - "Collection Runner executes all requests in sequence and reports test results"
+    - "Body > raw > JSON is the most common way to send JSON request bodies"
+    - "Auth set at the collection level is inherited by all requests inside — no need to repeat"
+    - "History saves every request sent, even unsaved ones — useful for recovering lost work"
+    - "Import/Export collections as JSON for sharing with team members or version control"

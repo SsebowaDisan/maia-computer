@@ -4,3 +4,114 @@ icon: "https://www.google.com/s2/favicons?domain=slack.com&sz=128"
 url: https://app.slack.com
 category: communication
 ai_description: "Read and send messages in channels. Search conversations. Manage notifications."
+help_url: "https://slack.com/help"
+
+navigation:
+  overview: >
+    Slack is a team messaging platform organized into workspaces, channels, and direct messages.
+    The interface has a left sidebar for navigation (channels, DMs, apps) and a main message pane.
+    Keyboard shortcuts are extensive — Cmd+K is the universal quick switcher for everything.
+
+  pages:
+    workspace:
+      description: "The main Slack view with channel sidebar on the left and message pane on the right."
+      layout:
+        - "Top-left: workspace name and dropdown menu (switch workspaces, preferences)"
+        - "Top-center: search bar with Cmd+F shortcut"
+        - "Top-right: profile icon, huddle status"
+        - "Left sidebar: Threads, DMs, Channels sections with collapsible headers"
+        - "Center/Right: message pane for active channel or DM"
+        - "Bottom of message pane: rich message composer with formatting toolbar"
+      search_bar:
+        selector: "div[data-qa='search_input']"
+        behavior: "Click or press Cmd+G to focus. Type a query, press Enter. Results panel shows tabs: Messages, Files, Channels, People. Supports filters — from:@person, in:#channel, before:date, after:date, has:link, has:file, has:reaction, during:month."
+      channel_list:
+        behavior: "Channels prefixed with # are public, those with a lock icon are private. Unread channels appear bold with a white dot. Right-click a channel for mute, leave, or notification preferences."
+      direct_messages:
+        behavior: "DMs listed under 'Direct messages' heading. Green dot = online, hollow circle = offline. Click any name to open conversation. Multi-person DMs show grouped avatars."
+      message_input:
+        selector: "div[data-qa='message_input']"
+        behavior: "Click to focus, type message, Enter to send. Shift+Enter for new line. Formatting: *bold*, _italic_, ~strikethrough~, `inline code`, ```code block```. Toolbar icons: bold (Cmd+B), italic (Cmd+I), strikethrough (Cmd+Shift+X), link (Cmd+Shift+U), ordered list, bulleted list, blockquote, code block."
+      channel_header:
+        behavior: "Shows channel name, topic, member count, pinned items count. Click channel name for details panel — description, members, integrations, settings. Star icon bookmarks the channel to the top of your sidebar."
+
+    thread_panel:
+      description: "Side panel for threaded replies to a specific message."
+      layout:
+        - "Top: 'Thread' header with close button (X)"
+        - "Center: original message followed by thread replies"
+        - "Bottom: reply input with 'Also send to #channel' checkbox"
+      thread_input:
+        behavior: "Type reply, Enter to send. Check 'Also send to #channel' to cross-post to the main channel. Threads keep conversations focused without cluttering the channel."
+
+    huddle:
+      description: "Lightweight audio call within a channel or DM — no scheduling needed."
+      behavior: "Click the headphone icon in the channel header to start a huddle. Others in the channel see a 'Join Huddle' indicator. Supports screen sharing and thread-based notes during the call."
+
+  keyboard_shortcuts:
+    quick_switcher: "Cmd+K — jump to any channel, DM, or person by typing a few letters"
+    channel_switcher: "Cmd+Shift+K — open DMs list specifically"
+    search: "Cmd+G — focus the search bar"
+    thread: "Cmd+Shift+T — open the Threads view"
+    unread_nav: "Alt+Shift+Up/Down — jump to next/previous unread channel"
+    mark_read: "Esc — mark the current channel as read"
+    edit_last: "Up arrow (in empty input) — edit your last message"
+    react: "Cmd+Shift+\\ — add a reaction to the last message"
+    emoji_picker: "Cmd+Shift+J — open emoji picker"
+    upload_file: "Cmd+U — upload a file"
+
+  slash_commands:
+    remind: "/remind [@person or #channel or me] [what] [when] — set a reminder"
+    mute: "/mute — mute the current channel"
+    status: "/status [:emoji:] [status text] — set your status"
+    dnd: "/dnd [duration] — pause notifications (e.g., /dnd 1 hour)"
+    topic: "/topic [text] — set the channel topic"
+    invite: "/invite @person — invite someone to the current channel"
+    leave: "/leave — leave the current channel"
+    collapse: "/collapse — collapse all images and files in the channel"
+    who: "/who — list all members in the current channel"
+    shrug: "/shrug [message] — append the shrug emoji to your message"
+
+  workflows:
+    send_message:
+      - "Click target channel or DM in sidebar (or Cmd+K and type name)"
+      - "Click message input or just start typing (auto-focuses)"
+      - "Type message, press Enter to send"
+
+    reply_in_thread:
+      - "Hover over a message — action icons appear on the right"
+      - "Click the speech bubble icon (Reply in thread)"
+      - "Thread panel opens — type reply, press Enter"
+      - "Check 'Also send to #channel' if you want it visible in the main feed"
+
+    mention_and_notify:
+      - "Type @username — autocomplete dropdown shows matches"
+      - "@channel notifies everyone, @here notifies only online members"
+      - "Mention channels with #channel-name to create a clickable link"
+
+    share_file:
+      - "Click + icon left of message input, or drag-and-drop a file, or Cmd+U"
+      - "Add optional message alongside the file"
+      - "Press Enter to share"
+
+    create_channel:
+      - "Click '+' next to the Channels heading in the sidebar"
+      - "Choose Public or Private"
+      - "Set name (lowercase, hyphens, no spaces), description, and invite members"
+
+  url_patterns:
+    workspace: "app.slack.com/client/TWORKSPACE_ID"
+    channel: "app.slack.com/client/TWORKSPACE_ID/CCHANNEL_ID"
+    thread: "app.slack.com/client/TWORKSPACE_ID/CCHANNEL_ID/thread/MESSAGE_TS"
+
+  tips:
+    - "Cmd+K is the fastest way to navigate — type any channel or person name"
+    - "Search filters: from:@person, in:#channel, before:2026-01-01, after:2025-12-01, has:link, has:file, has:reaction"
+    - "Bookmark messages by clicking the bookmark icon on hover — find them in Saved Items"
+    - "Format messages: *bold*, _italic_, ~strikethrough~, `code`, ```code block```, > blockquote"
+    - "Pin important messages: hover > three dots > Pin to channel (max 100 pins per channel)"
+    - "Huddles are instant audio calls — click the headphone icon in any channel header"
+    - "Canvas (notepad icon in channel header) creates a shared document tied to the channel"
+    - "Set reminders with /remind — e.g., '/remind me to review PR at 3pm'"
+    - "Star channels to pin them to the top of your sidebar for quick access"
+    - "Use emoji reactions for quick polls — post a question and add reaction options"

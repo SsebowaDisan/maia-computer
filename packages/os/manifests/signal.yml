@@ -4,3 +4,102 @@ icon: "https://www.google.com/s2/favicons?domain=signal.org&sz=128"
 url: https://signal.org
 category: communication
 ai_description: "Private encrypted messaging. Send texts, voice notes, and media."
+help_url: "https://support.signal.org"
+
+navigation:
+  overview: >
+    Signal is a privacy-focused messaging app with end-to-end encryption for all messages, calls,
+    and media by default. The desktop/web client mirrors the mobile app with a two-panel layout.
+    Requires linking to a phone via QR code on first setup. Known for minimal metadata collection,
+    sealed sender technology, and open-source protocol.
+
+  pages:
+    link_screen:
+      description: "The device linking screen shown on first launch."
+      behavior: "Displays a QR code. Open Signal mobile > Settings > Linked Devices > Link New Device > Scan QR code. Message history syncs after linking. Desktop client works independently once linked."
+
+    main:
+      description: "Two-panel messaging interface with conversation list and active chat."
+      layout:
+        - "Left panel header: profile icon, compose (pencil) icon, three-dot menu, search icon"
+        - "Left panel: conversation list sorted by most recent"
+        - "Right panel: active conversation with messages and input at bottom"
+        - "Right panel header: contact name, video call icon, voice call icon, search in chat, three-dot menu"
+      search:
+        behavior: "Click the search icon at the top of the left panel. Type a contact name, phone number, or message keyword. Results show matching conversations and messages within conversations. Press Escape to close search."
+      compose_icon:
+        behavior: "Pencil icon at top of left panel. Opens a new conversation view. Search for a contact by name or phone number. Also shows option to create a New Group."
+      conversation_list:
+        behavior: "Each entry: contact/group name, last message preview, timestamp. Unread conversations show bold text and blue count badge. Pinned conversations (up to 4) stay at top. Muted conversations show a crossed-out bell. Archived conversations accessible from the bottom of the list."
+      message_input:
+        selector: "div.module-composition-input__input"
+        behavior: "Type message, Enter to send. Shift+Enter for new line. Supports text formatting: *bold*, _italic_, ~strikethrough~, ||spoiler||. The + icon on the left opens attachments (photos, files, GIFs, stickers, voice note, contact). The emoji icon opens the emoji/sticker picker."
+      message_bubbles:
+        behavior: "Outgoing messages on the right (blue). Incoming on the left (gray/white). Delivery indicators: single check = sent, double check = delivered. No read receipts unless both parties have them enabled. Disappearing messages show a timer icon."
+      disappearing_messages:
+        behavior: "Timer icon in the conversation header or settings. When enabled, messages auto-delete after the set duration (30 seconds to 4 weeks). Both parties see the timer icon on messages. The countdown starts after the message is first viewed."
+      safety_number:
+        behavior: "Click contact name > View Safety Number. Shows a unique code representing the encryption keys between you and the contact. Compare codes in person or scan each other's QR codes to verify identity. Changes if either person reinstalls or gets a new phone."
+
+    note_to_self:
+      description: "A personal conversation for saving notes, links, and files."
+      behavior: "Appears as 'Note to Self' in the conversation list. Anything sent here is end-to-end encrypted and synced across your linked devices. Useful as a private notepad."
+
+    group_chat:
+      description: "Encrypted group conversation with admin controls."
+      behavior: "Groups support up to 1000 members. Admins can: add/remove members, edit group info, control who can edit group settings, control who can add members. Group links allow joining via URL. All group messages are end-to-end encrypted — Signal cannot read any content."
+
+    stories:
+      description: "Ephemeral photo/video/text posts visible for 24 hours."
+      behavior: "Click the Stories tab (if visible) or the signal icon. Post text, photos, or videos to specific audiences (all contacts, custom lists). Stories disappear after 24 hours."
+
+  keyboard_shortcuts:
+    search: "Cmd+F — search messages"
+    new_message: "Cmd+N — new message"
+    next_conversation: "Cmd+Down or Cmd+] — next conversation"
+    prev_conversation: "Cmd+Up or Cmd+[ — previous conversation"
+    archive: "Cmd+Shift+A — archive conversation"
+    preferences: "Cmd+, — open preferences"
+
+  workflows:
+    send_message:
+      - "Click a conversation in the left panel (or Cmd+N for new)"
+      - "Type in the message input"
+      - "Press Enter to send"
+
+    send_disappearing_message:
+      - "Open a conversation"
+      - "Click the timer icon in the header (or three-dot menu > Disappearing messages)"
+      - "Select a duration (30 seconds, 5 minutes, 1 hour, 8 hours, 1 day, 1 week, 4 weeks)"
+      - "All subsequent messages in this chat will auto-delete after the set time"
+
+    verify_safety_number:
+      - "Open a conversation"
+      - "Click the contact name at the top"
+      - "Click 'View Safety Number'"
+      - "Compare the displayed number with the other person (in person or via a trusted channel)"
+      - "Click 'Mark as Verified' if they match"
+
+    create_group:
+      - "Click the pencil (compose) icon"
+      - "Click 'New Group'"
+      - "Select members, click Next"
+      - "Set group name and optional avatar"
+      - "Click Create"
+
+    make_call:
+      - "Open a conversation"
+      - "Click the phone icon (voice) or video icon (video) in the header"
+      - "Call is end-to-end encrypted — verify by comparing the two-word code shown during the call"
+
+  tips:
+    - "All messages are end-to-end encrypted by default — Signal cannot read any messages"
+    - "Safety Numbers verify encryption — check them when you see a 'safety number changed' alert"
+    - "Disappearing messages auto-delete after a set time — great for sensitive conversations"
+    - "Note to Self is an encrypted personal notepad synced across devices"
+    - "Sealed sender hides even the metadata of who is messaging whom from Signal's servers"
+    - "Screen security (Settings > Privacy) prevents Signal content from appearing in screenshots and app switchers"
+    - "Registration lock (Settings > Account) prevents someone from re-registering your phone number"
+    - "Group links let new members join without being manually added — admins can toggle approval"
+    - "Relay calls through Signal servers (Settings > Privacy > Always Relay Calls) to hide your IP from the other party"
+    - "Signal is open source — the protocol, server, and clients are all publicly auditable"

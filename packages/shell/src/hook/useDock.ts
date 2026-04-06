@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+const REVEAL_ZONE_HEIGHT = 32
+const HIDE_DELAY_MS = 220
+
 export function useDock(autoHide: boolean) {
   const hideTimeoutRef = useRef<number>()
   const isHoveredRef = useRef(false)
@@ -14,7 +17,7 @@ export function useDock(autoHide: boolean) {
     setIsVisible(false)
 
     const handlePointerMove = (event: MouseEvent) => {
-      const nearBottom = event.clientY >= window.innerHeight - 12
+      const nearBottom = event.clientY >= window.innerHeight - REVEAL_ZONE_HEIGHT
 
       if (nearBottom) {
         window.clearTimeout(hideTimeoutRef.current)
@@ -26,7 +29,7 @@ export function useDock(autoHide: boolean) {
         window.clearTimeout(hideTimeoutRef.current)
         hideTimeoutRef.current = window.setTimeout(() => {
           setIsVisible(false)
-        }, 800)
+        }, HIDE_DELAY_MS)
       }
     }
 
@@ -49,7 +52,7 @@ export function useDock(autoHide: boolean) {
     if (!autoHide) return
     hideTimeoutRef.current = window.setTimeout(() => {
       setIsVisible(false)
-    }, 800)
+    }, HIDE_DELAY_MS)
   }, [autoHide])
 
   return {

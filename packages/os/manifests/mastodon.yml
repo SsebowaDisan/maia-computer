@@ -4,3 +4,112 @@ icon: "https://www.google.com/s2/favicons?domain=mastodon.social&sz=128"
 url: https://mastodon.social
 category: social
 ai_description: "Decentralized social network. Post, follow, and discover content."
+help_url: "https://docs.joinmastodon.org"
+
+navigation:
+  overview: >
+    Mastodon is a decentralized, open-source social network built on the ActivityPub protocol.
+    Unlike centralized platforms, it consists of thousands of independent servers (instances)
+    that federate with each other — together forming the "Fediverse." All timelines are strictly
+    chronological with no algorithmic ranking. Posts ("toots") have a 500-character limit on most
+    instances. Features include Content Warnings (CW), granular post visibility, and no ads.
+
+  pages:
+    home:
+      description: "The home timeline showing posts from accounts you follow."
+      layout:
+        - "Left column: compose area (text input with toolbar), navigation links"
+        - "Center column: home timeline with posts in reverse chronological order"
+        - "Right column: search bar, trending hashtags, trending posts, suggested accounts, instance info"
+      compose_area:
+        selector: "textarea.autosuggest-textarea__textarea"
+        behavior: "Type your post (500 characters on most instances, varies by server). Toolbar below: attach image/video (up to 4 images), create poll, set content warning (CW), set visibility, set language. Click 'Publish!' (or Cmd+Enter) to post."
+      compose_toolbar:
+        attach_media: "Click the image icon. Upload up to 4 images or 1 video. Alt text field appears on each image — write descriptions for accessibility."
+        poll: "Click the bar chart icon. Create a poll with 2-4 options. Set duration (5 minutes to 7 days). Single or multiple choice."
+        content_warning: "Click the CW button. Adds a spoiler/warning text field above your post. Readers see only the CW text and must click to reveal the content. Used for spoilers, sensitive topics, and long posts."
+        visibility: "Globe icon dropdown: Public (visible to everyone, appears on federated timelines), Unlisted (visible to everyone but not on public timelines), Followers-only (only your followers), Mentioned people only (direct message)."
+        language: "Set the language of your post. Helps with filtering and translation."
+      timeline:
+        behavior: "Posts in reverse chronological order. No algorithm. Each post shows: author avatar, display name, @handle@instance, timestamp, post content, engagement counts (replies, boosts, favorites), and boost indicator if it was shared by someone you follow."
+
+    local_timeline:
+      description: "Posts from all users on the same Mastodon instance."
+      behavior: "Click 'Local' in the navigation. Shows all public posts from users on your instance (e.g., mastodon.social). Useful for discovering people on your server. Strictly chronological."
+
+    federated_timeline:
+      description: "Posts from all instances your server is connected to."
+      behavior: "Click 'Federated' in the navigation. Shows public posts from across the Fediverse that your instance knows about (through follows and interactions). Much higher volume than Local. The firehose of the decentralized network."
+
+    explore:
+      description: "Trending content on your instance."
+      layout:
+        - "Tabs: Posts, Hashtags, News, For You"
+        - "Posts: trending posts based on engagement"
+        - "Hashtags: currently popular hashtags with usage graphs"
+        - "News: trending links being shared"
+      behavior: "Shows what is popular on your instance and connected instances. This is the closest thing to algorithmic discovery on Mastodon — still based on raw engagement counts, not personalization."
+
+    notifications:
+      description: "Activity feed for your account."
+      behavior: "Shows mentions, boosts, favorites, follows, poll results, and edit notifications. Filter by type using the filter bar at the top. Clear all button removes notification indicators."
+
+    profile:
+      description: "A user's profile page."
+      url_pattern: "mastodon.social/@username"
+      layout:
+        - "Top: banner, avatar, display name, @handle@instance, bio, join date"
+        - "Stats: posts count, following, followers"
+        - "Tabs: Posts, Posts and replies, Media, About (profile fields)"
+      behavior: "Click Follow to subscribe. For users on other instances, the follow may redirect you to confirm on your own instance. Profile fields can contain verified links (green checkmark if the linked website points back)."
+
+    search:
+      description: "Search for hashtags, accounts, and posts."
+      behavior: "Type in the search bar. Hashtag search always works across the Fediverse. Account search finds users by @handle or @handle@instance. Full-text post search availability depends on instance configuration — many instances enable it for your own posts and posts that interacted with you."
+
+  post_interactions:
+    reply: "Click the reply arrow. Reply appears as a threaded conversation below the original."
+    boost: "Click the two-arrow (repost) icon. Shares the post with your followers — no quote-posting (by design, to prevent pile-ons). Boost icon turns blue/green when active."
+    favorite: "Click the star icon. Notifies the author and adds to your favorites. Favorites are private."
+    bookmark: "Click the bookmark icon. Saves privately to your bookmarks — no one is notified."
+
+  workflows:
+    post:
+      - "Type your post in the compose area (500 characters)"
+      - "Add images with alt text, poll, or content warning if appropriate"
+      - "Set visibility: Public, Unlisted, Followers-only, or Direct"
+      - "Click 'Publish!' or press Cmd+Enter"
+
+    follow_someone:
+      - "Search for a user by @handle or @handle@instance"
+      - "Click their profile"
+      - "Click 'Follow' — for remote users, confirm on your instance if redirected"
+
+    discover_content:
+      - "Browse the Local timeline to find people on your instance"
+      - "Browse the Federated timeline for wider Fediverse content"
+      - "Check the Explore tab for trending posts and hashtags"
+      - "Follow hashtags: search for a hashtag, click it, then click Follow"
+
+    search_hashtags:
+      - "Type a hashtag in the search bar (e.g., #photography)"
+      - "Click the hashtag in results"
+      - "See all public posts with that tag across the Fediverse"
+      - "Click 'Follow' to add that hashtag to your home timeline"
+
+    use_content_warnings:
+      - "Click the CW button in the compose toolbar"
+      - "Type a brief warning in the CW field (e.g., 'movie spoiler', 'food', 'politics')"
+      - "Type the full post content below — readers must click to expand"
+
+  tips:
+    - "All timelines are strictly chronological — no algorithm, no ads, no promoted content"
+    - "Content Warnings (CW) are a community norm — use them for spoilers, sensitive topics, and long posts"
+    - "Boosting is the only way to share posts — no quote-posts by design"
+    - "Follow hashtags to add topic-based posts to your home timeline without following individual accounts"
+    - "Hashtag search works across the entire Fediverse; full-text search varies by instance"
+    - "Alt text on images is strongly encouraged — the community values accessibility"
+    - "You can migrate your account (followers) to a different instance without losing them"
+    - "Verified links: add your Mastodon URL to your website, and the link in your profile shows a green checkmark"
+    - "The Local timeline is great for finding community members on your instance"
+    - "Your @handle includes your instance: @username@mastodon.social — people on other instances see the full address"

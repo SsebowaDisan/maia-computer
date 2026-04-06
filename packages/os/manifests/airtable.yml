@@ -4,3 +4,70 @@ icon: "https://www.google.com/s2/favicons?domain=airtable.com&sz=128"
 url: https://airtable.com
 category: productivity
 ai_description: "Build databases and spreadsheets. Create custom workflows."
+
+navigation:
+  overview: >
+    Airtable is a database-spreadsheet hybrid. It organizes data in bases (databases) containing
+    tables with typed fields, and supports multiple views (Grid, Kanban, Calendar, Gallery).
+
+  pages:
+    home:
+      description: "The home page showing all your bases as cards."
+      layout:
+        - "Top: search bar, workspace name"
+        - "Center: base cards showing base name, icon, and last modified time"
+        - "Left sidebar: workspaces, shared bases, templates"
+      base_cards:
+        text: "Cards representing each base"
+        behavior: "Click a base card to open it and see its tables. Each base can contain multiple tables."
+
+    table_view:
+      description: "The grid view of a table inside a base — looks like a spreadsheet."
+      layout:
+        - "Top: table tabs (Table 1, Table 2, etc.), view switcher"
+        - "Left sidebar: view list (Grid, Kanban, Calendar, Gallery, Form views)"
+        - "Center: data grid with column headers (field names) and rows (records)"
+        - "Bottom: '+ Add a record' row"
+      grid:
+        text: "The spreadsheet-like grid in the center"
+        behavior: "Click any cell to select it and type data. Fields have types (text, number, date, select, attachment, etc.) — the input method matches the type. Tab moves right, Enter moves down."
+      field_headers:
+        text: "Column headers at the top of the grid"
+        behavior: "Click a header to sort, filter, or configure the field. Click '+' at the end to add a new field. Right-click for options: rename, change type, duplicate, delete."
+      add_record:
+        text: "'+ Add a record' at the bottom of the grid"
+        behavior: "Click to add a new empty row. Click each cell in the new row to fill in data."
+      view_tabs:
+        text: "View list in the left sidebar (Grid, Kanban, Calendar, Gallery, Form)"
+        behavior: "Click to switch how the data is displayed. Grid is the default spreadsheet view. Kanban groups records as cards in columns. Calendar shows records by date field. Gallery shows records as cards with images."
+      table_tabs:
+        text: "Table name tabs at the top"
+        behavior: "Click to switch between tables in the same base. Each table has its own fields and records."
+      filter_sort_bar:
+        text: "Filter, Sort, Group, Color buttons above the grid"
+        behavior: "Add filter rules to show only matching records. Sort records by any field. Group records by a category field."
+
+  workflows:
+    add_data:
+      - "Open a base and click the target table tab"
+      - "Click '+ Add a record' at the bottom of the grid"
+      - "Click each cell in the new row to enter data"
+      - "Press Tab to move to the next field, Enter to confirm"
+
+    search_records:
+      - "Press Cmd+F (Ctrl+F) to open the search bar"
+      - "Type your query — matching cells highlight"
+      - "For global search across bases, use the search bar on the home page"
+
+    change_views:
+      - "Click a view name in the left sidebar (Grid, Kanban, Calendar, etc.)"
+      - "Or click '+ Create a view' to add a new view"
+      - "Each view shows the same data in a different format"
+
+  tips:
+    - "Fields have types — a 'Single select' field shows a dropdown, a 'Date' field shows a date picker"
+    - "Expand a record by clicking the expand icon on the row to see all fields in a form layout"
+    - "Linked records let you connect tables like a relational database"
+    - "Views are independent — each can have its own filters, sorts, and hidden fields"
+    - "Cmd+F searches within the current view only"
+    - "Automations (in the Automations tab) can trigger actions when records change"

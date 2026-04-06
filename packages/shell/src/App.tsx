@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import { Dock } from './component/dock/Dock'
 import { Toast } from './component/notification/Toast'
 import { Spotlight } from './component/spotlight/Spotlight'
-import { SpacesBar } from './component/spaces/SpacesBar'
 import { BrainStatus } from './component/ui/BrainStatus'
 import { WindowLayer } from './component/window/WindowLayer'
 import { useBrainEvents } from './hook/useBrainEvents'
@@ -25,7 +24,7 @@ import { useTaskStore } from './store/taskStore'
 export function App() {
   const { messages, resetUnreadCount, sendMessage } = useChat()
   const { toasts } = useNotifications()
-  const { activeSpaceId, spaces, switchSpace } = useSpaces()
+  const { activeSpaceId } = useSpaces()
   const { isOpen, query, results, closeSpotlight, setQuery } = useSpotlight()
   const {
     closeWindow,
@@ -44,9 +43,9 @@ export function App() {
   const recentIds = useDockStore((state) => state.recentIds)
   const unpinItem = useDockStore((state) => state.unpinItem)
   const settings = useSettingsStore((state) => state.settings)
-  const activeAgentIds = useTaskStore((state) => state.activeAgentIds)
   const plan = useTaskStore((state) => state.plan)
   const running = useTaskStore((state) => state.running)
+  const research = useTaskStore((state) => state.research)
   const taskDescription = useTaskStore((state) => state.taskDescription)
   const thought = useTaskStore((state) => state.thought)
   const hasVisibleWindows = windows.some((window) => !window.isMinimized)
@@ -79,14 +78,12 @@ export function App() {
 
   return (
     <div className="relative flex h-full w-full flex-col overflow-hidden">
-      <SpacesBar activeSpaceId={activeSpaceId} onSwitchSpace={switchSpace} spaces={spaces} />
       {!hasVisibleWindows ? (
         <div className="min-h-0 flex-1">
           <HomeScreen onSubmitTask={handleStartTask} />
         </div>
       ) : null}
       <WindowLayer
-        activeAgentIds={activeAgentIds}
         installedApps={installedApps}
         messages={messages}
         onCloseWindow={(windowId) => { void closeWindow(windowId) }}
@@ -101,7 +98,6 @@ export function App() {
         onUpdateBounds={updateWindowBounds}
         onUpdateSetting={handleUpdateSetting}
         settings={settings}
-        taskDescription={taskDescription}
         windows={windows}
       />
       <Spotlight
@@ -119,7 +115,7 @@ export function App() {
         query={query}
         results={results}
       />
-      <div className="fixed right-6 top-12 z-[70] flex flex-col gap-3">
+      <div className="fixed right-6 top-6 z-[70] flex flex-col gap-3">
         {toasts.map((toast) => (
           <Toast key={toast.id} toast={toast} />
         ))}
@@ -147,6 +143,7 @@ export function App() {
         currentStep={plan.find((s) => s.status === 'in_progress')?.description ?? plan.find((s) => s.status === 'pending')?.description}
         isVisible={running}
         plan={plan}
+        research={research}
         taskDescription={taskDescription}
         thought={thought}
       />

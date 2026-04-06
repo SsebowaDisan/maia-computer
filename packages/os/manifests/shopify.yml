@@ -4,3 +4,66 @@ icon: "https://www.google.com/s2/favicons?domain=shopify.com&sz=128"
 url: https://admin.shopify.com
 category: finance
 ai_description: "E-commerce platform. Manage products, orders, and online store."
+
+navigation:
+  overview: >
+    Shopify is an e-commerce platform for managing online stores. The admin dashboard provides
+    tools for products, orders, customers, analytics, and store customization.
+
+  pages:
+    dashboard:
+      description: "The admin home page with store overview and sales metrics."
+      layout:
+        - "Left sidebar: Home, Orders, Products, Customers, Content, Analytics, Marketing, Discounts, Online Store, Settings"
+        - "Center: sales chart, recent orders, store performance metrics"
+        - "Top: search bar"
+      sidebar:
+        text: "Left navigation"
+        behavior: "Click any section to navigate. Sections expand to show sub-items. Orders shows order management. Products shows product catalog. Online Store has theme editor and pages."
+      search_bar:
+        text: "Search input at the top (or press '/')"
+        behavior: "Search for products, orders, customers, and admin pages. Results show matching items across all types."
+
+    orders:
+      description: "Order management page."
+      layout:
+        - "Top: tabs (All, Unfulfilled, Unpaid, Open)"
+        - "Center: order table with order number, date, customer, total, fulfillment status"
+      order_row:
+        text: "Individual order entries"
+        behavior: "Click to open order details: items, payment info, shipping address, and fulfillment status. 'Fulfill items' button starts the fulfillment process."
+
+    products:
+      description: "Product catalog management."
+      layout:
+        - "Center: product list with thumbnail, title, status (Active/Draft), inventory count, price"
+        - "Top: 'Add product' button"
+      add_product:
+        text: "'Add product' button"
+        behavior: "Opens the product creation form: title, description, images, price, variants, inventory, and SEO settings."
+
+  workflows:
+    manage_orders:
+      - "Click 'Orders' in the sidebar"
+      - "Use tabs to filter by status (Unfulfilled, Unpaid, etc.)"
+      - "Click an order to view full details"
+      - "Click 'Fulfill items' to process the shipment"
+
+    add_product:
+      - "Click 'Products' in the sidebar"
+      - "Click 'Add product'"
+      - "Fill in title, description, price, and upload images"
+      - "Set inventory and variants if applicable"
+      - "Click 'Save' — set status to Active to publish"
+
+    search:
+      - "Press '/' to focus the search bar"
+      - "Type product names, order numbers, or customer info"
+      - "Click a result to navigate directly"
+
+  tips:
+    - "The admin URL is admin.shopify.com — the storefront is a separate view"
+    - "Draft products are not visible to customers — set status to Active to publish"
+    - "The search bar (press '/') is the fastest way to find anything"
+    - "The Online Store section contains the theme editor for customizing store appearance"
+    - "Analytics shows sales, conversion rates, and traffic data"

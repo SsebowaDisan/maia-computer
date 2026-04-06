@@ -121,7 +121,7 @@ Intents:
 - casual: social/informal ("lol", "nice find", "haha that's a long flight")`,
       },
       { role: 'user', content: text },
-    ], { maxTokens: 16, temperature: 0.1 })
+    ], { model: 'gpt-4o-mini', maxTokens: 16, temperature: 0.1 })
 
     const intent = response.content.trim().toLowerCase()
     const intentMap: Record<string, MessageIntent> = {

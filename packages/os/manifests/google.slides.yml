@@ -4,3 +4,177 @@ icon: "https://ssl.gstatic.com/docs/presentations/images/favicon5.ico"
 url: https://docs.google.com/presentation
 category: productivity
 ai_description: "Create and edit presentations. Add slides, images, and animations."
+help_url: "https://support.google.com/docs/topic/9052835"
+
+navigation:
+  overview: >
+    Google Slides is a collaborative presentation editor. Each presentation contains slides
+    with text boxes, images, shapes, charts, and videos. The interface has a slide panel on the
+    left, a main editing canvas in the center, and speaker notes at the bottom. Presentations
+    support master slide themes, transitions, animations, real-time collaboration, and Presenter
+    View with speaker notes and timer. URL: docs.google.com/presentation/d/PRESENTATION_ID/edit.
+
+  pages:
+    home:
+      description: "The Slides home page listing recent presentations and template gallery."
+      url_pattern: "docs.google.com/presentation"
+      layout:
+        - "Top: template gallery with '+ Blank' and templates (Photo Album, Pitch Deck, Portfolio, Report, Consulting, etc.)"
+        - "Below: 'Recent presentations' list with name, owner, last opened date"
+      blank_card:
+        text: "'+ Blank' — creates a new untitled presentation with one blank slide"
+        behavior: "Opens the editor. Default slide has a title and subtitle text placeholder."
+      template_cards:
+        behavior: "Pre-designed templates with coordinated colors, fonts, and layouts. Click to create a new presentation from the template."
+
+    editor:
+      description: "The presentation editor with slide filmstrip, canvas, and speaker notes."
+      url_pattern: "docs.google.com/presentation/d/PRESENTATION_ID/edit"
+      layout:
+        - "Top-left: presentation title (click to rename), star, move icon"
+        - "Menu bar: File, Edit, View, Insert, Format, Slide, Arrange, Tools, Extensions, Help"
+        - "Toolbar: new slide (+), undo/redo, print, paint format, zoom, select, text box, image, shape, line, comment, background, layout, theme, transition"
+        - "Left: slide filmstrip (thumbnails of all slides in order)"
+        - "Center: slide canvas — current slide editing area at actual aspect ratio (16:9 default)"
+        - "Bottom: speaker notes area (expandable by dragging the divider)"
+        - "Top-right: 'Slideshow' button (play icon), Share button, collaborator avatars"
+      slide_filmstrip:
+        behavior: "Thumbnails of all slides, vertically stacked. Click to navigate. Right-click for: New slide, Duplicate slide, Delete slide, Skip slide, Move slide (up/down/beginning/end), Change layout, Change theme, Change transition, Apply layout to all. Drag to reorder. Multi-select with Shift+click or Cmd+click."
+      slide_canvas:
+        behavior: "Click text boxes to select (blue handles), double-click to edit text. Click empty canvas to deselect. Drag elements to reposition. Drag corner handles to resize (Shift+drag to maintain proportions). Alignment guides (red lines) appear when elements align with others."
+      placeholders:
+        title: "'Click to add title' — click and type. Placeholder text disappears when you start typing."
+        subtitle: "'Click to add subtitle' — secondary text below title."
+        body: "'Click to add text' — appears on content layouts for body text."
+      new_slide_button:
+        selector: "div[aria-label='New slide']"
+        keyboard: "Cmd+M — insert new slide"
+        behavior: "Adds a slide after the current one with the same layout. Click the dropdown arrow for layout choices: Title Slide, Section Header, Title and Body, Title and Two Columns, Title Only, One Column Text, Main Point, Big Number, Blank, and custom layouts."
+      speaker_notes:
+        selector: "div[aria-label='Speaker notes']"
+        behavior: "Click 'Click to add speaker notes' area below the canvas. Type notes visible only in Presenter View. Notes support basic formatting. Drag the border above notes to resize the area."
+      slideshow_button:
+        selector: "div[aria-label='Slideshow']"
+        keyboard: "Cmd+Enter — start from current slide. Cmd+Shift+Enter — start from beginning"
+        behavior: "Starts presentation in full-screen. Arrow keys, spacebar, or click advance slides. Press Escape to exit. Press 'P' during slideshow to enter Presenter View."
+      insert_menu:
+        text: "Insert menu"
+        options:
+          - "Image: upload, search web, by URL, from Drive, from Photos, camera"
+          - "Text box: draw a text area anywhere on the slide"
+          - "Audio: from Google Drive"
+          - "Video: YouTube URL search, by URL, from Google Drive"
+          - "Shape: wide library — shapes, arrows, callouts, equation symbols, stars, banners"
+          - "Table: specify rows/columns grid"
+          - "Chart: from Sheets (linked) or new (Line, Bar, Column, Pie)"
+          - "Diagram: pre-built visual templates (grid, hierarchy, timeline, process, relationship, cycle)"
+          - "Word art: stylized text with fill and outline"
+          - "Line: line, arrow, elbow connector, curved connector, curve, polyline, scribble"
+          - "Comment, Placeholder, Special characters, Slide numbers"
+      format_menu:
+        key_options:
+          - "Text: size, color, bold, italic, underline, strikethrough, superscript, subscript"
+          - "Align & indent: left, center, right, justify, indent options"
+          - "Line & paragraph spacing: before/after paragraph, line height"
+          - "Bullets & numbering: numbered, lettered, bulleted, custom"
+          - "Table: insert/delete rows/columns, merge cells, distribute rows/columns"
+          - "Format options: opens right panel with Size, Position, Text fitting, Alt text"
+      slide_menu:
+        key_options:
+          - "New slide (Cmd+M)"
+          - "Duplicate slide"
+          - "Delete slide"
+          - "Skip slide (hides from slideshow)"
+          - "Move slide"
+          - "Change background: solid color, gradient, or image"
+          - "Apply layout"
+          - "Change transition: fade, slide, flip, cube, gallery, and many more"
+          - "Edit theme: opens master slide editor"
+      theme_editor:
+        behavior: "Slide > Edit theme opens the master slide view. Edit layouts that apply across all slides. Changes to master slides propagate to all slides using that layout. Modify fonts, colors, logo placement, and background for consistency."
+
+    presenter_view:
+      description: "The presenter's view during a slideshow, shown on the presenter's screen while the audience sees full-screen slides."
+      layout:
+        - "Left: current slide (large preview)"
+        - "Right: next slide preview, speaker notes"
+        - "Top: slide number, elapsed timer, audience tools, zoom controls"
+        - "Bottom: navigation arrows"
+      behavior: "Access via three-dot menu during slideshow or press 'P'. Timer starts automatically. Audience Tools provides Q&A link for audience questions. Pointer/laser tools available."
+
+  workflows:
+    create_presentation:
+      - "Click '+ Blank' on home page"
+      - "Click the title placeholder, type presentation title"
+      - "Click subtitle, type subtitle text"
+      - "Press Cmd+M to add slides"
+      - "Choose layouts from the new slide dropdown for variety"
+
+    add_content:
+      - "Click text placeholders to type text"
+      - "Insert > Image to add images (search web, upload, URL, Drive, Photos)"
+      - "Insert > Shape for shapes, arrows, callouts"
+      - "Insert > Text box to add text anywhere (not just in placeholders)"
+      - "Insert > Table for structured data"
+      - "Insert > Video for YouTube or Drive videos"
+
+    apply_transitions:
+      - "Select a slide in the filmstrip"
+      - "Slide > Change transition (or click 'Transition' in toolbar)"
+      - "Choose transition type from the dropdown: None, Dissolve, Fade, Slide from right/left, Flip, Cube, Gallery"
+      - "Set speed: Slow, Medium, Fast"
+      - "Click 'Apply to all slides' for consistency"
+
+    present:
+      - "Click 'Slideshow' button (or Cmd+Enter for current slide, Cmd+Shift+Enter for beginning)"
+      - "Navigate: arrow keys, spacebar, click, or Page Up/Down"
+      - "Press 'P' for Presenter View with notes and timer"
+      - "Press 'L' for laser pointer"
+      - "Press 'A' to toggle audience Q&A"
+      - "Press Escape to exit"
+
+    collaborate:
+      - "Click Share, add collaborators by email"
+      - "Multiple people can edit simultaneously — cursors are visible with name labels"
+      - "Comment on specific elements: select element, Cmd+Alt+M or Insert > Comment"
+      - "Version history: File > Version history > See version history"
+
+  keyboard_shortcuts:
+    new_slide: "Cmd+M — insert new slide"
+    duplicate: "Cmd+D — duplicate selected element or slide"
+    bold: "Cmd+B"
+    italic: "Cmd+I"
+    underline: "Cmd+U"
+    copy_formatting: "Cmd+Alt+C"
+    paste_formatting: "Cmd+Alt+V"
+    group: "Cmd+Alt+G — group selected objects"
+    ungroup: "Cmd+Alt+Shift+G — ungroup"
+    start_slideshow: "Cmd+Enter — from current slide"
+    start_from_beginning: "Cmd+Shift+Enter — from first slide"
+    select_all: "Cmd+A — select all objects on current slide"
+    undo: "Cmd+Z"
+    redo: "Cmd+Y"
+    find: "Cmd+F"
+
+  url_patterns:
+    home: "docs.google.com/presentation"
+    editor: "docs.google.com/presentation/d/PRESENTATION_ID/edit"
+    specific_slide: "docs.google.com/presentation/d/PRESENTATION_ID/edit#slide=id.SLIDE_ID"
+    preview: "docs.google.com/presentation/d/PRESENTATION_ID/preview"
+    present: "docs.google.com/presentation/d/PRESENTATION_ID/present"
+    copy: "docs.google.com/presentation/d/PRESENTATION_ID/copy"
+    export_pdf: "docs.google.com/presentation/d/PRESENTATION_ID/export/pdf"
+    export_pptx: "docs.google.com/presentation/d/PRESENTATION_ID/export/pptx"
+    template: "docs.google.com/presentation/d/PRESENTATION_ID/template/preview"
+
+  tips:
+    - "Cmd+M adds a new slide with the same layout — fastest way to build out a deck"
+    - "Hold Shift while resizing to maintain aspect ratio of images and shapes"
+    - "Insert > Diagram provides pre-built visual templates for processes, hierarchies, timelines, and cycles"
+    - "Master slides (Slide > Edit theme) enforce consistent branding across all slides"
+    - "Import slides from other presentations: File > Import slides > select file > pick specific slides"
+    - "Slide > Change transition > Apply to all slides for consistent transitions"
+    - "The Explore panel (Tools > Explore) suggests AI-powered layouts based on your slide content"
+    - "Press 'L' during a slideshow to activate a laser pointer"
+    - "Presenter View shows notes, timer, and next slide — access by pressing 'P' during presentation"
+    - "Skip slides (right-click > Skip slide) to hide them from the slideshow without deleting"

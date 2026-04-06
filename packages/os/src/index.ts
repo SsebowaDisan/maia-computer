@@ -9,6 +9,7 @@ export { NetworkBrain } from './kernel/NetworkBrain'
 export { DOMBrain } from './kernel/DOMBrain'
 export { VisionBrain } from './kernel/VisionBrain'
 export { IntelligenceRouter } from './kernel/IntelligenceRouter'
+export { PageScraper } from './kernel/PageScraper'
 export { SearchIndex } from './kernel/SearchIndex'
 
 // Brain
@@ -19,6 +20,7 @@ export { SelfHealer } from './brain/SelfHealer'
 export { CostTracker } from './brain/CostTracker'
 export { Orchestrator } from './brain/Orchestrator'
 export { buildPersonalityPrompt, getPersonality } from './brain/AgentPersonality'
+export { NavigationMemory } from './brain/NavigationMemory'
 
 // LLM
 export { OpenAIAdapter } from './llm/OpenAIAdapter'

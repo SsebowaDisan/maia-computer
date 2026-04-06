@@ -4,3 +4,63 @@ icon: "https://www.google.com/s2/favicons?domain=gumroad.com&sz=128"
 url: https://gumroad.com
 category: finance
 ai_description: "Sell digital products. Manage sales, customers, and payouts."
+
+navigation:
+  overview: >
+    Gumroad is a platform for selling digital products (ebooks, courses, software, art).
+    It provides a dashboard for managing products, tracking sales, and handling payouts.
+
+  pages:
+    dashboard:
+      description: "The home page showing sales overview and recent activity."
+      layout:
+        - "Top: navigation tabs (Home, Products, Posts, Emails, Workflows, Discover)"
+        - "Center: revenue chart, total sales, recent purchases"
+      nav_tabs:
+        text: "Home, Products, Posts, Emails, Workflows in top navigation"
+        behavior: "Home shows sales dashboard. Products shows your listed products. Posts lets you publish content. Emails manages email campaigns. Discover is the public marketplace."
+      revenue_chart:
+        text: "Sales chart on the dashboard"
+        behavior: "Shows earnings over time with selectable date ranges."
+
+    products:
+      description: "Page listing all your products."
+      layout:
+        - "Top: 'New product' button"
+        - "Center: table of products with name, price, sales count, revenue"
+      product_list:
+        text: "Table of products"
+        behavior: "Each row shows product name, price, number of sales, and total revenue. Click a product to edit it."
+      new_product:
+        text: "'New product' button"
+        behavior: "Opens the product creation flow. Set name, price, description, cover image, and upload digital files for delivery."
+
+    product_editor:
+      description: "Edit page for a product."
+      layout:
+        - "Fields: name, price, description, cover image, content/files"
+        - "Settings: pricing options, licensing, customer limits"
+        - "Bottom: shareable purchase link"
+      purchase_link:
+        text: "Shareable link shown on the product page"
+        behavior: "Copy and share this URL — customers can purchase directly through it."
+
+  workflows:
+    create_product:
+      - "Click 'Products' in the top navigation"
+      - "Click 'New product'"
+      - "Set name, price, and description"
+      - "Upload the digital files"
+      - "Publish the product"
+      - "Share the purchase link"
+
+    track_sales:
+      - "Click 'Home' to see the dashboard"
+      - "View revenue chart and recent purchases"
+      - "Click a product to see its specific sales data"
+
+  tips:
+    - "Products must be published to be purchasable — drafts are not visible to customers"
+    - "The purchase link is the primary way customers buy — share it via email, social media, or your website"
+    - "Payout settings must be configured before you can withdraw earnings"
+    - "Gumroad handles payment processing and delivery automatically"

@@ -4,3 +4,121 @@ icon: "https://www.google.com/s2/favicons?domain=zoom.us&sz=128"
 url: https://app.zoom.us/wc
 category: communication
 ai_description: "Join and host video meetings. Screen sharing and chat."
+help_url: "https://support.zoom.us"
+
+navigation:
+  overview: >
+    Zoom is a video conferencing platform. The web client provides a dashboard for starting,
+    joining, and scheduling meetings, plus a full in-meeting experience with screen sharing,
+    breakout rooms, reactions, recording, and virtual backgrounds. The web client may prompt
+    to download the desktop app — look for 'Join from your browser' link to stay in the browser.
+
+  pages:
+    dashboard:
+      description: "The home page with meeting action buttons and upcoming meetings."
+      layout:
+        - "Left sidebar: Home, Team Chat, Meetings, Contacts, Whiteboards, Clips"
+        - "Center: 'New Meeting' (orange), 'Join' (blue), 'Schedule', 'Share Screen' action buttons"
+        - "Below: upcoming scheduled meetings list with Start/Join buttons"
+        - "Top-right: profile icon, settings"
+      new_meeting_button:
+        behavior: "Starts a new instant meeting. Dropdown arrow next to it offers: start with video on/off, use Personal Meeting ID (PMI) vs random ID. Your camera and mic activate on join."
+      join_button:
+        behavior: "Opens a dialog to enter a Meeting ID or Personal Link Name. Enter the code and click Join. May prompt for a display name and passcode."
+      schedule_button:
+        behavior: "Opens scheduling form: Topic, Date/Time, Duration, Time Zone, Recurring toggle, Meeting ID type (auto-generate or PMI), Passcode, Waiting Room toggle, Video on/off for host/participants, Calendar integration (Google, Outlook, Other)."
+      upcoming_meetings:
+        behavior: "Lists scheduled meetings with topic, date, time, duration. Click a meeting for details panel with Start button, invitation text, and meeting link. Copy Invitation copies a formatted block with all join details."
+
+    pre_join:
+      description: "Camera and audio preview before entering a meeting."
+      layout:
+        - "Center: camera preview with virtual background selector"
+        - "Bottom: mic test, speaker test, Join/Don't Connect audio options"
+      behavior: "Test camera and mic before joining. Select or blur virtual background. Choose to join with audio via computer or phone dial-in. Click 'Join' to enter the meeting."
+
+    in_meeting:
+      description: "Active meeting view with video and controls."
+      layout:
+        - "Center: participant video grid (Speaker View or Gallery View)"
+        - "Bottom toolbar: Mute/Unmute, Start/Stop Video, Security, Participants, Chat, Share Screen, Record, Reactions, Apps, Whiteboard, More, Leave/End"
+        - "Top-right: View toggle (Speaker/Gallery), fullscreen"
+      mute_unmute:
+        behavior: "Toggle microphone. Space bar = push-to-talk (hold to temporarily unmute when muted). The ^ arrow next to it opens audio settings: select mic, speaker, test audio, leave computer audio."
+      start_stop_video:
+        behavior: "Toggle camera. The ^ arrow next to it opens video settings: select camera, virtual background (blur, images, video backgrounds), video filters, touch up appearance, adjust for low light."
+      security:
+        behavior: "Host-only control. Toggle: Lock Meeting, Enable Waiting Room, Hide Profile Pictures, Allow participants to Share Screen/Chat/Rename/Unmute/Start Video. Suspend Participant Activities for emergency lockdown."
+      participants:
+        behavior: "Opens right panel showing all participants with mute/unmute status. Host can: mute/unmute individuals or all, spotlight (pin to main view), make co-host, put in waiting room, remove. Attendee count shown on the button."
+      share_screen:
+        behavior: "Opens share picker: Basic (entire screen or specific window), Advanced (audio only, second camera, content from 2nd camera), Files (Dropbox, OneDrive, Google Drive). 'Share computer sound' checkbox at bottom. 'Optimize for video clip' checkbox for smooth playback."
+      chat:
+        behavior: "Opens in-meeting chat panel. Send to Everyone or privately to specific participants. Share links, files. Host can control who participants can chat with (everyone, host only, no one)."
+      record:
+        behavior: "Start local or cloud recording (cloud requires paid plan). All participants are notified. Recording indicator appears top-left. Pause/stop via the button. Cloud recordings are processed and emailed after the meeting."
+      reactions:
+        behavior: "Send live reactions: Thumbs Up, Clap, Heart, Laugh, Surprised, Celebrate. Reactions appear briefly on your video tile. Raise Hand persists until manually lowered — visible in Participants panel. Nonverbal feedback: Yes, No, Slow Down, Speed Up."
+      breakout_rooms:
+        behavior: "Host creates breakout rooms via the Breakout Rooms button. Assign participants automatically or manually. Set timer for auto-return. Broadcast messages to all rooms. Participants can ask for help from host."
+      waiting_room:
+        behavior: "Participants land in a virtual waiting area before being admitted. Host sees them in the Participants panel with 'Admit' button. Can customize waiting room message and logo."
+      closed_captions:
+        behavior: "Click CC / Live Transcript in the toolbar. Zoom generates real-time captions. Full transcript available after meeting if recording is enabled."
+
+    meeting_chat:
+      description: "Persistent chat associated with a meeting (separate from in-meeting chat)."
+      behavior: "Accessible from Team Chat after the meeting. Contains shared files, links, and the meeting recording link. Group chat created automatically for all participants."
+
+  keyboard_shortcuts:
+    mute_unmute: "Cmd+Shift+A — toggle mute"
+    start_stop_video: "Cmd+Shift+V — toggle video"
+    share_screen: "Cmd+Shift+S — start/stop screen sharing"
+    pause_recording: "Cmd+Shift+P — pause/resume recording"
+    gallery_view: "Cmd+Shift+W — switch to Gallery View"
+    speaker_view: "Cmd+Shift+W — toggle Speaker/Gallery View"
+    fullscreen: "Cmd+Shift+F — toggle fullscreen"
+    raise_hand: "Alt+Y — raise/lower hand"
+    mute_all: "Cmd+Ctrl+M — mute all participants (host only)"
+    push_to_talk: "Space (hold) — temporarily unmute while muted"
+
+  workflows:
+    join_meeting:
+      - "Click the 'Join' button on the dashboard"
+      - "Enter Meeting ID or paste the meeting link"
+      - "Enter passcode if prompted"
+      - "Preview camera/mic in the pre-join screen"
+      - "Click 'Join' — if prompted by the browser, click 'Join from your browser'"
+
+    start_instant_meeting:
+      - "Click 'New Meeting' on the dashboard"
+      - "Meeting starts immediately with you as host"
+      - "Click Participants > Invite to get the meeting link or ID"
+      - "Share with others to have them join"
+
+    share_screen_in_meeting:
+      - "Click 'Share Screen' in the bottom toolbar"
+      - "Select what to share: entire screen, specific window, or browser tab"
+      - "Check 'Share computer sound' if presenting video/audio content"
+      - "Click Share — green border indicates active sharing"
+      - "Click 'Stop Share' (red bar at top) to end"
+
+    use_breakout_rooms:
+      - "Click 'Breakout Rooms' in the toolbar (host only)"
+      - "Choose number of rooms and assignment method (auto or manual)"
+      - "Click 'Create', then assign participants if manual"
+      - "Click 'Open All Rooms' to start breakout sessions"
+      - "Broadcast messages to all rooms if needed"
+      - "Click 'Close All Rooms' — participants get a 60-second countdown to return"
+
+  tips:
+    - "Space bar = push-to-talk when muted — hold to temporarily unmute"
+    - "'Join from your browser' link bypasses the desktop app download prompt"
+    - "Passcodes are separate from Meeting IDs — both may be required to join"
+    - "Waiting Room lets the host screen participants before admitting them"
+    - "Spotlight pins a participant's video as the main view for all attendees (host only)"
+    - "Virtual backgrounds work best with a solid-colored wall behind you"
+    - "Gallery View shows up to 49 participants per page — use arrow keys to navigate pages"
+    - "Cloud recordings are processed after the meeting and emailed with a link"
+    - "Closed captions / Live Transcript provides real-time speech-to-text"
+    - "The Security button is the fastest way to lock down a meeting if disrupted"

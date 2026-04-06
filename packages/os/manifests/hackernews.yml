@@ -4,3 +4,73 @@ icon: "https://www.google.com/s2/favicons?domain=news.ycombinator.com&sz=128"
 url: https://news.ycombinator.com
 category: media
 ai_description: "Tech news and discussions. Browse top stories and comments."
+
+navigation:
+  overview: >
+    Hacker News is a tech-focused news aggregation site run by Y Combinator. It shows ranked
+    links to articles and discussions. The interface is intentionally minimal — plain HTML layout.
+
+  pages:
+    front_page:
+      description: "The main page showing 30 ranked stories."
+      layout:
+        - "Top bar: Hacker News logo, navigation links (new, past, comments, ask, show, jobs)"
+        - "Center: numbered list of stories (1-30)"
+        - "Bottom: 'More' link to load the next page"
+      story_entry:
+        text: "Each numbered story in the list"
+        behavior: "Each story has two lines: Line 1 shows rank number, upvote arrow, title (link to external site), and domain in parentheses. Line 2 shows points, author (username), time posted, and 'N comments' link."
+      story_title:
+        text: "The title link on each story"
+        behavior: "Clicks through to the external article/website. The domain in parentheses shows where the link goes."
+      comments_link:
+        text: "'N comments' on the subtext line of each story"
+        behavior: "Opens the Hacker News discussion thread for that story. This is where the community discussion happens."
+      nav_links:
+        text: "new, past, comments, ask, show, jobs in the top bar"
+        behavior: "'new' shows latest submissions. 'past' shows yesterday's top stories. 'comments' shows recent comments. 'ask' shows Ask HN questions. 'show' shows Show HN project showcases. 'jobs' shows YC company job listings."
+      more_link:
+        text: "'More' at the bottom of the story list"
+        behavior: "Loads the next page of 30 stories (stories 31-60, etc.)."
+      upvote_arrow:
+        text: "Small triangle next to each story"
+        behavior: "Click to upvote the story. Upvoted stories rank higher. Requires a logged-in account."
+
+    comments_page:
+      description: "Discussion thread for a specific story."
+      layout:
+        - "Top: the original story title and link"
+        - "Below: comment thread with indented/nested replies"
+      comment:
+        text: "Individual comments in the thread"
+        behavior: "Each comment shows author, time posted, and text content. Comments are indented to show reply nesting. Click 'reply' below a comment to respond to it."
+      collapse_toggle:
+        text: "[-] next to a username"
+        behavior: "Collapses that comment thread, hiding all replies under it. Useful for skipping long threads."
+
+  workflows:
+    browse_stories:
+      - "The front page shows the top 30 stories ranked by popularity"
+      - "Scan titles and point counts to find interesting stories"
+      - "Click the title to read the external article"
+      - "Click 'N comments' to read the community discussion"
+
+    read_discussion:
+      - "Click 'N comments' on any story"
+      - "Comments are sorted by community ranking"
+      - "Follow the indentation to track conversation threads"
+      - "Collapse lengthy threads with the [-] toggle"
+
+    explore_sections:
+      - "Click 'ask' in the top bar for community questions (Ask HN posts)"
+      - "Click 'show' for project showcases (Show HN posts)"
+      - "Click 'jobs' for startup job listings"
+      - "Click 'new' for the latest submissions before they get ranked"
+
+  tips:
+    - "Story titles link to external sites; 'N comments' links to the HN discussion — these are different destinations"
+    - "High point counts indicate community-validated quality content"
+    - "The site has no built-in search — use hn.algolia.com for full-text search across all stories and comments"
+    - "Ask HN and Show HN posts are community-generated content hosted directly on the site"
+    - "'past' in the top bar shows yesterday's top-ranked stories — useful for catching up"
+    - "The interface is intentionally minimalist — all functionality works through simple HTML links"

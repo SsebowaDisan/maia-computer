@@ -4,3 +4,104 @@ icon: "https://www.google.com/s2/favicons?domain=notion.so&sz=128"
 url: https://notion.so
 category: productivity
 ai_description: "Create and edit pages. Manage databases. Organize notes and documents."
+
+navigation:
+  overview: >
+    Notion is an all-in-one workspace for notes, documents, databases, and project management.
+    Content is organized as pages that can contain text, databases, embeds, and nested sub-pages.
+
+  pages:
+    home:
+      description: "The landing page showing recently visited pages, favorites, and workspace overview."
+      layout:
+        - "Top-left: workspace name and switcher"
+        - "Left sidebar: navigation tree with Favorites, Private, Shared sections, and '+ New page' button at bottom"
+        - "Center: recently visited pages, suggested content, and quick action cards"
+      sidebar:
+        text: "Left panel with page tree, always visible"
+        behavior: "Shows all workspace pages in a tree structure. Click any page to open it. Click the triangle arrow next to a page to expand and see nested sub-pages. Drag pages to reorder or nest them."
+      new_page_button:
+        text: "'+ New page' at the bottom of the left sidebar"
+        behavior: "Creates a new blank page in your Private section. Opens it immediately with a title placeholder at the top."
+      favorites_section:
+        text: "'Favorites' section at top of sidebar"
+        behavior: "Shows pages you've starred for quick access. Add a page to favorites by clicking the star icon in the page header."
+      search:
+        text: "'Search' at the top of the sidebar (or press Cmd+K / Ctrl+K)"
+        behavior: "Opens Quick Find overlay. Type to search across all pages, databases, and content. Results appear instantly with page titles and previews."
+
+    page:
+      description: "A single Notion page with a title and block-based content area."
+      layout:
+        - "Top: page icon (optional emoji/image), page title (large text), cover image area"
+        - "Below title: page properties (if in a database), breadcrumb path"
+        - "Center: content area with blocks — text, headings, lists, toggles, tables, databases, embeds"
+        - "Left margin: block handles (six-dot grip icon) appear on hover for each block"
+      page_title:
+        text: "Large title text at the top of the page"
+        behavior: "Click to edit. Type the page name. Press Enter to move to the content area below."
+      block_content:
+        text: "Content blocks in the page body"
+        behavior: "Click any block to edit it. Each block can be text, heading, list, toggle, table, code, image, embed, or database. Blocks can be dragged by their handle to reorder."
+      slash_command:
+        text: "Type '/' anywhere in the content area"
+        behavior: "Opens the slash command menu with options to insert different block types: Text, Heading 1/2/3, Bulleted list, Numbered list, To-do list, Toggle, Quote, Divider, Table, Database, Image, Code, and many more."
+      block_handle:
+        text: "Six-dot grip icon that appears when hovering left of any block"
+        behavior: "Click to open a menu with options: Delete, Duplicate, Turn into (change block type), Copy link, Move to, Color. Drag to reorder the block."
+      add_icon:
+        text: "'Add icon' text that appears when hovering over the title area"
+        behavior: "Click to add an emoji icon to the page, which appears next to the title in the sidebar too."
+      add_cover:
+        text: "'Add cover' text that appears when hovering over the top of the page"
+        behavior: "Adds a cover image banner at the top of the page. Choose from gallery, upload, or paste a URL."
+
+    database:
+      description: "A structured collection of pages with properties, viewable in different layouts."
+      layout:
+        - "Top: database title, view tabs (Table, Board, Timeline, Calendar, List, Gallery)"
+        - "Below tabs: filter and sort controls"
+        - "Center: database entries displayed in the current view format"
+      view_tabs:
+        text: "Table, Board, Timeline, Calendar, List, Gallery tabs"
+        behavior: "Click to switch how the database is displayed. Table shows rows and columns. Board shows Kanban cards. Calendar shows entries by date. Each view can have its own filters and sorts."
+      filter_button:
+        text: "'Filter' button above the database"
+        behavior: "Opens filter controls to show only entries matching specific property values (e.g., Status is 'In Progress')."
+      sort_button:
+        text: "'Sort' button above the database"
+        behavior: "Adds sort rules to order entries by any property (ascending or descending)."
+      new_entry:
+        text: "'+ New' button at the bottom of the database or '+ New page' row"
+        behavior: "Creates a new database entry. Opens as a page where you can set properties and add content."
+
+  workflows:
+    create_page:
+      - "Click '+ New page' at the bottom of the left sidebar"
+      - "Type a title in the title field at the top"
+      - "Press Enter to move to the content area"
+      - "Type text or press '/' to insert different block types"
+
+    search_content:
+      - "Press Cmd+K (or Ctrl+K) to open Quick Find"
+      - "Type your search query"
+      - "Results appear instantly — click a result to open that page"
+
+    create_database:
+      - "On any page, type '/' and select 'Table - Full page' or 'Table - Inline'"
+      - "Name the database and define properties (columns) by clicking '+ Add a property'"
+      - "Add entries by clicking '+ New' at the bottom"
+      - "Switch views using the view tabs (Board, Calendar, etc.)"
+
+    organize_with_nesting:
+      - "Drag any page in the sidebar onto another page to nest it as a sub-page"
+      - "Or inside a page, type '/' and select 'Link to page' or 'Create sub-page'"
+      - "Build a hierarchy that matches your project structure"
+
+  tips:
+    - "The slash command menu (/) is the fastest way to add any content type — headings, lists, databases, embeds, code blocks"
+    - "Drag blocks by their handle to reorder content, or drag them into columns for side-by-side layouts"
+    - "Turn any page into a template by clicking the three-dot menu in the page header and selecting 'Turn into template'"
+    - "Use @-mentions to link to other pages or notify team members"
+    - "Toggle blocks are great for collapsible content — type '/toggle' to create one"
+    - "Database views let you see the same data in multiple ways — create a Table view for detail work and a Board view for visual tracking"

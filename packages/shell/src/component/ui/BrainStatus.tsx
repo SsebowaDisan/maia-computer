@@ -2,15 +2,20 @@ import { useCallback, useRef, useState } from 'react'
 
 import type { PlanStep } from '@maia/shared'
 
+import type { ResearchSnapshot } from '../../lib/researchSignals'
+
+import { ResearchProgress } from './ResearchProgress'
+
 interface BrainStatusProps {
   currentStep?: string
   isVisible: boolean
   plan: PlanStep[]
+  research: ResearchSnapshot
   taskDescription: string
   thought: string
 }
 
-export function BrainStatus({ currentStep, isVisible, plan, taskDescription, thought }: BrainStatusProps) {
+export function BrainStatus({ currentStep, isVisible, plan, research, taskDescription, thought }: BrainStatusProps) {
   const [dismissed, setDismissed] = useState(false)
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const dragRef = useRef<{ startX: number; startY: number; originX: number; originY: number } | undefined>(undefined)
@@ -40,7 +45,7 @@ export function BrainStatus({ currentStep, isVisible, plan, taskDescription, tho
 
   return (
     <div
-      className="fixed left-6 top-12 z-50 max-w-xs cursor-grab select-none rounded-xl border border-border bg-elevated/90 px-4 py-3 shadow-lg backdrop-blur active:cursor-grabbing"
+      className="fixed left-6 top-12 z-50 w-[360px] max-w-[calc(100vw-3rem)] cursor-grab select-none rounded-xl border border-border bg-elevated/90 px-4 py-3 shadow-lg backdrop-blur active:cursor-grabbing"
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
@@ -69,6 +74,7 @@ export function BrainStatus({ currentStep, isVisible, plan, taskDescription, tho
       ) : null}
       {currentStep ? <p className="mt-1 truncate text-xs text-textSecondary">{currentStep}</p> : null}
       {thought ? <p className="mt-2 truncate text-xs italic text-textMuted">{thought}</p> : null}
+      <ResearchProgress research={research} />
     </div>
   )
 }
