@@ -1,0 +1,131 @@
+name: Spotify
+id: spotify
+icon: "https://www.google.com/s2/favicons?domain=spotify.com&sz=128"
+url: https://open.spotify.com
+category: media
+ai_description: "Listen to music, podcasts, and playlists. Search for songs and artists."
+help_url: "https://support.spotify.com"
+
+navigation:
+  overview: >
+    Spotify is a music and podcast streaming service. The web player at open.spotify.com has a
+    three-panel layout: left sidebar for navigation and library, center content area, and a
+    persistent now-playing bar at the bottom. Free accounts have shuffle-only playback on mobile
+    and ads between songs; Premium accounts have full on-demand playback.
+
+  pages:
+    home:
+      description: "Personalized recommendations, recently played, and curated sections."
+      url_pattern: "open.spotify.com"
+      layout:
+        - "Left sidebar: Home icon, Search icon, Your Library section (expandable list of playlists, albums, artists, podcasts)"
+        - "Center: greeting banner (Good morning/afternoon/evening), recently played grid (6 items), then curated rows (Made For You, Popular playlists, New Releases, etc.)"
+        - "Bottom: now playing bar — persistent across all pages"
+      home_button:
+        selector: "a[href='/'] span, [data-testid='home-button']"
+        behavior: "Returns to the personalized home page."
+      your_library:
+        selector: "[data-testid='Your Library-section']"
+        behavior: "Shows saved playlists, albums, artists, and podcasts. Filter chips at top: Playlists, Artists, Albums, Podcasts & Shows. Search icon within library to filter by name. Sort by Recent, Recently Added, Alphabetical, Creator. Click any item to open it."
+
+    search:
+      description: "Search interface with genre browsing cards."
+      url_pattern: "open.spotify.com/search"
+      layout:
+        - "Top: search input field with placeholder 'What do you want to listen to?'"
+        - "Below (empty state): grid of colorful genre/mood cards (Pop, Rock, Hip-Hop, Chill, Workout, Focus, etc.)"
+        - "Below (with query): Top Result card (large), then rows for Songs, Artists, Albums, Playlists, Podcasts"
+      search_input:
+        selector: "input[data-testid='search-input']"
+        behavior: "Click to focus. Type an artist, song, album, or podcast name. Results appear instantly as you type. Clear with X button."
+        keyboard: "Cmd+L (Mac) or Ctrl+L (Windows) focuses the search bar from anywhere."
+      top_result:
+        behavior: "Large card showing the best overall match — could be an artist, album, song, or playlist. Click to navigate to it. Play button on hover starts playback."
+      songs_results:
+        behavior: "List of matching songs with title, artist, album, duration. Click any song to play it immediately. Hover shows a play icon replacing the track number."
+
+    album_playlist:
+      description: "Album or playlist view with track listing."
+      url_pattern: "open.spotify.com/album/ID or open.spotify.com/playlist/ID"
+      layout:
+        - "Top: cover art (large), title, creator/artist, description (playlists), total tracks, total duration"
+        - "Below: large green Play button, Shuffle toggle, heart/save icon, three-dot menu"
+        - "Center: track list table — columns: # (number), Title (with artist), Album (playlists only), Date Added (playlists only), Duration (clock icon)"
+      play_button:
+        selector: "button[data-testid='play-button']"
+        behavior: "Plays the album/playlist from the first track. If already playing this context, toggles pause."
+      track_row:
+        behavior: "Click a track to play it. Hover shows play icon over the track number. Right-click for context menu: Add to Queue, Go to Artist, Go to Album, Add to Playlist, Share, Show Credits. The currently playing track is highlighted green."
+      save_button:
+        behavior: "Heart icon saves the album/playlist to Your Library. Green heart means already saved."
+
+    artist_page:
+      description: "Artist profile with popular tracks, discography, and related artists."
+      url_pattern: "open.spotify.com/artist/ID"
+      layout:
+        - "Top: artist header image, name, monthly listener count, verified checkmark (if verified)"
+        - "Below: Play button, Follow button, three-dot menu"
+        - "Popular: top 5 tracks with play counts (click 'See more' for full list)"
+        - "Discography: Albums, Singles and EPs, Compilations — each as a horizontal scrolling row"
+        - "Fans also like: related artists row"
+        - "Appears On: albums/playlists featuring this artist"
+      follow_button:
+        behavior: "Follow the artist. They appear in Your Library under Artists. New releases trigger notifications."
+
+    now_playing:
+      description: "Full-screen now playing view."
+      behavior: "Click the album art in the bottom bar or the expand arrow to open. Shows large album art, lyrics (if available), and full playback controls. Click the chevron to collapse back to the bar."
+
+  playback_bar:
+    description: "Persistent bar at the bottom of every page."
+    layout:
+      - "Left: album art thumbnail (click to expand), song name (click to go to album), artist name (click to go to artist)"
+      - "Center: shuffle, previous, play/pause, next, repeat buttons. Progress bar below with current time and total time."
+      - "Right: Now Playing View, lyrics, queue, Connect to device, volume slider, mini/full player toggle"
+    keyboard_shortcuts:
+      spacebar: "Play/pause"
+      cmd_left: "Previous track (Cmd+Left on Mac)"
+      cmd_right: "Next track (Cmd+Right on Mac)"
+      cmd_up: "Volume up"
+      cmd_down: "Volume down"
+      cmd_l: "Focus search bar"
+      cmd_shift_left: "Rewind 15 seconds (podcasts)"
+      cmd_shift_right: "Forward 15 seconds (podcasts)"
+    queue_button:
+      behavior: "Opens the queue panel on the right, showing 'Now Playing' and 'Next in Queue'. Drag to reorder. Click X to remove tracks. 'Next From' section shows what plays after the queue."
+    device_selector:
+      behavior: "Connect to a Device icon lists available playback devices — phone, desktop app, smart speakers, web player. Click to transfer playback."
+
+  workflows:
+    search_and_play:
+      - "Press Cmd+L (Mac) or Ctrl+L to focus the search bar"
+      - "Type an artist, song, or album name"
+      - "Click a song in the results to play immediately"
+      - "Or click an artist/album to browse their content first"
+
+    queue_management:
+      - "Right-click any song and select 'Add to Queue'"
+      - "Click the queue icon in the bottom-right of the playback bar"
+      - "View upcoming tracks, drag to reorder, click X to remove"
+      - "The queue plays before the normal album/playlist order resumes"
+
+    discover_music:
+      - "Click Search, then browse genre/mood cards"
+      - "Or explore 'Made For You' playlists on the Home page (Discover Weekly, Release Radar, Daily Mixes)"
+      - "Or visit an artist page and check 'Fans also like' for related artists"
+
+    create_playlist:
+      - "Click '+ Create playlist' in the left sidebar library section"
+      - "Name the playlist and add a description"
+      - "Search for songs and right-click, select 'Add to Playlist', choose your playlist"
+      - "Or drag songs directly from search results into the playlist in the sidebar"
+
+  tips:
+    - "Cmd+L (Ctrl+L) is the fastest way to search — focuses the search bar from any page"
+    - "Right-click anything for a context menu with Add to Queue, Add to Playlist, Go to Artist, Share"
+    - "Discover Weekly (updated every Monday) and Release Radar (updated every Friday) are personalized playlists"
+    - "The queue is separate from the playlist order — queued songs play first, then normal order resumes"
+    - "Clicking the song name in the now playing bar navigates to the album, clicking the artist name goes to the artist page"
+    - "Lyrics are available for many songs — click the microphone icon in the bottom bar"
+    - "Free accounts have shuffle-only mode on playlists and ads between songs"
+    - "Connect to a Device lets you control playback on your phone, smart speaker, or other devices"

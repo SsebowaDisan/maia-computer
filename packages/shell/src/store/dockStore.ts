@@ -10,7 +10,7 @@ interface DockStoreState {
   setBadge: (itemId: string, count: number) => void
 }
 
-const DEFAULT_PINNED_IDS = ['gmail', 'slack', 'calendar', 'team-chat']
+const DEFAULT_PINNED_IDS: string[] = []
 
 export const useDockStore = create<DockStoreState>((set) => ({
   pinnedIds: DEFAULT_PINNED_IDS,

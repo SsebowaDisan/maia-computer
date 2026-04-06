@@ -1,0 +1,65 @@
+name: Miro
+id: miro
+icon: "https://www.google.com/s2/favicons?domain=miro.com&sz=128"
+url: https://miro.com
+category: productivity
+ai_description: "Online whiteboard for brainstorming, diagrams, and collaboration."
+
+navigation:
+  overview: >
+    Miro is an online collaborative whiteboard. It provides an infinite canvas for sticky notes,
+    shapes, diagrams, and brainstorming, with real-time collaboration.
+
+  pages:
+    dashboard:
+      description: "The home page showing your boards and team boards."
+      layout:
+        - "Center: grid of board cards with thumbnails, titles, and last modified dates"
+        - "Top: '+ New board' button, search bar, team selector"
+        - "Left sidebar: starred boards, team boards, recent boards"
+      new_board_button:
+        text: "'+ New board' button"
+        behavior: "Creates a new board. Choose blank or from template categories (brainstorming, mapping, planning, design, etc.)."
+      board_card:
+        text: "Individual board cards"
+        behavior: "Shows a thumbnail preview. Click to open in the editor."
+
+    editor:
+      description: "The board editor with infinite canvas and drawing tools."
+      layout:
+        - "Left: vertical toolbar (select, sticky note, shape, text, pen, connector, comment, more)"
+        - "Center: infinite canvas"
+        - "Bottom-right: zoom controls, minimap, presentation mode"
+      toolbar:
+        text: "Vertical toolbar on the left"
+        behavior: "Click a tool, then click or drag on the canvas. Sticky note creates a note at click position. Shape opens shape options. Text adds a text element. Pen allows freehand drawing. Connector draws lines between elements."
+      canvas:
+        text: "The infinite whiteboard area"
+        behavior: "Pan by clicking and dragging empty space (or Space+drag). Zoom with scroll wheel. Click elements to select. Drag to move. Right-click for context menu."
+      minimap:
+        text: "Small map in the bottom-right"
+        behavior: "Shows a miniature view of the entire board. Click to navigate to different areas."
+
+  workflows:
+    create_board:
+      - "Click '+ New board' on the dashboard"
+      - "Choose blank or a template"
+      - "The board opens in the editor"
+
+    add_content:
+      - "Select a tool from the left toolbar"
+      - "Click on the canvas to place the element"
+      - "Double-click elements to edit their content"
+      - "Use connectors to link elements together"
+
+    collaborate:
+      - "Share the board via the Share button (top-right)"
+      - "Collaborators see each other's cursors in real time"
+      - "Use the comment tool to leave feedback on specific areas"
+
+  tips:
+    - "Boards auto-save — there is no manual save button"
+    - "Templates save time — Miro has templates for retros, mind maps, user flows, and more"
+    - "Sticky notes are the most used element — click the sticky note tool, then click the canvas"
+    - "Frames help organize content into sections — useful for presentations"
+    - "The minimap helps navigate large boards"

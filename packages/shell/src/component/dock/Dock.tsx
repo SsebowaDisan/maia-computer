@@ -35,87 +35,65 @@ export function Dock({
 
   return (
     <>
-      {/* Invisible hover trigger zone at the bottom of the screen */}
       <div
         onMouseEnter={() => {
           setHovered(true)
           onPointerEnter()
         }}
-        style={{
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          width: '100%',
-          height: '12px',
-          zIndex: 60,
-          background: 'transparent',
-        }}
+        className="fixed inset-x-0 bottom-0 z-[60] h-8 bg-transparent"
       />
-      {/* Dock container */}
       <div
-        onMouseEnter={() => {
-          setHovered(true)
-          onPointerEnter()
-        }}
-        onMouseLeave={() => {
-          setHovered(false)
-          onPointerLeave()
-        }}
-        style={{
-          position: 'fixed',
-          bottom: show ? 0 : -100,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          transition: 'bottom 0.3s ease-out',
-          zIndex: 50,
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0px',
-          padding: '8px 12px',
-          borderRadius: '16px 16px 0 0',
-          border: '1px solid #222222',
-          borderBottom: 'none',
-          background: 'rgba(17, 17, 17, 0.9)',
-          backdropFilter: 'blur(20px)',
-          boxShadow: '0 -4px 24px rgba(0, 0, 0, 0.5)',
-        }}
+        className="pointer-events-none fixed inset-x-0 bottom-5 z-50 flex justify-center px-4"
       >
-        <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px' }}>
-          {itemsLeft.map((item) => (
-            <DockIcon
-              key={item.id}
-              badgeCount={badges[item.id]}
-              icon={item.icon}
-              isPinned={pinnedIds.includes(item.id)}
-              isRunning={runningIds.includes(item.id)}
-              label={item.label}
-              onClick={() => {
-                onOpenItem(item.id)
-              }}
-              onContextMenu={() => {
-                onTogglePin(item.id)
-              }}
-            />
-          ))}
-        </div>
-        <DockDivider />
-        <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px' }}>
-          {itemsRight.map((item) => (
-            <DockIcon
-              key={item.id}
-              badgeCount={badges[item.id]}
-              icon={item.icon}
-              isPinned={pinnedIds.includes(item.id)}
-              isRunning={runningIds.includes(item.id)}
-              label={item.label}
-              onClick={() => {
-                onOpenItem(item.id)
-              }}
-              onContextMenu={() => {
-                onTogglePin(item.id)
-              }}
-            />
-          ))}
+        <div
+          onMouseEnter={() => {
+            setHovered(true)
+            onPointerEnter()
+          }}
+          onMouseLeave={() => {
+            setHovered(false)
+            onPointerLeave()
+          }}
+          className={`flex items-center gap-0 rounded-[28px] border border-[#262626] bg-[rgba(12,12,12,0.78)] px-3 py-3 shadow-[0_20px_60px_rgba(0,0,0,0.5)] backdrop-blur-[26px] transition-[transform,opacity] duration-200 ease-out ${show ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}
+          style={{ transform: `translateY(${show ? 0 : 32}px)` }}
+        >
+          <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px' }}>
+            {itemsLeft.map((item) => (
+              <DockIcon
+                key={item.id}
+                badgeCount={badges[item.id]}
+                icon={item.icon}
+                isPinned={pinnedIds.includes(item.id)}
+                isRunning={runningIds.includes(item.id)}
+                label={item.label}
+                onClick={() => {
+                  onOpenItem(item.id)
+                }}
+                onContextMenu={() => {
+                  onTogglePin(item.id)
+                }}
+              />
+            ))}
+          </div>
+          <DockDivider />
+          <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px' }}>
+            {itemsRight.map((item) => (
+              <DockIcon
+                key={item.id}
+                badgeCount={badges[item.id]}
+                icon={item.icon}
+                isPinned={pinnedIds.includes(item.id)}
+                isRunning={runningIds.includes(item.id)}
+                label={item.label}
+                onClick={() => {
+                  onOpenItem(item.id)
+                }}
+                onContextMenu={() => {
+                  onTogglePin(item.id)
+                }}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </>

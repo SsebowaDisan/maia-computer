@@ -1,0 +1,83 @@
+name: Grammarly
+id: grammarly
+icon: "https://www.google.com/s2/favicons?domain=grammarly.com&sz=128"
+url: https://app.grammarly.com
+category: productivity
+ai_description: "Writing assistant. Check grammar, spelling, tone, and clarity."
+help_url: "https://support.grammarly.com"
+
+navigation:
+  overview: >
+    Grammarly is an AI writing assistant that checks grammar, spelling, punctuation, clarity, tone,
+    and style. The web editor at app.grammarly.com provides a document-based workflow: you create
+    or upload documents, and Grammarly analyzes text in real time, showing suggestions in a right
+    panel with an overall performance score.
+
+  pages:
+    dashboard:
+      description: "The home page showing your document library with recent documents and creation options."
+      layout:
+        - "Top-left: 'New' button (dropdown: blank document, upload), search bar"
+        - "Center: grid or list of document cards with title, word count, score, and last edited date"
+        - "Left sidebar: My Grammarly (documents), Trash"
+      new_button:
+        text: "'New' button at top-left"
+        behavior: "Click to open a dropdown with two options: 'New document' creates a blank document and opens the editor; 'Upload' opens a file picker to import .docx, .txt, or other text files for checking."
+      document_cards:
+        text: "Document cards in the center grid"
+        behavior: "Each card shows the document title, word count, overall score (colored circle), and last edited date. Click a card to open it in the editor. Hover to reveal a three-dot menu with rename, download, and delete options."
+
+    editor:
+      description: "The writing editor with text area on the left, suggestions panel on the right, and performance metrics."
+      layout:
+        - "Left: large text editing area where you write or paste content"
+        - "Right: suggestions panel listing all detected issues with category labels"
+        - "Top-right: overall performance score (0-100 in a colored circle)"
+        - "Top bar: document title (editable), goals button, download button, back to dashboard arrow"
+      text_area:
+        text: "Main editing area on the left side"
+        behavior: "Type or paste text directly. Grammarly analyzes in real time. Issues are underlined: red for correctness (grammar, spelling, punctuation), blue for clarity, green for engagement, purple for delivery. Click an underlined word/phrase to see the suggestion card in the right panel."
+      suggestions_panel:
+        text: "Right sidebar listing all detected issues"
+        behavior: "Categorized into four groups: Correctness (grammar, spelling, punctuation), Clarity (wordy sentences, unclear phrasing), Engagement (vocabulary variety, compelling language), Delivery (tone, formality). Click a suggestion to see explanation and accept/dismiss buttons. 'Accept' applies the fix inline; 'Dismiss' ignores it."
+      writing_score:
+        text: "Colored circular score indicator (top-right)"
+        behavior: "Shows an overall performance score from 0 to 100. Color changes from red (low) to yellow (medium) to green (high). Updates in real time as you fix issues. Click to see a breakdown by category."
+      goals_button:
+        text: "'Goals' or 'Set goals' button in the top bar"
+        behavior: "Opens a modal to configure writing goals: Audience (general, knowledgeable, expert), Formality (informal, neutral, formal), Domain (academic, business, general, technical, creative), Intent (inform, describe, convince, tell a story). Goals adjust which suggestions Grammarly prioritizes."
+      tone_detector:
+        text: "Tone indicator shown near the score or in the suggestions panel"
+        behavior: "Displays detected tone of the text (e.g., confident, friendly, formal, optimistic, urgent). Updates as you write. Helps ensure your text conveys the intended tone."
+      underlined_text:
+        text: "Underlined words and phrases in the text area"
+        behavior: "Red underlines: correctness errors (misspelling, grammar). Blue underlines: clarity improvements. Green underlines: engagement suggestions. Purple underlines: delivery/tone adjustments. Click any underline to see the suggestion card with explanation, original, and replacement."
+
+  workflows:
+    check_text:
+      - "Click 'New' on the dashboard and select 'New document' (or click an existing document)"
+      - "Paste or type your text in the editor"
+      - "Wait briefly for real-time analysis — underlines appear on detected issues"
+      - "Review suggestions in the right panel, sorted by category"
+      - "Click 'Accept' to apply a fix or 'Dismiss' to skip it"
+      - "Monitor the overall score as it improves with each fix"
+
+    upload_document:
+      - "Click 'New' on the dashboard and select 'Upload'"
+      - "Choose a .docx, .txt, or supported file"
+      - "The document opens in the editor with all issues already detected"
+      - "Review and apply suggestions"
+
+    set_writing_goals:
+      - "Open a document in the editor"
+      - "Click the 'Goals' button in the top bar"
+      - "Set audience, formality, domain, and intent"
+      - "Suggestions adapt to match your configured goals"
+
+  tips:
+    - "Grammarly checks happen automatically in real time — just type or paste and wait for analysis"
+    - "Set writing goals (audience, formality, domain) to get suggestions tailored to your context"
+    - "The tone detector helps ensure your text conveys the right emotional register"
+    - "Suggestion explanations teach grammar and style rules — read them to improve your writing over time"
+    - "Download your corrected document using the download button in the top bar"
+    - "Premium features include advanced clarity, conciseness, fluency, tone, and full-sentence rewrites"

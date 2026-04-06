@@ -33,12 +33,20 @@ export type CostEvent =
   | { type: 'cost.budget_warning'; currentCost: number; budgetLimit: number; timestamp: number }
   | { type: 'cost.budget_exceeded'; currentCost: number; budgetLimit: number; timestamp: number }
 
+export type OrchestratorEvent =
+  | { type: 'orchestrator.agent_started'; agentId: string; appId: string; description: string; timestamp: number }
+  | { type: 'orchestrator.agent_completed'; agentId: string; summary: string; timestamp: number }
+  | { type: 'orchestrator.discussion_started'; questionId: string; agentId: string; question: string; timestamp: number }
+  | { type: 'orchestrator.theatre_arrange'; layout: unknown[]; focusAppId?: string; timestamp: number }
+  | { type: 'orchestrator.theatre_focus'; appId: string; timestamp: number }
+
 export type MaiaEvent =
   | BrainEvent
   | AppEvent
   | CommunicationEvent
   | SessionEvent
   | CostEvent
+  | OrchestratorEvent
 
 export interface PlanStep {
   step: number

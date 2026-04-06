@@ -1,5 +1,6 @@
 import type { InstalledApp, ChatMessage } from '@maia/shared'
 
+import { AppWebView } from './AppWebView'
 import { ChatApp } from '../chat/ChatApp'
 import { SettingsScreen } from '../../screen/SettingsScreen'
 import { StoreScreen } from '../../screen/StoreScreen'
@@ -10,10 +11,9 @@ interface WindowContentProps {
   messages: ChatMessage[]
   onInstallApp: (app: Pick<InstalledApp, 'name' | 'icon' | 'url' | 'manifestId'>) => Promise<void>
   onOpenItem: (itemId: string) => void
-  onSendMessage: (message: string) => Promise<void>
+  onSendMessage: (message: string, replyToId?: string) => Promise<void>
   onUpdateSetting: (key: string, value: unknown) => Promise<void>
   settings: Record<string, unknown>
-  taskDescription: string
   window: ShellWindow
 }
 
@@ -39,11 +39,10 @@ export function WindowContent({
   onSendMessage,
   onUpdateSetting,
   settings,
-  taskDescription,
   window,
 }: WindowContentProps) {
   if (window.kind === 'chat') {
-    return <ChatApp activeTask={taskDescription} messages={messages} onSendMessage={onSendMessage} />
+    return <ChatApp messages={messages} onSendMessage={onSendMessage} />
   }
 
   if (window.kind === 'store') {
@@ -52,6 +51,12 @@ export function WindowContent({
 
   if (window.kind === 'settings') {
     return <SettingsScreen onUpdateSetting={onUpdateSetting} settings={settings} />
+  }
+
+  const installedApp = installedApps.find((app) => app.id === window.appId)
+
+  if (installedApp) {
+    return <AppWebView app={installedApp} />
   }
 
   return <AppPlaceholder appId={window.appId ?? window.title} />

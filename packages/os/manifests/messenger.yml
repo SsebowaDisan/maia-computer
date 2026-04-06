@@ -1,0 +1,97 @@
+name: Messenger
+id: messenger
+icon: "https://www.google.com/s2/favicons?domain=messenger.com&sz=128"
+url: https://www.messenger.com
+category: communication
+ai_description: "Chat with Facebook friends. Send messages, photos, and make calls."
+help_url: "https://www.facebook.com/help/messenger-app"
+
+navigation:
+  overview: >
+    Messenger is Meta's messaging platform, tightly integrated with Facebook. The web version
+    shows a conversation list on the left and the active chat on the right. Supports text, voice/video
+    calls, reactions, group chats, vanish mode, and end-to-end encryption. Uses your Facebook friends
+    list and can also reach Instagram DMs.
+
+  pages:
+    main:
+      description: "Two-panel messaging interface with conversations and active chat."
+      layout:
+        - "Left panel header: Messenger logo, profile photo, Chats tab, Marketplace tab, Message Requests, compose (pencil) icon"
+        - "Left panel: search bar ('Search Messenger'), conversation list sorted by most recent"
+        - "Right panel: active conversation with messages and input at bottom"
+        - "Right panel header: contact name/avatar, phone call icon, video call icon, info (i) icon"
+      search_bar:
+        selector: "input[placeholder='Search Messenger']"
+        behavior: "Type a contact name to filter conversations and find people. Shows recent searches, matching conversations, and Facebook contacts. Click a result to open the conversation."
+      conversation_list:
+        behavior: "Each entry: profile picture (green dot = online), name, last message snippet, timestamp. Unread conversations have bold text and a blue dot. Pinned conversations stay at top. Right-click for pin, mute, archive, delete options."
+      message_input:
+        selector: "div[aria-label='Message']"
+        behavior: "Click to focus. Type message, Enter to send. Shift+Enter for new line. The thumbs-up (like) button sends a quick like when input is empty — size varies by how long you hold. Supports text, emoji, stickers, GIFs."
+      compose_icon:
+        behavior: "Pencil icon at top of left panel. Opens a new conversation. Type contact name to search. Select one or multiple recipients for group chat."
+      reaction_bar:
+        behavior: "Hover over any message to see the reaction bar — quick emoji options (heart, haha, wow, sad, angry, thumbs up). Click the + to pick any emoji. Reactions appear below the message bubble."
+      call_buttons:
+        behavior: "Phone icon starts audio call. Video icon starts video call. Both support up to 50 participants in group calls. Screen sharing available during video calls."
+      info_panel:
+        behavior: "Click the (i) icon in the conversation header. Shows: customize chat (themes, emoji, nicknames), shared media/links/files, notification settings, privacy options, create group, block, and report."
+
+    message_requests:
+      description: "Messages from people not in your friends list."
+      behavior: "Accessed via the Message Requests section at the top of the left panel. Shows messages from non-friends. You can accept (moves to main inbox), delete, or block. Senders do not know if you have read their request."
+
+    group_chat:
+      description: "Multi-person conversation with shared features."
+      behavior: "Group name and photo can be customized. Admins can add/remove members, set approval for new members. Polls, shared albums, and planned events available. Each member can set a nickname visible to the group."
+
+    vanish_mode:
+      description: "Ephemeral messaging mode where messages disappear after being seen."
+      behavior: "Swipe up in a conversation to enter Vanish Mode (or toggle in chat settings). Messages, reactions, and media disappear once both parties have seen them and the chat is closed. Screenshot notifications alert the other person."
+
+  workflows:
+    send_message:
+      - "Click a conversation in the left panel"
+      - "Type message in the input at the bottom"
+      - "Press Enter to send"
+      - "Send a quick thumbs-up by clicking the like button (when input is empty)"
+
+    start_new_conversation:
+      - "Click the pencil (compose) icon at top of the left panel"
+      - "Type a contact name and select the person"
+      - "Type message and press Enter"
+      - "For group chat: select multiple recipients before sending"
+
+    react_to_message:
+      - "Hover over any message — reaction bar appears"
+      - "Click a quick emoji or + for full emoji picker"
+      - "Reaction appears below the message bubble"
+
+    make_video_call:
+      - "Open a conversation"
+      - "Click the video camera icon in the header"
+      - "Call starts — toggle camera, mic, screen share, effects during the call"
+      - "Group video calls support up to 50 participants"
+
+    customize_chat:
+      - "Click the (i) info icon in the conversation header"
+      - "Change chat theme (color scheme), default emoji (replaces thumbs-up), and member nicknames"
+      - "These customizations are visible to all participants"
+
+    send_media:
+      - "Click the + icon to the left of the message input"
+      - "Options: Photo/Video, Sticker, GIF, File, Polls, Location"
+      - "Select and send — images show inline, files as attachments"
+
+  tips:
+    - "The thumbs-up button changes based on chat emoji customization — hold longer for a bigger emoji"
+    - "Hover over messages for quick reactions — click + for any emoji beyond the default six"
+    - "Message Requests from non-friends are in a separate section and do not show read receipts"
+    - "Customize chat themes and nicknames via the (i) info panel"
+    - "Vanish Mode (swipe up or toggle in settings) makes messages disappear after being seen"
+    - "Pin up to 3 conversations to keep them at the top of the list"
+    - "End-to-end encrypted chats are available — look for the lock icon in conversation settings"
+    - "Group polls: click + > Poll to create quick polls within group chats"
+    - "Forwarding messages: hover > three dots > Forward to share a message to another chat"
+    - "Mute notifications per-conversation: right-click > Mute (15 min, 1 hour, 8 hours, 24 hours, forever)"

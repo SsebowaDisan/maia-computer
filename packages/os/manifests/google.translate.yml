@@ -1,0 +1,106 @@
+name: Google Translate
+id: google-translate
+icon: "https://www.google.com/s2/favicons?domain=translate.google.com&sz=128"
+url: https://translate.google.com
+category: other
+ai_description: "Translate text between languages. Detect language and listen to pronunciation."
+help_url: "https://support.google.com/translate"
+
+navigation:
+  overview: >
+    Google Translate supports 130+ languages for text, documents, images, and websites. The
+    interface has two side-by-side text areas: source (left) and translation (right). Translation
+    is instant as you type. For single words, it provides alternative translations, definitions,
+    examples, and synonyms. The service supports document translation (PDF, DOCX, PPTX, XLSX),
+    image translation via camera/upload, and full website translation. URL parameters encode
+    source language, target language, and text.
+
+  pages:
+    translator:
+      description: "The main translation interface with source and target text areas."
+      url_pattern: "translate.google.com"
+      layout:
+        - "Top: tabs — Text, Images, Documents, Websites"
+        - "Below tabs: source language selector (left), swap button (⇄ double arrows), target language selector (right)"
+        - "Language bar: shows 'Detect language' option plus recent/popular languages as clickable tabs"
+        - "Left: source text area — type or paste text to translate"
+        - "Right: translation output area (read-only)"
+        - "Below source area: speaker icon (listen), X clear button"
+        - "Below translation area: speaker icon, copy button, share button, thumbs up/down feedback"
+        - "For single words: expanded section with alternative translations, definitions, examples, synonyms"
+      source_textarea:
+        selector: "textarea[aria-label='Source text']"
+        behavior: "Click to focus, type or paste text. Translation happens instantly as you type — no submit button. Maximum 5,000 characters per translation. An X button appears to clear all text. Language auto-detection works when source is set to 'Detect language'."
+      target_area:
+        selector: "div[aria-label='Translation results container'], span.ryNqvb"
+        behavior: "Read-only output. Updates in real-time. Click individual translated words for alternative translations (in some language pairs). Click the copy icon to copy the full translation."
+      source_language_selector:
+        behavior: "Click to open language picker. Shows recent languages at top, then alphabetical list of 130+ languages. Select 'Detect language' for automatic identification. Language tabs below the selector show frequently used languages for quick switching."
+      target_language_selector:
+        behavior: "Click to open language picker. Same as source selector but without 'Detect language' option. You must choose a specific target language."
+      swap_button:
+        selector: "button[aria-label='Swap languages']"
+        behavior: "Swaps source and target languages. Moves the translated text to the source area for reverse translation. Only works when source language is explicitly set (not 'Detect language')."
+      speaker_icon:
+        behavior: "Click to hear the text spoken aloud in the selected language. Available for both source and translation. Uses Google text-to-speech. For long text, reads the full content with natural pacing."
+      copy_icon:
+        behavior: "Copies the translation text to the clipboard. Appears below the translation output."
+      single_word_details:
+        behavior: "When translating a single word, an expanded section appears below the translation showing: part of speech (noun, verb, adjective), alternative translations ranked by frequency, definitions in the target language, example sentences, synonyms. This section does not appear for phrases or sentences."
+      tabs:
+        text: "Default — type or paste text for instant translation"
+        images: "Upload an image containing text. Google extracts and translates the text. Works with photos of signs, menus, documents."
+        documents: "Upload a document file (PDF, DOCX, PPTX, XLSX, up to 10MB). Translate the entire document while preserving formatting. Click 'Browse your files' to select."
+        websites: "Enter a URL. Opens the website with all text translated, maintaining the original layout. Useful for reading foreign-language articles."
+
+  workflows:
+    translate_text:
+      - "Click the source text area on the left"
+      - "Type or paste text — translation appears instantly on the right"
+      - "To change target language: click the language name above the right area"
+      - "Click the speaker icon to hear pronunciation in either language"
+      - "Click copy icon to copy the translation"
+
+    translate_between_specific_languages:
+      - "Click source language selector — choose the language (or leave 'Detect language')"
+      - "Click target language selector — choose desired output language"
+      - "Type or paste text in source area"
+      - "For reverse direction: click the swap button (⇄)"
+
+    translate_document:
+      - "Click the 'Documents' tab at the top"
+      - "Click 'Browse your files' to select a document (PDF, DOCX, PPTX, XLSX)"
+      - "Verify source and target languages"
+      - "Click 'Translate' — the translated document renders in the browser"
+      - "Download the translated version if needed"
+
+    translate_website:
+      - "Click the 'Websites' tab at the top"
+      - "Paste the full URL of the website"
+      - "Set source and target languages"
+      - "Click the arrow button — opens the translated website in a new tab"
+
+    translate_image:
+      - "Click the 'Images' tab"
+      - "Upload an image or take a photo (on mobile)"
+      - "Google detects text in the image and shows translation overlaid or below"
+      - "Useful for signs, menus, and handwritten text"
+
+  url_patterns:
+    basic: "translate.google.com"
+    with_text: "translate.google.com/?sl=en&tl=es&text=hello"
+    language_pair: "translate.google.com/?sl=SOURCE_CODE&tl=TARGET_CODE"
+    auto_detect: "translate.google.com/?sl=auto&tl=fr&text=some+text"
+    common_codes: "en (English), es (Spanish), fr (French), de (German), it (Italian), pt (Portuguese), ja (Japanese), ko (Korean), zh-CN (Chinese Simplified), zh-TW (Chinese Traditional), ar (Arabic), ru (Russian), hi (Hindi), nl (Dutch), sv (Swedish)"
+
+  tips:
+    - "Translation is instant — no submit button needed. Just type and results update in real time"
+    - "'Detect language' auto-identifies the input language — useful when you are unsure of the source"
+    - "Single words show expanded results: alternative translations, definitions, example sentences, and synonyms"
+    - "The speaker icon reads text aloud with native pronunciation — useful for language learning"
+    - "The Documents tab preserves formatting: translate PDFs, Word docs, PowerPoint, and Excel files"
+    - "The Websites tab translates entire web pages while maintaining layout — paste any URL"
+    - "Bookmark a translation URL with language codes for quick access: translate.google.com/?sl=en&tl=es"
+    - "For better accuracy with long text, break it into shorter paragraphs"
+    - "Click individual words in the translation for alternative word choices (available for common language pairs)"
+    - "The swap button (⇄) quickly reverses the translation direction — useful for verifying accuracy"

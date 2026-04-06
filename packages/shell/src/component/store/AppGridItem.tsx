@@ -1,5 +1,7 @@
 import type { InstalledApp } from '@maia/shared'
 
+import { AppIcon } from '../ui/AppIcon'
+
 interface AppGridItemProps {
   app: InstalledApp
   badgeCount?: number
@@ -13,7 +15,7 @@ export function AppGridItem({ app, badgeCount = 0, onClick }: AppGridItemProps) 
       onClick={onClick}
     >
       <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-elevated text-3xl shadow-window transition group-hover:scale-105">
-        <span>{app.icon}</span>
+        <AppIcon icon={app.icon} size={36} />
         {badgeCount > 0 ? (
           <span className="absolute -right-2 -top-2 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-accentRed px-1 text-[11px] font-bold text-white">
             {badgeCount}

@@ -1,6 +1,93 @@
 name: Figma
 id: figma
-icon: "🎨"
+icon: "https://www.google.com/s2/favicons?domain=figma.com&sz=128"
 url: https://figma.com
 category: productivity
 ai_description: "View and edit designs. Browse components. Leave comments."
+
+navigation:
+  overview: >
+    Figma is a collaborative design tool for creating interfaces, prototypes, and graphics.
+    It opens to a file browser showing teams, projects, and recent design files.
+
+  pages:
+    file_browser:
+      description: "The home page showing your teams, projects, and recent files."
+      layout:
+        - "Left sidebar: teams list, Drafts, community, plugins"
+        - "Top: search bar, notification bell, profile avatar"
+        - "Center: Recents tab (recently opened files as cards with thumbnails), team projects"
+      search_bar:
+        text: "Search input at the top"
+        behavior: "Type a file name, project name, or component name. Results show matching files and projects with preview thumbnails. Click a result to open it."
+      recent_files:
+        text: "Grid of recently opened files with thumbnail previews"
+        behavior: "Click a file card to open it in the editor. Right-click for options like duplicate, move, or delete."
+      drafts:
+        text: "'Drafts' in left sidebar"
+        behavior: "Opens your personal draft files — files not in any team project."
+      team_section:
+        text: "Team name in the left sidebar"
+        behavior: "Click to expand and see projects. Click a project to see all files within it."
+      new_file:
+        text: "'+ New' button or 'Design file' option"
+        behavior: "Creates a new blank design file and opens it in the editor."
+
+    editor:
+      description: "The design editor with canvas, layers, and properties panels."
+      layout:
+        - "Top: toolbar with selection, frame, shape, pen, text tools, and more"
+        - "Left: layers panel showing the document's layer hierarchy (frames, groups, elements)"
+        - "Center: the canvas — infinite scrollable workspace showing your design frames"
+        - "Right: properties panel showing selected element's design properties (fill, stroke, effects, layout)"
+        - "Top-left: file name, page selector"
+      toolbar:
+        text: "Tool icons at top of the editor"
+        behavior: "Select tool (V) for selecting and moving. Frame tool (F) for creating frames. Shape tools (R for rectangle, O for ellipse). Pen tool (P) for custom paths. Text tool (T) for adding text. Each tool changes what happens when you click on the canvas."
+      layers_panel:
+        text: "Left panel showing document structure"
+        behavior: "Shows a tree of pages, frames, groups, and elements. Click an item to select it on the canvas. Double-click to drill into groups. Toggle visibility with the eye icon. Lock elements with the lock icon."
+      canvas:
+        text: "The infinite workspace in the center"
+        behavior: "Scroll to pan, Ctrl/Cmd+scroll to zoom. Click elements to select them. Double-click to enter groups or text editing. Drag to move elements. Draw new elements using the active tool."
+      properties_panel:
+        text: "Right panel showing properties of the selected element"
+        behavior: "Shows and lets you edit: position (X, Y), size (W, H), rotation, fill colors, stroke, effects (shadows, blur), text properties (font, size, weight), auto layout settings, and constraints."
+      pages:
+        text: "Page selector at top-left"
+        behavior: "A file can have multiple pages. Click to see the page list and switch between them."
+      comment_mode:
+        text: "Comment icon (speech bubble) in the toolbar"
+        behavior: "Switches to comment mode. Click anywhere on the canvas to leave a comment pinned to that spot. Comments are visible to all collaborators."
+
+  workflows:
+    browse_files:
+      - "On the home page, click 'Recents' to see recently opened files"
+      - "Or click a team and project in the sidebar to see project files"
+      - "Click a file thumbnail to open it in the editor"
+
+    inspect_design:
+      - "Open a file in the editor"
+      - "Click on any element to select it"
+      - "View properties in the right panel: colors, fonts, spacing, dimensions"
+      - "The 'Inspect' tab (if available) shows CSS-like properties for developers"
+
+    edit_design:
+      - "Select an element by clicking it on the canvas"
+      - "Use the properties panel on the right to change fill, stroke, size, position"
+      - "Double-click text to edit it"
+      - "Use toolbar tools (Frame, Shape, Text) to add new elements"
+
+    leave_comments:
+      - "Click the comment icon (speech bubble) in the toolbar"
+      - "Click anywhere on the canvas to place a comment"
+      - "Type your feedback and press Enter"
+      - "Reply to existing comments by clicking on their markers"
+
+  tips:
+    - "Ctrl+scroll (Cmd+scroll) zooms in and out on the canvas — much faster than using zoom controls"
+    - "Press Ctrl+\\ (Cmd+\\) to toggle the UI panels for a clean view of just the canvas"
+    - "View-only access means you can inspect but not edit — check the badge in the header"
+    - "Double-click nested elements to drill into groups and frames"
+    - "Right-click any element for a context menu with copy, paste, group, frame selection, and more"
+    - "Use Ctrl+D (Cmd+D) to duplicate the selected element in place"

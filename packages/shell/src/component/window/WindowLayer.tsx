@@ -14,14 +14,12 @@ interface WindowLayerProps {
   onInstallApp: (app: Pick<InstalledApp, 'name' | 'icon' | 'url' | 'manifestId'>) => Promise<void>
   onMinimizeWindow: (windowId: string) => void
   onOpenItem: (itemId: string) => void
-  onReportContentBounds: (appId: string, bounds: ShellWindow['bounds']) => void
-  onSendMessage: (message: string) => Promise<void>
+  onSendMessage: (message: string, replyToId?: string) => Promise<void>
   onSnapWindow: (windowId: string, zone: ShellWindow['snapZone']) => void
   onToggleMaximize: (window: ShellWindow) => void
   onUpdateBounds: (windowId: string, bounds: ShellWindow['bounds']) => void
   onUpdateSetting: (key: string, value: unknown) => Promise<void>
   settings: Record<string, unknown>
-  taskDescription: string
   windows: ShellWindow[]
 }
 
@@ -34,14 +32,12 @@ export function WindowLayer({
   onInstallApp,
   onMinimizeWindow,
   onOpenItem,
-  onReportContentBounds,
   onSendMessage,
   onSnapWindow,
   onToggleMaximize,
   onUpdateBounds,
   onUpdateSetting,
   settings,
-  taskDescription,
   windows,
 }: WindowLayerProps) {
   return (
@@ -60,11 +56,6 @@ export function WindowLayer({
           }}
           onMinimize={() => {
             onMinimizeWindow(window.id)
-          }}
-          onReportContentBounds={(bounds) => {
-            if (window.appId) {
-              onReportContentBounds(window.appId, bounds)
-            }
           }}
           onSnap={(zone) => {
             onSnapWindow(window.id, zone)
@@ -90,7 +81,6 @@ export function WindowLayer({
             onSendMessage={onSendMessage}
             onUpdateSetting={onUpdateSetting}
             settings={settings}
-            taskDescription={taskDescription}
             window={window}
           />
         </AppWindow>

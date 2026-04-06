@@ -1,0 +1,118 @@
+name: Pinterest
+id: pinterest
+icon: "https://www.google.com/s2/favicons?domain=pinterest.com&sz=128"
+url: https://www.pinterest.com
+category: social
+ai_description: "Discover ideas and inspiration. Save pins and create boards."
+help_url: "https://help.pinterest.com"
+
+navigation:
+  overview: >
+    Pinterest is a visual discovery and bookmarking platform. Users browse, save, and organize
+    "Pins" (images/videos linked to source websites) into themed Boards. Content spans design,
+    recipes, fashion, home decor, DIY, travel, and more. The interface centers on a masonry grid
+    layout. Features visual search (search by image), Idea Pins (multi-page stories), and Shopping.
+
+  pages:
+    home_feed:
+      description: "The main feed showing a masonry grid of recommended Pins."
+      layout:
+        - "Top nav: Pinterest logo (P), Home, Explore (compass), Create (+), search bar, notifications bell, messages, profile avatar"
+        - "Center: infinite-scroll masonry grid of Pin images in varying heights"
+      search_bar:
+        selector: "input[data-test-id='search-box-input']"
+        behavior: "Type a keyword, topic, or phrase and press Enter. Results show a Pin grid. Filter chips appear below the search bar for narrowing by category, color, and type. Autocomplete suggestions appear as you type, including visual suggestions."
+      pin_card:
+        behavior: "Each pin: image thumbnail, Save button (appears on hover, top-right), source label (bottom). Hover to see Save button and a three-dot menu for more options. Click the Pin to open its detail page. The aspect ratio varies — tall pins are more visually prominent."
+
+    pin_detail:
+      description: "Full view of a single Pin with source, description, and related Pins."
+      layout:
+        - "Center: full-size Pin image (left) and details (right)"
+        - "Right side: title, description, source website link, Save button with Board picker, comments, reactions"
+        - "Below: 'More like this' masonry grid of visually similar Pins"
+      save_button:
+        behavior: "Red 'Save' button. Click to save to a Board. A Board picker dropdown appears — select an existing Board or click 'Create board' for a new one. Pins are organized by Boards on your profile."
+      source_link:
+        behavior: "Shows the domain and a clickable link to the original website. This is where the Pin content comes from — recipes link to food blogs, products link to shops, tutorials link to articles."
+      try_it_button:
+        behavior: "Some Pins (especially products) show a 'Try it' or 'Shop' button linking to the retailer."
+      related_pins:
+        behavior: "Scroll below the detail view to see 'More like this' — visually similar Pins from across Pinterest. This is the primary way to explore deeper into a topic."
+
+    explore:
+      description: "Trending topics and curated collections."
+      url_pattern: "pinterest.com/ideas/"
+      layout:
+        - "Center: trending topic cards with cover images and titles"
+        - "Categories: Today's top Pins, trending searches, popular ideas"
+      behavior: "Browse trending content by category. Each topic opens a curated Pin grid. Different from the personalized home feed — shows what is popular broadly."
+
+    profile:
+      description: "Your profile showing saved Pins organized into Boards."
+      url_pattern: "pinterest.com/username/"
+      layout:
+        - "Top: profile photo, name, username, bio, follower/following counts"
+        - "Tabs: Created (your Pins), Saved (your Boards)"
+        - "Below: grid of Board covers or individual Pin thumbnails"
+      boards:
+        behavior: "Each Board has a cover image, title, and Pin count. Click a Board to see all Pins saved to it. Boards can be public or secret (only you can see). Section dividers within Boards organize Pins by sub-topic."
+
+    visual_search:
+      description: "Search by image using Pinterest Lens."
+      behavior: "Click the camera icon in the search bar. Upload an image or use your camera. Pinterest identifies objects in the image and shows visually similar Pins. Works especially well for home decor, fashion, food, and plants."
+
+    shopping:
+      description: "Product Pins with pricing and buy links."
+      behavior: "Pins from retailers show current price, availability, and a direct link to purchase. Filter search results by 'Shop' to see only buyable products. Product Pins show blue price tags."
+
+  workflows:
+    search_ideas:
+      - "Click the search bar at the top"
+      - "Type a topic (e.g., 'modern kitchen design', 'easy weeknight dinners')"
+      - "Press Enter — browse the masonry grid of results"
+      - "Use filter chips below the search bar to narrow by sub-category or style"
+      - "Click any Pin to see details and the source website"
+
+    save_to_board:
+      - "Hover over a Pin in the feed — the red 'Save' button appears"
+      - "Click 'Save'"
+      - "Select a Board from the dropdown (or create a new one)"
+      - "The Pin is saved to that Board — accessible from your profile"
+
+    visual_search:
+      - "Click the camera icon in the search bar"
+      - "Upload an image or paste an image URL"
+      - "Pinterest identifies objects and shows visually similar Pins"
+      - "Click any result to explore further"
+
+    create_pin:
+      - "Click the + (Create) icon in the top nav"
+      - "Select 'Create Pin'"
+      - "Upload an image or video"
+      - "Add title, description, alt text, and destination link"
+      - "Select a Board to save it to"
+      - "Click 'Publish'"
+
+    organize_boards:
+      - "Go to your Profile > Saved tab"
+      - "Click a Board to open it"
+      - "Click 'Organize' to rearrange Pins or add Sections (sub-categories)"
+      - "Drag Pins between Sections to organize by sub-topic"
+
+    browse_source_website:
+      - "Open a Pin by clicking it"
+      - "Click the source link (website domain) or the 'Visit' button"
+      - "Navigate to the original website for the full recipe, tutorial, or product page"
+
+  tips:
+    - "Save Pins to Boards to organize inspiration by topic (e.g., 'Kitchen Remodel', 'Travel 2026')"
+    - "The source link on a Pin leads to the original website — essential for recipes, tutorials, and products"
+    - "Related Pins below each detail page are the best way to explore deeper into a topic"
+    - "Visual search (camera icon) identifies objects in images and finds similar products/ideas"
+    - "Secret Boards are visible only to you — useful for private planning (gifts, surprises)"
+    - "Board Sections let you organize within a Board (e.g., a 'Recipes' Board with 'Breakfast', 'Dinner' sections)"
+    - "Shopping Pins show real-time pricing — filter by 'Shop' in search for buyable products"
+    - "The Explore page shows trending content — different from your personalized home feed"
+    - "Pin descriptions with keywords help your Pins appear in search results"
+    - "Idea Pins (multi-page stories) combine images, video, and text in a swipeable format"

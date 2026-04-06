@@ -1,0 +1,165 @@
+name: Google Docs
+id: google.docs
+icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"
+url: https://docs.google.com
+category: productivity
+ai_description: "Create, edit, and collaborate on documents. Write reports, letters, and notes."
+help_url: "https://support.google.com/docs/topic/9046002"
+
+navigation:
+  overview: >
+    Google Docs is a collaborative word processor with real-time multi-user editing. Documents
+    use a pageless or paginated layout with a toolbar for formatting, styles (Normal text,
+    Heading 1-6, Title, Subtitle), and an Insert menu for images, tables, charts, and smart
+    chips. Three editing modes exist: Editing (direct changes), Suggesting (tracked changes),
+    and Viewing (read-only). URL format: docs.google.com/document/d/DOC_ID/edit.
+
+  pages:
+    home:
+      description: "The Docs home page showing recent documents and creation options."
+      url_pattern: "docs.google.com"
+      layout:
+        - "Top: template gallery with '+ Blank' and templates (Resume, Letter, Project Proposal, Brochure, Report, etc.)"
+        - "Below: 'Recent documents' list — name, owner, last opened date"
+        - "Top-right: list/grid view toggle, sort options"
+      blank_card:
+        text: "'+ Blank' — creates a new untitled document"
+        behavior: "Opens immediately in the editor with cursor in the document body."
+
+    editor:
+      description: "The document editing view with toolbar, menu bar, and writing surface."
+      url_pattern: "docs.google.com/document/d/DOC_ID/edit"
+      layout:
+        - "Top-left: document title field (shows 'Untitled document' for new docs), star, move folder icon"
+        - "Below title: menu bar — File, Edit, View, Insert, Format, Tools, Extensions, Help"
+        - "Below menu: formatting toolbar — style dropdown ('Normal text'), font, size, bold, italic, underline, text color, highlight color, insert link, add comment, insert image, alignment, line spacing, lists (bulleted/numbered/checklist), indent/outdent, clear formatting"
+        - "Center: document body — white page area where text appears. Ruler above with margins and tab stops"
+        - "Top-right: Share button, collaborator avatars, editing mode selector (pencil icon)"
+        - "Right margin: comment markers (yellow rectangles) linking to comment thread"
+      title_field:
+        selector: "input.docs-title-input"
+        behavior: "Click to edit document name. Type name and press Enter or click away. The title becomes the filename in Google Drive."
+      style_dropdown:
+        selector: "span.docs-toolbar-button-label"
+        text: "'Normal text' dropdown at far-left of toolbar"
+        behavior: "Click to open style picker: Title, Subtitle, Heading 1, Heading 2, Heading 3, Heading 4, Heading 5, Heading 6, Normal text. These create document structure and populate the Outline panel. Apply by selecting text then choosing style, or place cursor and choose style before typing."
+      formatting_toolbar:
+        key_buttons:
+          - "Style dropdown (Normal text, Heading 1-6, Title, Subtitle)"
+          - "Font family (Arial default), Font size (11 default)"
+          - "Bold (Cmd+B), Italic (Cmd+I), Underline (Cmd+U)"
+          - "Text color (A with color bar), Highlight color (marker icon)"
+          - "Insert link (Cmd+K), Add comment (Cmd+Alt+M)"
+          - "Insert image (mountain icon)"
+          - "Align left/center/right/justify"
+          - "Line & paragraph spacing (vertical lines icon)"
+          - "Bulleted list (Cmd+Shift+8), Numbered list (Cmd+Shift+7), Checklist"
+          - "Indent decrease/increase"
+          - "Clear formatting (Cmd+\\)"
+      document_body:
+        selector: "div.kix-appview-editor"
+        behavior: "Click to place cursor. Type to insert text. Select text by click+drag or Shift+arrows. Double-click selects a word. Triple-click selects a paragraph. Cmd+A selects all."
+      editing_mode:
+        selector: "div[aria-label='Editing mode']"
+        text: "Pencil icon showing 'Editing', 'Suggesting', or 'Viewing'"
+        behavior: "Click to switch. Editing: direct changes. Suggesting: changes tracked in green with accept/reject controls. Viewing: read-only. Keyboard: Cmd+Alt+Shift+X for Suggesting mode."
+      share_button:
+        selector: "div[aria-label='Share. Private to only me.'], div.docs-share-button"
+        behavior: "Opens sharing dialog. Add people by email (Viewer/Commenter/Editor). General access: Restricted or Anyone with the link. Copy link button at bottom."
+      outline_panel:
+        behavior: "View > Show outline. Displays all headings as a clickable navigation tree on the left side. Essential for long documents."
+      comments:
+        behavior: "Select text, click comment icon or Cmd+Alt+M. Type comment in the sidebar. Others can reply. Click 'Resolve' to close a comment thread. Use @mentions to notify people."
+
+    pageless_mode:
+      description: "Optional mode removing page breaks for a continuous scrolling experience."
+      behavior: "File > Page setup > Pageless. Removes page boundaries, headers, footers, and page numbers. Content flows continuously."
+
+  workflows:
+    create_document:
+      - "Click '+ Blank' on the Docs home page"
+      - "Click 'Untitled document' at top-left to name it"
+      - "Click the document body and start typing"
+      - "Use the style dropdown to apply Heading 1, Heading 2, etc. for structure"
+
+    format_text:
+      - "Select text by clicking and dragging"
+      - "Bold: Cmd+B, Italic: Cmd+I, Underline: Cmd+U"
+      - "Change font: click font dropdown in toolbar"
+      - "Apply heading style: click style dropdown ('Normal text') and choose level"
+      - "Lists: Cmd+Shift+8 for bulleted, Cmd+Shift+7 for numbered"
+      - "Clear all formatting: Cmd+\\"
+
+    insert_content:
+      - "Insert > Image: upload, search web, by URL, from Drive, from Photos, or camera"
+      - "Insert > Table: choose grid size up to 20x20, click to insert"
+      - "Insert > Drawing: opens a drawing canvas for diagrams and shapes"
+      - "Insert > Chart: from Sheets (linked) or new chart"
+      - "Insert > Smart chips: type '@' to insert links to people, files, dates, events, places, dropdown chips"
+      - "Insert > Header & footer, Page numbers, Page break, Section break"
+      - "Insert > Table of contents: links to all headings in the document"
+
+    find_and_replace:
+      - "Cmd+F opens Find bar at top — type term, Enter to cycle matches (highlighted yellow)"
+      - "Cmd+H opens Find and Replace — replace one at a time or replace all"
+      - "Find supports regex: check 'Match using regular expressions' in Find and Replace"
+
+    collaborate:
+      - "Click Share, add collaborators by email"
+      - "Collaborators see each other's cursors in real-time with name labels and colors"
+      - "Switch to Suggesting mode for tracked changes — insertions show in green, deletions in strikethrough"
+      - "Review suggestions: click to see accept (checkmark) and reject (X) buttons"
+      - "Version history: File > Version history > See version history (Cmd+Alt+Shift+H)"
+
+    use_smart_chips:
+      - "Type '@' anywhere in the document"
+      - "Start typing a person's name, file name, date, or other entity"
+      - "Select from the dropdown — inserts an interactive smart chip"
+      - "Date chips can include deadlines, people chips link to contacts, file chips link to Drive files"
+
+  keyboard_shortcuts:
+    bold: "Cmd+B"
+    italic: "Cmd+I"
+    underline: "Cmd+U"
+    strikethrough: "Cmd+Shift+X"
+    copy_formatting: "Cmd+Alt+C"
+    paste_formatting: "Cmd+Alt+V"
+    paste_without_formatting: "Cmd+Shift+V"
+    insert_link: "Cmd+K"
+    add_comment: "Cmd+Alt+M"
+    word_count: "Cmd+Shift+C"
+    find: "Cmd+F"
+    find_replace: "Cmd+H"
+    heading_1: "Cmd+Alt+1"
+    heading_2: "Cmd+Alt+2"
+    heading_3: "Cmd+Alt+3"
+    normal_text: "Cmd+Alt+0"
+    bulleted_list: "Cmd+Shift+8"
+    numbered_list: "Cmd+Shift+7"
+    increase_indent: "Tab"
+    decrease_indent: "Shift+Tab"
+    select_all: "Cmd+A"
+    clear_formatting: "Cmd+\\"
+    print: "Cmd+P"
+    version_history: "Cmd+Alt+Shift+H"
+
+  url_patterns:
+    home: "docs.google.com"
+    editor: "docs.google.com/document/d/DOC_ID/edit"
+    preview: "docs.google.com/document/d/DOC_ID/preview"
+    copy: "docs.google.com/document/d/DOC_ID/copy"
+    export_pdf: "docs.google.com/document/d/DOC_ID/export?format=pdf"
+    export_docx: "docs.google.com/document/d/DOC_ID/export?format=docx"
+    template: "docs.google.com/document/d/DOC_ID/template/preview"
+
+  tips:
+    - "Type '@' to insert smart chips — people, files, dates, events, places, and dropdown menus"
+    - "Cmd+Shift+C shows word count with a live word count toggle in the bottom-left corner"
+    - "The Outline panel (View > Show outline) provides instant navigation through headings"
+    - "Voice typing: Tools > Voice typing (Cmd+Shift+S) — dictate content using your microphone"
+    - "Cmd+Shift+V pastes without formatting — essential for clean pasting from web pages"
+    - "Version history (File > Version history) shows all edits with colored attribution per author"
+    - "Pageless mode (File > Page setup > Pageless) removes page breaks for continuous writing"
+    - "The Explore panel (Tools > Explore) suggests related content and lets you insert citations"
+    - "Table of contents (Insert > Table of contents) auto-generates from your heading structure"
+    - "Use Heading styles consistently — they power the outline, table of contents, and document structure"

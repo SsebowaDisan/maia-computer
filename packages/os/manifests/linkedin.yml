@@ -1,0 +1,131 @@
+name: LinkedIn
+id: linkedin
+icon: "https://www.google.com/s2/favicons?domain=linkedin.com&sz=128"
+url: https://www.linkedin.com
+category: social
+ai_description: "Browse professional network. View profiles, post updates, search jobs, message contacts."
+help_url: "https://www.linkedin.com/help"
+
+navigation:
+  overview: >
+    LinkedIn is a professional networking platform with 1B+ members. It combines a social feed,
+    job search, messaging, and professional profiles. The top navigation bar is persistent across
+    all pages. Content includes posts, articles, newsletters, events, and job listings.
+
+  pages:
+    home_feed:
+      description: "The main feed showing posts, articles, and updates from your network."
+      layout:
+        - "Top nav: LinkedIn logo, search bar, Home, My Network, Jobs, Messaging, Notifications, Me dropdown, For Business grid"
+        - "Left sidebar: profile card (photo, name, headline, connections count, profile views)"
+        - "Center: 'Start a post' box, then feed of posts"
+        - "Right sidebar: LinkedIn News (trending stories), Today's puzzle games, ad content"
+      search_bar:
+        selector: "input[aria-label='Search']"
+        behavior: "Type a name, company, keyword, or job title. Autocomplete suggestions appear. Press Enter for full results page. Accepts Boolean: AND, OR, NOT, quotes for exact phrases, parentheses for grouping."
+      start_post_box:
+        behavior: "Click to open the post composer modal. Write text (up to 3,000 characters). Toolbar: Photo, Video, Document (PDF carousel), Poll, Celebrate an occasion, Find an expert. Visibility dropdown: Anyone, Connections only, Group. Hashtags: type # to add topic tags. @mention people and companies."
+      feed_post:
+        behavior: "Each post: author photo, name, headline, connection degree (1st, 2nd, 3rd), time posted, visibility icon (globe=public, people=connections). Content area: text (click 'see more' to expand), media. Action bar: Like (with reaction options), Comment, Repost, Send."
+      reaction_options:
+        behavior: "Hover over the Like button to see all reactions: Like (thumbs up), Celebrate (clapping), Support (heart), Funny (laughing), Love (heart), Insightful (lightbulb), Curious (thinking face). Click to react."
+      messaging_panel:
+        behavior: "Minimized chat panel in bottom-right corner. Shows recent conversations. Click to expand. Click the pencil icon to start a new conversation. Supports text, attachments, GIFs, and voice messages."
+
+    search_results:
+      description: "Results page with filters for different content types."
+      url_pattern: "linkedin.com/search/results/all/?keywords=your+query"
+      layout:
+        - "Top: search bar with query"
+        - "Tabs: People, Posts, Jobs, Companies, Groups, Products, Schools, Events, Services, Courses"
+        - "Left sidebar: filters specific to the selected tab"
+        - "Center: results list"
+      people_filters:
+        behavior: "Connections (1st, 2nd, 3rd+), Locations, Current company, Past company, Industry, School, Profile language, Open to, Service categories. 'All filters' opens the full filter panel."
+      jobs_filters:
+        behavior: "Date posted, Experience level, Company, Remote/On-site/Hybrid, Job type (Full-time, Part-time, Contract, Internship), Easy Apply, Salary range."
+
+    profile:
+      description: "A professional profile page — the digital resume."
+      url_pattern: "linkedin.com/in/username"
+      layout:
+        - "Top: banner image, profile photo, name, headline, location, connection degree"
+        - "Buttons: Connect, Message, More (three dots)"
+        - "Sections: About, Experience, Education, Skills, Recommendations, Activity, Interests"
+      connect_button:
+        behavior: "Sends a connection request. Click the dropdown to 'Add a note' (personalized message). Premium allows InMail to non-connections."
+      experience_section:
+        behavior: "Lists work history with company logo, job title, company name, dates, location, and description. Click a company name to visit the company page."
+      skills_section:
+        behavior: "Lists endorsed skills. Click 'Show all skills' to see all. Endorsements from connections add credibility. Take LinkedIn Skill Assessments to earn badges."
+
+    jobs:
+      description: "Job search and application hub."
+      url_pattern: "linkedin.com/jobs"
+      layout:
+        - "Top: search fields (job title/keyword, location)"
+        - "Filters: Date posted, Experience, Company, Remote, Job type, Easy Apply, Salary"
+        - "Left: job listing cards"
+        - "Right: job detail panel with full description"
+      easy_apply:
+        behavior: "Jobs marked 'Easy Apply' (lightning bolt icon) let you apply directly through LinkedIn using your profile as a resume. May ask a few additional questions. One-click or multi-step form depending on the employer."
+      save_job:
+        behavior: "Click the bookmark icon on any job listing to save it. Saved jobs are accessible from Jobs > My Jobs > Saved."
+      job_alerts:
+        behavior: "Toggle 'Set alert' on any search to receive email notifications for new matching jobs."
+
+    company_page:
+      description: "A company's LinkedIn presence with info, jobs, and posts."
+      url_pattern: "linkedin.com/company/name"
+      layout:
+        - "Top: company logo, name, industry, follower count, employee count"
+        - "Tabs: Home (feed), About, Posts, Jobs, People, Events"
+      behavior: "Follow a company to see their posts in your feed. The People tab shows employees and allows searching by title. The Jobs tab shows open positions."
+
+  workflows:
+    search_people:
+      - "Click the search bar (or Cmd+/ to focus)"
+      - "Type name, title, or company"
+      - "Press Enter, click 'People' tab"
+      - "Use filters: Location, Current company, Industry, Connection degree"
+      - "Click a profile to view full information"
+
+    search_jobs:
+      - "Click 'Jobs' in the top navigation"
+      - "Enter job title/keyword and location"
+      - "Apply filters: Remote, Experience level, Date posted, Easy Apply"
+      - "Click a listing to see full details in the right panel"
+      - "Click 'Easy Apply' or 'Apply' to submit"
+
+    create_post:
+      - "Click 'Start a post' at the top of the home feed"
+      - "Write content (up to 3,000 characters)"
+      - "Add media: Photo, Video, Document (PDF carousel), or Poll"
+      - "Add #hashtags for discoverability"
+      - "@mention people and companies"
+      - "Set visibility (Anyone or Connections only)"
+      - "Click 'Post'"
+
+    send_connection_request:
+      - "Visit a person's profile"
+      - "Click 'Connect'"
+      - "Click 'Add a note' to write a personalized message (300 chars)"
+      - "Click 'Send'"
+
+    send_message:
+      - "Click Messaging in the top nav (or use the bottom-right chat panel)"
+      - "Click the compose icon (pencil)"
+      - "Type recipient name, select from autocomplete"
+      - "Type message, press Enter to send"
+
+  tips:
+    - "Boolean search works: \"product manager\" AND (Google OR Meta) NOT intern"
+    - "Easy Apply jobs use your LinkedIn profile as a resume — keep it updated"
+    - "The 'Open to Work' frame (profile settings) privately signals recruiters"
+    - "PDF documents posted as carousels get high engagement — each page becomes a slide"
+    - "Creator Mode (profile settings) changes the Connect button to Follow and enables newsletters"
+    - "LinkedIn News in the right sidebar shows trending professional stories"
+    - "Save job searches to get email alerts for new matching positions"
+    - "Skill Assessments (profile > Skills > Take quiz) earn a badge that boosts search visibility"
+    - "Posting between 8-10 AM local time on weekdays typically gets the most engagement"
+    - "The 'People Also Viewed' sidebar on profiles helps discover similar professionals in your field"

@@ -1,6 +1,150 @@
 name: Google Calendar
 id: google.calendar
-icon: "📅"
+icon: "https://calendar.google.com/googlecalendar/images/favicons_2020q4/calendar_31_256.ico"
 url: https://calendar.google.com
 category: productivity
 ai_description: "View, create, and manage calendar events. Check availability. Schedule meetings."
+help_url: "https://support.google.com/calendar"
+
+navigation:
+  overview: >
+    Google Calendar is a scheduling and time management tool. Events display as colored blocks
+    on a time grid with Day, Week, Month, Year, Schedule, and 4 Days views. The left sidebar
+    has a mini calendar, calendar layer toggles, and a Create button. Events support recurring
+    schedules, guest invitations with RSVP, Google Meet integration, reminders, and multiple
+    calendar layers with color coding. URL format: calendar.google.com/calendar/u/0/r/week.
+
+  pages:
+    calendar_view:
+      description: "The main calendar showing events as colored blocks on a time grid."
+      layout:
+        - "Top-left: hamburger menu (toggle sidebar), 'Today' button, back/forward arrows (<, >), current date range text"
+        - "Top-right: search icon, Settings gear, view dropdown (Day/Week/Month/Year/Schedule/4 Days)"
+        - "Left sidebar: '+ Create' button (large), mini calendar for month navigation, 'Search for people' input, 'My calendars' list with color toggles, 'Other calendars' list"
+        - "Center: calendar grid — Day/Week show hourly time slots (12am-11pm), Month shows date cells with event titles"
+        - "All-day events appear in a strip above the hourly grid"
+      create_button:
+        selector: "div[data-tooltip='Create']"
+        text: "'Create' or '+' button at top of left sidebar"
+        behavior: "Opens a quick event creation dialog with title, date/time, guests, location, description. Click 'More options' to open the full event editor page. Keyboard shortcut: 'c'."
+      today_button:
+        text: "'Today' button"
+        behavior: "Returns the view to the current date. Useful after navigating to past or future dates. Keyboard shortcut: 't'."
+      navigation_arrows:
+        behavior: "< moves back one unit (day/week/month depending on view). > moves forward. Keyboard shortcuts: 'j' or 'k' for back/forward."
+      view_switcher:
+        text: "Dropdown or buttons at top-right"
+        behavior: "Day (d), Week (w), Month (m), Year (y), Schedule (a), 4 Days (x) — keyboard shortcuts in parentheses. The selected view determines the grid layout."
+      mini_calendar:
+        behavior: "Small month calendar in sidebar. Click any date to jump main view to that date. Left/right arrows navigate months. Current day has a colored circle. Selected date range is highlighted."
+      calendar_list:
+        text: "'My calendars' and 'Other calendars' sections in sidebar"
+        behavior: "Each calendar has a colored checkbox. Toggle visibility. Click the three-dot menu next to a calendar for: Settings, Hide, Color options. 'Other calendars' has a '+' to subscribe to calendars, browse calendars of interest, import from file, or add by URL."
+      event_block:
+        behavior: "Click an event for a popup summary: title, time, location, calendar, description preview. Edit (pencil), Delete (trash), Email guests (envelope) icons. Click event title or 'Edit event' to open full editor. Drag event blocks to reschedule. Drag bottom edge to change duration."
+      time_slot:
+        behavior: "Click an empty time slot for quick event creation. Click-and-drag across time slots to create an event spanning that duration. The quick creation popup shows title input and 'More options' link."
+      search_icon:
+        selector: "div[data-tooltip='Search']"
+        behavior: "Opens search bar. Type event name, person, or location. Results show matching events across all dates and calendars. Keyboard shortcut: '/'."
+
+    event_editor:
+      description: "The full event creation/editing form — opens as a new page."
+      url_pattern: "calendar.google.com/calendar/u/0/r/eventedit"
+      layout:
+        - "Title input (large, top)"
+        - "Date/time row: start date, start time, end date, end time. 'All day' toggle. Timezone selector"
+        - "Repeat dropdown: Does not repeat, Daily, Weekly, Monthly, Yearly, Custom (every N days/weeks/months)"
+        - "'Add Google Meet video conferencing' button — auto-generates a Meet link"
+        - "'Add location' field — autocomplete with Google Maps places"
+        - "'Add description' rich text area"
+        - "'Add guests' field — type email addresses, see availability"
+        - "Right panel: Guest permissions (Modify event, Invite others, See guest list)"
+        - "Bottom section: Calendar selector, Status (Busy/Free), Visibility (Default/Public/Private), Notification settings"
+        - "Top-right: 'Save' button (blue)"
+      guests_field:
+        behavior: "Type email addresses — autocomplete suggests contacts. Guests receive email invitations. After adding guests, 'Suggested times' and 'Find a time' tabs appear to check availability."
+      find_a_time:
+        behavior: "Shows a side-by-side view of all guests' calendars with busy/free blocks. Helps identify open slots for group meetings."
+      repeat_dropdown:
+        behavior: "Does not repeat (one-time), Daily, Every weekday (Mon-Fri), Weekly on [day], Monthly on [ordinal day], Yearly on [date], Custom. Custom allows: every N days/weeks/months, specific days of week, end after N occurrences or on a date."
+      notification:
+        behavior: "Add notification reminders: 10 minutes, 30 minutes, 1 hour, 1 day before, or custom. Email notification or popup notification. Multiple notifications can be added."
+      save_button:
+        behavior: "Saves the event. If guests were added, prompts 'Send invitation emails to guests?' with Send/Don't send options."
+
+  workflows:
+    create_event:
+      - "Press 'c' or click '+ Create'"
+      - "Type event title"
+      - "Set date and time (click date for date picker, click time for time dropdown)"
+      - "Optionally: add guests, location, Meet link, description"
+      - "Click 'Save' (or 'More options' for full editor first)"
+
+    create_recurring_event:
+      - "Create an event, click 'More options' for full editor"
+      - "Click 'Does not repeat' dropdown"
+      - "Choose frequency: Daily, Weekly, Monthly, Yearly, or Custom"
+      - "For Custom: set interval (every 2 weeks), specific days, end condition"
+      - "Save — all occurrences appear on the calendar"
+
+    find_event:
+      - "Press '/' or click search icon"
+      - "Type event name, person name, or location"
+      - "Results show matching events — click to jump to that date"
+
+    change_view:
+      - "Press keyboard shortcut: d=Day, w=Week, m=Month, y=Year, a=Schedule, x=4 Days"
+      - "Press 't' to jump to Today"
+      - "Press 'j'/'k' to navigate backward/forward"
+      - "Click any date in the mini calendar to jump there"
+
+    check_availability:
+      - "When creating/editing an event with guests, click 'Find a time' tab"
+      - "All guests' schedules appear side by side"
+      - "Colored blocks show busy times, empty spaces show availability"
+      - "Click an open slot to set the event time"
+
+    edit_event:
+      - "Click an event block on the calendar"
+      - "Click pencil (edit) icon in the popup"
+      - "Modify fields and click 'Save'"
+      - "For recurring events: choose to edit 'This event', 'This and following events', or 'All events'"
+
+  keyboard_shortcuts:
+    create_event: "c — create new event"
+    today: "t — go to today"
+    search: "/ — open search"
+    day_view: "d or 1 — Day view"
+    week_view: "w or 2 — Week view"
+    month_view: "m or 3 — Month view"
+    custom_view: "x or 4 — custom (4 Days) view"
+    schedule_view: "a or 5 — Schedule view"
+    year_view: "y or 6 — Year view"
+    back: "j or k — navigate back/forward"
+    delete_event: "Backspace or Delete — delete selected event"
+    undo: "z — undo last action"
+    settings: "s — open settings"
+
+  url_patterns:
+    week_view: "calendar.google.com/calendar/u/0/r/week"
+    day_view: "calendar.google.com/calendar/u/0/r/day"
+    month_view: "calendar.google.com/calendar/u/0/r/month"
+    year_view: "calendar.google.com/calendar/u/0/r/year"
+    specific_date: "calendar.google.com/calendar/u/0/r/day/2026/4/6"
+    create_event: "calendar.google.com/calendar/u/0/r/eventedit"
+    create_with_details: "calendar.google.com/calendar/u/0/r/eventedit?text=Meeting&dates=20260406T140000/20260406T150000&details=Agenda&location=Office"
+    settings: "calendar.google.com/calendar/u/0/r/settings"
+    second_account: "calendar.google.com/calendar/u/1/r/week"
+
+  tips:
+    - "Click and drag on empty time slots in Week/Day view to create events spanning that duration"
+    - "Drag existing events to reschedule — drag the bottom edge to change duration"
+    - "The Schedule view shows a flat chronological list of events — best for seeing what is coming up"
+    - "Keyboard shortcut 'c' creates a new event instantly from any view"
+    - "Google Meet links are auto-added when you click 'Add Google Meet video conferencing' in the event editor"
+    - "Multiple calendar layers with different colors help separate Work, Personal, Holidays, and project-specific events"
+    - "The 'Find a time' feature (in event editor with guests) shows everyone's availability side by side"
+    - "Create URL-based events: append ?text=Title&dates=START/END to the eventedit URL"
+    - "Right-click an event for quick options: Edit, Delete, Duplicate, Copy to, Change color"
+    - "Appointment schedules let others book time on your calendar — set up in Settings > Appointment schedules"

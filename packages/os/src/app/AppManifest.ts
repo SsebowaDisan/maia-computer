@@ -45,5 +45,7 @@ function validateManifest(raw: Record<string, unknown>): AppManifest | undefined
     url: String(raw.url),
     category: (raw.category as AppManifest['category']) ?? 'other',
     aiDescription: String(raw.ai_description ?? raw.aiDescription ?? ''),
+    navigation: (raw.navigation as AppManifest['navigation']) ?? undefined,
+    helpUrl: raw.help_url ? String(raw.help_url) : undefined,
   }
 }

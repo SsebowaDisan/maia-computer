@@ -1,0 +1,47 @@
+name: GitHub Copilot
+id: github-copilot
+icon: "https://www.google.com/s2/favicons?domain=github.com&sz=128"
+url: https://github.com/features/copilot
+category: developer
+ai_description: "AI pair programming. Code suggestions and completions."
+
+navigation:
+  overview: >
+    GitHub Copilot is an AI coding assistant available on GitHub. The web version provides
+    a chat panel for asking coding questions, getting code suggestions, and analyzing repositories.
+
+  pages:
+    copilot_chat:
+      description: "The Copilot Chat panel accessible from GitHub pages."
+      layout:
+        - "Bottom-right: floating Copilot icon"
+        - "Chat panel (when opened): conversation area with message input at bottom"
+      copilot_icon:
+        text: "Copilot icon in the bottom-right corner of GitHub pages"
+        behavior: "Click to open the Copilot Chat panel. The panel slides out from the right side."
+      chat_input:
+        text: "Text input at the bottom of the chat panel"
+        behavior: "Type a coding question, request, or paste code for analysis. Press Enter to send. Copilot responds with code suggestions, explanations, or fixes."
+      response_area:
+        text: "Conversation area in the chat panel"
+        behavior: "Shows your questions and Copilot's responses with code blocks, explanations, and suggestions. Code blocks have copy buttons."
+
+  workflows:
+    ask_coding_question:
+      - "Click the Copilot icon in the bottom-right of any GitHub page"
+      - "Type your coding question in the chat input"
+      - "Press Enter to send"
+      - "Read the response with code suggestions"
+      - "Copy code blocks using the copy button"
+
+    analyze_code:
+      - "Navigate to a file in a GitHub repository"
+      - "Open Copilot Chat"
+      - "Ask about the code: 'Explain this function', 'How can I improve this?', 'Find bugs in this code'"
+      - "Copilot analyzes the visible code context and responds"
+
+  tips:
+    - "Copilot Chat on GitHub.com has context about the repository you're viewing"
+    - "Code blocks in responses have copy buttons for quick use"
+    - "Ask follow-up questions to refine suggestions"
+    - "The web chat is separate from Copilot in your IDE — context differs between them"

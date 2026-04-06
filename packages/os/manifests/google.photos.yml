@@ -1,0 +1,129 @@
+name: Google Photos
+id: google-photos
+icon: "https://www.google.com/s2/favicons?domain=photos.google.com&sz=128"
+url: https://photos.google.com
+category: other
+ai_description: "View, organize, and share photos and videos. Search by people and places."
+help_url: "https://support.google.com/photos"
+
+navigation:
+  overview: >
+    Google Photos stores photos and videos with AI-powered search and organization. The main
+    view is a chronological grid grouped by date. AI recognizes faces, places, and objects,
+    enabling natural language search ("birthday", "beach", "dogs", "sunset"). The service
+    counts against Google's 15GB shared storage quota. Photos can be organized into albums,
+    shared via links, and edited with built-in tools. URL: photos.google.com.
+
+  pages:
+    photos_grid:
+      description: "The main chronological view showing all photos grouped by date, newest first."
+      url_pattern: "photos.google.com"
+      layout:
+        - "Top: search bar (input[aria-label='Search your photos']), upload button (cloud with arrow), profile"
+        - "Left sidebar: Photos, Explore, Sharing, Favorites, Albums, Utilities, Trash, Archive, Storage"
+        - "Center: photo thumbnails grouped by date headers (e.g., 'Today', 'Yesterday', 'March 15, 2026')"
+        - "Thumbnails adjust to fill rows — landscape photos wider, portrait photos taller"
+      search_bar:
+        selector: "input[aria-label='Search your photos']"
+        behavior: "Click to focus. Type anything — person names (from face recognition), places (GPS or landmark recognition), objects ('dog', 'car', 'food'), activities ('cooking', 'hiking'), colors ('red'), dates ('December 2025'), document types ('receipts', 'screenshots'). AI matching returns relevant photos."
+      photo_thumbnail:
+        behavior: "Click to open in full-screen viewer. Hover reveals a circular checkbox at top-left for multi-select. Click checkbox to select without opening. Selected photos show a blue checkmark."
+      upload_button:
+        selector: "button[aria-label='Upload photos']"
+        behavior: "Click to upload from computer. Drag-and-drop also works — drag files into the browser window. Upload quality: Original quality (counts against storage) or Storage saver (slightly compressed, free until quota)."
+      date_headers:
+        behavior: "Click a date header text to select all photos from that day. Useful for bulk operations like adding to album or deleting."
+      sidebar:
+        items:
+          - "Photos: main chronological grid"
+          - "Explore: AI-generated categories — People & Pets (face clusters), Places (map view), Things (categories like Food, Landscapes, Selfies, Documents)"
+          - "Sharing: shared albums and partner sharing"
+          - "Favorites: photos you hearted/starred"
+          - "Albums: manually created albums"
+          - "Utilities: archive, import, create (animation, collage, movie)"
+          - "Trash: deleted photos (60 days before permanent deletion)"
+          - "Archive: hidden from main grid but still searchable"
+
+    photo_viewer:
+      description: "Full-screen view of a single photo with tools."
+      layout:
+        - "Center: photo at full resolution"
+        - "Top: back arrow (left), share, favorite (heart), info (i), more options (three dots), delete"
+        - "Bottom: edit button, create (animation/collage), lens (visual search)"
+        - "Side arrows or keyboard left/right to navigate between photos"
+      share_button:
+        behavior: "Share via link, add to shared album, or send to specific Google contacts. 'Create link' generates a shareable URL."
+      favorite_button:
+        behavior: "Heart icon — toggles favorite. Favorited photos appear in the Favorites section."
+      edit_button:
+        behavior: "Opens photo editor. Tabs: Suggestions (AI-enhanced presets), Filters (Instagram-like filters), Crop (aspect ratios, rotate, straighten), Adjust (brightness, contrast, saturation, warmth, tint, vignette, HDR), Markup (draw, text, shapes). All edits are non-destructive — 'Revert to original' always available."
+      info_button:
+        behavior: "Shows metadata: date/time taken, camera model, aperture/shutter/ISO, file size, resolution, location on map. 'People' section shows identified faces."
+      lens_button:
+        behavior: "Opens Google Lens — visual search to identify objects, text, plants, animals, landmarks, and products in the photo."
+      delete_button:
+        behavior: "Moves to Trash. Items in Trash auto-delete after 60 days. Deleting from Google Photos also deletes from any synced device."
+
+    explore:
+      description: "AI-categorized content discovery page."
+      url_pattern: "photos.google.com/explore"
+      layout:
+        - "People & Pets: face-clustered groups with name labels"
+        - "Places: photos grouped by location, shown on a map"
+        - "Things: categories like Food, Screenshots, Documents, Receipts, Art, Flowers, etc."
+        - "Recent creations: auto-generated collages, animations, and movies"
+      people_section:
+        behavior: "Shows face clusters. Click a face to see all photos of that person. Label faces by clicking 'Who is this?' to name them — enables searching by name."
+
+    albums:
+      description: "User-created and auto-generated albums."
+      url_pattern: "photos.google.com/albums"
+      layout:
+        - "Grid of album covers with titles and photo counts"
+        - "'+ Create album' button"
+
+  workflows:
+    search_photos:
+      - "Click the search bar at the top"
+      - "Type a descriptive term: person name, place, object, activity, or date"
+      - "Results appear as a grid — AI matches visual content, not just metadata"
+      - "Combine terms: 'beach 2025' finds beach photos from 2025"
+
+    create_album:
+      - "Click 'Albums' in sidebar, then '+ Create album'"
+      - "Give the album a title"
+      - "Click 'Add photos' — select from your library"
+      - "Photos added to albums are not moved — they remain in the main grid too"
+      - "Share album by clicking the share icon and adding people or creating a link"
+
+    edit_photo:
+      - "Open a photo in the viewer, click the Edit button"
+      - "Suggestions tab: one-click AI-enhanced looks (Enhance, Warm, Cool, etc.)"
+      - "Filters tab: apply preset color filters"
+      - "Crop tab: resize, rotate (dial), straighten, change aspect ratio (Free, Original, Square, 16:9, etc.)"
+      - "Adjust tab: sliders for Light (brightness, exposure, contrast, highlights, shadows), Color (saturation, warmth, tint), Pop (HDR)"
+      - "Click 'Save copy' to keep original and create edited version, or 'Save' to replace"
+
+    share_photos:
+      - "Select photos: hover thumbnails, click checkboxes"
+      - "Click share icon (appears in top bar when photos selected)"
+      - "Choose: 'Create link', 'Send in Google Photos' (to contacts), or 'Create shared album'"
+      - "Shared album recipients can add their own photos if permission is granted"
+
+    organize:
+      - "Select multiple photos with checkboxes"
+      - "Top toolbar appears: Share, Add to album, Archive, Delete, More options"
+      - "Archive removes from main grid without deleting — photos still searchable and in albums"
+      - "Favorites (heart icon in viewer) bookmarks photos for quick access"
+
+  tips:
+    - "AI search understands concepts — search 'sunset', 'food', 'selfie', 'documents', 'receipts', or even colors like 'red'"
+    - "Name faces in Explore > People & Pets to enable searching by person name"
+    - "Archive declutters the main grid — archived photos remain in albums and search results"
+    - "The photo editor is non-destructive — 'Revert to original' restores the unedited version at any time"
+    - "Click a date header to select all photos from that day for bulk album adding or deletion"
+    - "Google Lens (in viewer) can identify plants, animals, products, landmarks, and text in photos"
+    - "Partner sharing automatically shares photos of specific people with a chosen partner account"
+    - "Locked Folder (Utilities > Locked Folder) hides sensitive photos behind device authentication"
+    - "Storage saver quality is visually indistinguishable from original for most photos — saves significant storage"
+    - "Drag and drop files directly into the browser window to upload — works for both photos and videos"

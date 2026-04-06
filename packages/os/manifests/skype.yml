@@ -1,0 +1,110 @@
+name: Skype
+id: skype
+icon: "https://www.google.com/s2/favicons?domain=web.skype.com&sz=128"
+url: https://web.skype.com
+category: communication
+ai_description: "Make video calls, send messages, and share files."
+help_url: "https://support.skype.com"
+
+navigation:
+  overview: >
+    Skype is a communication tool for messaging, audio calls, and video calls owned by Microsoft.
+    The web version has a left panel with tabs for Chats, Calls, Contacts, and Notifications,
+    and a main content area for conversations and calls. Supports screen sharing, Meet Now
+    (no-account-needed group calls), and Skype-to-phone calling (Skype Number).
+
+  pages:
+    main:
+      description: "The main Skype interface with tab navigation and conversation view."
+      layout:
+        - "Left panel header: profile avatar, Skype name, status dropdown"
+        - "Left panel tabs: Chats, Calls, Contacts, Notifications"
+        - "Left panel: search bar ('People, groups & messages'), conversation/contact list"
+        - "Right panel: active conversation or call interface"
+        - "Right panel header: contact name, audio call, video call, add people, three-dot menu"
+      chats_tab:
+        behavior: "Shows all conversations sorted by most recent. Unread conversations have bold text and a count badge. Right-click for pin, mute, mark as read, hide, or delete options."
+      calls_tab:
+        behavior: "Shows call history — missed (red), incoming, outgoing calls with timestamps and duration. Click a contact to call again. The dialpad icon at the bottom allows dialing phone numbers (requires Skype Credit or subscription)."
+      contacts_tab:
+        behavior: "Shows contact list grouped alphabetically. Green dot = online, yellow = away, red = busy, gray = offline. Click a contact to open their profile card with chat, call, and video options."
+      notifications_tab:
+        behavior: "Shows reactions to your messages, missed calls, mentions, and other activity notifications."
+      search_bar:
+        selector: "input[placeholder='People, groups & messages']"
+        behavior: "Search for contacts by name, Skype ID, email, or phone number. Also searches message content within conversations. Results split into People, Groups, and Messages."
+      message_input:
+        selector: "div[role='textbox']"
+        behavior: "Type message, Enter to send. Shift+Enter for new line. Supports emoji, GIFs (via Giphy integration), stickers, and formatting: *bold*, _italic_, ~strikethrough~, {code}preformatted{code}."
+      call_buttons:
+        behavior: "Phone icon starts audio call. Camera icon starts video call. Calls connect immediately. During a call: mute, toggle camera, share screen, add participants (up to 100), record, toggle subtitles, react."
+
+    meet_now:
+      description: "Instant group call that anyone can join via link — no Skype account required."
+      behavior: "Click 'Meet Now' in the left panel or top bar. Generates a unique meeting link. Share the link — recipients can join from any browser without signing in. Host controls include mute participants, remove from call, and lock meeting."
+
+    call_view:
+      description: "Active audio or video call interface."
+      layout:
+        - "Center: participant video feeds (grid or focus view)"
+        - "Bottom toolbar: mute, camera, share screen, chat, reactions, record, more options, end call"
+        - "Top: call duration timer, participant count"
+      screen_share:
+        behavior: "Click the screen share icon in the bottom toolbar. Choose to share entire screen or a specific application window. Audio sharing option available for system sounds."
+      live_subtitles:
+        behavior: "Click three dots > Turn on subtitles. Real-time speech-to-text transcription appears at the bottom. Supports multiple languages with live translation."
+      call_recording:
+        behavior: "Click three dots > Start recording. All participants are notified. Recording is saved to the chat as a video file after the call ends. Available for 30 days."
+
+    skype_number:
+      description: "A phone number assigned to your Skype account for receiving calls."
+      behavior: "Purchased through Skype settings. Lets people call your Skype from any phone. Multiple country numbers available. Calls ring on all Skype-connected devices."
+
+  keyboard_shortcuts:
+    search: "Cmd+F — search contacts and messages"
+    new_chat: "Cmd+N — start new conversation"
+    mute_call: "Cmd+M — toggle mute during call"
+    toggle_video: "Cmd+Shift+K — toggle camera during call"
+    end_call: "Cmd+E — end current call"
+
+  workflows:
+    send_message:
+      - "Click the Chats tab"
+      - "Click a conversation (or search for a contact)"
+      - "Type in the message input, press Enter to send"
+
+    make_video_call:
+      - "Open a conversation"
+      - "Click the video camera icon in the header"
+      - "Call connects immediately — adjust camera and mic as needed"
+      - "Click share screen to present, or add participants for a group call"
+
+    start_meet_now:
+      - "Click 'Meet Now' in the sidebar or top bar"
+      - "A meeting link is generated"
+      - "Share the link with participants"
+      - "Participants join from browser — no Skype account needed"
+
+    call_phone_number:
+      - "Click the Calls tab"
+      - "Click the dialpad icon at the bottom"
+      - "Enter a phone number with country code"
+      - "Click the call button (requires Skype Credit or subscription)"
+
+    share_screen:
+      - "During an active call, click the screen share icon in the toolbar"
+      - "Choose entire screen or a specific window"
+      - "Toggle 'Share computer sound' if needed"
+      - "Click Stop Sharing to end"
+
+  tips:
+    - "Meet Now creates instant meetings — share the link with anyone, no account required"
+    - "Live subtitles provide real-time transcription and can translate between languages"
+    - "Call recording saves to the chat — download within 30 days"
+    - "Screen sharing supports both full screen and individual application windows"
+    - "Skype Credit allows calling landlines and mobile phones at low international rates"
+    - "Status indicators: green = online, yellow = away, red = busy, gray = offline"
+    - "Message reactions: hover over a message and click the emoji icon to react"
+    - "File sharing: click the + icon in the message input to send documents, photos, and contacts"
+    - "Skype Number lets you receive phone calls from any device on your Skype account"
+    - "Background effects (blur, custom images) are available during video calls"

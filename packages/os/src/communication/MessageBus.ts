@@ -11,9 +11,9 @@ export class MessageBus {
   private readonly handlers = new Map<string, Set<MessageHandler>>()
   private readonly globalHandlers = new Set<MessageHandler>()
 
-  constructor(eventBus: EventBus) {
+  constructor(eventBus: EventBus, dbPath?: string) {
     this.eventBus = eventBus
-    this.history = new MessageHistory()
+    this.history = new MessageHistory(dbPath)
   }
 
   send(message: ChatMessage): void {
@@ -41,13 +41,14 @@ export class MessageBus {
     }
   }
 
-  sendUserMessage(text: string, taskId: string): ChatMessage {
+  sendUserMessage(text: string, taskId: string, replyToId?: string): ChatMessage {
     const message: ChatMessage = {
       id: `msg_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
       sender: 'user',
       receiver: 'all',
       intent: classifyIntent(text),
       message: text,
+      replyToId,
       context: { taskId },
       timestamp: Date.now(),
     }

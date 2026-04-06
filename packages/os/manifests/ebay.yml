@@ -1,0 +1,115 @@
+name: eBay
+id: ebay
+icon: "https://www.google.com/s2/favicons?domain=ebay.com&sz=128"
+url: https://www.ebay.com
+category: other
+ai_description: "Buy and sell items. Browse auctions, deals, and listings."
+help_url: "https://www.ebay.com/help"
+
+navigation:
+  overview: >
+    eBay is an online marketplace for buying and selling items through auctions and fixed-price
+    listings. Over 1.7 billion live listings. Key distinction from Amazon: eBay supports auctions
+    (timed bidding), Best Offer (price negotiation), and a wide range of used/refurbished goods.
+    Seller reputation is tracked via a detailed feedback system.
+
+  pages:
+    home:
+      description: "Landing page with deals, trending items, and personalized recommendations."
+      layout:
+        - "Top: eBay logo, category dropdown ('Shop by category'), search bar (input#gh-ac), search button, Advanced link"
+        - "Sub-nav: Saved, Motors, Electronics, Fashion, Collectibles, Home, Sporting Goods, Deals, Sell"
+        - "Center: promotional banners, deal cards, trending items, recently viewed, recommended"
+      search_bar:
+        selector: "#gh-ac"
+        type: "input"
+        behavior: "Click to focus. Type a product name or keyword. Autocomplete suggestions appear. Press Enter or click 'Search'. The 'All Categories' dropdown to the left narrows the search scope."
+      advanced_search:
+        behavior: "Click 'Advanced' link next to the search button. Opens a detailed search form with fields for keywords, excluded words, exact price range, item location, seller, listing type, and completed listings."
+      shop_by_category:
+        behavior: "Hover or click to open a mega-menu of product categories: Motors, Electronics, Collectibles & Art, Home & Garden, Clothing, Toys, Sporting Goods, etc."
+
+    search_results:
+      description: "Product listing results with filters and multiple view options."
+      url_pattern: "ebay.com/sch/i.html?_nkw=your+query"
+      layout:
+        - "Left sidebar: filters — Category tree, Condition (New/Open Box/Refurbished/Used/For parts), Price range, Buying Format (Auction/Buy It Now), Item Location, Delivery Options, Show Only (Free Returns, Authorized Seller, Completed Items)"
+        - "Top: result count, sort dropdown, view toggle (Gallery/List)"
+        - "Center: listing cards in grid or list format"
+      listing_card:
+        behavior: "Each shows: product image, title (blue link), condition label, price (bold), shipping cost (or 'Free shipping'), seller info (username + feedback percentage), listing format (Auction with bid count + time remaining, OR Buy It Now price). 'Top Rated Plus' badge on qualifying listings."
+      sort_dropdown:
+        options: "Best Match (default), Time: ending soonest, Time: newly listed, Price + Shipping: lowest first, Price + Shipping: highest first, Distance: nearest first, Condition: New first, Condition: Used first"
+      filter_sidebar:
+        behavior: "Check boxes to filter. Key filters: Condition (New, Open Box, Certified Refurbished, Used, For Parts), Buying Format (Auction, Buy It Now, Accepts Offers), Price range (min-max inputs + Go button). Active filters shown as removable chips above results."
+      view_toggle:
+        behavior: "Switch between Gallery view (grid of images) and List view (detailed rows). List view shows more info per item."
+
+    listing_detail:
+      description: "Full detail page for a single listing."
+      url_pattern: "ebay.com/itm/ITEM_ID"
+      layout:
+        - "Left: product images (main image + thumbnail strip, click to enlarge)"
+        - "Center: title, condition (with details), price, shipping cost+method, item location, returns policy"
+        - "Right: action buttons — Buy It Now / Place Bid / Make Offer, Add to Cart, Add to Watchlist"
+        - "Below: item description (often seller-provided HTML), item specifics table (brand, model, MPN, etc.), shipping details, return policy, seller info"
+      buy_now:
+        behavior: "Fixed-price purchase at the listed price. Click to proceed to checkout. Available on fixed-price listings and some auction listings with a Buy It Now option."
+      place_bid:
+        behavior: "For auction listings only. Enter your maximum bid amount. eBay's proxy bidding system automatically bids the minimum needed up to your maximum. Current bid, number of bids, and time remaining are shown. The '(X bids)' link shows bid history."
+      make_offer:
+        behavior: "Available on listings marked 'Best Offer'. Enter your proposed price. The seller can Accept, Decline, or Counter. You can send up to 3 offers per listing."
+      add_to_watchlist:
+        selector: "a#vi-atl-lnk"
+        behavior: "Saves the item to your Watchlist. You receive notifications about price changes and when auction items are ending soon."
+      seller_info:
+        behavior: "Shows seller username, feedback score (number), positive feedback percentage, member since date, and item location. Click the username to see their full feedback history. 'Top Rated Seller' badge indicates high-volume sellers with excellent metrics."
+      condition_details:
+        behavior: "Shows condition (New, Open Box, Certified Refurbished, Pre-Owned/Used, For Parts) with seller's condition description explaining any wear, defects, or included accessories."
+      item_specifics:
+        behavior: "Table of structured details: Brand, Model, MPN, UPC, Color, Size, Type, etc. Varies by category."
+
+    watchlist:
+      description: "Your watched items with status tracking."
+      url_pattern: "ebay.com/myb/WatchList"
+      behavior: "Shows all watched items with current price, bid count, time remaining (for auctions), and status. Sorted by ending soonest by default."
+
+  workflows:
+    search_and_buy:
+      - "Type your search in the search bar, press Enter"
+      - "Use filters: set Condition (New/Used), Buying Format (Auction/Buy It Now), Price range"
+      - "Sort by 'Price + Shipping: lowest first' for deals or 'Time: ending soonest' for ending auctions"
+      - "Click a listing to view full details"
+      - "Check seller feedback (prefer 99%+ positive with high volume)"
+      - "Click 'Buy It Now' for fixed-price or 'Place Bid' for auctions"
+
+    bid_on_auction:
+      - "Find an auction listing (shows current bid and time remaining)"
+      - "Watch the item first — click 'Add to Watchlist'"
+      - "Enter your maximum bid and click 'Place bid'"
+      - "eBay's proxy system bids the minimum needed up to your max"
+      - "You receive email if outbid — increase your bid or let it go"
+      - "Auction ends at the listed time — highest bidder wins"
+
+    negotiate_price:
+      - "Find a listing with 'Best Offer' option"
+      - "Click 'Make Offer'"
+      - "Enter your proposed price (typically 70-85% of asking)"
+      - "The seller can Accept, Decline, or Counter"
+      - "You can counter back up to 3 times total"
+
+  url_patterns:
+    search: "ebay.com/sch/i.html?_nkw=your+query"
+    item: "ebay.com/itm/ITEM_ID"
+    watchlist: "ebay.com/myb/WatchList"
+    seller: "ebay.com/usr/SELLER_NAME"
+
+  tips:
+    - "Auction vs Buy It Now are fundamentally different: auctions are timed bidding, Buy It Now is fixed price"
+    - "Total cost = item price + shipping — always check both"
+    - "Seller feedback percentage is critical: 99%+ with hundreds of ratings is reliable, below 95% is risky"
+    - "'Time: ending soonest' sort surfaces auction deals about to close"
+    - "'Completed Items' filter (under Show Only) reveals what items actually sold for — useful for pricing research"
+    - "'Best Offer' lets you negotiate — sellers often accept 70-85% of the listed price"
+    - "Watch items to track them and get ending-soon notifications"
+    - "'Certified Refurbished' items include a warranty and have been inspected by the manufacturer"

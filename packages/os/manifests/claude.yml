@@ -1,0 +1,91 @@
+name: Claude
+id: claude
+icon: "https://www.google.com/s2/favicons?domain=claude.ai&sz=128"
+url: https://claude.ai
+category: productivity
+ai_description: "Anthropic's AI assistant. Chat, analyze, write, and code."
+help_url: "https://support.anthropic.com"
+
+navigation:
+  overview: >
+    Claude is Anthropic's AI assistant. The interface has a collapsible left sidebar with conversation
+    history and a central chat area. New conversations start with a centered input field and optional
+    model selector. Claude supports file attachments, long-context analysis, and an artifacts panel
+    for rendering code, documents, and visualizations alongside the conversation.
+
+  pages:
+    chat:
+      description: "The main conversation view with message history, input, artifacts panel, and project support."
+      layout:
+        - "Left sidebar: 'New chat' button (top), conversation history grouped by date, starred conversations, project folders"
+        - "Center top: model selector pill showing current model"
+        - "Center: conversation area with user and assistant messages"
+        - "Bottom center: message input textarea with attachment button (paperclip), send button (arrow)"
+        - "Right (conditional): artifacts panel that opens when Claude generates code, documents, or visualizations"
+      message_input:
+        selector: "div[contenteditable='true'], textarea"
+        type: "Contenteditable div or textarea at the bottom center of the page"
+        behavior: "Click or focus to activate. Type your message. Press Enter to send (Shift+Enter for new line). The send button appears when text is present. Responses stream progressively in the conversation above."
+        keyboard: "The input auto-focuses on page load and after each response completes."
+      model_selector:
+        text: "Model pill/dropdown at the top of the chat area"
+        behavior: "Click to choose the Claude model: Haiku (fastest, lightest), Sonnet (balanced speed and quality), Opus (most capable, slower). The selection applies to the current and subsequent messages. Pro subscribers have higher usage limits on Opus."
+      new_chat_button:
+        text: "Button at the top of the left sidebar"
+        behavior: "Opens a fresh conversation. Previous conversations remain in the sidebar."
+      conversation_list:
+        text: "Conversation history in the left sidebar, grouped by recency"
+        behavior: "Click any conversation to reopen it with full context. Hover to reveal rename, star, and delete options. Conversations are auto-titled based on content."
+      file_attachment:
+        text: "Paperclip icon on the input bar"
+        behavior: "Click to open file picker. Supports PDFs (up to hundreds of pages), images, code files, CSVs, and text documents. Drag-and-drop onto the input area also works. Multiple files can be attached at once. Claude can read and analyze file contents in context."
+      artifacts_panel:
+        text: "Right-side panel that appears when Claude generates structured output"
+        behavior: "Displays rendered code (React components, HTML), documents, SVG diagrams, and Mermaid charts in a live preview. Each artifact has a copy button, download option, and version history. Click an artifact to expand it. The panel opens automatically when Claude creates one."
+      projects:
+        text: "'Projects' section in the left sidebar"
+        behavior: "Organize conversations into project folders. Each project can have custom instructions and uploaded knowledge files that persist across all conversations within that project."
+      response_actions:
+        text: "Action buttons below each assistant response"
+        behavior: "Copy (clipboard icon) copies the full text. Retry (circular arrow) regenerates the response. Thumbs up/down provides feedback."
+
+  workflows:
+    ask_question:
+      - "Click the message input at the bottom"
+      - "Type your question or prompt"
+      - "Press Enter to send"
+      - "Wait for the response to finish streaming"
+      - "Send follow-up messages to refine the answer"
+
+    analyze_document:
+      - "Click the paperclip icon (or drag files onto the input)"
+      - "Select one or more documents (PDF, text, image, code file, CSV)"
+      - "Type a message describing what you want Claude to do with the files"
+      - "Press Enter to send"
+
+    use_artifacts:
+      - "Ask Claude to create code, a document, a diagram, or a visualization"
+      - "The artifacts panel opens on the right with a live preview"
+      - "Click the copy or download button to use the generated output"
+      - "Ask Claude to iterate on the artifact in follow-up messages"
+
+    start_project:
+      - "Click 'Projects' in the sidebar or create a new project"
+      - "Add custom instructions describing the project context"
+      - "Upload reference files that persist across conversations in the project"
+      - "Start conversations within the project — Claude has access to the project knowledge"
+
+    start_new_conversation:
+      - "Click the 'New chat' button in the sidebar"
+      - "Choose a model from the selector if needed"
+      - "Type your first message and press Enter"
+
+  tips:
+    - "Claude handles very long documents well — attach large PDFs or codebases for comprehensive analysis"
+    - "Be specific about format: ask for bullet points, tables, code blocks, or step-by-step instructions"
+    - "Artifacts render live previews of code — ask Claude to build React components, SVG graphics, or HTML pages"
+    - "Projects with custom instructions and knowledge files create persistent context for ongoing work"
+    - "Drag and drop multiple files at once for batch analysis"
+    - "Shift+Enter adds line breaks within your message without sending"
+    - "Opus is best for complex reasoning and creative writing; Haiku is best for quick, straightforward tasks"
+    - "Star important conversations in the sidebar for quick access later"

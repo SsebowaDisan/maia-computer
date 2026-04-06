@@ -1,0 +1,53 @@
+name: Product Hunt
+id: producthunt
+icon: "https://www.google.com/s2/favicons?domain=producthunt.com&sz=128"
+url: https://www.producthunt.com
+category: media
+ai_description: "Discover new products and startups. Upvote and comment."
+
+navigation:
+  overview: >
+    Product Hunt is a daily leaderboard of new tech products and startups. Products are launched
+    daily and ranked by community upvotes with discussion threads.
+
+  pages:
+    home:
+      description: "Today's product launches ranked by upvotes."
+      layout:
+        - "Top: navigation with Topics, Collections, search icon"
+        - "Center: ranked list of product cards with name, tagline, upvote count"
+        - "Date navigation for viewing past days"
+      product_card:
+        text: "Individual product entries in the list"
+        behavior: "Shows product icon, name, tagline, and upvote count. Click to open the full product page with description, media, and discussion."
+      upvote_button:
+        text: "Arrow icon on each product card"
+        behavior: "Click to upvote the product. The count increases. Requires a logged-in account."
+      search:
+        text: "Search icon in the top navigation"
+        behavior: "Type a product name, category, or keyword. Results show products, makers, and collections."
+
+    product_detail:
+      description: "Full page for a product with description, media, and comments."
+      layout:
+        - "Top: product name, tagline, upvote button, media (images/video)"
+        - "Center: description, links, maker info"
+        - "Below: comment/discussion thread"
+
+  workflows:
+    browse_launches:
+      - "The home page shows today's top products"
+      - "Scroll to see more products"
+      - "Click a product card for full details and discussion"
+      - "Use date navigation to see past launches"
+
+    search_products:
+      - "Click the search icon"
+      - "Type a product name or category"
+      - "Browse results and click to view details"
+
+  tips:
+    - "The home page shows only today's launches — use date navigation for past days"
+    - "Products with high upvote counts in the first few hours tend to be the most notable"
+    - "The Topics section helps discover products by category (AI, Developer Tools, Design, etc.)"
+    - "Comment threads often include the makers responding to questions and feedback"

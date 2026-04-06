@@ -1,9 +1,12 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+
+const REVEAL_ZONE_HEIGHT = 32
+const HIDE_DELAY_MS = 220
 
 export function useDock(autoHide: boolean) {
   const hideTimeoutRef = useRef<number>()
+  const isHoveredRef = useRef(false)
   const [isVisible, setIsVisible] = useState(!autoHide)
-  const [isHovered, setIsHovered] = useState(false)
 
   useEffect(() => {
     if (!autoHide) {
@@ -11,11 +14,10 @@ export function useDock(autoHide: boolean) {
       return
     }
 
-    // Start hidden when autoHide is on
     setIsVisible(false)
 
     const handlePointerMove = (event: MouseEvent) => {
-      const nearBottom = event.clientY >= window.innerHeight - 12
+      const nearBottom = event.clientY >= window.innerHeight - REVEAL_ZONE_HEIGHT
 
       if (nearBottom) {
         window.clearTimeout(hideTimeoutRef.current)
@@ -23,11 +25,11 @@ export function useDock(autoHide: boolean) {
         return
       }
 
-      if (!isHovered) {
+      if (!isHoveredRef.current) {
         window.clearTimeout(hideTimeoutRef.current)
         hideTimeoutRef.current = window.setTimeout(() => {
           setIsVisible(false)
-        }, 800)
+        }, HIDE_DELAY_MS)
       }
     }
 
@@ -37,21 +39,25 @@ export function useDock(autoHide: boolean) {
       window.removeEventListener('mousemove', handlePointerMove)
       window.clearTimeout(hideTimeoutRef.current)
     }
-  }, [autoHide, isHovered])
+  }, [autoHide])
+
+  const handlePointerEnter = useCallback(() => {
+    window.clearTimeout(hideTimeoutRef.current)
+    isHoveredRef.current = true
+    setIsVisible(true)
+  }, [])
+
+  const handlePointerLeave = useCallback(() => {
+    isHoveredRef.current = false
+    if (!autoHide) return
+    hideTimeoutRef.current = window.setTimeout(() => {
+      setIsVisible(false)
+    }, HIDE_DELAY_MS)
+  }, [autoHide])
 
   return {
     isVisible,
-    handlePointerEnter: () => {
-      window.clearTimeout(hideTimeoutRef.current)
-      setIsHovered(true)
-      setIsVisible(true)
-    },
-    handlePointerLeave: () => {
-      setIsHovered(false)
-      if (!autoHide) return
-      hideTimeoutRef.current = window.setTimeout(() => {
-        setIsVisible(false)
-      }, 800)
-    },
+    handlePointerEnter,
+    handlePointerLeave,
   }
 }

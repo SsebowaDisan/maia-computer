@@ -1,6 +1,7 @@
 // Types — Apps
 export type {
   AppManifest,
+  AppNavigation,
   AppCategory,
   InstalledApp,
   AppBadge,
@@ -20,6 +21,7 @@ export type {
   CommunicationEvent,
   SessionEvent,
   CostEvent,
+  OrchestratorEvent,
   PlanStep,
   StageContract,
   PlanStepStatus,
@@ -43,11 +45,14 @@ export type {
   MessagePriority,
   MessageContext,
   MessageAttachments,
+  QuestionSeverity,
+  PendingQuestion,
 } from './type/messages'
 
 export {
   MESSAGE_INTENT,
   MESSAGE_PRIORITY,
+  QUESTION_SEVERITY,
   getMessagePriority,
 } from './type/messages'
 
@@ -66,9 +71,57 @@ export type {
   IPCCommands,
   IPCResults,
   IPCEvents,
+  TheatreLayoutItem,
   SearchResult,
   SearchResultGroup,
 } from './type/ipc'
+
+// Types — Orchestrator
+export type {
+  SubTask,
+  SubTaskStatus,
+  TheatreLayout,
+  AgentPersonalityConfig,
+} from './type/orchestrator'
+
+export { SUB_TASK_STATUS } from './type/orchestrator'
+
+// Types — Intelligence (Page Scraper, Research Memory, Smart Navigation, Visual Performance)
+export type {
+  PageType,
+  PageMetadata,
+  PageSection,
+  PageContentItem,
+  ScrollState,
+  ActiveStates,
+  ScrapedElement,
+  ScrapedPage,
+  ObstacleType,
+  PageObstacle,
+  SourceCredibility,
+  ResearchFinding,
+  ResearchDataItem,
+  VisitedPage,
+  ResearchMemoryState,
+  SmartAction,
+  WaitSignal,
+  WaitResult,
+  CursorIntent,
+  CursorMove,
+  TypingConfig,
+  GlowConfig,
+  HighlightConfig,
+  VisualAction,
+  SmartDecisionResult,
+} from './type/intelligence'
+
+export {
+  PAGE_TYPE,
+  OBSTACLE_TYPE,
+  SOURCE_CREDIBILITY,
+  WAIT_SIGNAL,
+  CURSOR_INTENT,
+} from './type/intelligence'
 
 // Constants
 export type { AgentProfile } from './constant/agents'

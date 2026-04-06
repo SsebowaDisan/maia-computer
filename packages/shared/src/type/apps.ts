@@ -1,3 +1,7 @@
+export interface AppNavigation {
+  [key: string]: string | string[] | Record<string, string> | undefined
+}
+
 export interface AppManifest {
   name: string
   id: string
@@ -5,6 +9,8 @@ export interface AppManifest {
   url: string
   category: AppCategory
   aiDescription: string
+  navigation: AppNavigation | undefined
+  helpUrl: string | undefined
 }
 
 export const APP_CATEGORY = {

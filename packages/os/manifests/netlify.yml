@@ -1,0 +1,105 @@
+name: Netlify
+id: netlify
+icon: "https://www.google.com/s2/favicons?domain=netlify.com&sz=128"
+url: https://app.netlify.com
+category: developer
+ai_description: "Deploy and host web apps. Build previews and serverless functions."
+help_url: "https://docs.netlify.com"
+
+navigation:
+  overview: >
+    Netlify is a web hosting and deployment platform for static sites, JAMstack apps, and
+    serverless functions. It auto-deploys from Git — pushes to main go to production, and PRs
+    get deploy previews with unique URLs. The dashboard manages sites, builds, forms, functions,
+    and domain configuration.
+
+  pages:
+    team_overview:
+      description: "Home page showing all sites deployed on your team account."
+      url_pattern: "app.netlify.com/teams/{team}/sites"
+      layout:
+        - "Top: team name, search bar, 'Add new site' button"
+        - "Center: grid of site cards with thumbnail preview, name, URL, and last deploy status"
+        - "Left sidebar: Sites, Builds, Plugins, Domains, Members, Audit log, Billing, Team settings"
+      site_card:
+        behavior: "Shows site thumbnail (screenshot of deployed page), site name, production URL, deploy status (Published = green, Failed = red, Building = yellow), and last deploy time. Click to open site detail."
+      add_site:
+        text: "'Add new site' button"
+        behavior: "Options: Import an existing project (from GitHub, GitLab, Bitbucket), Deploy manually (drag-and-drop folder), Start from a template."
+
+    site_detail:
+      description: "Detail page for a single site with deploy history and configuration."
+      url_pattern: "app.netlify.com/sites/{site-name}"
+      layout:
+        - "Top: site name, production URL (clickable), 'Open production deploy' button"
+        - "Nav tabs: Site overview, Deploys, Functions, Forms, Blobs, Logs, Integrations, Site configuration"
+      site_overview:
+        behavior: "Summary showing: production deploy status, production URL, Git repo link, latest deploy info, and quick links to common settings."
+      deploys_tab:
+        text: "'Deploys' tab"
+        behavior: "Chronological list of all deploys. Each shows: status badge (Published/Failed/Building/Skipped), deploy trigger (Git commit, manual, webhook), branch, commit message, timestamp, and duration. 'Trigger deploy' button for manual deploys. 'Deploy previews' section shows PR preview deploys."
+      deploy_log:
+        behavior: "Click any deploy to see its build log. Step-by-step output: initializing, installing dependencies, building, deploying. Errors highlighted in red. Build time shown at end. 'Retry deploy' button for failed builds."
+      functions_tab:
+        text: "'Functions' tab"
+        behavior: "Lists serverless functions deployed with the site. Shows function name, runtime (Node.js, Go, Rust), invocation count, and average duration. Click a function to see its invocation logs."
+      forms_tab:
+        text: "'Forms' tab"
+        behavior: "Shows form submissions collected by Netlify Forms (HTML forms with netlify attribute). Lists submission data that can be exported as CSV."
+
+    site_configuration:
+      description: "Site settings organized in sections."
+      layout:
+        - "Sections: General, Build & deploy, Domain management, Environment variables, Access & security, Functions, Forms, Post processing"
+      build_settings:
+        text: "Build & deploy section"
+        behavior: "Configure: build command (e.g., 'npm run build'), publish directory (e.g., 'dist'), base directory, deploy contexts (production branch, branch deploys, deploy previews)."
+      domain_management:
+        text: "Domain management section"
+        behavior: "Add custom domains, configure DNS, manage SSL certificates (auto-provisioned via Let's Encrypt). Shows primary domain, domain aliases, and branch subdomains."
+      environment_variables:
+        text: "Environment variables section"
+        behavior: "Set key-value pairs for build and runtime. Scoped by deploy context (Production, Deploy previews, Branch deploys, Local development). Sensitive values are encrypted."
+      redirects:
+        text: "Redirects and rewrites"
+        behavior: "Configure URL redirects via _redirects file or netlify.toml. Supports status codes (301, 302, 200 for rewrites), splats, and query parameters."
+
+  workflows:
+    check_deploy_status:
+      - "Click a site from the team overview"
+      - "Click the 'Deploys' tab"
+      - "Find the deploy by commit message or timestamp"
+      - "Check the status badge: Published (green), Failed (red), Building (yellow)"
+      - "Click the deploy to see its build log if there's an error"
+
+    add_new_site:
+      - "Click 'Add new site' on the team overview"
+      - "Select 'Import an existing project'"
+      - "Connect to Git provider (GitHub, GitLab, Bitbucket)"
+      - "Select the repository"
+      - "Configure build settings: build command, publish directory"
+      - "Click 'Deploy site' — Netlify builds and publishes"
+
+    configure_domain:
+      - "Open the site detail page"
+      - "Go to Site configuration > Domain management"
+      - "Click 'Add a domain'"
+      - "Enter your custom domain"
+      - "Configure DNS records as shown (Netlify DNS or external DNS)"
+      - "Wait for SSL certificate provisioning (automatic)"
+
+    trigger_manual_deploy:
+      - "Open the site detail page"
+      - "Click the 'Deploys' tab"
+      - "Click 'Trigger deploy' dropdown"
+      - "Choose 'Deploy site' (uses latest commit) or 'Clear cache and deploy site'"
+
+  tips:
+    - "Deploy previews are created for every PR — check PR comments for the Netlify bot preview link"
+    - "Build logs show the full output — scroll to the bottom for errors and final status"
+    - "Environment variables can be scoped per deploy context (production vs previews vs branches)"
+    - "The _redirects file or netlify.toml in your repo configures URL redirects and rewrites"
+    - "Branch deploys create unique URLs for specific branches: branch-name--site-name.netlify.app"
+    - "Netlify Functions are serverless functions deployed alongside your site — put them in netlify/functions/"
+    - "The 'Lock deploy' feature pins production to a specific deploy, ignoring new pushes"
+    - "Split testing (A/B) can split traffic between branches under Site configuration"

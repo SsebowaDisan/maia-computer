@@ -1,0 +1,142 @@
+name: YouTube
+id: youtube
+icon: "https://www.google.com/s2/favicons?domain=youtube.com&sz=128"
+url: https://www.youtube.com
+category: media
+ai_description: "Watch videos. Search for tutorials, music, news, and entertainment."
+help_url: "https://support.google.com/youtube"
+
+navigation:
+  overview: >
+    YouTube is the world's largest video platform with over 800 million videos. It opens to a
+    personalized home feed of recommended thumbnails. The interface has a persistent top bar with
+    search, a collapsible left sidebar for navigation, and a video player page with comments,
+    related videos, and chapter-based navigation.
+
+  pages:
+    home:
+      description: "Grid of recommended video thumbnails with category filter chips."
+      layout:
+        - "Top: hamburger menu, YouTube logo, search box (center), voice search mic, Create (+), notifications bell, profile avatar"
+        - "Left sidebar (collapsible): Home, Shorts, Subscriptions, You (Library), History, then Explore categories"
+        - "Below top bar: horizontal scrolling filter chips (All, Music, Gaming, Live, News, Podcasts, Recently uploaded, Watched, etc.)"
+        - "Center: responsive grid of video cards — each shows thumbnail, duration badge, title, channel name+avatar, view count, upload age"
+      search_box:
+        selector: "input[name='search_query']"
+        type: "input"
+        behavior: "Click to focus. Type query. Autocomplete dropdown appears after ~150ms. Press Enter or click magnifying glass to search. Press Down arrow to cycle autocomplete suggestions."
+        keyboard: "Press / (forward slash) to focus the search box from anywhere on the page."
+      filter_chips:
+        behavior: "Horizontal scrolling row. Click a chip to filter home feed. Click 'All' to reset. Left/right arrow buttons appear at edges when more chips exist."
+      video_card:
+        behavior: "Hover shows preview animation after ~2s delay. Three-dot menu on hover offers Save to Watch Later, Save to Playlist, Not interested, Don't recommend channel."
+      sidebar:
+        behavior: "Hamburger menu (top-left) toggles between mini sidebar (icons only) and expanded sidebar (icons + labels). Subscriptions section lists channels with unread indicators."
+
+    search_results:
+      description: "Vertical list of video results with optional filters."
+      url_pattern: "youtube.com/results?search_query=your+query"
+      layout:
+        - "Top: search box pre-filled with query, Filters button"
+        - "Center: vertical list — each result has thumbnail (left), title, channel, view count, age, description snippet (right)"
+        - "Interspersed: 'People also watched', channel results, playlist results, Shorts shelf"
+      filters_button:
+        behavior: "Opens filter grid: Upload date (Last hour/Today/This week/This month/This year), Type (Video/Channel/Playlist/Movie), Duration (Under 4 min/4-20 min/Over 20 min), Features (Live/4K/HD/Subtitles/Creative Commons/360/VR180), Sort by (Relevance/Upload date/View count/Rating)."
+
+    watch_page:
+      description: "Video player with metadata, comments, and recommendations."
+      url_pattern: "youtube.com/watch?v=VIDEO_ID"
+      layout:
+        - "Top/Center: video player (auto-plays)"
+        - "Below player: title, view count, like button (with count), share, download, clip, save, three-dot menu"
+        - "Below: channel avatar + name + subscriber count + Subscribe button, description (expandable)"
+        - "Below description: comments section with sort toggle (Top/Newest first)"
+        - "Right sidebar: autoplay toggle, recommended/related videos list"
+      video_player:
+        keyboard_shortcuts:
+          spacebar: "Play/pause (also K key)"
+          f: "Toggle fullscreen"
+          escape: "Exit fullscreen"
+          m: "Mute/unmute"
+          j: "Rewind 10 seconds"
+          l: "Forward 10 seconds"
+          left_arrow: "Rewind 5 seconds"
+          right_arrow: "Forward 5 seconds"
+          up_arrow: "Volume up 5%"
+          down_arrow: "Volume down 5%"
+          c: "Toggle captions/subtitles"
+          t: "Toggle theater mode"
+          i: "Toggle mini player"
+          period: "Next frame (while paused)"
+          comma: "Previous frame (while paused)"
+          shift_period: "Increase playback speed"
+          shift_comma: "Decrease playback speed"
+          number_0_to_9: "Jump to 0%-90% of video (0=start, 5=halfway)"
+        behavior: "Click to play/pause. Double-click for fullscreen. Double-click left/right side to skip back/forward 10s. Progress bar on hover shows thumbnail preview and chapter name."
+      chapters:
+        behavior: "If the uploader added timestamps, the progress bar is segmented into chapters. Each chapter has a title shown on hover. The description also lists chapters as clickable timestamp links."
+      description_section:
+        behavior: "Click 'more' or '...more' to expand. Contains full text, hashtags (clickable), timestamps (clickable to seek), links. Also shows upload date, view count, likes count."
+      subscribe_button:
+        selector: "button[aria-label*='Subscribe']"
+        behavior: "Subscribe to channel. Bell icon next to it controls notification preference (All/Personalized/None)."
+      comments_section:
+        behavior: "Click 'Add a comment' to write. Sort by Top comments or Newest first. Each comment shows avatar, username, time ago, text, like/dislike, reply count. Click 'N replies' to expand reply thread."
+
+    channel_page:
+      description: "A channel's public profile with tabs."
+      url_pattern: "youtube.com/@handle or youtube.com/channel/CHANNEL_ID"
+      layout:
+        - "Top: banner image, channel avatar, name, handle, subscriber count, video count"
+        - "Tabs: Home, Videos, Shorts, Live, Playlists, Community, About"
+      tabs:
+        home: "Curated featured content — trailers, featured playlists"
+        videos: "All uploads, sortable by Latest/Popular/Oldest"
+        shorts: "Short-form vertical videos grid"
+        live: "Past and upcoming live streams"
+        playlists: "Channel's public playlists"
+        community: "Text posts, polls, images shared by the channel"
+
+    shorts:
+      description: "Vertical short-form video feed."
+      url_pattern: "youtube.com/shorts/VIDEO_ID"
+      behavior: "Full-screen vertical video player. Swipe up/scroll down for next Short. Right side: like, dislike, comment, share, remix buttons. Bottom: audio source link, channel name + subscribe."
+
+  workflows:
+    search_and_watch:
+      - "Press / to focus search box or click it"
+      - "Type query, press Enter"
+      - "Scan results — check titles, view counts, channel credibility, and upload dates"
+      - "Click a video thumbnail or title"
+      - "Use J/L to skip 10s back/forward, spacebar to pause"
+
+    research_topic:
+      - "Search your topic"
+      - "Click Filters, set Upload date to This month or This year for recent content"
+      - "Watch the most relevant video"
+      - "Check the description for timestamps/chapters to find specific sections"
+      - "Explore related videos in the right sidebar for more perspectives"
+
+    create_playlist:
+      - "While watching a video, click the Save button (bookmark icon) below the player"
+      - "Select an existing playlist or click '+ Create new playlist'"
+      - "Name the playlist and set visibility (Public/Unlisted/Private)"
+
+  url_patterns:
+    home: "youtube.com"
+    search: "youtube.com/results?search_query=your+query"
+    video: "youtube.com/watch?v=VIDEO_ID"
+    channel: "youtube.com/@handle"
+    playlist: "youtube.com/playlist?list=PLAYLIST_ID"
+    shorts: "youtube.com/shorts/VIDEO_ID"
+    timestamp: "youtube.com/watch?v=VIDEO_ID&t=90s (starts at 1:30)"
+
+  tips:
+    - "Press / to instantly focus the search box from anywhere"
+    - "Number keys 0-9 on the watch page jump to 0%-90% of the video — faster than dragging the progress bar"
+    - "Shift+> and Shift+< change playback speed (0.25x to 2x) — great for tutorials or lectures"
+    - "The description often contains chapters/timestamps — expand it and click to jump directly"
+    - "Add &t=90s to any video URL to share it starting at 1:30"
+    - "Shorts are a separate vertical video format — they have their own swipeable player"
+    - "Mini player (press i) lets you browse YouTube while the video keeps playing in a corner"
+    - "Theater mode (press t) widens the player to fill the page width"

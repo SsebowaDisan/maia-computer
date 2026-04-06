@@ -1,0 +1,51 @@
+name: Revolut
+id: revolut
+icon: "https://www.google.com/s2/favicons?domain=revolut.com&sz=128"
+url: https://app.revolut.com
+category: finance
+ai_description: "Digital banking. Manage accounts, cards, transfers, and budgets."
+
+navigation:
+  overview: >
+    Revolut is a digital banking app for managing multi-currency accounts, transfers, and cards.
+    It opens to an account overview showing your total balance and recent transactions.
+
+  pages:
+    home:
+      description: "The account overview showing balance and transactions."
+      layout:
+        - "Top: total balance in primary currency"
+        - "Center: currency account tabs/cards, recent transactions list"
+        - "Bottom: navigation (Home, Cards, Crypto, etc.)"
+        - "Action buttons: Send, Request, Exchange"
+      balance:
+        text: "Total balance display"
+        behavior: "Shows the aggregate balance across all currency accounts. Click to see individual currency breakdowns."
+      send_button:
+        text: "'Send' button"
+        behavior: "Opens the transfer flow. Select a contact or enter recipient details, enter amount, review exchange rate and fees, confirm."
+      transaction_list:
+        text: "Recent transactions below the balance"
+        behavior: "Shows transaction type, merchant/recipient name, amount, and date. Click a transaction for full details."
+      account_tabs:
+        text: "Currency account tabs"
+        behavior: "Switch between different currency accounts (EUR, USD, GBP, etc.) to see individual balances."
+
+  workflows:
+    check_balance:
+      - "The home page shows total balance"
+      - "Click the balance area to see per-currency breakdowns"
+      - "Scroll down for recent transactions"
+
+    send_money:
+      - "Click 'Send' on the home page"
+      - "Select a contact or enter new recipient details"
+      - "Enter the amount"
+      - "Review exchange rate and fees"
+      - "Confirm the transfer"
+
+  tips:
+    - "Exchange rates fluctuate — the rate shown is at the moment of the transaction"
+    - "The web app may have fewer features than the mobile app"
+    - "Multi-currency accounts let you hold and exchange between currencies"
+    - "Transaction details show the exact exchange rate and any fees applied"

@@ -1,6 +1,177 @@
 name: GitHub
 id: github
-icon: "🐙"
+icon: "https://www.google.com/s2/favicons?domain=github.com&sz=128"
 url: https://github.com
 category: developer
 ai_description: "Browse repositories. Create issues. Review pull requests. Manage code."
+help_url: "https://docs.github.com"
+
+navigation:
+  overview: >
+    GitHub is the world's largest code hosting platform with over 100 million developers.
+    Code lives in repositories organized by owner/repo-name. Collaboration happens through
+    issues (bug reports, feature requests) and pull requests (proposed code changes with review).
+    GitHub Actions provides CI/CD. The interface is keyboard-friendly with dozens of shortcuts.
+
+  pages:
+    dashboard:
+      description: "The home feed showing activity from followed users, starred repos, and recommendations."
+      layout:
+        - "Top: nav bar — GitHub logo, search bar (or press '/'), Pull requests link, Issues link, Marketplace, Explore, notifications bell, '+' create menu, profile avatar"
+        - "Left: 'Top Repositories' list with search filter and green 'New' button"
+        - "Center: activity feed — commits, stars, forks, new repos from people and orgs you follow"
+        - "Right: 'Explore repositories' recommendations, changelog, trending"
+      search_bar:
+        selector: "input[name='q'], button[data-target='qbsearch-input.inputButton']"
+        behavior: "Press '/' from anywhere to focus. Type query and Enter for global search. On a repo page, searches within that repo by default. Supports qualifiers like 'language:python stars:>1000 is:public'."
+      create_menu:
+        text: "'+' dropdown in top-right nav"
+        behavior: "Quick-create: New repository, Import repository, New codespace, New gist, New organization, New project."
+      notifications_bell:
+        text: "Bell icon — blue dot means unread"
+        behavior: "Opens github.com/notifications. Filters: All, Unread, Participating, Mentioned. Grouped by repository. Mark as read, unsubscribe, or snooze."
+
+    repository:
+      description: "The main repo page — the hub for all project activity."
+      url_pattern: "github.com/{owner}/{repo}"
+      layout:
+        - "Top: owner/repo breadcrumb with visibility badge (Public/Private), Star/Watch/Fork buttons with counts"
+        - "Tab bar: Code, Issues, Pull requests, Discussions, Actions, Projects, Wiki, Security, Insights, Settings"
+        - "Below tabs: branch selector dropdown, 'Go to file' button, 'Add file' dropdown, green '<> Code' button"
+        - "File list: table with Name, Last commit message, Last commit date columns"
+        - "Below file list: rendered README.md"
+      branch_selector:
+        text: "Dropdown showing current branch name (usually 'main')"
+        behavior: "Click to list all branches and tags. Type to filter. Click a branch to switch the file view. Shows branch count and tag count."
+      code_button:
+        text: "Green '<> Code' button"
+        behavior: "Clone dropdown: HTTPS URL, SSH URL, GitHub CLI command. Also: 'Open with GitHub Desktop', 'Download ZIP'. Codespaces tab to launch a cloud dev environment."
+      go_to_file:
+        text: "'Go to file' button (keyboard shortcut: 't')"
+        behavior: "Fuzzy file finder. Type partial filename to filter all files in the repo. Enter to open."
+      tab_issues:
+        text: "'Issues' tab — shows open/closed count"
+        behavior: "Issue list with title, labels (colored badges), assignee avatars, comment count. Filter bar: 'is:issue is:open'. Green 'New issue' button. Supports issue templates if configured."
+      tab_pull_requests:
+        text: "'Pull requests' tab — shows open count"
+        behavior: "PR list with title, labels, review status (approved/changes requested), CI check status (green check/red X/yellow dot). Filter by author, label, milestone, reviewer."
+      tab_actions:
+        text: "'Actions' tab"
+        behavior: "CI/CD workflow runs. Left sidebar lists workflows. Center shows runs with status icon (green check, red X, yellow spinner), workflow name, branch, commit, duration, and timestamp."
+
+    file_view:
+      description: "Viewing a single file with syntax highlighting and metadata."
+      url_pattern: "github.com/{owner}/{repo}/blob/{branch}/{path}"
+      layout:
+        - "Top: file path breadcrumb (each segment is clickable), file size, line count"
+        - "Toolbar: Raw, Blame, Edit (pencil), Delete (trash), Copy raw, Download"
+        - "Center: syntax-highlighted code with line numbers"
+      line_numbers:
+        behavior: "Click a line number to highlight it and update URL hash (#L42). Shift+click for range (#L10-L25). Right-click line number for 'Copy permalink' and 'Reference in new issue'."
+      blame_view:
+        url_pattern: "github.com/{owner}/{repo}/blame/{branch}/{path}"
+        behavior: "Each line annotated with commit hash, author, date, and message. Click a commit hash to see the full commit. Useful for understanding when and why a line was written."
+
+    issue:
+      description: "Issue detail page — a discussion thread for bugs, features, or tasks."
+      url_pattern: "github.com/{owner}/{repo}/issues/{number}"
+      layout:
+        - "Top: issue title (editable by author/maintainer), '#number', Open/Closed badge"
+        - "Center: original description (markdown rendered), then chronological comments"
+        - "Right sidebar: Assignees, Labels, Projects, Milestone, Development (linked PRs)"
+        - "Bottom: comment box with Write/Preview tabs, file attachment, 'Close issue' button"
+      sidebar_fields:
+        assignees: "Click to assign users. Multiple assignees supported."
+        labels: "Click to add colored labels (bug, enhancement, documentation, etc.)."
+        milestone: "Group issues into milestones with due dates and progress tracking."
+        development: "Link a branch or PR. When the linked PR merges, the issue auto-closes."
+
+    pull_request:
+      description: "PR page — proposed code changes with review workflow."
+      url_pattern: "github.com/{owner}/{repo}/pull/{number}"
+      layout:
+        - "Top: PR title, '#number', Open/Merged/Closed/Draft badge, base <- head branch info"
+        - "Tabs: Conversation, Commits, Checks, Files changed"
+        - "Conversation: description, review comments, CI status checks, merge section"
+        - "Files changed: unified or split diff of all modified files"
+      files_changed:
+        behavior: "Green lines = additions, red = deletions. Click any line to start an inline review comment. 'Viewed' checkbox per file to track review progress. File tree sidebar on left for navigation."
+      merge_section:
+        behavior: "Green 'Merge pull request' button when checks pass and reviews approve. Dropdown arrow reveals: Create a merge commit, Squash and merge, Rebase and merge. Some options may be restricted by branch protection rules."
+      review_button:
+        text: "'Review changes' button on Files changed tab"
+        behavior: "Submit review: Comment (neutral), Approve (green check), Request changes (red X). Pending comments are batched until you submit the review."
+
+    profile:
+      url_pattern: "github.com/{username}"
+      description: "User profile showing bio, pinned repos, contribution graph, and activity."
+      layout:
+        - "Left: avatar, name, bio, location, company, links, followers/following counts"
+        - "Center: pinned repositories (up to 6), contribution graph (green squares), activity tab"
+
+  workflows:
+    search_repositories:
+      - "Press '/' to focus search"
+      - "Type query (e.g., 'react state management') and press Enter"
+      - "On results page, click 'Repositories' filter in left sidebar"
+      - "Sort by: Best match, Most stars, Most forks, Recently updated"
+      - "Filter by language, license, topics using sidebar"
+
+    create_issue:
+      - "Navigate to the repository"
+      - "Click the 'Issues' tab"
+      - "Click green 'New issue' button"
+      - "Select an issue template if available, or 'Open a blank issue'"
+      - "Enter title and markdown description"
+      - "Set Labels, Assignees, Milestone in right sidebar"
+      - "Click 'Submit new issue'"
+
+    create_pull_request:
+      - "Navigate to the repository"
+      - "Click 'Pull requests' tab, then green 'New pull request' button"
+      - "Select base branch (target, usually main) and compare branch (your changes)"
+      - "Review the diff shown below"
+      - "Click 'Create pull request'"
+      - "Enter title and description, add reviewers and labels"
+      - "Click 'Create pull request' to submit"
+
+    review_pull_request:
+      - "Open the PR from the Pull requests tab"
+      - "Read the Conversation tab for context"
+      - "Click 'Files changed' to review code"
+      - "Click any line number to add inline comments"
+      - "Click 'Review changes' button, choose Approve/Request changes/Comment"
+      - "Click 'Submit review'"
+
+  url_patterns:
+    repository: "github.com/{owner}/{repo}"
+    issues_list: "github.com/{owner}/{repo}/issues"
+    single_issue: "github.com/{owner}/{repo}/issues/{number}"
+    pr_list: "github.com/{owner}/{repo}/pulls"
+    single_pr: "github.com/{owner}/{repo}/pull/{number}"
+    file: "github.com/{owner}/{repo}/blob/{branch}/{path}"
+    blame: "github.com/{owner}/{repo}/blame/{branch}/{path}"
+    commits: "github.com/{owner}/{repo}/commits/{branch}"
+    actions: "github.com/{owner}/{repo}/actions"
+    profile: "github.com/{username}"
+    search: "github.com/search?q={query}&type=repositories"
+
+  keyboard_shortcuts:
+    - "/ — focus search bar"
+    - "t — fuzzy file finder on repo page"
+    - "y — switch URL to permalink (pinned to current commit SHA)"
+    - ". — open github.dev (VS Code in browser) for the current repo"
+    - "? — show full keyboard shortcuts help overlay"
+    - "g + n — go to notifications"
+    - "g + c — go to Code tab"
+    - "g + i — go to Issues tab"
+    - "g + p — go to Pull requests tab"
+
+  tips:
+    - "Press '.' on any repo page to open it in github.dev (browser-based VS Code)"
+    - "Search qualifiers: 'language:typescript stars:>500 created:>2025-01-01' for precise results"
+    - "On the issues page, filter syntax: 'is:open label:bug assignee:username sort:updated-desc'"
+    - "Click a line number then Shift+click another to select a range — the URL becomes a shareable permalink"
+    - "The green 'Code' button includes Codespaces for instant cloud development environments"
+    - "Branch protection rules (Settings > Branches) enforce required reviews and CI checks before merging"
+    - "GitHub Actions workflow files live in .github/workflows/ — YAML-based CI/CD"

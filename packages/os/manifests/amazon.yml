@@ -1,0 +1,130 @@
+name: Amazon
+id: amazon
+icon: "https://www.google.com/s2/favicons?domain=amazon.com&sz=128"
+url: https://www.amazon.com
+category: other
+ai_description: "Shop for products. Browse deals, track orders, and manage wishlist."
+help_url: "https://www.amazon.com/gp/help/customer"
+
+navigation:
+  overview: >
+    Amazon is the world's largest online marketplace with hundreds of millions of products. The
+    interface has a dense top navigation with search, department browsing, account access, and cart.
+    Product pages follow a consistent layout with images, pricing, buy box, and reviews. Prime
+    membership unlocks free fast shipping on eligible items.
+
+  pages:
+    home:
+      description: "Personalized landing page with deals, recommendations, and promotional banners."
+      layout:
+        - "Top bar: Amazon logo, delivery location, search bar with category dropdown, language selector, 'Account & Lists' hover menu, 'Returns & Orders', cart icon with count"
+        - "Sub-nav: Today's Deals, Customer Service, Registry, Gift Cards, Sell"
+        - "Center: auto-rotating promotional carousel, deal cards, 'Keep shopping for' grids, personalized recommendation rows"
+      search_bar:
+        selector: "#twotabsearchtextbox"
+        type: "input"
+        behavior: "Click to focus. Type a product query. Autocomplete suggestions appear as you type. Press Enter or click the magnifying glass button to search. The category dropdown to the left (id='searchDropdownBox') narrows search to specific departments."
+      category_dropdown:
+        selector: "#searchDropdownBox"
+        behavior: "Click to open. Select a department (Electronics, Books, Clothing, etc.) before searching. Shows 'All Departments' by default."
+      account_menu:
+        behavior: "Hover over 'Account & Lists' to see a dropdown: Sign In, Your Account, Your Orders, Your Lists (wishlists), Recommendations, Browsing History, Your Garage."
+      cart_icon:
+        selector: "#nav-cart"
+        behavior: "Shows item count badge. Click to view shopping cart with all items, quantities, prices, and 'Proceed to checkout' button."
+
+    search_results:
+      description: "Product listing page with filters and sorting."
+      url_pattern: "amazon.com/s?k=your+query"
+      layout:
+        - "Left sidebar: filters — Department, Customer Reviews (star bar), Price range input, Brand checkboxes, Prime eligible toggle, Delivery Day, Condition (New/Renewed/Used), Seller, Deals & Discounts"
+        - "Top: result count ('1-48 of over X results'), sort dropdown"
+        - "Center: product cards in a grid — each shows image, title, star rating, review count, price, Prime badge, delivery estimate, 'Amazon's Choice' or 'Best Seller' badges"
+      product_card:
+        behavior: "Shows product image, title (blue link — click to go to product page), star rating with review count, price (bold), Prime badge (checkmark + 'Prime'), and delivery estimate. 'Sponsored' label indicates paid placement."
+      sort_dropdown:
+        selector: "#s-result-sort-select"
+        options: "Featured, Price: Low to High, Price: High to Low, Avg. Customer Reviews, Newest Arrivals, Best Sellers"
+      filter_sidebar:
+        behavior: "Check boxes to filter by brand, star rating, price range, Prime eligibility, department. Click 'Go' next to price inputs for custom range. Filters apply immediately. Active filters shown as removable chips above results."
+      pagination:
+        behavior: "Bottom of page: Next/Previous buttons and page numbers. URL parameter: &page=2. Each page shows ~48 results."
+
+    product_page:
+      description: "Full product detail page with images, pricing, buy box, and reviews."
+      url_pattern: "amazon.com/dp/ASIN or amazon.com/gp/product/ASIN"
+      layout:
+        - "Left: product images — main image with thumbnail strip below/beside"
+        - "Center: title, brand link, star rating, review count, price, bullet point features, About this item"
+        - "Right: buy box — price, delivery options, availability, quantity selector, 'Add to Cart' button, 'Buy Now' button, seller info"
+        - "Below: detailed description, comparison table, Q&A section, customer reviews"
+      product_title:
+        selector: "#productTitle"
+        behavior: "Full product name, often detailed with brand, model, size, color."
+      price_display:
+        behavior: "Shows current price prominently. If discounted: original price struck through, deal price in red, savings percentage. 'List Price' vs current price comparison. Subscribe & Save may offer additional discount."
+      star_rating:
+        selector: "#acrPopover"
+        behavior: "Click the star rating or 'X ratings' link to jump to customer reviews section. Shows average out of 5. Histogram shows distribution across 1-5 stars."
+      add_to_cart:
+        selector: "#add-to-cart-button"
+        behavior: "Adds item to cart. A confirmation side panel or page appears showing the item was added, with 'Cart' and 'Proceed to checkout' options."
+      buy_now:
+        selector: "#buy-now-button"
+        behavior: "Skips cart. Goes directly to checkout using default shipping address and payment method."
+      image_gallery:
+        behavior: "Click thumbnails to switch main image. Hover over the main image to zoom (magnifier effect). Some products have videos in the image gallery. Click the expand icon for fullscreen view."
+      customer_reviews:
+        selector: "#reviewsMedley"
+        behavior: "Star histogram shows distribution. Click a star bar to filter reviews by that rating. 'Top reviews' are selected by relevance. Sort by Most recent. Search bar searches within reviews. Reviews show star rating, title, verified purchase badge, text, helpful vote count."
+      qa_section:
+        behavior: "Customer questions and answers section. Shows questions with community answers. Search bar to find specific questions. Click 'See all questions' for the full list."
+      seller_info:
+        behavior: "Buy box shows 'Ships from' and 'Sold by' — Amazon or third-party seller. Click seller name to see their storefront and feedback rating. 'Fulfilled by Amazon' means Amazon handles shipping even for third-party items."
+
+    cart:
+      description: "Shopping cart page."
+      url_pattern: "amazon.com/gp/cart/view.html"
+      layout:
+        - "Center: list of cart items with images, titles, prices, quantity dropdowns, 'Delete' link, 'Save for later' link"
+        - "Right: order summary — subtotal, 'Proceed to checkout' button"
+      quantity_selector:
+        behavior: "Dropdown per item (1-10, then '10+' for manual entry). Changing quantity updates the subtotal."
+
+  workflows:
+    search_and_buy:
+      - "Click the search bar (or it auto-focuses)"
+      - "Type product name, press Enter"
+      - "Scan results — check titles, ratings (prefer 4+ stars with 100+ reviews), prices, Prime badges"
+      - "Use left sidebar filters to narrow by brand, price, or rating"
+      - "Click a product title to view details"
+      - "Review images, bullet points, and customer reviews"
+      - "Click 'Add to Cart' or 'Buy Now'"
+
+    compare_products:
+      - "Search for a product category (e.g., 'wireless earbuds')"
+      - "Open several promising products, noting prices, ratings, and review counts"
+      - "Check the 'Compare with similar items' table on product pages"
+      - "Read 1-star and 3-star reviews for honest criticism"
+      - "Higher review counts make the average rating more reliable"
+
+    track_order:
+      - "Click 'Returns & Orders' in the top-right"
+      - "Find the order in the list"
+      - "Click 'Track package' to see delivery status, carrier, and estimated arrival"
+
+  url_patterns:
+    search: "amazon.com/s?k=your+query"
+    product: "amazon.com/dp/ASIN"
+    cart: "amazon.com/gp/cart/view.html"
+    orders: "amazon.com/gp/your-account/order-history"
+
+  tips:
+    - "Products with 'Amazon's Choice' badge are highly rated, well-priced, and Prime-eligible"
+    - "Sort by 'Avg. Customer Reviews' to find the best-rated products in a category"
+    - "Check 'Ships from' and 'Sold by' in the buy box — 'Ships from Amazon.com' is generally most reliable"
+    - "The Q&A section often answers specific product questions that reviews miss"
+    - "Subscribe & Save offers 5-15% discount on recurring deliveries for household items"
+    - "Review the star histogram — a bimodal distribution (lots of 5-star and 1-star) suggests inconsistent quality"
+    - "Price and stock can change rapidly — Amazon uses dynamic pricing"
+    - "Filter by 'Prime' to see only items with free fast shipping"

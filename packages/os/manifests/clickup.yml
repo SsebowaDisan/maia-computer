@@ -1,0 +1,77 @@
+name: ClickUp
+id: clickup
+icon: "https://www.google.com/s2/favicons?domain=clickup.com&sz=128"
+url: https://app.clickup.com
+category: productivity
+ai_description: "All-in-one project management. Tasks, docs, goals, and chat."
+
+navigation:
+  overview: >
+    ClickUp is an all-in-one project management platform. Work is organized hierarchically:
+    Workspace > Space > Folder > List > Task. It supports multiple views and task management.
+
+  pages:
+    home:
+      description: "The home dashboard showing recent tasks, favorites, and assigned items."
+      layout:
+        - "Left sidebar: hierarchical tree (Spaces > Folders > Lists), Favorites, Dashboards, Docs"
+        - "Center: home feed with recent tasks, tasks assigned to you, and agenda"
+      sidebar:
+        text: "Left panel with workspace hierarchy"
+        behavior: "Expand Spaces to see Folders, expand Folders to see Lists. Click a List to view its tasks. Favorites shows starred items for quick access."
+
+    task_list:
+      description: "A list view showing tasks grouped by status."
+      layout:
+        - "Top: view tabs (List, Board, Gantt, Calendar, Timeline), filter/sort options"
+        - "Center: task rows grouped by status sections (To Do, In Progress, Complete, etc.)"
+        - "Top of each section: '+ Add Task' button"
+      task_row:
+        text: "Individual task in the list"
+        behavior: "Shows task name, assignee, due date, priority flag, status tag, and custom fields. Click the task name to open the task detail view."
+      add_task:
+        text: "'+ Add Task' at the top or bottom of a section"
+        behavior: "Creates a new task inline. Type the name and press Enter. The task appears in that status group."
+      view_tabs:
+        text: "List, Board, Gantt, Calendar tabs at top"
+        behavior: "Switch between views of the same data. Board shows Kanban columns. Gantt shows a timeline chart. Calendar shows tasks by date."
+
+    task_detail:
+      description: "Full task detail view."
+      layout:
+        - "Top: task name, status, assignee, priority, due date"
+        - "Center: description, subtasks, checklists, attachments"
+        - "Bottom: comments and activity"
+      status_field:
+        text: "Status dropdown"
+        behavior: "Click to change the task status (To Do, In Progress, Complete, etc.)."
+      subtasks:
+        text: "Subtasks section"
+        behavior: "Add subtasks to break down work. Each subtask can have its own assignee and due date."
+
+  workflows:
+    create_task:
+      - "Navigate to the correct List in the sidebar"
+      - "Click '+ Add Task' in the desired status section"
+      - "Type the task name and press Enter"
+      - "Click the task to open it and set details (assignee, priority, due date, description)"
+
+    search:
+      - "Press Cmd+K (Ctrl+K) to open universal search"
+      - "Type your query"
+      - "Results show tasks, docs, and people"
+      - "Click a result to open it"
+
+    organize_work:
+      - "Create Spaces for teams or departments"
+      - "Create Folders within Spaces for projects"
+      - "Create Lists within Folders for task categories"
+      - "Add tasks to Lists and manage them through statuses"
+
+  tips:
+    - "Cmd+K (Ctrl+K) is the fastest way to find anything in ClickUp"
+    - "Press 'T' as a shortcut to create a task in the current view"
+    - "Multiple views (List, Board, Gantt) show the same tasks differently — use the one that fits your workflow"
+    - "Custom fields let you track any data on tasks (priority, effort, team, etc.)"
+    - "Task dependencies can be set to block tasks until prerequisites are complete"
+    - "The hierarchy (Space > Folder > List) helps organize large projects with many tasks"

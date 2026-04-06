@@ -1,0 +1,69 @@
+name: QuickBooks
+id: quickbooks
+icon: "https://www.google.com/s2/favicons?domain=quickbooks.intuit.com&sz=128"
+url: https://quickbooks.intuit.com
+category: finance
+ai_description: "Accounting software. Manage invoices, expenses, and reports."
+
+navigation:
+  overview: >
+    QuickBooks is accounting software for small businesses. It manages invoices, expenses,
+    banking, payroll, and financial reports from a central dashboard.
+
+  pages:
+    dashboard:
+      description: "Home page with financial overview charts and summaries."
+      layout:
+        - "Left sidebar: Dashboard, Banking, Sales, Expenses, Projects, Reports, and more"
+        - "Center: income vs expense chart, bank account balances, recent transactions, profit & loss summary"
+        - "Top-left: green '+New' button"
+      sidebar:
+        text: "Left navigation"
+        behavior: "Dashboard shows overview. Banking shows connected accounts. Sales has Invoices, Customers, Products. Expenses has Bills, Vendors. Reports has financial reports."
+      plus_new_button:
+        text: "Green '+New' button (top-left)"
+        behavior: "Opens a quick-create menu for: Invoice, Expense, Check, Bill, Payment, Customer, Vendor, and more. The fastest way to create anything."
+      search:
+        text: "Magnifying glass in the top bar"
+        behavior: "Search by transaction amount, customer name, memo, or invoice number across all records."
+
+    invoices:
+      description: "Invoice management page."
+      layout:
+        - "Center: invoice list with status (Draft, Sent, Paid, Overdue), customer, amount, date"
+      invoice_row:
+        text: "Individual invoice entries"
+        behavior: "Click to open the invoice detail. Edit, send, or mark as paid."
+
+    reports:
+      description: "Financial reports page."
+      layout:
+        - "Center: list of report types (Profit & Loss, Balance Sheet, Cash Flow, etc.)"
+      report_card:
+        text: "Report options"
+        behavior: "Click a report to generate it. Set date range and customization options."
+
+  workflows:
+    create_invoice:
+      - "Click the green '+New' button"
+      - "Select 'Invoice'"
+      - "Fill in customer, items/services, amounts"
+      - "Click 'Save and send' to email it to the customer"
+
+    search_transactions:
+      - "Click the search icon in the top bar"
+      - "Type an amount, customer name, or description"
+      - "Results group by type: Invoices, Expenses, Customers"
+      - "Click a result for full details"
+
+    view_reports:
+      - "Click 'Reports' in the left sidebar"
+      - "Select a report type (Profit & Loss, Balance Sheet, etc.)"
+      - "Set the date range"
+      - "The report generates with the financial data"
+
+  tips:
+    - "The '+New' button is the fastest way to create anything — invoices, expenses, checks, etc."
+    - "Reports may take a moment to load with large datasets — wait for the data to render"
+    - "The Dashboard gives a quick financial health overview without running detailed reports"
+    - "Banking section syncs with connected bank accounts for automatic transaction matching"

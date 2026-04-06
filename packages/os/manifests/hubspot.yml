@@ -1,0 +1,62 @@
+name: HubSpot
+id: hubspot
+icon: "https://www.google.com/s2/favicons?domain=hubspot.com&sz=128"
+url: https://app.hubspot.com
+category: productivity
+ai_description: "CRM, marketing, sales, and customer service platform."
+
+navigation:
+  overview: >
+    HubSpot is a CRM and business platform covering contacts, deals, marketing, sales, and
+    service. It opens to a dashboard with activity feed and pipeline summaries.
+
+  pages:
+    dashboard:
+      description: "The home page with activity feed, tasks, and sales pipeline summary."
+      layout:
+        - "Top: navigation bar with Contacts, Conversations, Marketing, Sales, Service, Automation hubs"
+        - "Center: activity feed, task list, deal pipeline overview"
+      top_nav:
+        text: "Contacts, Conversations, Marketing, Sales, Service, Automation in the nav bar"
+        behavior: "Hover over each hub to see dropdown menus with sub-sections. Contacts has Contacts, Companies. Sales has Deals, Tasks, Documents. Service has Tickets, Knowledge Base."
+      search_bar:
+        text: "Search input at the top (or press '/')"
+        behavior: "Search across all CRM records — contacts, companies, deals, tickets. Results are grouped by type."
+
+    contacts:
+      description: "Contact database showing all people in your CRM."
+      layout:
+        - "Center: table of contacts with name, email, company, lifecycle stage, last activity"
+        - "Top: filter and search options, 'Create contact' button"
+      contact_record:
+        text: "Individual contact record (click a contact to open)"
+        behavior: "Left side shows contact properties (name, email, phone, company). Right side shows activity timeline (emails, calls, notes, meetings). Edit properties by clicking them."
+
+    deals:
+      description: "Sales pipeline showing deals as a Kanban board."
+      layout:
+        - "Center: Kanban columns representing pipeline stages"
+        - "Cards in each column represent deals with value and contact info"
+      deal_card:
+        text: "Individual deal cards in the pipeline"
+        behavior: "Shows deal name, value, and associated contact. Drag between columns to update pipeline stage. Click to open full deal details."
+
+  workflows:
+    search_contacts:
+      - "Click the search bar (or press '/')"
+      - "Type a contact name, email, or company"
+      - "Click a result to open the contact record"
+      - "View their properties and activity timeline"
+
+    manage_deals:
+      - "Navigate to Sales > Deals"
+      - "View deals in the pipeline board"
+      - "Drag deal cards between stages to update progress"
+      - "Click a deal to see details, notes, and associated contacts"
+
+  tips:
+    - "Navigation dropdowns appear on hover — hover over menu items to see sub-sections"
+    - "The search bar searches across all record types — contacts, companies, deals, and tickets"
+    - "Contact records show a complete timeline of all interactions"
+    - "Custom properties can be added to contacts and deals for tracking specific data"
+    - "Deals in the pipeline view can be dragged between stages"

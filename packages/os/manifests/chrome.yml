@@ -1,6 +1,149 @@
-name: Chrome
-id: chrome
-icon: "🌐"
-url: https://www.google.com
+name: Web Browser
+id: web-browser
+icon: "https://www.google.com/s2/favicons?domain=google.com&sz=128"
+url: https://www.google.com/webhp
 category: other
-ai_description: "Browse the web. Search for information. Fill forms. Extract data from websites."
+ai_description: "Browse the web. Search for information. Navigate to any website. Fill forms. Extract data."
+help_url: "https://support.google.com/websearch/answer/134479"
+
+navigation:
+  overview: >
+    Google Search is the default homepage. It processes over 8.5 billion searches per day.
+    The interface is deliberately minimal — a search box with autocomplete, and results
+    organized by relevance with optional featured snippets, knowledge panels, and rich results.
+
+  pages:
+    homepage:
+      description: "Minimal page: logo, search box, two buttons. Language may vary by region (Dutch, French, German, etc.) — functionality is identical."
+      layout:
+        - "Top-right: 'Gmail' link, 'Images' link, Google Apps grid (3x3 dots), Sign in button"
+        - "Center: Google logo, search textarea (name='q'), two buttons below"
+        - "Bottom: region name, language switcher, footer links"
+      search_box:
+        selector: "textarea[name='q']"
+        type: "textarea (not input — Google switched to textarea in 2023)"
+        behavior: "Click or focus to activate. Type query. Autocomplete dropdown appears after ~200ms showing suggestions. Press Enter to search. Press Down arrow to select an autocomplete suggestion, then Enter."
+        keyboard: "The search box auto-focuses on page load in most cases. Just start typing."
+      google_search_button:
+        text: "Regional variations: 'Google Search', 'Google Zoeken' (Dutch), 'Recherche Google' (French), 'Google Suche' (German), 'Buscar con Google' (Spanish)"
+        behavior: "Submits the query. Same effect as pressing Enter in the search box."
+      feeling_lucky_button:
+        text: "Regional: 'I'm Feeling Lucky', 'Ik doe een gok' (Dutch), 'J'ai de la chance' (French)"
+        behavior: "Bypasses search results and navigates directly to the first result URL. Useful when you know the exact site you want."
+      google_apps_grid:
+        selector: "a[aria-label='Google apps'], a[aria-label='Google-apps']"
+        behavior: "Opens a floating panel with icons for Google services: Gmail, Drive, Maps, YouTube, Calendar, Meet, Chat, Translate, Photos, etc. Click any icon to navigate there."
+      gmail_link:
+        behavior: "Opens Gmail in the same tab. Located in the top-right corner."
+      images_link:
+        behavior: "Switches to Google Images search. The search box changes to image search mode."
+
+    search_results:
+      description: "The SERP (Search Engine Results Page). Google returns ~10 organic results per page plus optional rich features."
+      url_pattern: "google.com/search?q=your+query"
+      layout:
+        - "Top: search box (editable, pre-filled with query), filter tabs (All, Images, News, Maps, Videos, Shopping, Books)"
+        - "Below tabs: 'About X results (Y seconds)' count"
+        - "Main column: organic results, each with site favicon+name, URL breadcrumb, blue title link, gray snippet"
+        - "Right column (optional): knowledge panel with structured info, images, key facts"
+        - "Bottom: pagination (Gooooooogle with page numbers), Related searches"
+      organic_result:
+        structure: "Each result has: (1) site favicon + site name, (2) URL in green/gray breadcrumb format, (3) blue clickable title — THIS is what you click, (4) snippet — 2-3 lines of gray text describing the page content"
+        behavior: "Click the blue title to navigate to that page. The URL breadcrumb shows where the link goes. The snippet gives a preview of what the page contains."
+      featured_snippet:
+        description: "A prominent box at the very top of results with a direct answer extracted from a webpage. May be a paragraph, list, or table."
+        behavior: "Contains the answer text, often sufficient without clicking through. Source link below the snippet leads to the full page. Also called 'Position Zero'."
+      knowledge_panel:
+        description: "A card on the right side for entities (people, places, companies, movies). Shows image, description, key facts in structured format."
+        behavior: "Contains quick facts. 'More about' link leads to Google's knowledge graph. Sub-links go to official sites, social profiles, etc."
+      people_also_ask:
+        description: "Expandable FAQ-style questions related to your search. Each expands to show a brief answer with source."
+        behavior: "Click a question to expand. Reading one question triggers more related questions to appear below. Useful for exploring a topic."
+      ads:
+        label: "Marked 'Sponsored' in bold text above the result"
+        behavior: "Paid advertisements. Appear at top and bottom. Look like organic results but have the 'Sponsored' label. May be relevant, may not."
+      tabs:
+        all: "Default — shows web results"
+        images: "Shows image results with thumbnails"
+        news: "Shows recent news articles"
+        maps: "Shows map with local results"
+        videos: "Shows video results (mainly YouTube)"
+        shopping: "Shows product listings with prices"
+        books: "Shows book results"
+      tools_button:
+        behavior: "Opens time filter: Past hour, Past 24 hours, Past week, Past month, Past year, Custom range. Also includes verbatim search option."
+      pagination:
+        behavior: "Click 'Next' or page numbers at the bottom. Each page shows ~10 results. URL parameter: &start=10 for page 2, &start=20 for page 3."
+
+    any_website:
+      description: "After clicking a search result, you navigate to a third-party website."
+      common_elements:
+        cookie_banners: "Most EU sites show cookie consent banners. Look for 'Accept', 'Accept all', 'I agree', 'Agree' buttons. Some have 'Reject all' or 'Manage preferences' options."
+        navigation_bar: "Usually at the top with logo, menu links, search, and account options."
+        main_content: "The article/page content, usually in a <main> or <article> element. This is what you want to read."
+        sidebar: "Optional — may contain related articles, ads, or table of contents."
+        footer: "Links to about, contact, privacy policy, terms. Usually not useful for content."
+        paywall: "Some sites hide content behind a subscription wall after showing 1-2 paragraphs. Look for 'Subscribe', 'Sign in to read', or content fading to white. Go back and try another source."
+        popup_overlays: "Newsletter signup, cookie consent, app download prompts. Look for close button (X), 'No thanks', or press Escape."
+
+  workflows:
+    basic_search:
+      - "Type query in the search box (textarea[name='q'])"
+      - "Press Enter"
+      - "Scan the results — check featured snippet first, then read titles and snippets of organic results"
+      - "Click the most relevant result by its blue title text"
+      - "Read the page, scroll to find the information you need"
+      - "If the page isn't useful, go back and try the next result"
+
+    research_multiple_sources:
+      - "Search for your topic"
+      - "Click the first credible result, read thoroughly, extract key data"
+      - "Go back to search results"
+      - "Click a second source, read and compare with what you found"
+      - "If needed, refine the search with different terms"
+      - "Synthesize findings from 2-3 sources into a comprehensive answer"
+
+    refine_search:
+      - "Click the search box at the top of the results page"
+      - "Clear or modify the query"
+      - "Press Enter to search with new terms"
+
+    site_specific_search:
+      - "Type: site:wikipedia.org quantum computing"
+      - "This searches only within wikipedia.org"
+      - "Useful for targeting specific trusted sources"
+
+    find_recent_info:
+      - "Search your query"
+      - "Click 'Tools' below the search box"
+      - "Select time range: Past hour, Past 24 hours, Past week, Past month, Past year"
+      - "Results are filtered to only show content from that time period"
+
+  search_operators:
+    quotes: "\"exact phrase\" — finds pages with this exact phrase"
+    minus: "-word — excludes pages containing this word"
+    site: "site:domain.com — searches only within a specific website"
+    filetype: "filetype:pdf — finds only PDF documents"
+    intitle: "intitle:word — finds pages with this word in the title"
+    OR: "word1 OR word2 — finds pages with either word"
+    wildcard: "\"largest * in the world\" — asterisk acts as placeholder for any word"
+    range: "camera $200..$500 — finds results within a price range"
+
+  url_patterns:
+    search: "google.com/search?q=your+query"
+    page_2: "google.com/search?q=your+query&start=10"
+    image_search: "google.com/search?q=your+query&tbm=isch"
+    news_search: "google.com/search?q=your+query&tbm=nws"
+    time_filter: "google.com/search?q=your+query&tbs=qdr:w (w=week, d=day, m=month, y=year)"
+
+  tips:
+    - "Adding the current year to queries (e.g., 'best laptops 2026') returns more recent results"
+    - "Wikipedia is often the most comprehensive source for factual topics"
+    - "Official sites (.gov, .edu, company domains) are more authoritative than blogs"
+    - "If a page is in another language, Google may show a 'Translate this page' link"
+    - "The 'Tools' button lets you filter by time — essential for finding current information"
+    - "Google Search Console data shows that the first 3 results get ~55% of all clicks — check those first"
+    - "For product research, Google Shopping (Shopping tab) shows prices across retailers"
+    - "Google Scholar (scholar.google.com) is better for academic and research papers"
+    - "If you see a featured snippet with the answer, verify it — snippets are auto-extracted and occasionally wrong"
+    - "Autocomplete suggestions reflect popular searches — they can inspire better query phrasing"

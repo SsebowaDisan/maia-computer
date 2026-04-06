@@ -1,0 +1,58 @@
+name: Substack
+id: substack
+icon: "https://www.google.com/s2/favicons?domain=substack.com&sz=128"
+url: https://substack.com
+category: media
+ai_description: "Newsletter platform. Read, write, and subscribe to newsletters."
+
+navigation:
+  overview: >
+    Substack is a newsletter and publishing platform. Writers publish posts that subscribers
+    receive via email. The website shows a feed of posts from subscriptions and recommendations.
+
+  pages:
+    home:
+      description: "Feed showing posts from subscriptions and recommended content."
+      layout:
+        - "Top: navigation with Home, Inbox, search icon"
+        - "Center: post cards from subscriptions and recommendations"
+      post_card:
+        text: "Individual post entries in the feed"
+        behavior: "Shows title, subtitle, author/publication name, and preview image. Click to open the full article."
+      search:
+        text: "Search icon in the top navigation"
+        behavior: "Type a publication name, topic, or keyword. Results show publications and posts."
+      inbox_tab:
+        text: "'Inbox' in the navigation"
+        behavior: "Shows posts from your subscriptions in chronological order — more focused than the algorithmic home feed."
+
+    article:
+      description: "Full article view in a clean reading layout."
+      layout:
+        - "Top: title, author, publication, date"
+        - "Center: article text with images and embeds"
+        - "Bottom: comments section, related posts"
+      subscribe_button:
+        text: "'Subscribe' button on publication pages"
+        behavior: "Subscribe to the publication (free or paid). Free subscriptions deliver posts via email."
+      paywall:
+        text: "Paywall indicator on some posts"
+        behavior: "Some posts are for paid subscribers only. A preview is shown with a prompt to upgrade."
+
+  workflows:
+    read_posts:
+      - "Browse the home feed or Inbox"
+      - "Click a post title to read the full article"
+      - "Scroll through the article content"
+
+    search_publications:
+      - "Click the search icon"
+      - "Type a topic or publication name"
+      - "Click a result to visit the publication"
+      - "Click 'Subscribe' to follow"
+
+  tips:
+    - "The Inbox tab shows a chronological view of subscriptions — the home feed is algorithmic"
+    - "Free subscriptions deliver posts via email — no payment needed for most publications"
+    - "Some posts are paywalled (paid-only) — a preview is shown with a subscribe prompt"
+    - "Publication pages show a full archive of all past posts"

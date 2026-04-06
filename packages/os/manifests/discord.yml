@@ -1,0 +1,108 @@
+name: Discord
+id: discord
+icon: "https://www.google.com/s2/favicons?domain=discord.com&sz=128"
+url: https://discord.com/app
+category: communication
+ai_description: "Chat with communities and teams. Send messages, join voice channels, share files."
+help_url: "https://support.discord.com"
+
+navigation:
+  overview: >
+    Discord is a communication platform built around servers (communities). Each server contains
+    text channels, voice channels, forum channels, and stage channels organized under categories.
+    The interface has three columns: server list, channel list, and message/content pane.
+
+  pages:
+    main_view:
+      description: "The primary Discord interface with servers, channels, and messages."
+      layout:
+        - "Far left: vertical server list (circular icons) — top icon is Home (DMs), bottom icons are Add Server and Discover"
+        - "Second column: server name at top, channel list organized by category headings, user panel at very bottom (avatar, username, mic/deafen/settings)"
+        - "Center: message pane for the selected channel"
+        - "Right (toggleable): member list showing online/offline users by role"
+        - "Top bar: channel name, topic, pinned messages, threads, notification settings, member list toggle, search, inbox"
+      server_list:
+        behavior: "Circular icons for each joined server. White dot on left = unread messages. Click to switch. Right-click for options (mark as read, mute, notification settings, leave server). Drag to reorder. Green pill on left = currently selected."
+      channel_list:
+        behavior: "Text channels: # prefix. Voice channels: speaker icon. Forum channels: chat bubble icon. Stage channels: broadcast icon. Announcement channels: megaphone icon. Categories are collapsible headers. Right-click channels for mute, notification, and edit options."
+      channel_types:
+        text: "# text channel — standard messaging"
+        voice: "Voice channel — click to join audio immediately, video and screen share available once connected"
+        forum: "Forum channel — organized posts with titles, tags, and threaded replies (like Reddit within Discord)"
+        stage: "Stage channel — speaker/audience model for events and presentations"
+        announcement: "Announcement channel — posts can be followed by other servers to receive cross-server updates"
+      message_input:
+        selector: "div[role='textbox']"
+        behavior: "Type message, Enter to send. Shift+Enter for new line. Supports markdown: **bold**, *italic*, ~~strikethrough~~, `code`, ```language\\ncode block```, > quote, || spoiler ||. Paste images directly. Drag-and-drop files."
+      user_panel:
+        behavior: "Bottom of channel list. Shows your avatar, username, and status. Microphone icon toggles mute. Headphone icon toggles deafen. Gear icon opens User Settings."
+      member_list:
+        behavior: "Toggle with the people icon in the top bar. Shows members grouped by role (Admin, Moderator, etc.) with online/offline status. Click a member for profile card with roles, mutual servers, and message option."
+
+    direct_messages:
+      description: "DM home accessible from the Discord logo at top of server list."
+      layout:
+        - "Top: Friends tab with sub-tabs (Online, All, Pending, Blocked, Add Friend)"
+        - "Left: recent DM conversations and 'Find or start a conversation' search"
+        - "Center: active DM or Friends list"
+      friends_tab:
+        behavior: "Online shows friends currently active. Pending shows incoming/outgoing friend requests. Add Friend lets you send requests by username. Right-click a friend for call, message, or remove options."
+
+    server_settings:
+      description: "Server configuration panel for admins."
+      behavior: "Click server name dropdown > Server Settings. Sections: Overview, Roles, Emoji, Stickers, Moderation, Audit Log, Integrations, Community. Roles define permissions — each role has granular permission toggles."
+
+  keyboard_shortcuts:
+    quick_switcher: "Cmd+K — search and jump to any server, channel, or DM"
+    search: "Cmd+F — search within the current channel"
+    mark_read: "Escape — mark channel as read"
+    edit_message: "Up arrow (in empty input) — edit your last sent message"
+    pin_jump: "Cmd+Shift+P — open pinned messages"
+    emoji_picker: "Cmd+E — open emoji picker while typing (or type : to trigger inline)"
+    mute: "Cmd+Shift+M — toggle mute in voice channel"
+    deafen: "Cmd+Shift+D — toggle deafen in voice channel"
+
+  workflows:
+    send_message:
+      - "Click a server in the far-left column"
+      - "Click a # text channel in the channel list"
+      - "Type in the message input, press Enter"
+
+    join_voice:
+      - "Click a voice channel (speaker icon) — you connect immediately"
+      - "Voice controls appear at the bottom of the channel list and in the connected bar"
+      - "Click the camera icon to enable video, screen icon to share screen"
+      - "Click the disconnect button (phone with X) to leave"
+
+    use_threads:
+      - "Right-click a message or click the # icon on hover to create a thread"
+      - "Thread opens as a side panel with its own message input"
+      - "Threads auto-archive after inactivity (configurable)"
+
+    search_messages:
+      - "Click search icon in top bar or press Cmd+F"
+      - "Type query — supports filters: from:user, mentions:user, has:link, has:file, has:embed, has:image, before:date, after:date, in:channel"
+      - "Click a result to jump to the message in context"
+
+    react_to_message:
+      - "Hover over a message — action bar appears"
+      - "Click the smiley face icon to add a reaction"
+      - "Or right-click the message > Add Reaction"
+      - "Type : in the message input to search emoji inline"
+
+  url_patterns:
+    server_channel: "discord.com/channels/SERVER_ID/CHANNEL_ID"
+    dm: "discord.com/channels/@me/DM_CHANNEL_ID"
+    message_link: "discord.com/channels/SERVER_ID/CHANNEL_ID/MESSAGE_ID"
+
+  tips:
+    - "Cmd+K is the fastest navigation — type any server, channel, or person name"
+    - "Markdown in messages: **bold**, *italic*, ~~strikethrough~~, `code`, ```code block```, > quote, ||spoiler||"
+    - "Type @username, @role, or @everyone/@here to mention and notify"
+    - "Forum channels work like mini-Reddit — great for Q&A, feedback, and organized discussions"
+    - "Server Boost (Nitro feature) unlocks higher audio quality, more emoji slots, and upload limits"
+    - "Right-click messages for quick actions: reply, react, pin, edit, delete"
+    - "Voice channels show participant names underneath — see who is in a call before joining"
+    - "Slash commands (/giphy, /tts, /nick) provide quick actions — type / to see available commands"
+    - "Pin important messages: right-click > Pin Message (view pins via pin icon in top bar)"
+    - "Thread auto-archive keeps channels clean — old threads collapse but are searchable"

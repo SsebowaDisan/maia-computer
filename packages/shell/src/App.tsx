@@ -3,9 +3,9 @@ import { useEffect } from 'react'
 import { Dock } from './component/dock/Dock'
 import { Toast } from './component/notification/Toast'
 import { Spotlight } from './component/spotlight/Spotlight'
-import { SpacesBar } from './component/spaces/SpacesBar'
 import { BrainStatus } from './component/ui/BrainStatus'
 import { WindowLayer } from './component/window/WindowLayer'
+import { useBrainEvents } from './hook/useBrainEvents'
 import { useChat } from './hook/useChat'
 import { useDock } from './hook/useDock'
 import { useNotifications } from './hook/useNotifications'
@@ -24,14 +24,13 @@ import { useTaskStore } from './store/taskStore'
 export function App() {
   const { messages, resetUnreadCount, sendMessage } = useChat()
   const { toasts } = useNotifications()
-  const { activeSpaceId, spaces, switchSpace } = useSpaces()
+  const { activeSpaceId } = useSpaces()
   const { isOpen, query, results, closeSpotlight, setQuery } = useSpotlight()
   const {
     closeWindow,
     focusWindow,
     openAppWindow,
     openBuiltinWindow,
-    reportContentBounds,
     snapWindow,
     toggleMinimized,
     updateWindowBounds,
@@ -46,9 +45,13 @@ export function App() {
   const settings = useSettingsStore((state) => state.settings)
   const plan = useTaskStore((state) => state.plan)
   const running = useTaskStore((state) => state.running)
+  const research = useTaskStore((state) => state.research)
   const taskDescription = useTaskStore((state) => state.taskDescription)
+  const thought = useTaskStore((state) => state.thought)
   const hasVisibleWindows = windows.some((window) => !window.isMinimized)
   const dock = useDock(hasVisibleWindows)
+
+  useBrainEvents()
   const {
     handleInstallApp,
     handleStartTask,
@@ -74,15 +77,11 @@ export function App() {
   const runningIds = windows.filter((window) => !window.isMinimized).map((window) => window.id)
 
   return (
-    <div className="h-full w-full">
-      <SpacesBar activeSpaceId={activeSpaceId} onSwitchSpace={switchSpace} spaces={spaces} />
+    <div className="relative flex h-full w-full flex-col overflow-hidden">
       {!hasVisibleWindows ? (
-        <HomeScreen
-          apps={installedApps}
-          badges={badges}
-          onOpenApp={(app) => { void openAppWindow(app) }}
-          onSubmitTask={handleStartTask}
-        />
+        <div className="min-h-0 flex-1">
+          <HomeScreen onSubmitTask={handleStartTask} />
+        </div>
       ) : null}
       <WindowLayer
         installedApps={installedApps}
@@ -93,30 +92,34 @@ export function App() {
         onInstallApp={handleInstallApp}
         onMinimizeWindow={toggleMinimized}
         onOpenItem={openDockItem}
-        onReportContentBounds={(appId, bounds) => { void reportContentBounds(appId, bounds) }}
         onSendMessage={sendMessage}
         onSnapWindow={snapWindow}
         onToggleMaximize={(window) => { snapWindow(window.id, 'maximized') }}
         onUpdateBounds={updateWindowBounds}
         onUpdateSetting={handleUpdateSetting}
         settings={settings}
-        taskDescription={taskDescription}
         windows={windows}
       />
       <Spotlight
         isOpen={isOpen}
         onClose={closeSpotlight}
         onQueryChange={setQuery}
-        onSelect={(appId) => { openDockItem(appId); closeSpotlight() }}
+        onSelect={(appId) => {
+          if (appId === 'ai-task') {
+            void handleStartTask(query)
+          } else {
+            openDockItem(appId)
+          }
+          closeSpotlight()
+        }}
         query={query}
         results={results}
       />
-      <div className="fixed right-6 top-12 z-[70] flex flex-col gap-3">
+      <div className="fixed right-6 top-6 z-[70] flex flex-col gap-3">
         {toasts.map((toast) => (
           <Toast key={toast.id} toast={toast} />
         ))}
       </div>
-      <div className="fixed bottom-0 left-0 z-40 h-1 w-full" />
       <Dock
         badges={badges}
         isVisible={dock.isVisible}
@@ -136,7 +139,14 @@ export function App() {
         pinnedIds={pinnedIds}
         runningIds={runningIds}
       />
-      <BrainStatus currentStep={plan[0]?.description} isVisible={running} taskDescription={taskDescription} />
+      <BrainStatus
+        currentStep={plan.find((s) => s.status === 'in_progress')?.description ?? plan.find((s) => s.status === 'pending')?.description}
+        isVisible={running}
+        plan={plan}
+        research={research}
+        taskDescription={taskDescription}
+        thought={thought}
+      />
     </div>
   )
 }

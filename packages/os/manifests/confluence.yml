@@ -1,0 +1,108 @@
+name: Confluence
+id: confluence
+icon: "https://www.google.com/s2/favicons?domain=atlassian.com&sz=128"
+url: https://www.atlassian.com/software/confluence
+category: developer
+ai_description: "Team wiki and documentation. Create pages, spaces, and templates."
+help_url: "https://support.atlassian.com/confluence-cloud"
+
+navigation:
+  overview: >
+    Confluence is Atlassian's team wiki and knowledge base. Content is organized into spaces
+    (team or project workspaces), each containing a tree hierarchy of pages. The editor supports
+    slash commands, inline macros, tables, and rich media. Pages can have comments, labels,
+    restrictions, and version history. It integrates deeply with Jira for issue tracking.
+
+  pages:
+    home:
+      description: "The home feed showing recent activity, starred pages, and space navigation."
+      layout:
+        - "Top bar: Confluence logo, Spaces dropdown, People dropdown, Apps dropdown, Templates dropdown, blue 'Create' button, search icon, notification bell, profile"
+        - "Center: recent activity feed showing pages updated by your team"
+        - "Left sidebar: Recent pages, Starred pages, Spaces list, Drafts"
+      search:
+        selector: "input[placeholder*='Search'], button[aria-label*='Search']"
+        text: "Search icon/bar in the top navigation (or press / anywhere)"
+        behavior: "Opens a search dialog. Type keywords to search across all pages, spaces, and attachments. Results show page title, space name, author, last modified date, and a content snippet. Filter by space, contributor, type, or date."
+      create_button:
+        text: "Blue 'Create' button in the top navigation bar"
+        behavior: "Opens the page creation flow. First choose a blank page or a template (meeting notes, decision, retrospective, how-to, product requirements, etc.). Select the target space. Opens the full-page editor."
+      spaces_dropdown:
+        text: "'Spaces' dropdown in the top navigation"
+        behavior: "Shows a list of spaces you follow or have recently visited. 'View all spaces' opens a directory of all available spaces. Each space is a self-contained workspace for a team or project."
+
+    space:
+      description: "A workspace containing pages organized in a tree hierarchy with a sidebar navigator."
+      layout:
+        - "Left sidebar: space name, page tree hierarchy (expandable/collapsible), 'Create page' shortcut, space settings link"
+        - "Center: content of the currently selected page"
+        - "Top: breadcrumb trail (space > parent page > current page), page actions (edit, share, watch, restrictions, more)"
+      page_tree:
+        text: "Hierarchical page list in the left sidebar"
+        behavior: "Click any page to view it. Click the expand arrow (triangle) to reveal child pages nested underneath. Drag pages to reorder or re-parent them within the tree. The tree reflects the information architecture of the space."
+      page_actions:
+        text: "Action buttons at the top-right of a page"
+        behavior: "Edit (pencil icon) opens the page editor. Share sends the page link. Watch (eye icon) subscribes to change notifications. Restrictions (lock icon) controls who can view or edit. Three-dot menu has move, copy, delete, export, and version history."
+      page_labels:
+        text: "Labels displayed at the bottom of a page"
+        behavior: "Click to add labels (tags) to a page for categorization. Labels make pages discoverable across spaces via label-based search."
+      page_comments:
+        text: "Comments section at the bottom of a page"
+        behavior: "Add comments for discussion. Inline comments can be attached to specific text by highlighting and clicking the comment icon. Page-level comments appear at the bottom."
+
+    page_editor:
+      description: "The rich text editor for creating and editing pages, with slash commands and macro support."
+      layout:
+        - "Top: page title field (large, editable)"
+        - "Below: formatting toolbar (text styles, headings, bold, italic, lists, tables, links, images, macros, layouts)"
+        - "Center: page content area (block-based editor)"
+        - "Top-right: 'Publish' button, 'Close' button, three-dot menu (preview, find/replace)"
+      slash_commands:
+        text: "Type / in the editor to trigger the quick insert menu"
+        behavior: "A dropdown appears with insertable elements: /table, /code (code block), /info (info panel), /warning (warning panel), /decision, /action (action item), /date, /status (status lozenge), /jira (Jira issue link), /expand (expandable section). Type to filter the list."
+      mention:
+        text: "Type @ in the editor to mention a person"
+        behavior: "A dropdown of team members appears. Select a person to notify them about the page. They receive a notification with a link."
+      table_editor:
+        text: "Tables inserted via toolbar or /table command"
+        behavior: "Click inside cells to type. Tab to move between cells. Use the table toolbar (appears when a table is selected) to add/remove rows and columns, merge cells, and set header rows."
+      publish_button:
+        text: "'Publish' button at top-right"
+        behavior: "Makes the page (or changes) visible to the team. New pages become live; edited pages update in place. Unpublished changes are saved as a draft visible only to you."
+
+  workflows:
+    create_page:
+      - "Click the blue 'Create' button in the top navigation"
+      - "Choose a blank page or select a template"
+      - "Select the target space"
+      - "Type a page title"
+      - "Add content using the editor — use / commands for tables, code blocks, panels, and macros"
+      - "Click 'Publish' to make it visible to the team"
+
+    edit_existing_page:
+      - "Navigate to the page via the space page tree or search"
+      - "Click the edit (pencil) icon at the top-right"
+      - "Make changes in the editor"
+      - "Click 'Publish' — the previous version is saved in version history"
+
+    search_content:
+      - "Click the search icon in the top bar (or press /)"
+      - "Type keywords"
+      - "Filter results by space, contributor, or date"
+      - "Click a result to open that page"
+
+    comment_on_page:
+      - "Navigate to the page"
+      - "For inline comments: highlight text and click the comment icon"
+      - "For page comments: scroll to the bottom and type in the comment box"
+      - "Submit the comment — mentioned users are notified"
+
+  tips:
+    - "Slash commands (/) in the editor are the fastest way to insert tables, code blocks, status badges, and macros"
+    - "Use @mentions in pages to notify specific team members about content relevant to them"
+    - "Labels (tags) at the bottom of pages make content discoverable — use consistent labels across your space"
+    - "Templates save time for recurring documents like meeting notes, decisions, and retrospectives"
+    - "Draft changes are auto-saved and only visible to you until you click Publish"
+    - "The Jira macro (/jira) embeds live Jira issue data directly in Confluence pages"
+    - "Page restrictions (lock icon) control who can view or edit sensitive content"
+    - "Version history (three-dot menu > Page history) lets you compare and restore previous versions"

@@ -1,0 +1,113 @@
+name: Trello
+id: trello
+icon: "https://www.google.com/s2/favicons?domain=trello.com&sz=128"
+url: https://trello.com
+category: productivity
+ai_description: "Manage projects with boards, lists, and cards. Track tasks and deadlines."
+
+navigation:
+  overview: >
+    Trello is a Kanban-style project management tool. Work is organized on boards containing
+    vertical lists (columns), and each list contains cards (tasks) that can be moved between lists.
+
+  pages:
+    boards_overview:
+      description: "The home page showing all your boards organized by workspace."
+      layout:
+        - "Left sidebar: Boards, Templates, Home links, and workspace list"
+        - "Center: your boards displayed as cards with background colors/images"
+        - "Top: Trello logo, search input, create button, notifications bell, profile"
+      board_cards:
+        text: "Board cards displayed in the center area"
+        behavior: "Click a board to open it and see its lists and cards."
+      create_button:
+        text: "'Create' button in the top navigation or '+' icon"
+        behavior: "Opens options to create a new board, workspace, or use a template."
+      search:
+        text: "Search input in the top navigation"
+        behavior: "Type to search for boards, cards, and members. Press Enter or click a result."
+
+    board:
+      description: "A single board showing vertical lists with cards."
+      layout:
+        - "Top: board name, star (favorite), visibility selector, workspace name, board menu button"
+        - "Center: horizontal row of vertical lists (columns), each containing stacked cards"
+        - "Right end: '+ Add another list' placeholder"
+      list_column:
+        text: "Vertical list with a title header and cards stacked below"
+        behavior: "Each list represents a stage or category (e.g., To Do, In Progress, Done). Cards stack vertically within each list. The list header can be clicked to rename the list."
+      card:
+        text: "Individual card within a list"
+        behavior: "Shows card title, optional colored labels, due date badge, member avatars, and attachment/comment counts. Click to open the card detail modal. Drag to move between lists or reorder within a list."
+      add_card_button:
+        text: "'+ Add a card' at the bottom of each list"
+        behavior: "Click to show a text input. Type the card title and press Enter or click 'Add card' to create it in that list."
+      add_list_button:
+        text: "'+ Add another list' at the right end of the board"
+        behavior: "Click to create a new list. Type the list name and press Enter."
+      board_menu:
+        text: "Menu button ('...' or 'Show menu') at top-right of the board"
+        behavior: "Opens a side panel with board settings: background color, Power-Ups, labels, archived items, and activity log."
+
+    card_detail:
+      description: "Modal overlay showing full card details when a card is clicked."
+      layout:
+        - "Top: card title (editable), list name it belongs to"
+        - "Left: description, activity/comments, checklists"
+        - "Right sidebar: action buttons — Members, Labels, Checklist, Due date, Attachment, Cover, Move, Copy, Archive"
+      card_title:
+        text: "Card title at the top of the modal"
+        behavior: "Click to edit the card title directly."
+      description:
+        text: "Description field below the title"
+        behavior: "Click to edit. Supports markdown formatting for rich text descriptions."
+      members_button:
+        text: "'Members' in the right sidebar"
+        behavior: "Opens a dropdown to assign team members to the card."
+      labels_button:
+        text: "'Labels' in the right sidebar"
+        behavior: "Opens label picker. Select colored labels to categorize the card. Labels appear as colored bars on the card in the board view."
+      due_date_button:
+        text: "'Due date' in the right sidebar"
+        behavior: "Opens a date picker to set a deadline. Due dates show as badges on the card — overdue dates turn red."
+      checklist_button:
+        text: "'Checklist' in the right sidebar"
+        behavior: "Adds a checklist to the card. Type items and check them off as they're completed. Progress bar shows completion percentage."
+      comment_input:
+        text: "Comment input in the Activity section"
+        behavior: "Type a comment and click 'Save' to add it to the card's activity log. Team members see comments and get notified."
+      move_button:
+        text: "'Move' in the right sidebar"
+        behavior: "Move the card to a different list or a different board."
+
+  workflows:
+    create_card:
+      - "Open a board"
+      - "Click '+ Add a card' at the bottom of the target list"
+      - "Type the card title"
+      - "Press Enter to create it"
+      - "Click the new card to open it and add details (description, due date, labels, members)"
+
+    move_card:
+      - "Click and drag a card from one list to another"
+      - "Drop it at the desired position in the target list"
+      - "Or open the card, click 'Move' in the sidebar, and select the destination list"
+
+    search_cards:
+      - "Click the search input in the top navigation"
+      - "Type keywords from card titles or descriptions"
+      - "Click a search result to jump to that card's board and open it"
+
+    organize_board:
+      - "Create lists for each workflow stage (e.g., Backlog, To Do, In Progress, Review, Done)"
+      - "Add cards to the appropriate list"
+      - "Use labels for categories (bugs, features, etc.) and due dates for deadlines"
+      - "Drag cards between lists as work progresses"
+
+  tips:
+    - "Drag and drop is the fastest way to move cards between lists"
+    - "Color-coded labels make it easy to categorize cards visually — click a label on a card to see its name"
+    - "Checklists within cards are great for breaking tasks into subtasks with progress tracking"
+    - "The card detail modal closes when you click outside it or press Escape"
+    - "Use keyboard shortcut 'n' to create a new card in the current list"
+    - "Archive cards instead of deleting them — archived items can be recovered from the board menu"

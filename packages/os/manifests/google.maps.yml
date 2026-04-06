@@ -1,0 +1,143 @@
+name: Google Maps
+id: google-maps
+icon: "https://www.google.com/s2/favicons?domain=maps.google.com&sz=128"
+url: https://www.google.com/maps
+category: other
+ai_description: "Navigate, search places, get directions, and explore street view."
+help_url: "https://support.google.com/maps"
+
+navigation:
+  overview: >
+    Google Maps is a navigation and mapping service with search, directions, Street View,
+    satellite imagery, and real-time traffic. The interface centers on an interactive map with
+    a search box at top-left, place detail panels on the left, and zoom/Street View controls
+    at bottom-right. The search box supports places, addresses, coordinates, and natural
+    language queries like "coffee near me". URL patterns encode location as @lat,lng,zoom.
+
+  pages:
+    map_view:
+      description: "The default full-screen interactive map with search and controls."
+      layout:
+        - "Top-left: search box (id='searchboxinput'), hamburger menu, back arrow (when panel open)"
+        - "Left panel: expands when searching or viewing place details"
+        - "Center: interactive map — pan by click+drag, zoom by scroll wheel or pinch"
+        - "Bottom-right: zoom controls (+/-), Street View pegman, My Location button (crosshair)"
+        - "Bottom-left: Layers button (satellite/terrain/traffic/transit/biking), scale bar, Google logo"
+        - "Top-right: directions shortcut, satellite/map toggle (in some regions)"
+      search_box:
+        selector: "input#searchboxinput"
+        behavior: "Click to focus. Type a place name, address, business category, or coordinates (lat,lng). Autocomplete dropdown appears with suggestions after ~200ms. Press Enter or click a suggestion. Results show as red pins on the map with a detail panel opening on the left."
+      map_area:
+        behavior: "Click+drag to pan. Scroll wheel to zoom. Double-click to zoom in on that spot. Right-click for context menu: Directions from/to here, What's here (shows coordinates), Measure distance, Add a missing place, Add your business. The blue dot shows your current location if location permission is granted."
+      zoom_controls:
+        selector: "button[aria-label='Zoom in'], button[aria-label='Zoom out']"
+        behavior: "'+' zooms in one level, '-' zooms out. Map zoom levels range from 1 (world) to 21 (building). Ctrl+scroll for tilt in 3D mode."
+      street_view_pegman:
+        selector: "button[aria-label='Street View']"
+        behavior: "Drag the yellow person icon onto a road highlighted with blue lines. Drops into Street View — a 360-degree ground-level panoramic view. Navigate by clicking arrows or click+drag to look around. Press Escape or click the back arrow to exit."
+      layers_button:
+        selector: "button[aria-label='Layers']"
+        behavior: "Hover to expand. Options: Map type (Default, Satellite, Terrain), Map details (Transit, Traffic, Biking). Traffic shows real-time road conditions: green (flowing), yellow (slow), red (congested), dark red (very congested)."
+      my_location:
+        selector: "button[aria-label='Your location']"
+        behavior: "Centers the map on your current location (requires location permission). Shows a blue dot with accuracy circle."
+
+    place_details:
+      description: "Information panel that slides open on the left when selecting a place."
+      layout:
+        - "Top: place name (large), star rating, review count, price level ($-$$$$), category"
+        - "Action buttons row: Directions, Save, Share, Phone"
+        - "Info section: address, hours (click to expand weekly schedule), phone, website link"
+        - "Photos carousel: user and official photos"
+        - "Popular times: bar graph showing typical busyness by hour for each day"
+        - "Reviews: star ratings with text, filterable by rating level and keywords"
+        - "Related places: 'People also search for' section"
+      directions_button:
+        behavior: "Opens directions with this place as the destination. Enter starting point or use 'Your location'. Shows route options by car, transit, walk, bike."
+      save_button:
+        behavior: "Save to a list: Favorites (heart), Want to go (bookmark), Starred places (star), or create a new list. Saved places appear as colored icons on your map."
+      hours_section:
+        behavior: "Shows today's hours. Click the arrow to expand and see the full weekly schedule. Live busyness indicator shows 'Usually busy' or 'Not too busy' for the current time."
+      reviews_section:
+        behavior: "Overall rating, number of reviews, rating distribution bar chart. Individual reviews with star rating, date, text, and photos. Sort by: Most relevant, Newest, Highest rating, Lowest rating."
+
+    directions:
+      description: "Route planning showing step-by-step directions between locations."
+      layout:
+        - "Top: Starting point input (input[aria-label='Starting point']), Destination input (input[aria-label='Destination'])"
+        - "Swap button (up/down arrows) between the two inputs"
+        - "Transport mode icons: Driving (car), Transit (train), Walking (person), Cycling (bike), Flights (plane)"
+        - "Route options: Avoid highways, Avoid tolls, Avoid ferries"
+        - "Route list: multiple route options with time estimates and distance"
+        - "Map: blue line(s) showing route(s), gray alternatives"
+        - "Step-by-step: turn-by-turn list with maneuver icons, street names, distances"
+      transport_modes:
+        behavior: "Car: fastest route with traffic-aware ETA. Transit: shows departure times, line numbers, walk connections, fare info. Walking: pedestrian-friendly routes. Cycling: bike-friendly routes with elevation info. Each mode shows different route options."
+      add_destination:
+        behavior: "Click '+' icon to add intermediate stops. Drag waypoints to reorder. Supports up to 9 intermediate destinations."
+      depart_arrive:
+        behavior: "For transit: 'Depart at' or 'Arrive by' dropdowns with time picker. Shows schedules for specific departure/arrival times."
+
+    street_view:
+      description: "360-degree ground-level panoramic view of a location."
+      layout:
+        - "Full-screen panoramic image"
+        - "Top-left: address/location text, back arrow"
+        - "Center: navigation arrows on the road for moving forward/backward"
+        - "Bottom: mini-map showing your position and direction, date of imagery"
+      navigation:
+        behavior: "Click arrows to move along the road. Click+drag to rotate view. Scroll to zoom. Click on distant points to jump there. Arrow keys also work for movement."
+
+  workflows:
+    search_place:
+      - "Click the search box (input#searchboxinput)"
+      - "Type a place name, address, or category (e.g., 'Italian restaurants nearby')"
+      - "Press Enter or click an autocomplete suggestion"
+      - "Map centers on result, red pin appears, details panel opens on left"
+      - "For multiple results (category search), red pins mark all locations"
+
+    get_directions:
+      - "Click 'Directions' on a place panel, or click the directions icon in the search box area"
+      - "Enter starting point (or use 'Your location')"
+      - "Select transport mode (car, transit, walking, cycling)"
+      - "Compare route options — click a route for step-by-step directions"
+      - "Click 'Start' to begin navigation (mobile) or review steps"
+
+    explore_area:
+      - "Navigate the map by dragging and zooming"
+      - "Category chips appear at bottom: Restaurants, Hotels, Gas stations, Attractions, Groceries, Coffee, etc."
+      - "Click a category to see nearby places with pins"
+      - "Click any pin for details, rating, hours"
+
+    measure_distance:
+      - "Right-click any point on the map"
+      - "Select 'Measure distance'"
+      - "Click additional points to create a path — distance updates in real-time"
+      - "Click anywhere to add waypoints, right-click a point to remove it"
+
+    share_location:
+      - "Search for a place or right-click a spot on the map"
+      - "Click 'Share' in the place panel or context menu"
+      - "Copy the link or share directly to social/messaging platforms"
+      - "The URL encodes the exact location and zoom level"
+
+  url_patterns:
+    location: "google.com/maps/@LAT,LNG,ZOOM_LEVELz"
+    search: "google.com/maps/search/QUERY/@LAT,LNG,ZOOMz"
+    place: "google.com/maps/place/PLACE_NAME/@LAT,LNG,ZOOMz"
+    directions: "google.com/maps/dir/ORIGIN/DESTINATION"
+    street_view: "google.com/maps/@LAT,LNG,3a,75y,HEADING_DEGREEh,TILT_DEGREEt"
+    embed: "google.com/maps/embed?pb=ENCODED_PARAMS"
+    coordinates: "google.com/maps?q=LAT,LNG"
+
+  tips:
+    - "Search 'from [place A] to [place B]' to get directions directly from the search box"
+    - "Right-click any point to see exact coordinates, measure distance, or set as direction start/end"
+    - "Traffic layer (Layers > Traffic) shows real-time conditions — color coded green/yellow/red/dark red"
+    - "The 'Popular times' graph on business listings shows typical busyness — pink bar shows live busyness"
+    - "Searching a category like 'pharmacies' or 'ATMs' shows all nearby options with ratings and hours"
+    - "Click the clock icon in the directions panel to set departure or arrival time"
+    - "3D buildings appear at high zoom levels in satellite/terrain mode — Ctrl+drag to tilt"
+    - "Saved lists sync across devices — save places to 'Want to go' for trip planning"
+    - "Timeline (hamburger menu > Your timeline) shows your location history organized by date"
+    - "Coordinates can be searched directly: paste '40.7128,-74.0060' into the search box"

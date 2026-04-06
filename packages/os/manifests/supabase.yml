@@ -1,0 +1,135 @@
+name: Supabase
+id: supabase
+icon: "https://www.google.com/s2/favicons?domain=supabase.com&sz=128"
+url: https://supabase.com/dashboard
+category: developer
+ai_description: "Open source Firebase alternative. Database, auth, storage, and functions."
+help_url: "https://supabase.com/docs"
+
+navigation:
+  overview: >
+    Supabase is an open-source backend-as-a-service built on PostgreSQL. Each project provides a
+    full Postgres database, authentication (email, OAuth, magic link), file storage, edge functions,
+    realtime subscriptions, and auto-generated REST/GraphQL APIs. The dashboard is a powerful
+    database management tool with a spreadsheet-like table editor and a Monaco-based SQL editor.
+
+  pages:
+    organization_dashboard:
+      description: "Home page showing all projects in your organization."
+      layout:
+        - "Top: organization selector, 'New project' button"
+        - "Center: project cards with name, region, status (Active/Paused), and database URL"
+      new_project:
+        text: "'New project' button"
+        behavior: "Create a new project: enter name, database password, region, and pricing plan. Project provisioning takes 1-2 minutes. The database password is only shown once."
+
+    project_dashboard:
+      description: "Project overview with quick stats, API keys, and getting started guides."
+      url_pattern: "supabase.com/dashboard/project/{ref}"
+      layout:
+        - "Left sidebar: project-specific navigation (all tools)"
+        - "Center: project status, API URL, anon key, service role key, database connection string"
+      left_sidebar:
+        sections:
+          - "Table Editor — spreadsheet-like database GUI"
+          - "SQL Editor — write and run SQL queries"
+          - "Database — tables, functions, triggers, roles, extensions, migrations, backups"
+          - "Authentication — users, providers, policies, URL configuration"
+          - "Storage — file buckets and objects"
+          - "Edge Functions — serverless Deno functions"
+          - "Realtime — inspect realtime channels and messages"
+          - "API Docs — auto-generated API reference for your tables"
+          - "Advisors — performance and security suggestions"
+          - "Reports — database and API usage metrics"
+          - "Settings — general, API keys, auth, database, integrations"
+
+    table_editor:
+      description: "Spreadsheet-like interface for viewing and editing database tables."
+      layout:
+        - "Left panel: list of all tables and views in the schema (public by default)"
+        - "Center: data grid with column headers, rows, and cells"
+        - "Toolbar: filter button, sort button, insert row, column visibility, schema selector"
+      behavior: "Click a table name to load its data. Click any cell to edit its value inline. Press Enter to save. Click '+' at bottom to insert a new row. Click column headers to sort. The filter button opens a query builder for WHERE clauses."
+      create_table:
+        behavior: "Click 'New table' in the left panel. Enter table name, add columns with name, type (text, int4, uuid, bool, jsonb, etc.), default value, and constraints (primary key, nullable, unique, foreign key). Enable Row Level Security from the start."
+      column_types:
+        behavior: "Supabase supports all PostgreSQL types. Common ones: text, int4, int8, float8, bool, uuid, timestamptz, jsonb, array types. Foreign key dropdown shows related tables."
+      row_level_security:
+        behavior: "RLS policies control row-level access. Enable via the shield icon on each table. Create policies with the policy editor (select, insert, update, delete) using SQL expressions."
+
+    sql_editor:
+      description: "Monaco-powered SQL editor for writing and executing queries."
+      layout:
+        - "Left panel: saved queries, templates, quickstarts"
+        - "Center: Monaco code editor with SQL syntax highlighting and autocomplete"
+        - "Bottom: query results as a table, or error messages"
+        - "Toolbar: 'Run' button (or Cmd+Enter), save query, new query tab"
+      behavior: "Write any SQL — DDL, DML, functions, triggers. Cmd+Enter or click 'Run' to execute. Results appear in a table below. Multiple query tabs supported. Templates provide ready-made queries for common operations."
+      templates:
+        behavior: "Pre-built SQL templates: create table, add column, create function, create trigger, create policy, quick queries. Click a template to insert it into the editor."
+
+    authentication:
+      description: "User management and auth provider configuration."
+      layout:
+        - "Tabs: Users, Providers, Policies, URL Configuration, Email Templates, Hooks"
+        - "Users tab: list of all authenticated users with email, provider, created date, last sign-in"
+      users_tab:
+        behavior: "List of all users. Click a user to see their profile, metadata, and sessions. 'Add user' button creates a user manually. 'Send magic link' sends a passwordless login email."
+      providers_tab:
+        behavior: "Enable/disable OAuth providers: Google, GitHub, GitLab, Discord, Apple, Twitter, Azure, and more. Each requires client ID and secret from the provider's developer console."
+
+    storage:
+      description: "File storage with bucket-based organization."
+      layout:
+        - "Left panel: list of storage buckets"
+        - "Center: file browser showing objects in the selected bucket"
+      behavior: "Create buckets for organizing files (e.g., 'avatars', 'documents'). Upload files via drag-and-drop or file picker. Set bucket as public or private. Generate signed URLs for private file access."
+
+    edge_functions:
+      description: "Serverless Deno functions deployed to the edge."
+      layout:
+        - "List of deployed functions with name, status, and last deployment time"
+        - "Click a function to see its invocation logs and metrics"
+      behavior: "Edge functions are deployed via Supabase CLI ('supabase functions deploy'). The dashboard shows deployment status, logs, and invocation metrics."
+
+    api_docs:
+      description: "Auto-generated API reference based on your database schema."
+      behavior: "Shows REST endpoints for every table: GET (select), POST (insert), PATCH (update), DELETE. Includes code examples in JavaScript, cURL, and Python. Updates automatically when schema changes."
+
+  workflows:
+    browse_and_edit_data:
+      - "Click 'Table Editor' in the left sidebar"
+      - "Click a table name in the left panel"
+      - "Browse rows in the data grid"
+      - "Click any cell to edit its value, press Enter to save"
+      - "Use filter and sort toolbar buttons for complex queries"
+      - "Click '+' at the bottom to insert a new row"
+
+    run_sql_query:
+      - "Click 'SQL Editor' in the left sidebar"
+      - "Write your SQL query in the editor"
+      - "Press Cmd+Enter or click 'Run'"
+      - "Results appear in a table below the editor"
+      - "Click 'Save' to save the query for later"
+
+    manage_auth_users:
+      - "Click 'Authentication' in the left sidebar"
+      - "Browse the Users tab for all authenticated users"
+      - "Click a user to view details, metadata, and sessions"
+      - "Enable OAuth providers in the Providers tab"
+
+    get_api_keys:
+      - "Click 'Settings' in the left sidebar"
+      - "Click 'API' in settings navigation"
+      - "Copy the Project URL, anon (public) key, and service role (secret) key"
+      - "Or check the API Docs for table-specific endpoints and examples"
+
+  tips:
+    - "Table Editor is best for quick data browsing and editing — SQL Editor for complex queries and DDL"
+    - "Cmd+Enter runs the SQL query — no need to click the Run button"
+    - "Always enable Row Level Security on tables — the shield icon shows RLS status"
+    - "API keys are in Settings > API — the anon key is safe for client-side, service role key is server-only"
+    - "The SQL Editor autocompletes table names, column names, and SQL keywords"
+    - "Saved queries in SQL Editor persist across sessions and can be shared with team members"
+    - "Realtime subscriptions require the table to have REPLICA IDENTITY FULL set"
+    - "Edge Functions use Deno runtime — deploy via CLI, monitor via dashboard"

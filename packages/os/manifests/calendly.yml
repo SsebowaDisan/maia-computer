@@ -1,0 +1,66 @@
+name: Calendly
+id: calendly
+icon: "https://www.google.com/s2/favicons?domain=calendly.com&sz=128"
+url: https://calendly.com
+category: productivity
+ai_description: "Schedule meetings without back-and-forth. Share availability."
+
+navigation:
+  overview: >
+    Calendly is a scheduling tool that eliminates back-and-forth emails for booking meetings.
+    You create event types with availability rules, share the link, and others book times.
+
+  pages:
+    home:
+      description: "The home page showing upcoming scheduled events and quick access to event types."
+      layout:
+        - "Top: navigation with Event Types, Scheduled Events, Workflows, Availability"
+        - "Center: upcoming events list and activity overview"
+      nav_tabs:
+        text: "Event Types, Scheduled Events, Workflows tabs"
+        behavior: "Event Types shows your booking templates. Scheduled Events shows all upcoming meetings. Workflows shows automation rules."
+
+    event_types:
+      description: "Page listing your configured event types (booking templates)."
+      layout:
+        - "Center: list of event type cards with name, duration, and shareable link"
+        - "Top: '+ Create' button"
+      event_type_card:
+        text: "Individual event type cards"
+        behavior: "Each card shows the event name, duration, and a copy-link button. Click the card to edit settings. Click the link icon to copy the shareable booking URL."
+      create_button:
+        text: "'+ Create' button"
+        behavior: "Opens the event type creation flow. Choose One-on-One, Group, or Round Robin. Set name, duration, location (Zoom, Meet, phone), description, and availability."
+
+    scheduled_events:
+      description: "List of all upcoming and past meetings."
+      layout:
+        - "Center: chronological list of scheduled events with attendee names, times, and meeting type"
+      event_entry:
+        text: "Individual scheduled event"
+        behavior: "Click to see full details: attendee info, meeting link, time, and notes. Options to reschedule or cancel."
+
+  workflows:
+    create_event_type:
+      - "Click '+ Create' on the Event Types page"
+      - "Choose meeting type (One-on-One, Group, etc.)"
+      - "Set name, duration, and location"
+      - "Configure availability (days and hours)"
+      - "Save — a shareable link is generated"
+
+    share_booking_link:
+      - "Go to Event Types"
+      - "Click the link icon on the event type card"
+      - "Copy the URL and share it via email or message"
+      - "Recipients see your available times and book directly"
+
+    manage_schedule:
+      - "Click 'Scheduled Events' in the top navigation"
+      - "View upcoming meetings chronologically"
+      - "Click any event to see details, reschedule, or cancel"
+
+  tips:
+    - "Event types are templates — creating one generates a reusable booking link"
+    - "Availability rules control which times are offered — set them per event type or globally"
+    - "Buffer time between meetings prevents back-to-back scheduling"
+    - "Integrations with Google Calendar and Outlook prevent double-booking automatically"

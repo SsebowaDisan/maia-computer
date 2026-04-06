@@ -1,0 +1,116 @@
+name: Netflix
+id: netflix
+icon: "https://www.google.com/s2/favicons?domain=netflix.com&sz=128"
+url: https://www.netflix.com
+category: media
+ai_description: "Stream movies and TV shows. Browse catalog and manage watchlist."
+help_url: "https://help.netflix.com"
+
+navigation:
+  overview: >
+    Netflix is a subscription streaming service with thousands of movies and TV series. The interface
+    opens to a browse page with a hero banner, horizontal category rows, and a persistent top
+    navigation. Requires an active subscription and logged-in account. Content varies by region.
+
+  pages:
+    home:
+      description: "Main browse page with hero banner and horizontal scrolling content rows."
+      url_pattern: "netflix.com/browse"
+      layout:
+        - "Top nav: Netflix logo, Home, TV Shows, Movies, New & Popular, My List, Browse by Language, search icon (magnifying glass), notifications bell, profile avatar"
+        - "Hero banner: large background image/video for a featured title with logo, synopsis, Play button, More Info button"
+        - "Below: horizontal rows of title cards organized by category (Continue Watching, Trending Now, Top 10, New Releases, genre rows)"
+      search_icon:
+        selector: "button[aria-label='Search'], span.icon-search"
+        behavior: "Click the magnifying glass icon in the top-right. An input field slides open. Type a movie or show name — results appear as a grid of title cards below, updating as you type. Press Escape or click X to close search."
+      hero_banner:
+        behavior: "Auto-rotates through promoted titles. Background may auto-play a video preview after a few seconds. Click 'Play' to start watching immediately. Click 'More Info' to open the detail modal."
+      category_rows:
+        behavior: "Each row is a named category (e.g., 'Trending Now', 'Because You Watched X'). Hover over left/right edges to reveal arrow buttons for scrolling. Each row shows ~6 visible cards. The 'Top 10' row shows numbered rank badges."
+      title_card:
+        behavior: "Hover over a card — after ~1s delay, it expands showing: a short video preview (if available), title, match percentage, maturity rating (TV-MA, PG-13, etc.), runtime/season count, genre tags, and buttons for Play, Add to My List, Like/Dislike, More Info (down chevron)."
+      profile_switcher:
+        behavior: "Click the profile avatar in top-right, then 'Switch Profiles' or click another profile name. Each profile has its own recommendations, Continue Watching, and My List."
+
+    detail_modal:
+      description: "Overlay modal with full info about a title."
+      layout:
+        - "Top: title hero image/video, X close button, Play button, Add to My List (+), Like/Dislike buttons"
+        - "Center: synopsis, cast, genres, maturity rating, year"
+        - "For TV shows: season dropdown, episode list (thumbnail, number, title, duration, synopsis, progress bar)"
+        - "Bottom: 'More Like This' grid of similar titles, Trailers & More tab, About tab"
+      season_selector:
+        behavior: "Dropdown listing all seasons. Click to switch. Episode list updates to show the selected season. Each episode shows a thumbnail, episode number, title, duration, and synopsis."
+      episode_progress:
+        behavior: "A red progress bar under episode thumbnails indicates partial viewing. The next unwatched episode is highlighted."
+
+    player:
+      description: "Full-screen video player with overlay controls."
+      url_pattern: "netflix.com/watch/TITLE_ID"
+      layout:
+        - "Full-screen video content"
+        - "Bottom overlay (on mouse move): progress bar, play/pause, 10s rewind, 10s forward, volume, subtitles/audio, playback speed, fullscreen"
+        - "Top-left overlay: back arrow, title name"
+        - "Top-right overlay: episodes list (for TV shows)"
+      keyboard_shortcuts:
+        spacebar: "Play/pause"
+        enter: "Play/pause"
+        f: "Toggle fullscreen"
+        m: "Mute/unmute"
+        up_arrow: "Volume up"
+        down_arrow: "Volume down"
+        left_arrow: "Rewind 10 seconds"
+        right_arrow: "Forward 10 seconds"
+        escape: "Exit fullscreen or go back"
+      skip_intro:
+        behavior: "A 'Skip Intro' button appears during opening credits (bottom-right). Click to jump past the intro. Disappears after a few seconds."
+      skip_recap:
+        behavior: "A 'Skip Recap' button may appear at the start of TV episodes that begin with a 'Previously on' recap."
+      next_episode:
+        behavior: "Near the end of a TV episode, a 'Next Episode' card appears in the bottom-right with a countdown. Click to skip immediately. If autoplay is enabled, the next episode starts automatically after the countdown."
+      subtitles_audio:
+        behavior: "Click the speech bubble icon to open a panel with subtitle language options and audio track options. Supports dozens of languages. Subtitle appearance (font, size, color) is configured in account settings."
+      playback_speed:
+        behavior: "Click the speed icon to choose 0.5x, 0.75x, 1x (normal), 1.25x, or 1.5x playback speed."
+
+  workflows:
+    search_and_watch:
+      - "Click the magnifying glass icon in the top-right navigation"
+      - "Type the name of a movie or show"
+      - "Click a title card from the results grid"
+      - "Click 'Play' in the detail modal or on the expanded card"
+
+    browse_by_genre:
+      - "Scroll down the home page to browse category rows"
+      - "Or click 'TV Shows' or 'Movies' in the top nav to filter"
+      - "Use left/right arrows on each row to see more titles"
+      - "Hover over a title card for preview and synopsis"
+      - "Click the card or down-chevron for the full detail modal"
+
+    manage_my_list:
+      - "Hover over any title card and click the '+' icon to add to My List"
+      - "Click 'My List' in the top navigation to see all saved titles"
+      - "Hover over a title in My List and click the checkmark to remove it"
+
+    watch_tv_series:
+      - "Find a show and click 'Play' — it starts the first or next unwatched episode"
+      - "In the player, click the episodes icon (top-right) to browse seasons and episodes"
+      - "Select a different season from the dropdown"
+      - "Click any episode to switch to it"
+
+  url_patterns:
+    browse: "netflix.com/browse"
+    search: "netflix.com/search?q=query"
+    title: "netflix.com/title/TITLE_ID"
+    player: "netflix.com/watch/TITLE_ID"
+    my_list: "netflix.com/browse/my-list"
+
+  tips:
+    - "Hover over title cards for quick previews — the expanded card shows match percentage, maturity rating, and genre tags"
+    - "The 'Continue Watching' row always appears near the top — find your in-progress shows there"
+    - "Left/Right arrow keys skip 10 seconds in the player — faster than clicking the skip buttons"
+    - "Subtitles and audio language are changed with the speech bubble icon in the player controls"
+    - "Playback speed (0.5x to 1.5x) is available from the speed icon in the player"
+    - "Each profile has separate recommendations and watch history — use the right profile"
+    - "The Top 10 row shows what is most popular in your country right now"
+    - "Secret genre codes in the URL (netflix.com/browse/genre/XXXX) unlock hidden categories"

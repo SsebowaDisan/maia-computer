@@ -1,0 +1,97 @@
+name: Dropbox
+id: dropbox
+icon: "https://www.google.com/s2/favicons?domain=dropbox.com&sz=128"
+url: https://www.dropbox.com
+category: productivity
+ai_description: "Store, sync, and share files. Collaborate on documents."
+help_url: "https://help.dropbox.com"
+
+navigation:
+  overview: >
+    Dropbox is a cloud file storage and sharing platform. The web interface shows your file system
+    with navigation for recent files, starred items, shared content, and deleted files. Files and
+    folders can be shared via links with configurable access levels. Dropbox Paper provides
+    collaborative document editing. The interface supports drag-and-drop uploads and inline
+    previews for most file types.
+
+  pages:
+    home:
+      description: "The home page showing recent activity, suggested files, and starred items."
+      layout:
+        - "Left sidebar: Home, All files, Recents, Starred, Shared, Deleted files, folder tree"
+        - "Top center: search bar"
+        - "Center: recently modified files, suggested folders, and quick access items"
+      sidebar:
+        text: "Left navigation panel"
+        behavior: "Home shows activity overview and suggestions. All files shows the complete folder tree. Recents shows recently modified files sorted by date. Starred shows bookmarked items. Shared shows files and folders others have shared with you. Deleted files is the recoverable trash."
+      search_bar:
+        selector: "input[type='search'], input[placeholder*='Search']"
+        text: "Search input at top center"
+        behavior: "Click to focus, type a file name or keyword. Dropbox searches file names and full-text content of PDFs, docs, and spreadsheets. Results show files and folders with their full path. Filter by file type, date modified, or shared status."
+
+    all_files:
+      description: "The full file browser showing all files and folders in a navigable tree."
+      layout:
+        - "Top: breadcrumb path (Dropbox > Folder > Subfolder), view toggle (list/grid), sort options (name, modified, size), 'Upload' button, 'Create' button"
+        - "Center: file and folder list with columns for name, modified date, size, and shared members"
+      file_list:
+        text: "Files and folders in the center area"
+        behavior: "Click a folder to navigate into it. Click a file to open an inline preview. Hover to reveal a checkbox for multi-select and a '...' menu for actions (share, download, move, copy, rename, delete). Right-click for the full context menu. Drag-and-drop to move files between folders."
+      breadcrumbs:
+        text: "Path trail at top (e.g., Dropbox > Work > Reports)"
+        behavior: "Click any segment to jump back up to that folder level."
+      upload_button:
+        text: "'Upload' button near the top (or drag-and-drop files onto the page)"
+        behavior: "Click to choose 'Files' or 'Folder' upload from your computer. Progress indicator appears at the bottom. Drag-and-drop files directly onto the file list for quick upload."
+      create_button:
+        text: "'Create' button near the upload button"
+        behavior: "Options: new folder, new Paper doc, new Google Doc/Sheet/Slide, or new shortcut. Creates the item in the current directory."
+
+    file_preview:
+      description: "Inline preview when clicking a file, with sharing and comment tools."
+      layout:
+        - "Center: file preview (documents, images, videos, PDFs render inline)"
+        - "Top bar: file name, open button, download button, share button, three-dot menu"
+        - "Right panel: comments and activity history"
+      share_button:
+        text: "Share button in the preview header"
+        behavior: "Opens a sharing dialog: invite people by email (with 'can edit' or 'can view' permissions), create a shared link (with configurable access: anyone with link, only invited people, password-protected), set link expiration dates."
+      comments:
+        text: "Comments panel on the right of the preview"
+        behavior: "Add comments on files for collaboration. Use @mentions to notify specific people. Comments are threaded and support replies."
+      download_button:
+        text: "Download button in the preview header"
+        behavior: "Downloads the file to your local computer."
+
+  workflows:
+    search_files:
+      - "Click the search bar at the top"
+      - "Type the file name or content keywords"
+      - "Review results — filter by type, date, or sharing status"
+      - "Click a result to preview or open the file"
+
+    upload_files:
+      - "Navigate to the target folder in All Files"
+      - "Click the 'Upload' button (or drag-and-drop files onto the page)"
+      - "Select files or folders from your computer"
+      - "Upload progress appears at the bottom of the screen"
+
+    share_file_or_folder:
+      - "Hover over a file or folder and click the share icon (or right-click > Share)"
+      - "Enter email addresses and set permission level (can edit / can view)"
+      - "Or click 'Copy link' to create a shareable URL with configurable access"
+
+    organize_files:
+      - "Create folders via the 'Create' > 'New folder' option"
+      - "Drag-and-drop files to move them between folders"
+      - "Star important files by hovering and clicking the star icon"
+      - "Use Recents to quickly find recently modified files"
+
+  tips:
+    - "Search indexes the full text content of PDFs, Word docs, and spreadsheets — search for text inside files"
+    - "Recents view is the fastest way to find files you recently worked on"
+    - "Starred items appear in the Starred section for quick one-click access"
+    - "Shared links can be password-protected and have expiration dates for security"
+    - "Deleted files stay in trash for 30 days (180 days for business accounts) and can be fully restored"
+    - "Right-click any file for a full context menu: share, move, copy, rename, download, delete"
+    - "Version history (right-click > Version history) lets you view and restore previous versions of files"

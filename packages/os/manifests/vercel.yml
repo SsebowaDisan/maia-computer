@@ -1,0 +1,106 @@
+name: Vercel
+id: vercel
+icon: "https://www.google.com/s2/favicons?domain=vercel.com&sz=128"
+url: https://vercel.com/dashboard
+category: developer
+ai_description: "Deploy web apps. Preview deployments, analytics, and domains."
+help_url: "https://vercel.com/docs"
+
+navigation:
+  overview: >
+    Vercel is a cloud platform for deploying web applications, with first-class support for
+    Next.js, React, Svelte, and other frameworks. It auto-deploys from Git — every push to main
+    triggers a production deployment, and every PR gets a unique preview URL. The dashboard
+    shows projects, deployments, domains, and analytics.
+
+  pages:
+    dashboard:
+      description: "Home page showing all projects with their deployment status."
+      url_pattern: "vercel.com/dashboard"
+      layout:
+        - "Top: team/personal account selector, 'Add New...' button, search, feedback, avatar"
+        - "Center: grid of project cards — each shows name, framework icon, Git branch, production URL, and deployment status badge"
+        - "Top tabs: Overview, Integrations, Activity, Usage, Settings"
+      project_card:
+        behavior: "Each card shows: project name, last deployment status (Ready = green, Building = yellow, Error = red), Git repo link, production domain, and last deploy time. Click to open project detail."
+      add_new_button:
+        text: "'Add New...' button"
+        behavior: "Dropdown with: Project (deploy from Git repo or template), Domain, Store (KV, Postgres, Blob, Edge Config), Team Member."
+      team_selector:
+        text: "Account/team dropdown at top-left"
+        behavior: "Switch between personal account and team accounts. Each has its own projects, domains, and billing."
+
+    project_detail:
+      description: "Detail page for a project with deployment history, settings, and analytics."
+      url_pattern: "vercel.com/{team}/{project}"
+      layout:
+        - "Top: project name, production URL (clickable), 'Visit' button, Git repo link"
+        - "Tabs: Project (overview), Deployments, Analytics, Speed Insights, Logs, Storage, Settings"
+      project_tab:
+        behavior: "Shows the production deployment preview, environment variables summary, recent deployments, and connected Git repo."
+      deployments_tab:
+        text: "'Deployments' tab"
+        behavior: "Chronological list of all deployments. Each shows: status badge (Ready/Error/Building/Canceled), commit message, branch, author, timestamp, and duration. Filter by branch or status. Click a deployment for details."
+      deployment_detail:
+        behavior: "Shows: build logs (step-by-step output), deployment URL (unique per deploy), source commit, build duration, serverless function regions. 'Promote to Production' button for preview deployments."
+      analytics_tab:
+        text: "'Analytics' tab"
+        behavior: "Web analytics: visitors, page views, top pages, referrers, countries, devices. Only for production deployments."
+      speed_insights_tab:
+        text: "'Speed Insights' tab"
+        behavior: "Core Web Vitals: LCP, FID, CLS, TTFB. Real user metrics from production. Historical trends. Scores color-coded green/yellow/red."
+      logs_tab:
+        text: "'Logs' tab"
+        behavior: "Real-time runtime logs from serverless functions and edge functions. Filter by function name, status code, and time range."
+      settings_tab:
+        text: "'Settings' tab"
+        behavior: "Project configuration organized in sections: General (name, framework, root directory), Domains (custom domains, SSL), Environment Variables (per-environment: Production/Preview/Development), Git (connected repo, ignored build step), Functions (runtime, memory, regions), Security (password protection, deployment protection)."
+
+    domains:
+      description: "Domain management for the project."
+      layout:
+        - "List of connected domains with DNS status and SSL certificate status"
+        - "'Add' button to add new custom domains"
+      behavior: "Each domain shows: domain name, DNS configuration status (Valid/Invalid), SSL status. Click a domain to see required DNS records (A record, CNAME). Vercel provides automatic SSL via Let's Encrypt."
+
+    environment_variables:
+      description: "Environment variable configuration within Settings tab."
+      behavior: "Key-value pairs set per environment: Production, Preview, Development. Each variable can be plain text or encrypted (sensitive). Variables are injected at build time and runtime. 'Add New' button to create. Click a variable to edit or delete."
+
+  workflows:
+    check_deployment_status:
+      - "Open the project from the dashboard"
+      - "Click the 'Deployments' tab"
+      - "Find the deployment by commit message, branch, or time"
+      - "Check the status badge: Ready (green), Error (red), Building (yellow)"
+      - "Click the deployment to see build logs if there's an error"
+
+    add_custom_domain:
+      - "Open the project"
+      - "Go to Settings > Domains"
+      - "Type your domain and click 'Add'"
+      - "Configure DNS records as shown (A record or CNAME)"
+      - "Wait for DNS propagation and SSL certificate provisioning"
+
+    set_environment_variables:
+      - "Open the project"
+      - "Go to Settings > Environment Variables"
+      - "Click 'Add New'"
+      - "Enter key and value"
+      - "Select which environments it applies to (Production, Preview, Development)"
+      - "Click 'Save' — redeploy for changes to take effect"
+
+    view_preview_deployment:
+      - "Push a branch or open a PR on the connected Git repo"
+      - "Vercel automatically creates a preview deployment"
+      - "Find it in the Deployments tab or check the GitHub PR for the Vercel bot comment"
+      - "Click the preview URL to test the changes"
+
+  tips:
+    - "Every PR automatically gets a unique preview URL — check GitHub PR comments for the Vercel bot link"
+    - "Build logs auto-scroll — wait for the build to finish to see the final status and any errors"
+    - "Environment variables can differ per environment — use Preview env for staging secrets"
+    - "The 'Promote to Production' button lets you promote any preview deployment to production without rebuilding"
+    - "Deployment protection can require authentication to view preview deployments"
+    - "The Activity tab on the dashboard shows a timeline of all actions across projects"
+    - "Usage tab shows bandwidth, build minutes, and serverless function invocations for billing awareness"

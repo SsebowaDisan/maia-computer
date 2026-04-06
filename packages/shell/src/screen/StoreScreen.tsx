@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import type { InstalledApp } from '@maia/shared'
 
-import { AppStoreGrid } from '../component/store/AppStoreGrid'
+import { AppIcon } from '../component/ui/AppIcon'
 import { Button } from '../component/ui/Button'
 import { Input } from '../component/ui/Input'
+import { useIPC } from '../hook/useIPC'
+import { resolveAppIcon } from '../lib/appIcons'
 
 interface StoreScreenProps {
   installedApps: InstalledApp[]
@@ -12,21 +14,46 @@ interface StoreScreenProps {
   onOpenApp: (appId: string) => void
 }
 
-const APP_CATALOG = [
-  { id: 'figma', name: 'Figma', icon: '🎨', url: 'https://figma.com' },
-  { id: 'github', name: 'GitHub', icon: '🐙', url: 'https://github.com' },
-  { id: 'linear', name: 'Linear', icon: '📈', url: 'https://linear.app' },
-]
+interface ManifestApp {
+  id: string
+  name: string
+  icon: string
+  url: string
+  category: string
+  aiDescription: string
+}
 
 export function StoreScreen({ installedApps, onInstallApp, onOpenApp }: StoreScreenProps) {
+  const { invoke } = useIPC()
   const [customUrl, setCustomUrl] = useState('')
+  const [manifests, setManifests] = useState<ManifestApp[]>([])
+
+  useEffect(() => {
+    void invoke('appstore:getManifests', {}).then((result) => {
+      const nextManifests = (result as unknown as ManifestApp[]).map((app) => ({
+        ...app,
+        icon: resolveAppIcon({
+          appId: app.id,
+          icon: app.icon,
+          name: app.name,
+          url: app.url,
+        }),
+      }))
+      setManifests(nextManifests)
+    })
+  }, [invoke])
+
+  const installedManifestIds = new Set(installedApps.map((app) => app.manifestId))
+
+  const findInstalledApp = (manifestId: string) =>
+    installedApps.find((app) => app.manifestId === manifestId)
 
   return (
     <div className="h-full overflow-y-auto bg-chrome px-6 py-5">
       <div className="rounded-xl border border-border bg-elevated p-5">
         <h2 className="text-lg font-semibold text-textPrimary">Install any web app</h2>
         <p className="mt-2 text-sm text-textSecondary">
-          Enter any URL to install any web app inside Maia.
+          Enter any URL to install it inside Maia. Works with any web app.
         </p>
         <div className="mt-4 flex gap-3">
           <Input
@@ -39,37 +66,71 @@ export function StoreScreen({ installedApps, onInstallApp, onOpenApp }: StoreScr
           <Button
             variant="primary"
             onClick={() => {
-              if (!customUrl.trim()) {
-                return
+              const url = customUrl.trim()
+              if (!url) return
+              try {
+                const hostname = new URL(url.startsWith('http') ? url : `https://${url}`).hostname
+                void onInstallApp({
+                  name: hostname.replace('www.', ''),
+                  icon: `https://www.google.com/s2/favicons?domain=${hostname}&sz=128`,
+                  url: url.startsWith('http') ? url : `https://${url}`,
+                  manifestId: 'custom',
+                })
+                setCustomUrl('')
+              } catch {
+                // Invalid URL
               }
-
-              void onInstallApp({
-                name: new URL(customUrl).hostname.replace('www.', ''),
-                icon: '🌐',
-                url: customUrl,
-                manifestId: 'custom',
-              })
-              setCustomUrl('')
             }}
           >
-            Add URL
+            Add
           </Button>
         </div>
       </div>
-      <div className="mt-6">
-        <AppStoreGrid
-          catalog={APP_CATALOG}
-          installedAppIds={installedApps.map((app) => app.id)}
-          onInstall={(app) => {
-            void onInstallApp({
-              name: app.name,
-              icon: app.icon,
-              url: app.url,
-              manifestId: app.id,
-            })
-          }}
-          onOpen={onOpenApp}
-        />
+
+      <h3 className="mb-4 mt-8 text-sm font-medium uppercase tracking-widest text-textSecondary">
+        Available Apps
+      </h3>
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
+        {manifests.map((app) => {
+          const isInstalled = installedManifestIds.has(app.id)
+          const installed = findInstalledApp(app.id)
+
+          return (
+            <div key={app.id} className="flex flex-col items-center gap-3 rounded-xl border border-border bg-elevated p-5 text-center">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-surface">
+                <AppIcon icon={app.icon} size={36} />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-textPrimary">{app.name}</p>
+                <p className="mt-1 line-clamp-2 text-xs text-textMuted">{app.aiDescription}</p>
+              </div>
+              {isInstalled ? (
+                <Button
+                  className="border-accentGreen text-accentGreen"
+                  onClick={() => {
+                    if (installed) onOpenApp(installed.id)
+                  }}
+                >
+                  Open
+                </Button>
+              ) : (
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    void onInstallApp({
+                      name: app.name,
+                      icon: app.icon,
+                      url: app.url,
+                      manifestId: app.id,
+                    })
+                  }}
+                >
+                  Install
+                </Button>
+              )}
+            </div>
+          )
+        })}
       </div>
     </div>
   )

@@ -1,0 +1,117 @@
+name: Docker Hub
+id: docker-hub
+icon: "https://www.google.com/s2/favicons?domain=hub.docker.com&sz=128"
+url: https://hub.docker.com
+category: developer
+ai_description: "Container image registry. Browse, pull, and push Docker images."
+help_url: "https://docs.docker.com"
+
+navigation:
+  overview: >
+    Docker Hub is the world's largest container image registry, hosting millions of images.
+    It serves as the default registry for the Docker CLI — when you run 'docker pull nginx',
+    it pulls from Docker Hub. The web interface lets you search images, read documentation,
+    browse tags and architectures, manage your own repositories, and configure automated builds.
+
+  pages:
+    explore:
+      description: "The public catalog for discovering container images."
+      url_pattern: "hub.docker.com/search"
+      layout:
+        - "Top: search bar with category filters"
+        - "Center: featured and trending images, categorized by use case (Databases, Web Servers, Programming Languages, Operating Systems)"
+        - "Navigation: Explore, Repositories, Organizations"
+      search_bar:
+        behavior: "Type an image name or keyword. Results show image name, publisher, description, pull count, star count, and badges (Official Image, Verified Publisher, Sponsored OSS). Filter by: Official Images, Verified Publishers, categories, operating systems, architectures."
+      badges:
+        official_image: "Blue 'Official Image' badge — curated by Docker, maintained by the project authors. No org prefix (e.g., 'nginx' not 'library/nginx'). Most trusted."
+        verified_publisher: "Blue checkmark — verified by Docker as a legitimate publisher."
+        sponsored_oss: "Green badge — open source project sponsored by Docker."
+
+    search_results:
+      description: "Search results listing matching images."
+      url_pattern: "hub.docker.com/search?q={query}"
+      layout:
+        - "Center: list of image cards with name, description, pull count, star count, and last updated"
+        - "Left sidebar: filters (Content types, Categories, Operating Systems, Architectures)"
+      result_card:
+        behavior: "Each card shows: image name (with org prefix if not official), short description, pull count (total downloads), star count, and last pushed date. Click to open the image detail page."
+
+    image_detail:
+      description: "Full detail page for a Docker image with documentation and tags."
+      url_pattern: "hub.docker.com/_/{image} (official) or hub.docker.com/r/{org}/{image}"
+      layout:
+        - "Top: image name, publisher, pull count, star count, 'Docker Pull Command' box"
+        - "Tabs: Overview, Tags"
+        - "Overview: rendered README with usage instructions, environment variables, and examples"
+      pull_command:
+        text: "'Docker Pull Command' box at the top"
+        behavior: "Displays 'docker pull {image}:{tag}'. Click the copy icon to copy the command. Default tag is 'latest' if none specified."
+      overview_tab:
+        behavior: "The README from the image publisher. Typically includes: what the image does, supported tags, quick start examples, environment variables, docker-compose examples, and where to file issues."
+      tags_tab:
+        text: "'Tags' tab"
+        behavior: "Lists all available image tags with: tag name, compressed size, last pushed date, OS/architecture support (linux/amd64, linux/arm64, etc.), and digest hash. Tags are sortable and filterable."
+        common_tags:
+          latest: "The default tag — usually the most recent stable release"
+          alpine: "Minimal image based on Alpine Linux — much smaller (5-50MB vs 100-500MB)"
+          slim: "Debian-based but with non-essential packages removed — smaller than default, larger than alpine"
+          bookworm: "Debian Bookworm based — full Debian with all standard libraries"
+          bullseye: "Debian Bullseye based — previous stable Debian release"
+          version_numbers: "Specific versions like '18', '18.19', '18.19.1' for Node.js — pin these in production"
+
+    repository_page:
+      description: "Your own pushed image repositories."
+      url_pattern: "hub.docker.com/r/{username}/{repo}"
+      layout:
+        - "Top: repo name, visibility (public/private), description"
+        - "Tabs: General (README), Tags, Collaborators, Webhooks, Builds"
+      collaborators:
+        behavior: "Manage who can push to this repository. Add users with read, write, or admin permissions."
+      webhooks:
+        behavior: "Configure HTTP webhooks triggered on image push events. Useful for triggering deployments when a new image is published."
+
+    organizations:
+      description: "Team management for shared image repositories."
+      url_pattern: "hub.docker.com/orgs/{org}"
+      layout:
+        - "Tabs: Repositories, Members, Teams, Settings, Billing"
+      behavior: "Organizations group repositories under a shared namespace. Members are assigned to teams with different repository permissions."
+
+  workflows:
+    search_for_image:
+      - "Type the image name in the search bar (e.g., 'postgres', 'node', 'redis')"
+      - "Check results — look for the 'Official Image' badge for trusted images"
+      - "Check pull count — higher means more widely used and tested"
+      - "Click the image to read the documentation"
+      - "Copy the pull command from the top of the page"
+
+    find_specific_tag:
+      - "Open the image detail page"
+      - "Click the 'Tags' tab"
+      - "Browse or search for a specific tag (e.g., '18-alpine' for Node.js 18 on Alpine)"
+      - "Check the OS/architecture column matches your deployment target"
+      - "Copy the full pull command with tag: 'docker pull node:18-alpine'"
+
+    compare_image_variants:
+      - "On the Tags tab, compare sizes between variants:"
+      - "  'latest' or version-only (e.g., '18') — full image, largest size"
+      - "  'slim' — reduced size, removes docs and uncommon packages"
+      - "  'alpine' — smallest, based on musl libc (some packages may not work)"
+      - "Choose based on your needs: alpine for minimal size, default for maximum compatibility"
+
+    manage_your_images:
+      - "Click 'Repositories' in the top nav to see your pushed images"
+      - "Click a repository for settings, tags, collaborators, and webhooks"
+      - "Set visibility (public/private) in repository settings"
+      - "Configure automated builds from GitHub/Bitbucket in the Builds tab"
+
+  tips:
+    - "Official images have no org prefix — 'nginx' not 'library/nginx' in the pull command"
+    - "Pull count indicates reliability — images with millions of pulls are battle-tested"
+    - "Alpine tags are 5-10x smaller than default tags — use them when size matters"
+    - "Pin specific version tags in production (e.g., 'node:18.19.1-alpine') — never use 'latest' in production"
+    - "The README on Official Images is comprehensive — it's the primary documentation for running the image"
+    - "Multi-architecture images (linux/amd64, linux/arm64) work on both Intel and ARM machines automatically"
+    - "The digest hash in the Tags tab is the unique identifier for an exact image build — use it for reproducibility"
+    - "Docker Hub has a rate limit for anonymous pulls (100 per 6 hours) — authenticate for higher limits"

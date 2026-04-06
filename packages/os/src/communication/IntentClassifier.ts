@@ -1,4 +1,5 @@
 import { MESSAGE_INTENT, type MessageIntent } from '@maia/shared'
+import type { ProviderRegistry } from '../llm/ProviderRegistry'
 
 const TAKEOVER_PATTERNS = [
   /\blet me\b/i,
@@ -40,17 +41,44 @@ const APPROVAL_PATTERNS = [
   /\bbook it\b/i,
   /\bdo it\b/i,
   /\bsure\b/i,
+  /\blooks good\b/i,
+  /\bsend it\b/i,
+  /\bgo with\b/i,
 ]
 
+const REDIRECT_PATTERNS = [
+  /\bactually\b/i,
+  /\binstead\b/i,
+  /\bforget\b/i,
+  /\bchange\b/i,
+  /\bswitch to\b/i,
+  /\bnot that\b/i,
+  /\bdo .+ instead\b/i,
+]
+
+const CASUAL_PATTERNS = [
+  /^(lol|haha|nice|cool|thanks|ty|thx|wow|😂|😄|👍|heh)$/i,
+  /^(good job|well done|great|awesome)!?$/i,
+]
+
+/** Fast regex-based classification for short/simple messages. */
 export function classifyIntent(text: string): MessageIntent {
   const trimmed = text.trim()
 
+  if (CASUAL_PATTERNS.some((p) => p.test(trimmed))) {
+    return MESSAGE_INTENT.CASUAL
+  }
+
   if (TAKEOVER_PATTERNS.some((p) => p.test(trimmed))) {
-    return MESSAGE_INTENT.INSTRUCTION
+    return MESSAGE_INTENT.TAKEOVER
   }
 
   if (RESUME_PATTERNS.some((p) => p.test(trimmed))) {
-    return MESSAGE_INTENT.INSTRUCTION
+    return MESSAGE_INTENT.HANDOFF
+  }
+
+  if (REDIRECT_PATTERNS.some((p) => p.test(trimmed))) {
+    return MESSAGE_INTENT.REDIRECT
   }
 
   if (NEGATIVE_PATTERNS.some((p) => p.test(trimmed))) {
@@ -66,6 +94,52 @@ export function classifyIntent(text: string): MessageIntent {
   }
 
   return MESSAGE_INTENT.INSTRUCTION
+}
+
+/** LLM-backed classification for complex messages. */
+export async function classifyIntentWithLLM(text: string, llm: ProviderRegistry): Promise<MessageIntent> {
+  // Short messages: regex is enough
+  if (text.split(' ').length <= 6) {
+    return classifyIntent(text)
+  }
+
+  try {
+    const response = await llm.sendMessage([
+      {
+        role: 'system',
+        content: `Classify this user message into exactly one intent. Respond with ONLY the intent name.
+
+Intents:
+- question: asking something ("why did you pick that?", "how much is it?")
+- instruction: telling the agent to do something ("book the flight", "use economy")
+- context: sharing new info the agents don't have ("Mark is already in Tokyo")
+- redirect: changing the plan ("actually do Seoul instead", "forget the email")
+- agreement: approving something ("yes", "looks good", "send it")
+- challenge: pushing back ("that seems expensive", "are you sure?")
+- takeover: user wants to do it themselves ("let me handle the email")
+- handoff: user is done, agents can resume ("ok your turn", "I'm done")
+- casual: social/informal ("lol", "nice find", "haha that's a long flight")`,
+      },
+      { role: 'user', content: text },
+    ], { model: 'gpt-4o-mini', maxTokens: 16, temperature: 0.1 })
+
+    const intent = response.content.trim().toLowerCase()
+    const intentMap: Record<string, MessageIntent> = {
+      question: MESSAGE_INTENT.QUESTION,
+      instruction: MESSAGE_INTENT.INSTRUCTION,
+      context: MESSAGE_INTENT.CONTEXT,
+      redirect: MESSAGE_INTENT.REDIRECT,
+      agreement: MESSAGE_INTENT.AGREEMENT,
+      challenge: MESSAGE_INTENT.CHALLENGE,
+      takeover: MESSAGE_INTENT.TAKEOVER,
+      handoff: MESSAGE_INTENT.HANDOFF,
+      casual: MESSAGE_INTENT.CASUAL,
+    }
+
+    return intentMap[intent] ?? classifyIntent(text)
+  } catch {
+    return classifyIntent(text)
+  }
 }
 
 export function isTakeoverRequest(text: string): boolean {

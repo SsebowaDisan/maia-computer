@@ -1,0 +1,121 @@
+name: Microsoft Teams
+id: ms-teams
+icon: "https://www.google.com/s2/favicons?domain=teams.microsoft.com&sz=128"
+url: https://teams.microsoft.com
+category: communication
+ai_description: "Chat, meet, and collaborate with your team. Share files and schedule meetings."
+help_url: "https://support.microsoft.com/teams"
+
+navigation:
+  overview: >
+    Microsoft Teams is a workplace communication hub combining chat, video meetings, file sharing,
+    and channel-based collaboration. The interface has a persistent left rail for section navigation
+    and a main content area. Deeply integrated with Microsoft 365 (Word, Excel, PowerPoint, OneDrive, SharePoint).
+
+  pages:
+    main:
+      description: "The main Teams interface with left rail navigation and content pane."
+      layout:
+        - "Left rail: Activity, Chat, Teams, Calendar, Calls, Files, Apps icons (vertical)"
+        - "Top: search bar (Cmd+E), breadcrumb, profile icon"
+        - "Center: content area changes based on selected rail section"
+      left_rail:
+        activity: "Shows notifications feed — mentions, replies, reactions, meeting invites. Red badge shows unread count."
+        chat: "1:1 and group conversations. New chat icon (pencil) at top. Filter button to show unread only. Pop-out chat button for separate windows."
+        teams: "Teams and their channels. Each team has a General channel by default. Channels can be Standard (visible to all) or Private (invite-only). Shared channels span across organizations."
+        calendar: "Outlook calendar integration. Shows meetings with Join button when active. New Meeting button at top-right. Day/Work week/Week views."
+        calls: "Call history, voicemail, contacts. Speed dial for frequent contacts. Dialpad for PSTN calls (if enabled)."
+        files: "Recent files from OneDrive and SharePoint. Cloud storage tab for connected services."
+      search_bar:
+        selector: "input[data-tid='searchInput']"
+        behavior: "Cmd+E to focus. Type query, press Enter. Results tabs: Messages, People, Files. Slash commands work here: /available, /busy, /dnd, /away to set status. /files, /unread, /mentions for quick navigation."
+
+    chat_view:
+      description: "Individual or group conversation view."
+      layout:
+        - "Top: participant names, video call, audio call, screen share, pop-out, add people icons"
+        - "Center: message history with timestamps and read receipts"
+        - "Bottom: compose box with formatting toolbar"
+      compose_box:
+        selector: "div[data-tid='ckeditor']"
+        behavior: "Type message, Enter to send. Shift+Enter for new line. Click the format icon (A with paintbrush) to expand the rich editor with bold (Cmd+B), italic (Cmd+I), underline, lists, tables, code snippets, and headings. The A icon toggles between quick send and rich compose modes."
+      loop_components:
+        behavior: "Click the Loop icon (infinity symbol) in the compose toolbar to insert a collaborative Loop component — table, task list, checklist, or paragraph that updates live across all chats and apps where it is shared."
+      tabs:
+        behavior: "Each chat has a tab bar at the top. Default tabs: Chat, Files, Organization (shows org chart). Add tabs for Planner, OneNote, or third-party apps via the + icon."
+
+    channel_view:
+      description: "Team channel with posts, files, and tabs."
+      layout:
+        - "Top: channel name, tabs (Posts, Files, Wiki/Notes, + more)"
+        - "Center: conversation feed — posts with threaded replies"
+        - "Bottom: compose box (New conversation button)"
+      posts_tab:
+        behavior: "Channel conversations are threaded by default — click 'Reply' under a post to respond in-thread. Click 'New conversation' to start a new topic. Each post can have a subject line for clarity."
+      files_tab:
+        behavior: "Shows files shared in the channel. Backed by a SharePoint document library. Upload, co-edit Word/Excel/PowerPoint files directly in Teams."
+
+    meeting_view:
+      description: "Active meeting with video grid and controls."
+      layout:
+        - "Center: participant video grid (Gallery, Large gallery, Together mode, Focus mode)"
+        - "Bottom toolbar: mic, camera, share, raise hand, reactions, more (...), leave/end"
+        - "Side panels (toggleable): Chat, People, Notes, Copilot"
+      meeting_controls:
+        mic: "Toggle microphone. Cmd+Shift+M shortcut."
+        camera: "Toggle camera. Cmd+Shift+O shortcut."
+        share: "Share screen, window, PowerPoint Live, or Whiteboard. PowerPoint Live gives presenter and audience independent slide navigation."
+        raise_hand: "Raises your hand in the participants list — visible to everyone. Cmd+Shift+K shortcut."
+        reactions: "Send live reactions (applause, heart, laugh, surprised, thumbs up) that appear as floating animations."
+        together_mode: "Places all participants in a shared virtual scene (auditorium, coffee shop, etc.)."
+        copilot: "AI assistant that summarizes the meeting, answers questions about what was discussed, and generates action items."
+        breakout_rooms: "Host can create breakout rooms to split participants into smaller groups for focused discussion."
+
+  keyboard_shortcuts:
+    search: "Cmd+E — focus search bar"
+    new_chat: "Cmd+N — start a new chat"
+    goto_activity: "Cmd+1 — go to Activity"
+    goto_chat: "Cmd+2 — go to Chat"
+    goto_teams: "Cmd+3 — go to Teams"
+    goto_calendar: "Cmd+4 — go to Calendar"
+    toggle_mute: "Cmd+Shift+M — toggle mute in meeting/call"
+    toggle_camera: "Cmd+Shift+O — toggle camera in meeting/call"
+    raise_hand: "Cmd+Shift+K — raise/lower hand in meeting"
+
+  workflows:
+    send_chat_message:
+      - "Click Chat in the left rail (or Cmd+2)"
+      - "Click a conversation or start new chat (pencil icon / Cmd+N)"
+      - "Type in compose box, Enter to send"
+
+    join_meeting:
+      - "Click Calendar in the left rail (or Cmd+4)"
+      - "Find the meeting entry — active meetings show a 'Join' button"
+      - "Click Join, configure camera/mic in the pre-join screen"
+      - "Click 'Join now'"
+
+    post_in_channel:
+      - "Click Teams in the left rail (or Cmd+3)"
+      - "Select a team, then a channel"
+      - "Click 'New conversation' at the bottom"
+      - "Type message, optionally add a subject line for clarity"
+      - "Enter to post — visible to all channel members"
+      - "Click 'Reply' under a post for threaded responses"
+
+    schedule_meeting:
+      - "Click Calendar in the left rail"
+      - "Click 'New Meeting' at top-right"
+      - "Set title, attendees, date/time, recurrence, and optional channel"
+      - "Click Send — invites go to attendees and the meeting appears on all calendars"
+
+  tips:
+    - "Cmd+E opens search — type slash commands like /available, /busy, /dnd to set status"
+    - "Chat = 1:1 and group conversations; Channels = team-wide topic discussions"
+    - "The format button (A with paintbrush) toggles between quick-send and rich editor mode"
+    - "Loop components (infinity icon in compose) create live-updating collaborative content"
+    - "PowerPoint Live lets audiences browse slides at their own pace during presentations"
+    - "@mention someone in a channel to notify them — @team notifies everyone"
+    - "Pin messages in chat for quick reference — right-click > Pin"
+    - "Meeting recordings are saved to OneDrive (chat meetings) or SharePoint (channel meetings)"
+    - "Copilot in meetings can summarize what you missed if you join late"
+    - "Files shared in channels are stored in SharePoint — accessible even outside Teams"

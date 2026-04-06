@@ -1,0 +1,90 @@
+name: ChatGPT
+id: chatgpt
+icon: "https://www.google.com/s2/favicons?domain=chatgpt.com&sz=128"
+url: https://chatgpt.com
+category: productivity
+ai_description: "Chat with OpenAI's AI assistant. Ask questions, generate content, brainstorm ideas."
+help_url: "https://help.openai.com"
+
+navigation:
+  overview: >
+    ChatGPT is OpenAI's conversational AI assistant. The interface is a two-panel layout: a
+    collapsible left sidebar with conversation history and a central chat area. New users land
+    on a blank chat with a centered prompt input. Returning users see their most recent conversation.
+
+  pages:
+    chat:
+      description: "The main conversation view with message history, input, model selector, and tool toggles."
+      layout:
+        - "Left sidebar: 'New chat' button (pencil icon, top-left), conversation history grouped by date (Today, Yesterday, Previous 7 Days, Previous 30 Days), 'Explore GPTs' link at bottom"
+        - "Center top: model selector dropdown showing current model name"
+        - "Center: conversation area with alternating user (right-aligned) and assistant (left-aligned) message bubbles"
+        - "Bottom center: multi-line textarea input with attachment button (paperclip), web search toggle, image generation toggle, and send button (arrow icon)"
+      message_input:
+        selector: "textarea, div[contenteditable='true']"
+        type: "Textarea or contenteditable div at the bottom of the page"
+        behavior: "Click or focus to activate. Type your message. Press Enter to send (Shift+Enter for new line). The send button (up-arrow icon) appears only when text is present. Responses stream word-by-word in real time above."
+        keyboard: "The input auto-focuses when a new chat opens."
+      model_selector:
+        text: "Dropdown at the top center of a new or existing chat"
+        behavior: "Click to open a menu of available models: GPT-4o (default, fast multimodal), GPT-4o mini (faster, lighter), GPT-4 (legacy). Model selection applies to the current conversation and persists for new messages."
+      new_chat_button:
+        text: "Pencil/compose icon at the top of the left sidebar"
+        behavior: "Clears the current conversation and opens a blank chat. Previous conversations remain in the sidebar history. Keyboard shortcut: Ctrl+Shift+O (Cmd+Shift+O on Mac)."
+      conversation_list:
+        text: "Conversation history in the left sidebar, grouped by date"
+        behavior: "Click any conversation to reopen it with full message history. Hover to reveal a three-dot menu with Rename, Share, Archive, and Delete options. Conversations are auto-titled based on the first message."
+      response_actions:
+        text: "Action buttons below each assistant response"
+        behavior: "Copy (clipboard icon) copies the full response text. Thumbs up/down provides feedback. Regenerate (circular arrow) generates a new response to the same prompt. Read aloud (speaker icon) uses text-to-speech."
+      file_attachment:
+        text: "Paperclip icon on the left side of the input bar"
+        behavior: "Click to upload files: images (for vision analysis), PDFs, code files, spreadsheets. Files are analyzed in context with your message. Drag-and-drop onto the input area also works."
+      web_search_toggle:
+        text: "Globe icon in the input toolbar"
+        behavior: "When enabled, ChatGPT searches the web for current information before answering. Results include inline citations with source links."
+      image_generation:
+        text: "Image icon or DALL-E option in the input toolbar"
+        behavior: "Ask ChatGPT to generate images by describing what you want. Uses DALL-E to create images inline in the conversation."
+      explore_gpts:
+        text: "'Explore GPTs' link at the bottom of the sidebar"
+        behavior: "Opens the GPT Store where you can browse and use custom GPTs built by OpenAI and the community. Each GPT is a specialized version of ChatGPT for a specific task."
+
+  workflows:
+    ask_question:
+      - "Click the message input at the bottom"
+      - "Type your question or prompt"
+      - "Press Enter to send"
+      - "Wait for the response to finish streaming"
+      - "Send follow-up messages to refine or continue the conversation"
+
+    start_new_conversation:
+      - "Click the pencil/compose icon at the top of the sidebar (or Ctrl+Shift+O)"
+      - "Select a model from the dropdown at the top if needed"
+      - "Type your first message and press Enter"
+
+    continue_previous_chat:
+      - "Click a conversation in the left sidebar"
+      - "The full conversation history loads"
+      - "Type a new message at the bottom to continue"
+
+    upload_and_analyze:
+      - "Click the paperclip icon in the input bar"
+      - "Select a file (image, PDF, code, spreadsheet)"
+      - "Type a message describing what to do with the file"
+      - "Press Enter — ChatGPT analyzes the file in context"
+
+    use_custom_gpt:
+      - "Click 'Explore GPTs' at the bottom of the sidebar"
+      - "Browse or search the GPT Store"
+      - "Click a GPT to open a new conversation using that specialized assistant"
+
+  tips:
+    - "Be specific in your prompts — include context, desired format, and constraints for better responses"
+    - "Follow-up messages maintain full conversation context — use them to iterate and refine"
+    - "Shift+Enter adds line breaks within your message without sending"
+    - "The web search toggle (globe icon) gives ChatGPT access to current information — enable it for recent events or data"
+    - "Code interpreter can run Python code, analyze CSVs, and generate charts — upload data files and ask for analysis"
+    - "Rename conversations by hovering over them in the sidebar and clicking the three-dot menu"
+    - "Custom instructions (Settings > Personalization) let you set persistent preferences across all conversations"
+    - "Voice mode (headphone icon) allows spoken conversation with ChatGPT using natural speech"

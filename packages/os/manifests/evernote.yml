@@ -1,0 +1,108 @@
+name: Evernote
+id: evernote
+icon: "https://www.google.com/s2/favicons?domain=evernote.com&sz=128"
+url: https://www.evernote.com
+category: productivity
+ai_description: "Take notes, clip web pages, organize ideas and tasks."
+help_url: "https://help.evernote.com"
+
+navigation:
+  overview: >
+    Evernote is a note-taking and organization app. Notes live inside notebooks and can be tagged
+    for cross-notebook categorization. The web interface uses a three-panel layout: left sidebar
+    for navigation, center column for the note list, and right panel for the note editor. Notes
+    support rich text, checklists, tables, file attachments, images, and audio recordings.
+    Search includes OCR for text inside images and PDFs.
+
+  pages:
+    home:
+      description: "The home dashboard showing recent notes, scratch pad, pinned notes, and quick access widgets."
+      layout:
+        - "Left sidebar: Home, Search, '+ New Note' button, Shortcuts (pinned items), Notebooks section, Tags section, Trash"
+        - "Center: home widgets — scratch pad (quick capture), recent notes, recently captured (web clips), pinned notes"
+      new_note_button:
+        text: "Green '+ New Note' button in the left sidebar"
+        behavior: "Creates a new note and opens it in the editor. Optionally click the dropdown arrow next to it to choose a template (meeting notes, project plan, etc.) or create in a specific notebook."
+      scratch_pad:
+        text: "Scratch pad widget on the home dashboard"
+        behavior: "A quick-capture text area for jotting down thoughts without creating a full note. Content persists across sessions. Not a full note — use it for temporary capture."
+      shortcuts:
+        text: "Shortcuts section in the left sidebar"
+        behavior: "Pinned notes, notebooks, and tags for quick one-click access. Drag items to the Shortcuts section to pin them."
+
+    notes_view:
+      description: "The notes list and editor in a three-panel layout."
+      layout:
+        - "Left sidebar: navigation (same as home)"
+        - "Center column: note list showing title, snippet preview, date, notebook name, and thumbnail"
+        - "Right panel: note editor showing the selected note's full content"
+      note_list:
+        text: "Center column listing notes"
+        behavior: "Shows note titles, content snippets, dates, and notebook name. Click a note to open it in the editor on the right. Sort by date updated, date created, or title. Toggle between list, card, and snippet views using the view buttons at the top."
+      search_bar:
+        selector: "input[type='search'], input[placeholder*='Search']"
+        text: "Search input at the top of the left sidebar or in the top bar"
+        behavior: "Type keywords, note titles, or search operators. Results replace the note list. Evernote indexes text inside images and PDFs (OCR), so you can find text in photos and scanned documents."
+      search_operators:
+        notebook_filter: "notebook:\"Work Notes\" — show notes only from a specific notebook"
+        tag_filter: "tag:important — show notes with a specific tag"
+        created_date: "created:20240101 — notes created after a date"
+        has_attachment: "resource:application/pdf — notes containing PDF attachments"
+      notebook_list:
+        text: "Notebooks section in the left sidebar"
+        behavior: "Shows all your notebooks. Click a notebook to filter the note list to only its notes. Right-click for rename, share, and delete. Notebooks can be organized into stacks (groups)."
+      tags_section:
+        text: "Tags section in the left sidebar"
+        behavior: "Shows all your tags. Click a tag to filter notes by that tag. Tags work across all notebooks for flexible cross-categorization."
+
+    editor:
+      description: "The note editor panel showing the full note with formatting toolbar."
+      layout:
+        - "Top: note title field (large, editable)"
+        - "Below title: notebook name (clickable to change), tag area (click to add tags)"
+        - "Below: formatting toolbar (headings, bold, italic, underline, strikethrough, lists, checkboxes, tables, code blocks, horizontal rule, attachment, link)"
+        - "Center: note body content area"
+      note_body:
+        text: "Content area below the title"
+        behavior: "Click to place cursor and type. Supports rich formatting, checklists (checkbox items), numbered and bulleted lists, tables, code blocks, horizontal rules, images (paste or attach), file attachments, and audio notes. Notes auto-save continuously."
+      toolbar:
+        text: "Formatting toolbar below the note title"
+        behavior: "Buttons for text styles (headings 1-3, bold, italic), lists (bullet, numbered, checklist), insert options (table, horizontal rule, code block), and attachment (paperclip for files, camera for images)."
+      tags:
+        text: "Tag area below the note title"
+        behavior: "Click to add tags. Type a tag name — existing tags auto-suggest. Press Enter to add. Tags enable cross-notebook organization."
+
+  workflows:
+    create_note:
+      - "Click '+ New Note' in the left sidebar"
+      - "Type a title in the title field"
+      - "Click the body area and start writing"
+      - "Add formatting, checklists, tables, or attachments as needed"
+      - "Notes save automatically — no manual save required"
+
+    search_notes:
+      - "Click the search bar at the top"
+      - "Type keywords — results appear in the note list"
+      - "Click a result to open it in the editor"
+      - "Use operators: notebook:\"Name\", tag:name, created:YYYYMMDD for precise filtering"
+
+    organize_with_notebooks_and_tags:
+      - "Create notebooks for major categories (Work, Personal, Projects)"
+      - "Move notes between notebooks by right-clicking and selecting 'Move note'"
+      - "Add tags to notes for cross-notebook grouping (e.g., tag:urgent spans all notebooks)"
+      - "Pin frequently used items to Shortcuts for one-click access"
+
+    create_checklist:
+      - "Create or open a note"
+      - "Click the checkbox icon in the toolbar (or type [] for a shortcut)"
+      - "Type checklist items — each gets a clickable checkbox"
+      - "Check items off as you complete them"
+
+  tips:
+    - "Notes auto-save continuously — every keystroke is preserved immediately"
+    - "Search indexes text inside images and PDFs (OCR) — find text in photos and scans"
+    - "Tags work across notebooks — use them for flexible cross-categorization"
+    - "Pin notes, notebooks, or tags to Shortcuts for instant one-click access"
+    - "The scratch pad on the home page is for quick capture — move content to proper notes for organization"
+    - "Keyboard shortcuts: Ctrl+N (Cmd+N) for new note, Ctrl+Shift+T (Cmd+Shift+T) for new tag"
+    - "Notebook stacks let you group related notebooks into collapsible categories"

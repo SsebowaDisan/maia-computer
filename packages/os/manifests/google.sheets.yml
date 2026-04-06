@@ -1,6 +1,157 @@
 name: Google Sheets
 id: google.sheets
-icon: "📊"
+icon: "https://ssl.gstatic.com/docs/spreadsheets/favicon3.ico"
 url: https://sheets.google.com
 category: productivity
 ai_description: "Create, read, and edit spreadsheets. Add rows, formulas, and charts. Analyze data."
+help_url: "https://support.google.com/docs/topic/9054603"
+
+navigation:
+  overview: >
+    Google Sheets is a collaborative spreadsheet editor supporting real-time multi-user editing.
+    It uses a cell grid addressed by column letters (A-Z, AA-ZZ) and row numbers (1-1000+).
+    Formulas start with '=' and support 400+ functions. The interface has a menu bar, formatting
+    toolbar, formula bar (fx), cell grid, and sheet tabs at the bottom. Files auto-save to
+    Google Drive. URL format: docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit#gid=SHEET_ID.
+
+  pages:
+    home:
+      description: "The Sheets home page listing recent spreadsheets and template gallery."
+      url_pattern: "sheets.google.com"
+      layout:
+        - "Top: template gallery with '+ Blank' card and templates (Budget, Schedule, To-Do List, Invoice, etc.)"
+        - "Below: 'Recent spreadsheets' sorted by last opened. Each shows name, owner, last modified date"
+        - "Top-right: list/grid view toggle, sort options (Last opened, Last modified, Title)"
+      blank_card:
+        text: "'+ Blank' — first card in template gallery"
+        behavior: "Creates a new untitled spreadsheet. Opens immediately in the editor with cell A1 selected."
+
+    editor:
+      description: "The spreadsheet editing view — the core interface for data entry, formulas, and formatting."
+      url_pattern: "docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit"
+      layout:
+        - "Top-left: spreadsheet title (click to rename), star icon (favorite), folder icon (move)"
+        - "Below title: menu bar — File, Edit, View, Insert, Format, Data, Tools, Extensions, Help"
+        - "Below menu: formatting toolbar — undo/redo, print, paint format, zoom, currency, percent, decimal, font, size, bold, italic, strikethrough, text color, fill color, borders, merge, alignment, wrap, rotate, link, comment, chart, filter, functions"
+        - "Below toolbar: formula bar — Name Box (shows 'A1') on left, fx label, formula input area on right"
+        - "Center: cell grid with column headers (A, B, C...) and row numbers (1, 2, 3...)"
+        - "Bottom-left: sheet tabs (Sheet1, Sheet2...), '+' add sheet, navigation arrows for many sheets"
+        - "Bottom-right: quick stats bar (Sum, Average, Min, Max, Count when cells selected)"
+        - "Top-right: blue 'Share' button, collaborator avatars, editing indicator"
+      cell_grid:
+        behavior: "Click a cell to select (blue border). Type to overwrite. Double-click or press F2 to edit in-place. Enter confirms and moves down. Tab confirms and moves right. Escape cancels. Click+drag to select a range. Ctrl+click for non-contiguous selection. Shift+click to extend selection."
+      name_box:
+        selector: "input.jfk-textinput[aria-label='Name Box']"
+        behavior: "Shows the active cell address (e.g., 'A1'). Type a cell reference (B5, AA100) and press Enter to navigate. Type a range (A1:D10) to select it. Type a named range name to jump to it."
+      formula_bar:
+        selector: "div#formula_bar_input, div[aria-label='Formula input']"
+        behavior: "Shows content/formula of selected cell. Click to edit. Type '=' to start a formula. While typing, click cells to insert references (they highlight in matching colors). Press Enter to confirm."
+      toolbar:
+        key_buttons:
+          - "Undo (Cmd+Z) / Redo (Cmd+Y)"
+          - "Paint format (paint roller icon) — copies formatting from selected cells to clicked cells"
+          - "Currency ($), Percent (%), Decrease/Increase decimal places"
+          - "Font family dropdown, Font size dropdown"
+          - "Bold (Cmd+B), Italic (Cmd+I), Strikethrough (Alt+Shift+5)"
+          - "Text color (A with color bar), Fill color (paint bucket)"
+          - "Borders dropdown (many border styles), Merge cells dropdown"
+          - "Horizontal alignment (left/center/right), Vertical alignment (top/middle/bottom)"
+          - "Text wrapping (overflow/wrap/clip), Text rotation"
+          - "Insert link (Cmd+K), Insert comment (Cmd+Alt+M)"
+          - "Insert chart, Create filter, Functions (sigma icon with dropdown)"
+      sheet_tabs:
+        behavior: "Click a tab to switch sheets. Right-click for: Rename, Delete, Duplicate, Copy to another spreadsheet, Hide, Protect, Change color, Move left/right. Drag tabs to reorder. '+' button adds a new sheet."
+      share_button:
+        selector: "div[aria-label='Share']"
+        behavior: "Opens sharing dialog. Add people by email, set permission (Viewer/Commenter/Editor). Copy link with link-sharing options."
+
+  workflows:
+    enter_data:
+      - "Click a cell (e.g., A1) to select it"
+      - "Type your data — text, numbers, dates"
+      - "Press Enter to move down, Tab to move right"
+      - "To edit existing data: double-click the cell or press F2"
+      - "Paste data from other sources with Cmd+V (Cmd+Shift+V for values only)"
+
+    write_formulas:
+      - "Click the cell where you want the result"
+      - "Type '=' to begin a formula"
+      - "Type the function name and opening parenthesis: =SUM("
+      - "Click cells or type ranges to reference them: =SUM(A1:A10)"
+      - "Press Enter to confirm — the cell shows the computed result"
+      - "Select the cell to see the formula in the formula bar"
+
+    format_cells:
+      - "Select cells by clicking and dragging, or Ctrl+click for non-contiguous"
+      - "Click column header (A, B, C) to select entire column, row number for entire row"
+      - "Use toolbar: Bold, colors, borders, number formats"
+      - "Format > Number for: Automatic, Plain text, Number, Percent, Scientific, Accounting, Financial, Currency, Date, Time, Duration, Custom number format"
+
+    create_chart:
+      - "Select the data range including headers"
+      - "Insert > Chart (or click chart icon in toolbar)"
+      - "Chart Editor opens on right with Setup and Customize tabs"
+      - "Setup: chart type (Line, Area, Bar, Column, Pie, Scatter, Map, Treemap, etc.), data range, series"
+      - "Customize: titles, legend, axis labels, colors, gridlines"
+
+    sort_and_filter:
+      - "Select data range or click inside the data"
+      - "Data > Create a filter — dropdown arrows appear on column headers"
+      - "Click a dropdown to: Sort A-Z, Sort Z-A, Filter by condition, Filter by values"
+      - "Data > Sort range for custom sort with multiple columns"
+      - "Data > Slicer for a visual filter control widget"
+
+    conditional_formatting:
+      - "Select the range to format"
+      - "Format > Conditional formatting"
+      - "Set condition: is empty, is not empty, text contains, greater than, between, custom formula"
+      - "Set formatting style: fill color, text color, bold, italic, strikethrough"
+      - "Add multiple rules — rules are evaluated top to bottom"
+
+  keyboard_shortcuts:
+    bold: "Cmd+B — bold selected cells"
+    italic: "Cmd+I — italic"
+    underline: "Cmd+U — underline"
+    undo: "Cmd+Z — undo"
+    redo: "Cmd+Y — redo"
+    find: "Cmd+F — find"
+    find_replace: "Cmd+H — find and replace"
+    paste_values: "Cmd+Shift+V — paste values only"
+    select_column: "Ctrl+Space — select entire column"
+    select_row: "Shift+Space — select entire row"
+    insert_row: "Cmd+Shift+= — insert row/column (based on selection)"
+    delete_row: "Cmd+- — delete row/column"
+    fill_down: "Cmd+D — fill down"
+    fill_right: "Cmd+R — fill right"
+    absolute_reference: "F4 — toggle absolute/relative reference ($A$1, A$1, $A1, A1)"
+    show_shortcuts: "Cmd+/ — show all keyboard shortcuts"
+    navigate_sheets: "Cmd+Shift+PageUp/PageDown — move between sheets"
+
+  common_formulas:
+    basic: "=SUM(A1:A10), =AVERAGE(B1:B20), =COUNT(C1:C100), =MIN(D1:D50), =MAX(D1:D50)"
+    lookup: "=VLOOKUP(search_key, range, column_index, is_sorted), =HLOOKUP(), =INDEX(range, row, col), =MATCH(key, range, type)"
+    text: "=CONCATENATE(A1, ' ', B1), =LEFT(A1, 5), =RIGHT(A1, 3), =MID(A1, 2, 4), =TRIM(A1), =UPPER(A1), =LOWER(A1), =LEN(A1), =SUBSTITUTE(A1, 'old', 'new')"
+    logic: "=IF(A1>10, 'Yes', 'No'), =AND(A1>0, B1>0), =OR(A1=1, A1=2), =IFS(A1>90, 'A', A1>80, 'B', TRUE, 'C'), =SWITCH(A1, 1, 'One', 2, 'Two', 'Other')"
+    date: "=TODAY(), =NOW(), =DATE(2026, 4, 6), =DATEDIF(A1, B1, 'D'), =WEEKDAY(A1), =EOMONTH(A1, 0)"
+    array: "=ARRAYFORMULA(A1:A10 * B1:B10), =FILTER(A1:C10, C1:C10>100), =SORT(A1:C10, 3, FALSE), =UNIQUE(A1:A100), =QUERY(A1:D100, 'SELECT A, SUM(D) GROUP BY A')"
+
+  url_patterns:
+    home: "sheets.google.com"
+    editor: "docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit"
+    specific_sheet: "docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit#gid=SHEET_NUMBER"
+    specific_cell: "docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit#gid=0&range=A1"
+    export_csv: "docs.google.com/spreadsheets/d/SPREADSHEET_ID/export?format=csv"
+    export_xlsx: "docs.google.com/spreadsheets/d/SPREADSHEET_ID/export?format=xlsx"
+    template: "docs.google.com/spreadsheets/d/SPREADSHEET_ID/template/preview"
+
+  tips:
+    - "Select a range of numbers and the bottom-right status bar shows Sum, Average, Min, Max, Count instantly"
+    - "Cmd+Shift+V pastes values only — strips all formatting and formulas"
+    - "F4 cycles through absolute references: A1 -> $A$1 -> A$1 -> $A1 -> A1"
+    - "Freeze rows/columns: View > Freeze > 1 row / 2 rows / Up to current row (keeps headers visible while scrolling)"
+    - "The QUERY function uses SQL-like syntax: =QUERY(A:D, 'SELECT A, SUM(D) WHERE C=\"Sales\" GROUP BY A ORDER BY SUM(D) DESC')"
+    - "ARRAYFORMULA applies a formula to an entire range without copying down: =ARRAYFORMULA(IF(A2:A>0, A2:A*B2:B, 0))"
+    - "Data > Data validation creates dropdown menus in cells — choose 'List of items' and enter comma-separated options"
+    - "Named ranges (Data > Named ranges) let you use descriptive names like =SUM(Revenue) instead of =SUM(D2:D100)"
+    - "Paint Format (roller icon) copies formatting: select formatted cell, click roller, click target cells. Double-click roller to apply to multiple targets."
+    - "Alt+Enter inserts a line break within a cell"

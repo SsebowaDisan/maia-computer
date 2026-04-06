@@ -1,0 +1,66 @@
+name: Apple Music
+id: apple-music
+icon: "https://www.google.com/s2/favicons?domain=music.apple.com&sz=128"
+url: https://music.apple.com
+category: media
+ai_description: "Stream music and radio. Browse albums, playlists, and artists."
+
+navigation:
+  overview: >
+    Apple Music is a streaming service for music, radio, and playlists. The web player shows
+    a browse page with featured content, your library, and a persistent player at the top.
+
+  pages:
+    browse:
+      description: "The main page showing featured playlists, new releases, and curated sections."
+      layout:
+        - "Left sidebar: Listen Now, Browse, Radio, Library, Search, and playlists"
+        - "Center: featured content — top picks, new releases, charts, curated playlists"
+        - "Top: player controls (play/pause, skip, volume, progress bar)"
+      sidebar:
+        text: "Left navigation panel"
+        behavior: "Listen Now shows personalized recommendations. Browse shows the full catalog. Radio shows live and on-demand stations. Library shows your added music. Search opens the search interface."
+      player_controls:
+        text: "Player bar at the top of the page"
+        behavior: "Shows currently playing track with artwork, song/artist name. Controls: play/pause, skip forward/back, volume slider, progress bar. Click album art to open Now Playing."
+
+    search:
+      description: "Search page for finding music across the catalog."
+      layout:
+        - "Top: search input field"
+        - "Below: tabs for Top Results, Artists, Albums, Songs, Playlists"
+      search_input:
+        text: "Search field"
+        behavior: "Type an artist, album, song, or genre. Results appear organized by type."
+
+    album_detail:
+      description: "Album page showing track list and details."
+      layout:
+        - "Top: album art, title, artist, release year, genre"
+        - "Below: Play and Shuffle buttons"
+        - "Center: track list with track numbers, titles, and durations"
+      play_button:
+        text: "Play button on the album page"
+        behavior: "Plays the album from the first track."
+      track_list:
+        text: "List of tracks"
+        behavior: "Click any track to play it. Hover to see a play icon."
+
+  workflows:
+    search_and_play:
+      - "Click 'Search' in the left sidebar"
+      - "Type an artist, song, or album name"
+      - "Click a result to view the album or artist page"
+      - "Click Play to start listening"
+
+    browse_new_music:
+      - "Click 'Browse' in the left sidebar"
+      - "Scroll through featured sections, charts, and new releases"
+      - "Click an album or playlist to see its tracks"
+      - "Click Play or click individual tracks"
+
+  tips:
+    - "The web player requires an Apple Music subscription for full playback"
+    - "Library shows only music you've added — Browse shows the full catalog"
+    - "The queue icon lets you see and manage upcoming songs"
+    - "Radio stations provide continuous curated music without needing to choose specific songs"
