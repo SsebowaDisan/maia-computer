@@ -74,6 +74,17 @@ navigation:
       - "Set audience, formality, domain, and intent"
       - "Suggestions adapt to match your configured goals"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for checking and improving text with Grammarly only."
+    - "Paste or type text in the editor and wait for real-time analysis — underlines appear on detected issues."
+    - "Review suggestions in the right panel categorized by Correctness, Clarity, Engagement, and Delivery."
+    - "Click 'Accept' on individual suggestions to apply fixes, or 'Dismiss' to skip them."
+    - "Set writing goals using the Goals button to tailor suggestions for audience, formality, and domain."
+    - "Monitor the overall performance score (0-100) in the top-right as issues are resolved."
+    - "NEVER delete documents, modify account settings, or change subscription without explicit user approval."
+    - "NEVER download or share documents without explicit user approval."
+    - "Red underlines indicate correctness errors, blue for clarity, green for engagement, purple for delivery."
+
   tips:
     - "Grammarly checks happen automatically in real time — just type or paste and wait for analysis"
     - "Set writing goals (audience, formality, domain) to get suggestions tailored to your context"

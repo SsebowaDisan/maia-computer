@@ -67,6 +67,17 @@ navigation:
       - "Click 'jobs' for startup job listings"
       - "Click 'new' for the latest submissions before they get ranked"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for browsing Hacker News stories and comments only."
+    - "Story titles link to external sites while 'N comments' links to the HN discussion — these are different destinations."
+    - "Click 'N comments' on a story to read the community discussion, not the story title."
+    - "Use the nav links (new, past, ask, show, jobs) to explore different content sections."
+    - "HN has no built-in search — direct the user to hn.algolia.com for full-text search across all stories and comments."
+    - "Collapse long comment threads with the [-] toggle to skip to the next top-level comment."
+    - "Use point counts and comment counts as quality signals when scanning the front page."
+    - "NEVER upvote, comment, or submit stories without explicit user approval."
+    - "Click 'past' in the top bar to see yesterday's top stories for catching up on missed content."
+
   tips:
     - "Story titles link to external sites; 'N comments' links to the HN discussion — these are different destinations"
     - "High point counts indicate community-validated quality content"

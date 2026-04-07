@@ -61,6 +61,17 @@ navigation:
       - "Type product names, order numbers, or customer info"
       - "Click a result to navigate directly"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing the Shopify store admin only."
+    - "NEVER make payments or transfers without explicit user approval."
+    - "NEVER create, modify, or delete products without explicit user approval."
+    - "NEVER fulfill orders, process refunds, or change order status without explicit user approval."
+    - "Press '/' to focus the search bar and find products, orders, customers, and admin pages quickly."
+    - "Use the left sidebar to navigate: Orders for order management, Products for catalog, Analytics for data."
+    - "Click an order row to view full details including items, payment info, and fulfillment status."
+    - "Draft products are not visible to customers — check status (Active/Draft) in the products list."
+    - "NEVER modify store settings, themes, or discount codes without explicit user approval."
+
   tips:
     - "The admin URL is admin.shopify.com — the storefront is a separate view"
     - "Draft products are not visible to customers — set status to Active to publish"

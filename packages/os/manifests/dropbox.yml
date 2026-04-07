@@ -87,6 +87,17 @@ navigation:
       - "Star important files by hovering and clicking the star icon"
       - "Use Recents to quickly find recently modified files"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing files in Dropbox only."
+    - "Use the search bar at the top to find files by name or content keywords — Dropbox searches full text of PDFs, docs, and spreadsheets."
+    - "Navigate the folder tree using 'All files' in the sidebar and breadcrumb links at the top."
+    - "Click a file to open an inline preview, or right-click for actions like share, download, move, and rename."
+    - "Use the sidebar shortcuts: Recents for recently modified files, Starred for bookmarked items."
+    - "NEVER delete, move, or rename files without explicit user approval."
+    - "NEVER upload files or create folders without explicit user approval."
+    - "NEVER share files or modify sharing permissions without explicit user approval."
+    - "Drag-and-drop files onto the file list for quick uploads only when the user explicitly requests it."
+
   tips:
     - "Search indexes the full text content of PDFs, Word docs, and spreadsheets — search for text inside files"
     - "Recents view is the fastest way to find files you recently worked on"

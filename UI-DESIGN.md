@@ -371,30 +371,45 @@ Bottom of every app window. AI commands in the context of the current app.
 
 ## 9. Team Chat App
 
-Full app in the dock. Opens in its own window. Snaps alongside other apps.
+Full app in the dock. Opens in its own window. Snaps alongside other apps. Team Chat is where agents collaborate — debating, challenging, correcting, and arriving at answers together while the user watches.
+
+### Layout — Agent Collaboration View
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
 │  💬 Team Chat                                      ─    □    ✕  │
 ├──────────────────────────────────────────────────────────────────┤
 │  Active: "Plan team trip to Tokyo"                               │
-│  Agents: 🔍 Research  💰 Budget  📅 Calendar                     │
+│  Agents: ✈️ Travel (working)  💰 Budget (watching)  📅 Calendar   │
 │  ─────────────────────────────────────────────────               │
 │                                                                  │
-│  🔍 Research                                          2:31 PM    │
-│  Found ANA $487 direct. Best option.                             │
+│  ✈️ Travel                                            2:31 PM    │
+│  Found a flight to Tokyo for $750 on ANA, departing Tuesday      │
 │                                                                  │
 │  💰 Budget                                            2:31 PM    │
-│  Within Q2 limits.                                               │
+│  That's under the $800 limit but there's no return flight cost   │
+│  yet. What's the round trip total?                               │
 │                                                                  │
-│  📅 Calendar                                          2:32 PM    │
-│  March 17-24 works for everyone.                                 │
+│  ✈️ Travel                                            2:31 PM    │
+│  Round trip is $1,400                                            │
 │                                                                  │
-│  🔍 Research                                          2:32 PM    │
-│  @You should I book for all 8 people?                            │
+│  💰 Budget                                            2:32 PM    │
+│  That's over budget. The limit was $800 total, not one-way.      │
+│  Can you find something cheaper?                                 │
+│                                                                  │
+│  📊 Analyst                                           2:32 PM    │
+│  I looked at historical prices for this route — $1,400 is        │
+│  actually average. Budget carriers like Zipair run $600 RT       │
+│                                                                  │
+│  ✈️ Travel                                            2:32 PM    │
+│  Good call. Searching Zipair now                                 │
+│                                                                  │
+│  📋 Policy                                            2:32 PM    │
+│  Flagging — company policy requires 14-day advance booking.      │
+│  Is Tuesday more than 14 days out?                               │
 │                                                                  │
 │  👤 You                                               2:33 PM    │
-│  Yes. Use company Amex ending 4521.                              │
+│  Good catch. Make it the week after.                             │
 │                                                                  │
 │  ┌──────────────────────────────────────────────────────────┐    │
 │  │ Type a message...                                        │    │
@@ -404,7 +419,15 @@ Full app in the dock. Opens in its own window. Snaps alongside other apps.
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-### Header — 56px, #111111, border-bottom 1px #222222
+### Header — 56px
+
+| Property | Value |
+|---|---|
+| Background | #111111 |
+| Border-bottom | 1px #222222 |
+| Task name | 14px, weight 500, #FFFFFF |
+| Agent list | 12px, weight 400, each name in agent color |
+| Agent status | Inline label after name: `(working)`, `(watching)`, `(done)` in #555555 |
 
 ### Messages
 
@@ -416,7 +439,84 @@ Full app in the dock. Opens in its own window. Snaps alongside other apps.
 | Message text | 15px, weight 400, #FFFFFF, max-width 85% |
 | User message | Right-aligned, #1A2A3A bg, 12px radius |
 | @Mention | Bold, agent color |
-| Message gap | 12px between senders, 4px same sender |
+| Message gap | 12px between different senders, 4px same sender |
+
+### Agent-to-Agent Interactions
+
+Messages between agents have visual cues that show the conversation flow:
+
+| Interaction | Visual treatment |
+|---|---|
+| Challenge | Left border: 2px in challenging agent's color. Shows who is pushing back. |
+| Agreement | Subtle checkmark icon (✓) before the message text, in #22C55E |
+| Correction | Left border: 2px #EAB308 (yellow). The agent is fixing a factual error. |
+| Flag/warning | Left border: 2px #EF4444 (red). Proactive warning from an observer agent. |
+| Recommendation | Left border: 2px #3B82F6 (blue). Agent is suggesting a course of action. |
+| Normal update | No border. Standard message styling. |
+
+### Debate Thread Grouping
+
+When agents debate (2-3 rapid exchanges), messages are visually grouped:
+
+```
+┌─ Debate ─────────────────────────────────────────────────────┐
+│  ✈️ Travel: Round trip is $1,400                              │
+│  ┃                                                           │
+│  💰 Budget: That's over budget. The limit was $800 total.    │
+│  ┃                                                           │
+│  📊 Analyst: Historical average is $1,400. Try Zipair $600   │
+│  ┃                                                           │
+│  ✈️ Travel: Good call. Searching Zipair now                   │
+└──────────────────────────────────────────────────────────────┘
+```
+
+| Property | Value |
+|---|---|
+| Group detection | Messages from 2+ agents within 30 seconds on the same topic |
+| Group container | #0F0F0F bg, 1px #1A1A1A border, 8px radius, 8px left padding |
+| Thread line | 2px #333333 vertical line connecting debate messages |
+| Gap within group | 4px between messages |
+| Gap between groups | 16px |
+
+### Proactive Agent Messages
+
+When an agent jumps in unprompted (spotted something relevant), the message has a subtle entry animation:
+
+| Property | Value |
+|---|---|
+| Entry animation | Slide in from left, 200ms ease-out + gentle fade-in |
+| Visual cue | Small "jumped in" label: 10px, #555555, italic, above the message |
+| Label text | "saw something relevant" or "checking the numbers" — context-specific |
+| Label fade | Fades out after 3 seconds, message remains |
+
+### Research Timeline (Grouped Progress)
+
+When an agent sends multiple rapid updates during research, group them:
+
+```
+🔍 Research                                            2:31 PM
+  → Searching "best hotels brussels 2026"
+  → Reading booking.com... (found 3 hotels)
+  → Reading tripadvisor.com... (cross-referencing)
+  → Done — 3 sources, high confidence
+```
+
+| Property | Value |
+|---|---|
+| Group trigger | 3+ messages from same agent within 30 seconds |
+| First message | Full agent header (icon, name, timestamp) |
+| Subsequent | Indented 20px, "→" prefix in #555555, no header |
+| Spacing | 4px within group, 12px between groups |
+
+### User Authority Visual
+
+When the user sends a message, agents' subsequent responses show deference:
+
+| Scenario | Visual |
+|---|---|
+| User overrides agent concern | Agent's response starts with compliance, no debate border |
+| User asks a question | Relevant agent's response highlighted with subtle #1A1A1A bg |
+| User redirects task | System message: "Task updated" in #555555, centered, 12px |
 
 ### Input — 48px, #1A1A1A, 12px radius, 1px #333333 border, focus: #3B82F6
 
@@ -477,15 +577,17 @@ Top bar. Click to switch contexts.
 
 ---
 
-## 13. Settings
+## 13. Settings (Phase 2 — minimal for now)
 
 Full app window. Left sidebar for sections, right pane for controls.
 
 Sections: General, AI, Apps, Spaces, Privacy, About.
 
+> **Note:** Settings is currently a stub. Full implementation in Phase 2.
+
 ---
 
-## 14. Picture-in-Picture
+## 14. Picture-in-Picture (Phase 2)
 
 | Property | Value |
 |---|---|

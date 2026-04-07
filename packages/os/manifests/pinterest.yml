@@ -105,6 +105,18 @@ navigation:
       - "Click the source link (website domain) or the 'Visit' button"
       - "Navigate to the original website for the full recipe, tutorial, or product page"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for browsing Pinterest pins and boards only."
+    - "Use the search bar to find pins by typing descriptive topics like 'modern kitchen design' or 'easy weeknight dinners'."
+    - "Use filter chips below the search bar to narrow results by sub-category, style, or color."
+    - "Click any Pin to see its full detail page, including the source website link for the original content."
+    - "Scroll below a Pin detail to browse 'More like this' related Pins for deeper topic exploration."
+    - "NEVER save Pins to boards, create boards, or follow accounts without explicit user approval."
+    - "NEVER create Pins or upload content without explicit user approval."
+    - "When the user wants the original content (recipe, tutorial, product), click the source link on the Pin detail page."
+    - "Use visual search (camera icon) only when the user provides an image to search by."
+    - "Check the Explore page for trending topics when the user wants to discover popular ideas."
+
   tips:
     - "Save Pins to Boards to organize inspiration by topic (e.g., 'Kitchen Remodel', 'Travel 2026')"
     - "The source link on a Pin leads to the original website — essential for recipes, tutorials, and products"

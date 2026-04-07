@@ -57,6 +57,16 @@ navigation:
       - "Scroll to the curriculum section"
       - "Some lectures have a 'Preview' button — click to watch a free sample"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for browsing and taking Udemy courses only."
+    - "Use the search bar at the top to find courses by topic, skill, or instructor name."
+    - "Use filters (Rating, Duration, Level, Price) on search results to narrow course options."
+    - "Click a course card to see its detail page with curriculum, instructor bio, and student reviews."
+    - "Check the 'Last updated' date on courses to ensure content is current."
+    - "Rating count matters more than rating alone — prefer courses with thousands of reviews."
+    - "NEVER purchase courses, add to cart, or start free previews without explicit user approval."
+    - "Review the curriculum section to see exactly what lectures and sections the course contains."
+
   tips:
     - "Udemy frequently has sales — course prices can drop from $100+ to $10-15 during promotions"
     - "Check the 'Last updated' date on courses to ensure content is current"

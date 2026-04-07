@@ -51,6 +51,16 @@ navigation:
       - "Type your query to find docs, pages, or content"
       - "Click a result to navigate to it"
 
+  rules:
+    - "To create a new doc, click '+ New doc' on the home page. Type a title at the top, then start adding content below."
+    - "Press '/' in the content area to open the slash command menu for inserting tables, buttons, formulas, charts, and other blocks."
+    - "ALWAYS click the content area to place your cursor before typing. Never type without first clicking the target area."
+    - "NEVER try to search the web from inside Coda. This app is for document and table creation only."
+    - "Use the left sidebar page list to navigate between pages within a doc. Click a page name to open it."
+    - "Press Cmd+K to open the search and command palette for finding docs, pages, or content."
+    - "Tables in Coda are interactive databases — click cells to edit, use column headers to sort and filter."
+    - "Use buttons for automations — they can trigger actions like updating data or sending notifications when clicked."
+
   tips:
     - "The '/' slash command menu is the primary way to add non-text content"
     - "Tables in Coda are interactive databases with formulas, filters, and views"

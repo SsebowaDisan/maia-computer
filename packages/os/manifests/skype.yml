@@ -97,6 +97,18 @@ navigation:
       - "Toggle 'Share computer sound' if needed"
       - "Click Stop Sharing to end"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for messaging, calling, and video conferencing only."
+    - "Before sending any message, verify the recipient and content. Messages cannot be unsent in most cases."
+    - "Use the left panel tabs (Chats, Calls, Contacts, Notifications) to navigate. Click the Chats tab to see conversations."
+    - "Type messages in the message input in the right panel. Press Enter to send, Shift+Enter for a new line."
+    - "Never click the audio or video call buttons unless the user explicitly asks — calls connect immediately with no confirmation."
+    - "To share your screen during a call, click the screen share icon in the bottom toolbar and choose entire screen or a specific window."
+    - "Use the search bar labeled 'People, groups & messages' to find contacts by name, Skype ID, email, or phone number."
+    - "For Meet Now (instant meetings), click the Meet Now button to generate a shareable link — no Skype account is required for participants."
+    - "The Calls tab shows call history and includes a dialpad for dialing phone numbers, which requires Skype Credit or a subscription."
+    - "Contact status indicators: green dot means online, yellow means away, red means busy, gray means offline."
+
   tips:
     - "Meet Now creates instant meetings — share the link with anyone, no account required"
     - "Live subtitles provide real-time transcription and can translate between languages"

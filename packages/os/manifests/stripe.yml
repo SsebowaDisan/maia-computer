@@ -58,6 +58,17 @@ navigation:
       - "Browse or search customer records"
       - "Click a customer to see their payment history, subscriptions, and payment methods"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing the Stripe payment dashboard only."
+    - "NEVER make payments, issue refunds, or modify customer records without explicit user approval."
+    - "Always verify the test/live mode toggle at the top-left before reading any data — test mode shows fake transactions."
+    - "Press '/' to open global search and find payments by ID, customer email, or amount."
+    - "Click 'Payments' in the left sidebar for the full transaction list with status, amount, and date columns."
+    - "Click any payment row to see full details including payment method, metadata, and event timeline."
+    - "Click 'Customers' in the sidebar to browse and search customer records with payment history."
+    - "NEVER modify API keys, webhook settings, or developer configurations without explicit user approval."
+    - "Use date range selectors on the dashboard to view revenue metrics for different periods."
+
   tips:
     - "Always verify test vs live mode — the mode toggle is at the top-left"
     - "The '/' shortcut opens global search from any page"

@@ -44,6 +44,16 @@ navigation:
       - "Review exchange rate and fees"
       - "Confirm the transfer"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing Revolut accounts and balances only."
+    - "NEVER make payments or transfers without explicit user approval."
+    - "NEVER send money, exchange currencies, or modify account settings without explicit user approval."
+    - "Check the home page for total balance and per-currency breakdowns."
+    - "Scroll down on the home page to view recent transactions with merchant names and amounts."
+    - "Click any transaction for full details including exchange rate and fees applied."
+    - "Switch between currency account tabs to see individual currency balances."
+    - "When the user requests a transfer, always review the exchange rate and fees before confirming."
+
   tips:
     - "Exchange rates fluctuate — the rate shown is at the moment of the transaction"
     - "The web app may have fewer features than the mobile app"

@@ -9,6 +9,21 @@
 (function maiaBridge() {
   'use strict'
 
+  // Force online status — prevents "No Internet connection" banners
+  // that appear when bridge injection briefly interrupts the page context
+  try {
+    Object.defineProperty(navigator, 'onLine', { get: function() { return true }, configurable: true })
+    window.addEventListener('offline', function(e) { e.stopImmediatePropagation() }, true)
+    // Unregister service workers that might show offline pages
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (var i = 0; i < registrations.length; i++) {
+          registrations[i].unregister()
+        }
+      }).catch(function() {})
+    }
+  } catch(e) { /* non-critical */ }
+
   /**
    * Get all interactive elements on the page with their properties.
    */

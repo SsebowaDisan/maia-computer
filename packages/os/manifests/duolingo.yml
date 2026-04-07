@@ -56,6 +56,16 @@ navigation:
       - "Practice exercises review previously learned material"
       - "Completing practice restores hearts and reinforces knowledge"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for language learning on Duolingo only."
+    - "Click the highlighted lesson node on the learning path to start the next available lesson."
+    - "Complete each exercise by selecting or typing answers and clicking 'Check' to verify."
+    - "Lessons must be completed in order on the learning path — do not skip ahead."
+    - "Monitor hearts (top bar) — free users have limited attempts, and mistakes cost hearts."
+    - "NEVER make purchases in the Shop, start subscriptions, or spend gems without explicit user approval."
+    - "NEVER change language courses or account settings without explicit user approval."
+    - "Use the 'Practice' link in the sidebar to review previously learned material and restore hearts."
+
   tips:
     - "Daily streaks encourage consistent practice — even a short session counts"
     - "Lessons must be completed in order on the learning path"

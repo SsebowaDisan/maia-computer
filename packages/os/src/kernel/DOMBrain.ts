@@ -29,6 +29,15 @@ export class DOMBrain {
     this.eventBus = eventBus
   }
 
+  /** Execute arbitrary JavaScript in a page's webview context. Used by App Agents. */
+  async executeInPage<T>(appId: string, script: string): Promise<T | undefined> {
+    try {
+      return await this.containers.executeJavaScript(appId, script) as T
+    } catch {
+      return undefined
+    }
+  }
+
   // ── Element Reading ──────────────────────────────────────────
 
   async getElements(appId: string): Promise<DOMElement[]> {

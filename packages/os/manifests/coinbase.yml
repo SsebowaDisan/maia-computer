@@ -47,6 +47,16 @@ navigation:
       - "Select payment method"
       - "Review the preview (including fees) and click 'Confirm'"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for viewing Coinbase crypto portfolio and market data only."
+    - "NEVER make payments or transfers without explicit user approval."
+    - "NEVER buy, sell, or trade cryptocurrency without explicit user approval."
+    - "NEVER modify payment methods or wallet settings without explicit user approval."
+    - "Check the portfolio page for total value, asset holdings, and 24-hour price changes."
+    - "Click individual assets in the portfolio list to see detailed price charts and transaction history."
+    - "Use date range selectors (1H, 1D, 1W, 1M, 1Y, ALL) on charts to view different time periods."
+    - "Always review the preview step with exact fees before confirming any trade the user requests."
+
   tips:
     - "The preview step before trade confirmation shows exact fees — always review before confirming"
     - "24-hour price change gives a quick sense of recent market movement"

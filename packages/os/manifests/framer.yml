@@ -98,6 +98,18 @@ navigation:
       - "Set animation properties: opacity, scale, position, rotation"
       - "Preview the animation in the editor"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for designing and publishing websites only."
+    - "Use the Layers panel (left side) to select elements — it is more reliable than clicking on the canvas for nested or overlapping elements."
+    - "Click elements on the canvas to select them (blue outline appears). Drag to move. Resize with corner/edge handles."
+    - "Double-click text on the canvas to enter inline text editing mode."
+    - "Use the properties panel (right side) to change styles: fill, border, shadow, opacity, layout, and text properties."
+    - "Add new elements using the insert menu: Frame, Text, Image, Stack, Button, etc. Drag from the menu onto the canvas."
+    - "Switch between breakpoints (desktop, tablet, phone) using the icons in the top toolbar to design responsive layouts."
+    - "Changes are NOT live until you click 'Publish' (top-right). Always publish after making changes."
+    - "Use the Pages list (top of left panel) to switch between pages. Add new pages with the '+' button."
+    - "Create reusable components via right-click > 'Create Component' to maintain consistency across pages."
+
   tips:
     - "Changes in the editor are not live until you click Publish"
     - "Components keep your design consistent — edit the master and all instances update"

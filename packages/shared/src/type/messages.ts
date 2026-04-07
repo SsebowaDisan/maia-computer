@@ -23,6 +23,9 @@ export const MESSAGE_INTENT = {
   REDIRECT: 'redirect',
   TAKEOVER: 'takeover',
   CASUAL: 'casual',
+  RECOMMENDATION: 'recommendation',
+  CORRECTION: 'correction',
+  FLAG: 'flag',
 } as const
 
 export type MessageIntent = typeof MESSAGE_INTENT[keyof typeof MESSAGE_INTENT]
@@ -52,6 +55,8 @@ export function getMessagePriority(intent: MessageIntent): MessagePriority {
     case MESSAGE_INTENT.REDIRECT:
       return MESSAGE_PRIORITY.HIGH
     case MESSAGE_INTENT.CHALLENGE:
+    case MESSAGE_INTENT.CORRECTION:
+    case MESSAGE_INTENT.FLAG:
     case MESSAGE_INTENT.INSTRUCTION:
     case MESSAGE_INTENT.TAKEOVER:
       return MESSAGE_PRIORITY.MEDIUM

@@ -80,6 +80,18 @@ navigation:
       - "Choose a model from the selector if needed"
       - "Type your first message and press Enter"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for chatting with Anthropic's Claude assistant only."
+    - "Type messages in the input at the bottom and press Enter to send."
+    - "Use Shift+Enter to add line breaks within a message without sending it."
+    - "Wait for the response to finish streaming before sending follow-up messages."
+    - "Click the 'New chat' button at the top of the sidebar to start a fresh conversation."
+    - "Click conversations in the left sidebar to reopen previous chats with full context."
+    - "NEVER modify account settings, projects, or subscription without explicit user approval."
+    - "NEVER delete or archive conversations without explicit user approval."
+    - "Use the paperclip icon to attach files for analysis only when the user provides files to upload."
+    - "Select the appropriate model (Haiku, Sonnet, Opus) from the model selector based on task complexity."
+
   tips:
     - "Claude handles very long documents well — attach large PDFs or codebases for comprehensive analysis"
     - "Be specific about format: ask for bullet points, tables, code blocks, or step-by-step instructions"

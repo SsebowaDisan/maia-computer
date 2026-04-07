@@ -50,6 +50,17 @@ navigation:
       - "Adjust export settings (background, scale)"
       - "Download the file"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for drawing diagrams, wireframes, and sketches only."
+    - "Select a drawing tool from the top toolbar before clicking on the canvas. Use keyboard shortcuts: R for rectangle, D for diamond, O for ellipse, A for arrow, L for line, T for text."
+    - "Click and drag on the canvas to draw shapes with the selected tool. Click elements to select them with the selection tool (V)."
+    - "Use the properties bar (appears below toolbar when an element is selected) to change stroke color, background fill, stroke width, and style."
+    - "Pan the canvas by holding Space and dragging. Zoom with Ctrl/Cmd+scroll."
+    - "Use the arrow tool (A) to draw connections between shapes for flowcharts and diagrams."
+    - "Export drawings via the hamburger menu (top-left) > 'Export image'. Choose PNG or SVG format."
+    - "Drawings are stored in the browser by default — always export or share to save permanently."
+    - "Duplicate selected elements with Ctrl/Cmd+D instead of redrawing them."
+
   tips:
     - "Hold Space and drag to pan the canvas without switching tools"
     - "Ctrl/Cmd+D duplicates selected elements"

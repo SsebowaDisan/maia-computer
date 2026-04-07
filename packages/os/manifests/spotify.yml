@@ -120,6 +120,18 @@ navigation:
       - "Search for songs and right-click, select 'Add to Playlist', choose your playlist"
       - "Or drag songs directly from search results into the playlist in the sidebar"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for searching and playing music on Spotify only."
+    - "Use Cmd+L (Ctrl+L) to focus the search bar and type artist, song, album, or podcast names."
+    - "Click a song in search results to play it immediately, or click an artist/album to browse first."
+    - "Right-click tracks for context menu options: Add to Queue, Go to Artist, Go to Album, Add to Playlist."
+    - "Use the playback bar at the bottom for play/pause, skip, shuffle, repeat, and volume control."
+    - "Click the queue icon in the bottom-right to view and manage upcoming tracks."
+    - "NEVER create or modify playlists without explicit user approval."
+    - "NEVER follow artists, save albums, or change account settings without explicit user approval."
+    - "Browse genre/mood cards on the Search page for discovery when the user wants recommendations."
+    - "Check 'Your Library' in the left sidebar to find the user's saved playlists, albums, and artists."
+
   tips:
     - "Cmd+L (Ctrl+L) is the fastest way to search — focuses the search bar from any page"
     - "Right-click anything for a context menu with Add to Queue, Add to Playlist, Go to Artist, Share"

@@ -100,6 +100,17 @@ navigation:
       - "Failed steps show error logs — click to expand"
       - "Re-run a pipeline from the pipeline detail page"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing Git repositories, pull requests, and pipelines only."
+    - "Always check the active workspace in the top nav Workspaces dropdown before navigating — repositories are scoped to workspaces."
+    - "Use the left sidebar (Source, Commits, Branches, Pull Requests, Pipelines) for all navigation within a repository."
+    - "To browse code, click 'Source' in the left sidebar and navigate through folders. Use the branch selector dropdown to switch branches."
+    - "When reviewing a pull request, click the 'Diff' tab to see code changes. Click on lines to add inline comments."
+    - "Check pipeline status by clicking 'Pipelines' in the left sidebar. Click a pipeline run to see step-by-step build output."
+    - "When creating a pull request, select source and destination branches carefully, then add reviewers before submitting."
+    - "Click 'Approve' on a PR only after reviewing the Diff tab. Use 'Request changes' if modifications are needed."
+    - "Use the compare feature (via Branches) to see the diff between two branches before creating a pull request."
+
   url_patterns:
     repository: "bitbucket.org/{workspace}/{repo}"
     source: "bitbucket.org/{workspace}/{repo}/src/{branch}/"

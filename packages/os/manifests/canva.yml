@@ -68,6 +68,17 @@ navigation:
       - "Customize colors, fonts, and layout"
       - "Download or share the finished design"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for creating and editing graphic designs only."
+    - "Start new designs by clicking the purple 'Create a design' button (top-right) and selecting a format, or search templates in the search bar."
+    - "Use the left panel tabs (Templates, Elements, Text, Uploads) to add content to the canvas."
+    - "Click elements on the canvas to select them. Drag to move. Use corner handles to resize."
+    - "Double-click text elements to edit their content. Single-click to select and move them."
+    - "Search within the Elements tab to find specific shapes, graphics, stickers, and photos."
+    - "Download finished designs using the 'Share' or 'Download' button in the top-right. Choose the correct format (PNG, JPG, PDF, MP4)."
+    - "Pro elements marked with a crown icon require a Canva Pro subscription — use free alternatives when possible."
+    - "For multi-page designs like presentations, use the page thumbnails at the bottom to navigate between pages."
+
   tips:
     - "Templates are the fastest way to create professional designs — search and customize"
     - "Double-click text to edit it, single-click to select and move"

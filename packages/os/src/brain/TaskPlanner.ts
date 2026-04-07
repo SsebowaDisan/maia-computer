@@ -6,8 +6,10 @@ import type { EventBus } from '../events/EventBus'
 const PLAN_PROMPT = `break this task into steps for a computer that controls a web browser. it can type, click links, press keys, scroll, go back, and read page content. the browser is already open on google.com.
 
 the agent researches like a thorough human:
-- always check at least 2 sources before answering
-- read the actual page content, don't just skim
+- always check at least 5 different web pages/sources before answering
+- read the actual page content on each page — scroll through it fully
+- save detailed notes and content from each page to research memory
+- the research memory content will be used later (e.g., to write reports in google docs)
 - share a detailed, well-structured answer at the end
 
 IMPORTANT: when clicking search results, the agent must click the LINK TEXT (e.g. "Machine learning - Wikipedia") not a CSS selector. search results are clickable links with descriptive titles.
@@ -19,7 +21,7 @@ IMPORTANT: when clicking search results, the agent must click the LINK TEXT (e.g
 </example>
 <example>
 <task>what is machine learning</task>
-<plan>[{"step":1,"description":"type 'what is machine learning' in the google search box and press Enter","output":"search results page"},{"step":2,"description":"click the Wikipedia article about machine learning by clicking its title link, read the definition and key concepts","output":"wikipedia content read and saved to research memory"},{"step":3,"description":"go back to search results and click a second source like IBM or Google AI for another perspective","output":"second source read and saved to research memory"},{"step":4,"description":"share a comprehensive explanation of machine learning with the team — include definition, types, examples, and real-world applications from both sources","output":"detailed explanation shared"}]</plan>
+<plan>[{"step":1,"description":"type 'what is machine learning' in the google search box and press Enter","output":"search results page"},{"step":2,"description":"click Wikipedia article, scroll through full page, extract definition, types, history, and applications — save all content to research memory","output":"wikipedia content saved to research memory"},{"step":3,"description":"go back to search results, click IBM or Google AI article, scroll through, extract their explanation and examples — save to research memory","output":"second source content saved"},{"step":4,"description":"go back, click a third source like MIT or Stanford for academic perspective, scroll and extract — save to research memory","output":"third source content saved"},{"step":5,"description":"go back, click a fourth source — a tech blog or tutorial for practical examples, scroll and extract","output":"fourth source content saved"},{"step":6,"description":"go back, click a fifth source for any missing angles, scroll and extract","output":"fifth source content saved"},{"step":7,"description":"share a comprehensive explanation with the team — include definition, types, examples, history, and applications from all 5 sources","output":"detailed explanation shared with full research"}]</plan>
 </example>
 <example>
 <task>who is the CEO of stripe</task>
@@ -48,9 +50,11 @@ IMPORTANT: when clicking search results, the agent must click the LINK TEXT (e.g
 </examples>
 
 rules:
-- plans should be 3-4 steps for simple questions, 4-6 for comparisons/research
+- plans should be 4-5 steps for simple questions, 6-8 for research tasks
 - step 1 is ALWAYS: type the search query and press Enter
-- always include at least 2 source visits before the final summary
+- always include at least 5 source visits before the final summary
+- on each source: scroll through the full page, extract key content, save to research memory
+- the agent must SAVE page content in research memory — this content is reused later for reports, emails, etc.
 - the LAST step must always be sharing a DETAILED answer with the team
 - mention "research memory" in output descriptions so the agent knows to store findings
 

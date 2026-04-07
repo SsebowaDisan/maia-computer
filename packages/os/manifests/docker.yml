@@ -106,6 +106,17 @@ navigation:
       - "Set visibility (public/private) in repository settings"
       - "Configure automated builds from GitHub/Bitbucket in the Builds tab"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for browsing, searching, and managing Docker container images only."
+    - "Use the search bar at the top to find images by name or keyword. Look for the 'Official Image' badge for trusted, curated images."
+    - "Click an image name in search results to open its detail page with documentation and tags."
+    - "On the image detail page, read the Overview tab (README) for usage instructions, environment variables, and docker-compose examples."
+    - "Click the 'Tags' tab to find specific image versions and architectures. Check the OS/architecture column matches your deployment target."
+    - "Copy the pull command from the 'Docker Pull Command' box at the top of the image detail page using the copy icon."
+    - "Prefer alpine tags for smaller image sizes. Pin specific version tags (e.g., 'node:18.19.1-alpine') for production — never use 'latest' in production."
+    - "Check pull count and star count to gauge image reliability — higher numbers indicate battle-tested images."
+    - "Navigate your own repositories via 'Repositories' in the top nav to manage settings, tags, and collaborators."
+
   tips:
     - "Official images have no org prefix — 'nginx' not 'library/nginx' in the pull command"
     - "Pull count indicates reliability — images with millions of pulls are battle-tested"

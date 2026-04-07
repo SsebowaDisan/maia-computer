@@ -98,6 +98,18 @@ navigation:
       - "The seller can Accept, Decline, or Counter"
       - "You can counter back up to 3 times total"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for searching and browsing eBay listings only."
+    - "NEVER complete a purchase without explicit user approval."
+    - "NEVER click 'Buy It Now', 'Place Bid', 'Make Offer', or 'Add to Cart' without explicit user approval."
+    - "Use the search bar (#gh-ac) to search for items by keyword, then apply filters for Condition and Buying Format."
+    - "Check whether a listing is Auction (timed bidding) or Buy It Now (fixed price) before reporting the price."
+    - "Always include shipping cost alongside item price — total cost = item price + shipping."
+    - "Check seller feedback percentage and volume — 99%+ with hundreds of ratings indicates reliability."
+    - "Use 'Time: ending soonest' sort to find auction deals about to close."
+    - "Click into a listing detail page to see full condition description, item specifics, and return policy."
+    - "NEVER modify watchlist, account settings, or payment methods without explicit user approval."
+
   url_patterns:
     search: "ebay.com/sch/i.html?_nkw=your+query"
     item: "ebay.com/itm/ITEM_ID"

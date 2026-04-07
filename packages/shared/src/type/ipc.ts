@@ -1,11 +1,18 @@
 import type { AppManifest, InstalledApp, AppBounds, AppBadge, SnapZone, Space } from './apps'
 import type { ChatMessage } from './messages'
 import type { PlanStep } from './events'
+import type { SharedTaskState } from './orchestrator'
 
 export interface TheatreLayoutItem {
   appId?: string
   windowId?: string
   snapZone: SnapZone
+}
+
+export interface SharedStateEventPayload {
+  type: string
+  state: SharedTaskState
+  timestamp: number
 }
 
 // ── Frontend → Backend (commands) ──────────────────────────────
@@ -77,6 +84,11 @@ export interface IPCEvents {
   'cost:update': { totalCost: number; budget: number }
   'theatre:arrange': { layout: TheatreLayoutItem[]; focusAppId?: string }
   'theatre:focus': { appId: string }
+  'orchestrator.shared_state.agent_registered': SharedStateEventPayload
+  'orchestrator.shared_state.agent_status_changed': SharedStateEventPayload
+  'orchestrator.shared_state.finding_added': SharedStateEventPayload
+  'orchestrator.shared_state.decision_made': SharedStateEventPayload
+  'orchestrator.shared_state.task_status_changed': SharedStateEventPayload
 }
 
 // ── Search ─────────────────────────────────────────────────────

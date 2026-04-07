@@ -111,6 +111,18 @@ navigation:
       - "Use tabs: Newest (latest questions), Votes (all-time best), Unanswered (needs help)"
       - "The tag wiki provides an overview and usage guidance"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for searching programming questions and reading community answers only."
+    - "Use the search bar at the top to search. Add tag filters for precision: [python] [pandas] merge dataframe."
+    - "In search results, prioritize questions with high vote counts and accepted answers (green checkmark indicator)."
+    - "On a question page, read the accepted answer (green checkmark) first, but also check higher-voted answers which may be more current."
+    - "Check answer dates — older answers may use deprecated APIs or patterns. Prefer recent answers for modern frameworks."
+    - "Read comments below answers carefully — they often contain important corrections, caveats, and edge cases."
+    - "Use the 'Linked' and 'Related' sections in the right sidebar to find additional relevant questions."
+    - "Copy code from code blocks using the hover copy button (top-right of code block) instead of manually selecting text."
+    - "Click tag badges on questions to browse all questions for that technology."
+    - "Follow 'Marked as duplicate of' links to find canonical answers when a question is closed as duplicate."
+
   url_patterns:
     question: "stackoverflow.com/questions/QUESTION_ID/slug-title"
     search: "stackoverflow.com/search?q=your+query"

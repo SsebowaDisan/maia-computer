@@ -77,6 +77,18 @@ navigation:
       - "Click the close button (checkmark) in the conversation header"
       - "The conversation moves to the Closed section and can be reopened if the customer replies"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing customer conversations and support only."
+    - "Before sending any reply, verify the composer is in the correct mode: 'Reply' (white background, sends to customer) or 'Note' (yellow background, internal only). Sending an internal note as a reply exposes private information to the customer."
+    - "Before sending any message, verify the recipient and content. Messages sent to customers cannot be unsent."
+    - "Click a conversation in the inbox list to open the full thread. Read the entire conversation history before replying."
+    - "Use the inbox section tabs (Unassigned, Assigned to me, All, Mentions) to find the right conversations to work on."
+    - "Type # in the composer to quick-search saved replies instead of writing common responses from scratch."
+    - "Use the customer sidebar (right panel) to review customer context — name, email, company, previous conversations — before responding."
+    - "To assign a conversation to another agent or team, click the person icon in the conversation header and select from the dropdown."
+    - "Use the Snooze (clock) icon to hide a conversation temporarily and have it reappear at a scheduled time for follow-up."
+    - "Close conversations with the checkmark button only when the issue is fully resolved. Closed conversations reopen automatically if the customer replies."
+
   tips:
     - "Reply mode (white) sends to the customer; Note mode (yellow) is internal-only — always check the toggle"
     - "Type # in the composer to quick-search saved replies without clicking the lightning bolt"

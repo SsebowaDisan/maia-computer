@@ -57,6 +57,16 @@ navigation:
       - "Add labels for cross-project categorization"
       - "Use sections within projects to group related tasks"
 
+  rules:
+    - "To add a task, click '+ Add task' at the bottom of the list or press 'q' for quick add. Type the task name and press Enter."
+    - "ALWAYS set a due date when creating a task — use the calendar icon and type natural language like 'tomorrow' or 'next Monday'."
+    - "Set priority using the flag icon: P1 (urgent/red), P2 (high/orange), P3 (medium/blue), P4 (default/no color)."
+    - "NEVER try to search the web from inside Todoist. This app is for task management only."
+    - "Click the circle checkbox next to a task to mark it complete. The task disappears from the active view."
+    - "Use the left sidebar to navigate: Inbox for uncategorized tasks, Today for due-today tasks, Upcoming for a calendar view."
+    - "Assign tasks to projects by clicking the project field when creating a task, or drag tasks between projects."
+    - "Click a task name to open its details and add descriptions, subtasks, comments, or labels."
+
   tips:
     - "Natural language date parsing works in the date field: 'tomorrow', 'next Friday', 'every Monday', 'Jan 15'"
     - "Priorities: P1 (urgent/red), P2 (high/orange), P3 (medium/blue), P4 (low/no color)"

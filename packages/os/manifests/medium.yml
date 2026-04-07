@@ -69,6 +69,17 @@ navigation:
       - "Clap (hand icon) to show appreciation"
       - "Bookmark (flag icon) to save for later"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for reading and searching Medium articles only."
+    - "Click the search icon in the top navigation and type keywords to find articles by topic."
+    - "Use the 'Stories' or 'Articles' tab in search results to filter for written content."
+    - "Click topic tags on the home page or sidebar to browse curated article feeds by subject."
+    - "Check the reading time on article cards to estimate how long each piece will take."
+    - "Scroll through the full article content before summarizing — do not stop at previews."
+    - "NEVER clap, comment, follow writers, or bookmark articles without explicit user approval."
+    - "NEVER create or publish articles without explicit user approval."
+    - "Some articles are behind a paywall — note this to the user if content is restricted."
+
   tips:
     - "Reading time is shown on every article card — useful for choosing what to read"
     - "Clapping multiple times (up to 50) signals stronger appreciation to the author"

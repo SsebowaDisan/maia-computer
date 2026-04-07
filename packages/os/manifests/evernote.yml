@@ -98,6 +98,17 @@ navigation:
       - "Type checklist items — each gets a clickable checkbox"
       - "Check items off as you complete them"
 
+  rules:
+    - "To create a new note, click the green '+ New Note' button in the left sidebar. Type a title first, then click the body area to write content."
+    - "ALWAYS give notes a descriptive title before writing content — this makes them searchable and easy to find."
+    - "NEVER try to search the web from inside Evernote. This app is for note-taking and organization only."
+    - "Use the search bar at the top to find notes — Evernote indexes text inside images and PDFs (OCR), so search is powerful."
+    - "Add tags to notes by clicking the tag area below the title. Tags enable cross-notebook organization."
+    - "Click a notebook name in the left sidebar to filter notes to only that notebook's contents."
+    - "Use the formatting toolbar for headings, bold, lists, checklists, tables, and code blocks. Click the checkbox icon to create checklists."
+    - "Notes auto-save continuously — every keystroke is preserved immediately. No manual save needed."
+    - "Pin frequently used notes, notebooks, or tags to the Shortcuts section in the sidebar for one-click access."
+
   tips:
     - "Notes auto-save continuously — every keystroke is preserved immediately"
     - "Search indexes text inside images and PDFs (OCR) — find text in photos and scans"

@@ -54,6 +54,17 @@ navigation:
       - "Drag deal cards between stages to update progress"
       - "Click a deal to see details, notes, and associated contacts"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing HubSpot CRM and marketing only."
+    - "Use the search bar (press '/') to find contacts, companies, deals, and tickets across all CRM records."
+    - "Hover over navigation items (Contacts, Sales, Marketing, Service) to see dropdown sub-sections."
+    - "Click a contact record to view their properties, activity timeline, and associated deals."
+    - "NEVER create, modify, or delete contacts, companies, or deals without explicit user approval."
+    - "NEVER send emails, create marketing campaigns, or modify workflows without explicit user approval."
+    - "NEVER change pipeline stages or deal values without explicit user approval."
+    - "Navigate to Sales > Deals to view the pipeline board and drag deal cards only when user requests it."
+    - "Contact records show a complete timeline of all interactions — scroll through it for full context."
+
   tips:
     - "Navigation dropdowns appear on hover — hover over menu items to see sub-sections"
     - "The search bar searches across all record types — contacts, companies, deals, and tickets"

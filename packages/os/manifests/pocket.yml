@@ -52,6 +52,16 @@ navigation:
       - "Favorite important articles with the star icon"
       - "Use Tags in the sidebar to browse by category"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing saved articles in Pocket only."
+    - "Use the search bar at the top to find saved articles by title, URL, or tag."
+    - "Click items in My List to open them in Pocket's clean reader view."
+    - "Use the sidebar navigation: My List for unread, Archive for completed, Favorites for starred items."
+    - "Add tags to articles by hovering and clicking the tag icon for better organization."
+    - "NEVER delete or archive articles without explicit user approval."
+    - "NEVER save new articles or modify tags without explicit user approval."
+    - "Check the Discover section in the sidebar for recommended articles based on reading history."
+
   tips:
     - "Archived items are hidden from My List but not deleted — find them in Archive"
     - "Tags help organize articles by topic for easy retrieval"

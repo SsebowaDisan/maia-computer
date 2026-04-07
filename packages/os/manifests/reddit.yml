@@ -93,6 +93,18 @@ navigation:
       - "Use the sort dropdown to switch between Best, New, or Top comments"
       - "Collapse long threads by clicking the vertical line on the left of a comment"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for browsing Reddit content only."
+    - "Use the search bar to find topics, then click the 'Posts' tab and apply time filters for relevant results."
+    - "When browsing a subreddit, check the sidebar rules and description to understand the community context."
+    - "Always click into a post to read the full content and comments before summarizing the discussion."
+    - "Use sort options (Best, Top, New) on both posts and comments to find the most relevant content."
+    - "Follow nested comment indentation carefully to track which replies belong to which parent comment."
+    - "Collapse long comment threads using the vertical line to skip to the next top-level comment."
+    - "NEVER post, comment, upvote, downvote, or join subreddits without explicit user approval."
+    - "When researching a topic, search within specific subreddits by navigating to the subreddit first."
+    - "Use 'Top > All Time' sort on a subreddit to find the highest-quality posts in that community."
+
   tips:
     - "Adding 'reddit' to Google searches often finds relevant Reddit discussions on any topic"
     - "The 'Top > All Time' sort on a subreddit shows the most popular posts ever in that community"

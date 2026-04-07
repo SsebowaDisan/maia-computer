@@ -111,6 +111,18 @@ navigation:
       - "Broadcast messages to all rooms if needed"
       - "Click 'Close All Rooms' — participants get a 60-second countdown to return"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for video meetings, screen sharing, and team chat only."
+    - "Before sending any message in meeting chat, verify the recipient (Everyone vs specific participant) and content."
+    - "When joining a meeting, enter the Meeting ID and passcode. If the browser prompts to download the desktop app, click 'Join from your browser' to stay in the web client."
+    - "Never click 'New Meeting' unless the user explicitly asks to start one — it activates camera and microphone immediately."
+    - "In a meeting, use the bottom toolbar for controls: Mute/Unmute, Start/Stop Video, Share Screen, Participants, Chat, Record, Reactions."
+    - "Use Space bar as push-to-talk when muted — hold to temporarily unmute, release to mute again."
+    - "When sharing screen, select the specific window or tab to share. Check 'Share computer sound' only if presenting audio/video content."
+    - "Never start recording unless the user explicitly requests it — all participants are notified when recording begins."
+    - "Use the Security button (host only) to lock the meeting, enable waiting room, or suspend participant activities if needed."
+    - "To leave a meeting, click the Leave button in the bottom-right. If you are the host, choose 'End Meeting for All' only if the user explicitly asks."
+
   tips:
     - "Space bar = push-to-talk when muted — hold to temporarily unmute"
     - "'Join from your browser' link bypasses the desktop app download prompt"

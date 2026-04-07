@@ -98,6 +98,18 @@ navigation:
       - "Or inside a page, type '/' and select 'Link to page' or 'Create sub-page'"
       - "Build a hierarchy that matches your project structure"
 
+  rules:
+    - "To create a new page, click '+ New page' at the bottom of the left sidebar. Type a title, then press Enter to start adding content."
+    - "Press '/' anywhere in the content area to open the slash command menu for inserting blocks (headings, lists, tables, databases, images, code)."
+    - "ALWAYS click a block or text area before typing. Never type without first placing your cursor in the target area."
+    - "NEVER try to search the web from inside Notion. This app is for document and database creation only."
+    - "Use the left sidebar to navigate between pages. Click the triangle arrow next to a page to expand and see sub-pages."
+    - "Press Cmd+K (Ctrl+K) to open Quick Find for searching across all pages and databases."
+    - "Click the six-dot handle on the left of any block to drag it, delete it, duplicate it, or change its type."
+    - "For databases, type '/' and select 'Table - Full page' or 'Table - Inline'. Add properties with the '+ Add a property' button."
+    - "Use @-mentions to link to other pages or notify team members within a page."
+    - "Drag pages in the sidebar onto other pages to nest them as sub-pages for hierarchical organization."
+
   tips:
     - "The slash command menu (/) is the fastest way to add any content type — headings, lists, databases, embeds, code blocks"
     - "Drag blocks by their handle to reorder content, or drag them into columns for side-by-side layouts"

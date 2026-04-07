@@ -165,6 +165,18 @@ navigation:
     smaller: "smaller:1M — emails smaller than 1MB"
     category: "category:primary — emails in the Primary tab"
 
+  rules:
+    - "To compose a new email, click 'Compose' button in the left sidebar or press 'c' (with keyboard shortcuts enabled)."
+    - "ALWAYS fill in email fields in order: To recipients first, then Subject, then message Body."
+    - "In the To field, type the full email address or start typing a name for autocomplete. Press Tab or comma to confirm each recipient."
+    - "Press Cmd+Enter to send the email. Always verify To and Subject fields before sending."
+    - "NEVER try to search the web from inside Gmail. This app is for email only."
+    - "To search emails, click the search bar or press '/' and use operators like from:, subject:, has:attachment for precise results."
+    - "To reply, open the email thread and press 'r' for reply or 'a' for reply all. Type your reply in the inline editor."
+    - "Use labels to organize emails — press 'l' with an email selected to open the label picker."
+    - "After sending, watch for the 'Undo' link in the toast notification to cancel a sent email within the undo window."
+    - "Click the star icon on emails to mark important messages for quick access via the Starred view."
+
   url_patterns:
     inbox: "mail.google.com/mail/u/0/#inbox"
     starred: "mail.google.com/mail/u/0/#starred"

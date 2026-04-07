@@ -156,6 +156,18 @@ navigation:
     redo: "Cmd+Y"
     find: "Cmd+F"
 
+  rules:
+    - "ALWAYS click a text box or placeholder before typing. Never type without first clicking the target text area."
+    - "Click 'Click to add title' or 'Click to add subtitle' placeholders to enter text on a slide."
+    - "Use the slide filmstrip on the left to navigate between slides. Click a thumbnail to select that slide."
+    - "Press Cmd+M to add a new slide. Use the dropdown arrow on the new slide button for layout choices."
+    - "To insert an image, use Insert > Image. Never try to drag images from outside the app."
+    - "NEVER try to search the web from inside Google Slides. This app is for presentation editing only."
+    - "Double-click a text box to enter edit mode. Single-click selects the text box for moving/resizing."
+    - "Hold Shift while resizing images or shapes to maintain their aspect ratio."
+    - "To add speaker notes, click the 'Click to add speaker notes' area below the slide canvas."
+    - "After building slides, use Slideshow button (or Cmd+Enter) to preview the presentation."
+
   url_patterns:
     home: "docs.google.com/presentation"
     editor: "docs.google.com/presentation/d/PRESENTATION_ID/edit"

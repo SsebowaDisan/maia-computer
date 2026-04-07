@@ -56,6 +56,17 @@ navigation:
       - "Enter the amount"
       - "Review and confirm the payment"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing PayPal payments and transactions only."
+    - "NEVER make payments or transfers without explicit user approval."
+    - "NEVER send money, request payments, or modify payment methods without explicit user approval."
+    - "Check the balance card on the dashboard for available and pending balances."
+    - "Click 'Activity' in the top navigation to browse the full transaction history."
+    - "Use the search bar on the Activity page to find transactions by name, email, or transaction ID."
+    - "Apply date range and status filters to narrow transaction results."
+    - "Click any transaction row for full details including amount, fees, and transaction ID."
+    - "The Wallet section shows all linked bank accounts and cards — view only unless user requests changes."
+
   tips:
     - "The Activity page loads with a default date range — expand it to find older transactions"
     - "Pending transactions appear separately from completed ones"

@@ -64,6 +64,18 @@ navigation:
       - "Or click '+ Create a view' to add a new view"
       - "Each view shows the same data in a different format"
 
+  rules:
+    - "Click a cell in the grid to select it, then type to enter data. The input method matches the field type (text, dropdown, date picker, etc.)."
+    - "Press Tab to move to the next field (column) in a record. Press Enter to confirm and move down to the next record."
+    - "ALWAYS click the correct table tab at the top before editing — each table has its own fields and records."
+    - "NEVER try to search the web from inside Airtable. This app is for database and spreadsheet management only."
+    - "Click '+ Add a record' at the bottom of the grid to create a new row. Fill in each cell by clicking it."
+    - "Use the view list in the left sidebar (Grid, Kanban, Calendar, Gallery) to switch how data is displayed."
+    - "Click a column header to sort, filter, or configure the field. Click '+' at the end of headers to add a new field."
+    - "Expand a record by clicking the expand icon on the row to see all fields in a detailed form layout."
+    - "Use Filter, Sort, and Group buttons above the grid to narrow and organize visible records."
+    - "Press Cmd+F (Ctrl+F) to search within the current view for specific cell values."
+
   tips:
     - "Fields have types — a 'Single select' field shows a dropdown, a 'Date' field shows a date picker"
     - "Expand a record by clicking the expand icon on the row to see all fields in a form layout"

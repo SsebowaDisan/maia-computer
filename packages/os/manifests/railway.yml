@@ -109,6 +109,18 @@ navigation:
       - "Each environment gets its own variables, deployments, and domains"
       - "Set environment-specific variables in each service's Variables tab"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for deploying services, managing databases, and viewing deployment logs only."
+    - "Click project cards on the dashboard to open the project canvas. The canvas shows services and databases as connected nodes."
+    - "Click a service card on the canvas to open its detail panel with Deployments, Variables, Settings, Metrics, and Networking tabs."
+    - "Use the '+ New' button on the canvas to add services (GitHub Repo, Docker Image) or databases (PostgreSQL, Redis, MongoDB)."
+    - "Switch between environments using the environment tabs at the top of the canvas. Each environment is fully isolated."
+    - "Set environment variables in each service's Variables tab. Use ${{service.VARIABLE}} syntax to reference variables from other services."
+    - "Check deployment logs by clicking a service card > Deployments tab > clicking a deployment. Toggle between Build Logs and Deploy Logs."
+    - "Use the Metrics tab on a service to monitor CPU, memory, and network usage for right-sizing resources."
+    - "Generate a public domain for a service via its Networking tab. Custom domains require a CNAME record."
+    - "Database connection variables are auto-injected into linked services — check the database card's Variables tab for credentials."
+
   tips:
     - "Railway auto-detects your framework via Nixpacks — no Dockerfile needed for most projects"
     - "Environment variables from database plugins are auto-injected into connected services"

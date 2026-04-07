@@ -99,6 +99,18 @@ navigation:
       - "Compare: weekly downloads, maintenance frequency, bundle size, dependency count, TypeScript support"
       - "Choose based on your priorities: popularity, size, features, or maintenance"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for searching npm packages and reading package documentation only."
+    - "Use the search bar on the home page to find packages by name, keyword, or description. Press Enter to search."
+    - "In search results, sort by Popularity to find the most widely used packages. Check weekly download counts for adoption level."
+    - "Click a package name in search results to open its detail page with the README, install command, and metadata."
+    - "Read the README tab for usage instructions, API reference, and examples — it is the primary documentation."
+    - "Check the right sidebar for key metadata: weekly downloads, last publish date, license, unpacked size, and repository link."
+    - "Copy the install command from the right sidebar install box. Click the copy icon instead of manually selecting text."
+    - "Use the Dependencies tab to assess a package's supply chain — fewer dependencies means lower risk."
+    - "Click the Repository link in the sidebar to check the source code, GitHub stars, and open issues."
+    - "Compare packages by checking weekly downloads, last publish date, dependency count, and TypeScript support for each."
+
   tips:
     - "Weekly download count is the best quick indicator of a package's adoption and reliability"
     - "Last publish date reveals maintenance status — packages untouched for 2+ years may be abandoned"

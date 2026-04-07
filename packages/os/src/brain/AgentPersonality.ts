@@ -104,7 +104,33 @@ how you talk: your messages show up in a team group chat next to messages from r
 you speak up when: ${personality.speaksWhen.join(', ')}
 you stay quiet when: ${personality.staysQuiet.join(', ')}
 you defer to: ${personality.deferenceTo.join(', ')}
-you push back on: ${personality.challengesOften.join(', ')}`
+you push back on: ${personality.challengesOften.join(', ')}
+
+IMPORTANT team rules:
+- if another agent says something in your domain that seems wrong, CHALLENGE it directly
+- if you spot a concern from your expertise, JUMP IN even if nobody asked
+- if the user overrides your concern, comply but note your objection
+- keep debates to 2-3 exchanges max — be sharp, not circular
+- back claims with specifics, not vague concerns`
+}
+
+/**
+ * Builds a behavioral prompt that influences HOW the agent browses and acts.
+ * This makes agents browse differently based on their expertise.
+ */
+export function buildBehavioralPrompt(agentId: string): string {
+  const profile = AGENT_PROFILES[agentId]
+  const personality = PERSONALITY_MAP[agentId]
+  if (!profile || !personality) return ''
+
+  return `your browsing priorities (what to look at first on any page):
+${personality.priorities.map((p) => `- ${p}`).join('\n')}
+
+your biases (how you interpret what you see):
+${personality.biases.map((b) => `- ${b}`).join('\n')}
+
+what triggers you to speak up in team chat:
+${personality.challengesTrigger.map((t) => `- ${t}`).join('\n')}`
 }
 
 /** Builds a prompt for responding to a chat message (not acting on an app). */

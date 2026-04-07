@@ -127,6 +127,7 @@ export interface ResearchFinding {
   url: string
   visitedAt: number
   data: ResearchDataItem[]
+  content: string
   credibility: SourceCredibility
   pageType: PageType
 }

@@ -38,11 +38,13 @@ export class ResearchMemory {
     url: string,
     data: ResearchDataItem[],
     pageType: ScrapedPage['pageType'],
+    content: string = '',
   ): void {
     // Check if we already have findings from this source
     const existing = this.state.findings.find((f) => f.url === url)
     if (existing) {
       existing.data.push(...data)
+      if (content) existing.content = (existing.content ? existing.content + '\n' : '') + content
       existing.visitedAt = Date.now()
       return
     }
@@ -52,11 +54,23 @@ export class ResearchMemory {
       url,
       visitedAt: Date.now(),
       data,
+      content,
       credibility: this.assessCredibility(source, url),
       pageType,
     })
 
     this.updateConfidence()
+  }
+
+  /**
+   * Get all stored content from all findings — used when the agent needs
+   * to write a report, compose an email, or do anything with the research.
+   */
+  getAllContent(): string {
+    return this.state.findings
+      .filter((f) => f.content)
+      .map((f) => `--- ${f.source} (${f.url}) ---\n${f.content}`)
+      .join('\n\n')
   }
 
   /** Record a search query the agent tried. */
@@ -92,6 +106,42 @@ export class ResearchMemory {
     this.state.openQuestions = this.state.openQuestions.filter((q) => q !== question)
   }
 
+  /**
+   * Check if a page's content overlaps significantly with what we already have.
+   * Returns the matching source name if duplicate, undefined if new content.
+   */
+  isDuplicateContent(pageText: string): string | undefined {
+    if (!pageText || pageText.length < 50) return undefined
+
+    // Extract key phrases (words 4+ chars) from the new page
+    const newWords = new Set(
+      pageText.toLowerCase().split(/\s+/).filter((w) => w.length >= 4),
+    )
+    if (newWords.size < 10) return undefined
+
+    for (const finding of this.state.findings) {
+      if (!finding.content || finding.content.length < 50) continue
+
+      const existingWords = new Set(
+        finding.content.toLowerCase().split(/\s+/).filter((w) => w.length >= 4),
+      )
+
+      // Count overlap
+      let overlap = 0
+      for (const word of newWords) {
+        if (existingWords.has(word)) overlap++
+      }
+
+      const overlapRatio = overlap / Math.min(newWords.size, existingWords.size)
+      // 60%+ word overlap = duplicate content
+      if (overlapRatio > 0.6) {
+        return finding.source
+      }
+    }
+
+    return undefined
+  }
+
   /** Get the full state for inclusion in LLM prompt. */
   getState(): ResearchMemoryState {
     return this.state
@@ -107,7 +157,7 @@ export class ResearchMemory {
 
     // Findings by source
     if (this.state.findings.length > 0) {
-      parts.push('  Findings:')
+      parts.push(`  Findings from ${this.state.findings.length} source(s):`)
       for (const finding of this.state.findings) {
         parts.push(`    [${finding.source}] (${finding.credibility} credibility)`)
         for (const item of finding.data.slice(0, 5)) {
@@ -116,6 +166,13 @@ export class ResearchMemory {
             .map(([key, val]) => `${key}: ${val}`)
             .join(', ')
           parts.push(`      - ${item.name}${fields ? ' — ' + fields : ''}`)
+        }
+        // Show content preview if available
+        if (finding.content) {
+          const preview = finding.content.length > 200
+            ? finding.content.slice(0, 200) + '...'
+            : finding.content
+          parts.push(`      content: "${preview}"`)
         }
       }
     }
@@ -127,13 +184,17 @@ export class ResearchMemory {
     }
 
     // Pages visited — show which were useful and which to avoid
+    if (this.state.pagesVisited.length > 0) {
+      const domains = this.state.pagesVisited.map((p) => { try { return new URL(p.url).hostname } catch { return p.url } })
+      parts.push(`  ⚠️ ALREADY VISITED THESE SITES (do NOT click these again on search results): ${[...new Set(domains)].join(', ')}`)
+    }
     const useful = this.state.pagesVisited.filter((p) => p.useful)
     const useless = this.state.pagesVisited.filter((p) => !p.useful)
     if (useful.length > 0) {
-      parts.push(`  ✅ Useful pages visited: ${useful.map((p) => { try { return new URL(p.url).hostname } catch { return p.url } }).join(', ')}`)
+      parts.push(`  ✅ Useful pages: ${useful.map((p) => { try { return new URL(p.url).hostname } catch { return p.url } }).join(', ')}`)
     }
     if (useless.length > 0) {
-      parts.push(`  ❌ Pages to AVOID (already visited, not useful): ${useless.map((p) => { try { return `${new URL(p.url).hostname} (${p.reason ?? 'not useful'})` } catch { return p.url } }).join(', ')}`)
+      parts.push(`  ❌ Useless pages: ${useless.map((p) => { try { return `${new URL(p.url).hostname} (${p.reason ?? 'not useful'})` } catch { return p.url } }).join(', ')}`)
     }
 
     // Open questions
@@ -158,7 +219,12 @@ export class ResearchMemory {
   }
 
   private assessCredibility(source: string, url: string): SourceCredibility {
-    const hostname = new URL(url).hostname.replace('www.', '')
+    let hostname: string
+    try {
+      hostname = new URL(url.startsWith('http') ? url : `https://${url}`).hostname.replace('www.', '')
+    } catch {
+      return SOURCE_CREDIBILITY.MEDIUM
+    }
 
     // First-party booking/review sites
     const highCredibility = [

@@ -84,6 +84,18 @@ navigation:
       - "Options: Photo/Video, Sticker, GIF, File, Polls, Location"
       - "Select and send — images show inline, files as attachments"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for messaging Facebook contacts only."
+    - "Before sending any message, verify the recipient and content. Messages cannot be unsent in most cases."
+    - "Click a conversation in the left panel to open it. Use the search bar labeled 'Search Messenger' to find contacts by name."
+    - "Type messages in the message input at the bottom of the right panel. Press Enter to send, Shift+Enter for a new line."
+    - "When the message input is empty, the thumbs-up (like) button appears instead of send. Do not click it unless the user wants to send a quick like."
+    - "To start a new conversation, click the pencil (compose) icon at the top of the left panel and search for a contact name."
+    - "Never click the phone or video call buttons unless the user explicitly asks to make a call — calls connect immediately."
+    - "Use the (i) info icon in the conversation header to access chat settings, shared media, and notification controls."
+    - "Hover over messages to access the reaction bar for quick emoji reactions. Click + for the full emoji picker."
+    - "Check for Message Requests from non-friends in the separate Message Requests section at the top of the left panel."
+
   tips:
     - "The thumbs-up button changes based on chat emoji customization — hold longer for a bigger emoji"
     - "Hover over messages for quick reactions — click + for any emoji beyond the default six"

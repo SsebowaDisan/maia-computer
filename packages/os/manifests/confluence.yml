@@ -97,6 +97,18 @@ navigation:
       - "For page comments: scroll to the bottom and type in the comment box"
       - "Submit the comment — mentioned users are notified"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing Confluence wiki pages and spaces only."
+    - "Use the search icon (or press /) to find pages by keyword across all spaces and attachments."
+    - "Navigate spaces using the Spaces dropdown in the top navigation or the page tree in the left sidebar."
+    - "Click the expand arrow in the page tree to reveal child pages nested under parent pages."
+    - "Read page content fully before summarizing — check the lead section and all expandable sections."
+    - "NEVER create, edit, or delete pages without explicit user approval."
+    - "NEVER add comments, labels, or change page restrictions without explicit user approval."
+    - "NEVER publish drafts or modify page hierarchies without explicit user approval."
+    - "Use the blue 'Create' button only when the user explicitly asks to create a new page."
+    - "Check version history (three-dot menu > Page history) to compare and review previous page versions."
+
   tips:
     - "Slash commands (/) in the editor are the fastest way to insert tables, code blocks, status badges, and macros"
     - "Use @mentions in pages to notify specific team members about content relevant to them"

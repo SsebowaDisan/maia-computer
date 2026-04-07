@@ -100,6 +100,18 @@ navigation:
       - "Build an animation timeline with keyframes for opacity, position, scale, etc."
       - "Preview the animation and publish"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for building and designing websites visually only."
+    - "Use the Navigator panel (left side, layers tree) to select deeply nested or overlapping elements that are hard to click on the canvas."
+    - "Add elements by dragging from the Add panel ('+' icon, left side) onto the canvas. Categories include Layout, Basic, Forms, and Components."
+    - "Style elements using the Style panel (right side) — set layout, spacing, typography, backgrounds, borders, and effects."
+    - "Use CSS classes via the class selector at the top of the Style panel. Create reusable classes for consistent styling across elements."
+    - "Design desktop layout first (base breakpoint), then switch to tablet and phone breakpoints in the top toolbar for responsive overrides."
+    - "Double-click text elements on the canvas to enter inline editing mode. Click empty space to deselect."
+    - "Changes require publishing to go live — click 'Publish' (top-right) and select domains. The Designer canvas is a preview only."
+    - "Use the Pages panel (left side) to switch between pages and add new pages."
+    - "For dynamic content, use CMS Collections (left panel) to create content types and bind them to page templates."
+
   tips:
     - "Changes require publishing to go live — the Designer canvas is a preview only"
     - "Classes are the foundation of Webflow styling — reuse classes across elements for consistency"

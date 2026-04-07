@@ -108,6 +108,18 @@ navigation:
       - "Set title, attendees, date/time, recurrence, and optional channel"
       - "Click Send — invites go to attendees and the meeting appears on all calendars"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for team chat, channels, and meetings only."
+    - "Before sending any message, verify the recipient chat or channel and content. Messages cannot be unsent in most cases."
+    - "Use the left rail icons to navigate: Chat (Cmd+2) for direct messages, Teams (Cmd+3) for channels, Calendar (Cmd+4) for meetings."
+    - "Type messages in the compose box at the bottom. Press Enter to send, Shift+Enter for a new line."
+    - "Distinguish between Chat (1:1 and group conversations) and Channels (team-wide topic discussions). Do not post channel content in personal chats."
+    - "In channels, click 'Reply' under a post to respond in-thread. Click 'New conversation' to start a new topic. Do not mix these up."
+    - "Never click the Join button on a meeting unless the user explicitly asks to join — meetings connect immediately."
+    - "Use Cmd+E to focus the search bar. Use slash commands like /available, /busy, /dnd to set status when requested."
+    - "When composing rich messages, click the format icon (A with paintbrush) to expand the rich editor with bold, italic, lists, and code."
+    - "Use @mention to notify specific people in channels. Never use @team unless the user specifically requests it."
+
   tips:
     - "Cmd+E opens search — type slash commands like /available, /busy, /dnd to set status"
     - "Chat = 1:1 and group conversations; Channels = team-wide topic discussions"

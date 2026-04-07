@@ -136,6 +136,18 @@ navigation:
       - "Tabs: All, Verified, Mentions — filter by type"
       - "Click any notification to jump to the relevant post"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for browsing X/Twitter content only."
+    - "Use the search bar or press / to find specific topics, users, or posts rather than scrolling endlessly through the feed."
+    - "When searching, use advanced operators like from:username, since:date, and min_faves:N to get precise results."
+    - "Click the 'Latest' tab in search results to get chronological results instead of algorithmic ranking."
+    - "Always click a post title or 'Show more' to expand full content before summarizing or quoting it."
+    - "Use keyboard shortcuts J/K to navigate between posts and Enter to open them for faster browsing."
+    - "Switch to the 'Following' tab on the home timeline for a chronological feed without algorithmic interference."
+    - "When reading a thread, scroll through all replies before concluding what the conversation says."
+    - "NEVER post, reply, like, repost, or follow accounts unless the user explicitly asks for that action."
+    - "NEVER send direct messages or interact with Spaces without explicit user approval."
+
   tips:
     - "The 'Following' tab gives a chronological feed with no algorithmic interference"
     - "Keyboard shortcuts are powerful — press ? to see the full list"

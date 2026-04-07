@@ -51,6 +51,16 @@ navigation:
       - "Click a result to visit the publication"
       - "Click 'Subscribe' to follow"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for reading and searching Substack newsletters only."
+    - "Use the search icon to find publications and posts by topic, keyword, or publication name."
+    - "Click the 'Inbox' tab for a chronological view of subscribed posts instead of the algorithmic home feed."
+    - "Click a post title to read the full article content in Substack's clean reading layout."
+    - "NEVER subscribe to publications, comment on posts, or share content without explicit user approval."
+    - "NEVER create or publish any newsletter content without explicit user approval."
+    - "Some posts are paywalled for paid subscribers only — note this to the user if content is restricted."
+    - "Check publication pages for full archives of all past posts when researching a specific writer."
+
   tips:
     - "The Inbox tab shows a chronological view of subscriptions — the home feed is algorithmic"
     - "Free subscriptions deliver posts via email — no payment needed for most publications"

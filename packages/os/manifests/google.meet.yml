@@ -134,6 +134,16 @@ navigation:
     toggle_chat: "Cmd+Alt+C — open/close chat"
     toggle_people: "Cmd+Alt+P — open/close people panel"
 
+  rules:
+    - "To join a meeting, paste the meeting code or URL into the input field on the landing page, then click 'Join'."
+    - "ALWAYS check camera and microphone settings on the preview screen before clicking 'Join now'."
+    - "Use Cmd+D to toggle microphone mute/unmute. Use Cmd+E to toggle camera on/off during a meeting."
+    - "Hold spacebar for push-to-talk when muted — releases automatically when you let go."
+    - "NEVER try to search the web from inside Google Meet. This app is for video conferencing only."
+    - "To share your screen, click 'Present now' (up arrow icon) in the bottom toolbar and choose screen, window, or tab."
+    - "To start a new meeting, click 'New meeting' > 'Start an instant meeting'. Copy the meeting link from the info (i) icon to share."
+    - "Click 'Stop sharing' at the bottom of the screen when done presenting."
+
   url_patterns:
     landing: "meet.google.com"
     meeting: "meet.google.com/xxx-xxxx-xxx"

@@ -94,6 +94,17 @@ navigation:
       - "Click 'Trigger deploy' dropdown"
       - "Choose 'Deploy site' (uses latest commit) or 'Clear cache and deploy site'"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for deploying sites, managing builds, and configuring hosting only."
+    - "Click site cards on the team overview to open site details. Check the deploy status badge: Published (green), Failed (red), Building (yellow)."
+    - "Use the 'Deploys' tab to see deployment history. Click a deploy to view the full build log for debugging."
+    - "To trigger a manual deploy, go to the Deploys tab and click 'Trigger deploy' dropdown, then select 'Deploy site' or 'Clear cache and deploy site'."
+    - "Configure build settings (build command, publish directory) in Site configuration > Build & deploy."
+    - "Add custom domains via Site configuration > Domain management. Follow the DNS configuration instructions shown."
+    - "Set environment variables in Site configuration > Environment variables. Scope them per deploy context (Production, Preview, Branch)."
+    - "Add new sites via 'Add new site' button — import from GitHub/GitLab/Bitbucket or deploy manually."
+    - "Use the left sidebar (Sites, Builds, Plugins, Domains, Members) for team-level navigation."
+
   tips:
     - "Deploy previews are created for every PR — check PR comments for the Netlify bot preview link"
     - "Build logs show the full output — scroll to the bottom for errors and final status"

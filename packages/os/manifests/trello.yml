@@ -104,6 +104,18 @@ navigation:
       - "Use labels for categories (bugs, features, etc.) and due dates for deadlines"
       - "Drag cards between lists as work progresses"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing Trello boards, lists, and cards only."
+    - "Use the search input in the top navigation to find boards, cards, and members by keyword."
+    - "Click a board card on the home page to open it and see its lists and cards."
+    - "Click any card within a list to open the card detail modal with description, checklists, and comments."
+    - "NEVER create, modify, or delete cards, lists, or boards without explicit user approval."
+    - "NEVER move cards between lists, change labels, or set due dates without explicit user approval."
+    - "NEVER add or remove board members without explicit user approval."
+    - "NEVER archive or delete boards or cards without explicit user approval."
+    - "Drag and drop cards between lists only when the user explicitly asks to move them."
+    - "Use color-coded labels on cards to identify categories — click a label to see its name."
+
   tips:
     - "Drag and drop is the fastest way to move cards between lists"
     - "Color-coded labels make it easy to categorize cards visually — click a label on a card to see its name"

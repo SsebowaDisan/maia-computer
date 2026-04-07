@@ -57,6 +57,17 @@ navigation:
       - "Collaborators see each other's cursors in real time"
       - "Use the comment tool to leave feedback on specific areas"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for whiteboarding, brainstorming, and visual collaboration only."
+    - "Create new boards from the dashboard by clicking '+ New board'. Choose blank or a template for the task at hand."
+    - "Use the vertical toolbar on the left to select tools: sticky note, shape, text, pen, connector, comment."
+    - "Click a tool, then click on the canvas to place the element. Double-click elements to edit their content."
+    - "Pan the canvas by clicking and dragging empty space, or hold Space and drag. Zoom with the scroll wheel."
+    - "Use connectors from the toolbar to draw lines between elements for flowcharts and diagrams."
+    - "Boards auto-save — there is no manual save button. Do not look for one."
+    - "Use the minimap in the bottom-right to navigate large boards quickly."
+    - "Share boards via the Share button (top-right) to enable real-time collaboration."
+
   tips:
     - "Boards auto-save — there is no manual save button"
     - "Templates save time — Miro has templates for retros, mind maps, user flows, and more"

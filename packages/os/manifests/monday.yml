@@ -56,6 +56,17 @@ navigation:
       - "Select a new status from the dropdown (Working on it, Stuck, Done, etc.)"
       - "The color updates immediately"
 
+  rules:
+    - "To add a new item, click '+ Add item' at the bottom of a status group. Type the name and press Enter."
+    - "Click any cell in a row to edit its value directly. Status cells show colored labels — click to change status."
+    - "ALWAYS open the correct board from the sidebar before creating or editing items."
+    - "NEVER try to search the web from inside Monday.com. This app is for work and project management only."
+    - "Use the left sidebar to navigate between workspaces and boards. Click a board name to open it."
+    - "Items are created within a status group — the group determines the item's initial status."
+    - "Fill in column values (Person, Status, Date, etc.) by clicking each cell in the item's row."
+    - "Switch between view tabs (Main Table, Kanban, Timeline, Calendar) at the top to see data in different formats."
+    - "Use the search icon in the left sidebar (or Cmd+F) to search for items, boards, and updates."
+
   tips:
     - "Cells are directly editable — click any cell to change its value"
     - "Items are added within a status group — the group determines the item's initial status"

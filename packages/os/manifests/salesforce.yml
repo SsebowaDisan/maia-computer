@@ -69,6 +69,18 @@ navigation:
       - "Fill in the required fields"
       - "Click 'Save'"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing Salesforce CRM records only."
+    - "Use the global search bar at the top to find contacts, accounts, leads, and opportunities by name or ID."
+    - "Click navigation tabs (Accounts, Contacts, Leads, Opportunities) to browse list views for each object type."
+    - "Click a record name in any list view to open its full detail page with fields and activity timeline."
+    - "Use the App Launcher (grid icon, top-left) to access all available objects and apps."
+    - "NEVER create, modify, or delete records without explicit user approval."
+    - "NEVER log calls, create tasks, or send emails without explicit user approval."
+    - "NEVER change opportunity stages, lead status, or account ownership without explicit user approval."
+    - "Check related lists on record detail pages to see connections between objects."
+    - "Use the view selector dropdown on list views to switch between different filtered views."
+
   tips:
     - "The App Launcher (grid icon) lets you access all objects and apps — useful when tabs are hidden"
     - "List views can be customized — use 'Recently Viewed' or create custom filtered views"

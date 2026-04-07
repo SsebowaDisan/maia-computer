@@ -54,6 +54,15 @@ navigation:
       - "Browse the results grid"
       - "Click shots to see full details and designer info"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for browsing design inspiration and designer portfolios only."
+    - "Use the search bar at the top to find designs by keyword, style, or tool name (e.g., 'landing page', 'dark mode', 'dashboard')."
+    - "Click shot cards in the masonry grid to open the full-size shot view with description and designer info."
+    - "Use category tabs (Popular, New & Noteworthy, Following) to filter the home feed by popularity or recency."
+    - "Click designer names or avatars to view their full portfolio on their profile page."
+    - "Shots may be animated GIFs or videos — scroll down on the shot detail page to see the full content."
+    - "Use color filters on search results to find designs matching a specific color palette."
+
   tips:
     - "The Popular tab shows the most liked shots — great for seeing design trends"
     - "Use color filters on search results to find designs matching a specific color palette"

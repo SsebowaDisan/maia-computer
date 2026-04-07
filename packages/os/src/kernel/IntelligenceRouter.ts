@@ -34,6 +34,11 @@ export class IntelligenceRouter {
     this.scraper = scraper
   }
 
+  /** Get the DOM Brain instance — used by App Agents for direct page access. */
+  getDOMBrain(): DOMBrain {
+    return this.dom
+  }
+
   async getAppState(appId: string): Promise<AppState> {
     const networkSummary = this.network.getAppSummary(appId)
 
@@ -152,5 +157,11 @@ export class IntelligenceRouter {
     } catch {
       return false
     }
+  }
+
+  async dismissObstacles(appId: string): Promise<void> {
+    try {
+      await this.scraper.dismissObstacles(appId)
+    } catch { /* non-critical */ }
   }
 }

@@ -79,6 +79,18 @@ navigation:
       - "Browse or search the GPT Store"
       - "Click a GPT to open a new conversation using that specialized assistant"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for chatting with OpenAI's ChatGPT assistant only."
+    - "Type messages in the input textarea at the bottom and press Enter to send."
+    - "Use Shift+Enter to add line breaks within a message without sending it."
+    - "Wait for the response to finish streaming before sending follow-up messages."
+    - "Click the pencil icon at the top of the sidebar to start a new conversation."
+    - "Click conversations in the left sidebar to reopen previous chats with full history."
+    - "NEVER modify account settings, subscription, or custom instructions without explicit user approval."
+    - "NEVER delete or archive conversations without explicit user approval."
+    - "Use the paperclip icon to attach files for analysis only when the user provides files to upload."
+    - "Select the appropriate model from the dropdown at the top based on user needs."
+
   tips:
     - "Be specific in your prompts — include context, desired format, and constraints for better responses"
     - "Follow-up messages maintain full conversation context — use them to iterate and refine"

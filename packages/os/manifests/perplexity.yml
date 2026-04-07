@@ -92,6 +92,18 @@ navigation:
       - "Go to Library and create collections for different topics"
       - "Add threads to relevant collections"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for asking questions and browsing answers on Perplexity only."
+    - "Type natural language questions in the search textarea and press Enter to search."
+    - "Select a focus mode before searching: All for web, Academic for scholarly papers, YouTube for video content, Reddit for discussions."
+    - "Read the AI-generated answer and check inline citation numbers [1][2] to verify source accuracy."
+    - "Click source cards above the answer to open the original web pages in a new tab."
+    - "Use the follow-up input below the answer to drill deeper into a topic within the same thread."
+    - "Click suggested follow-up questions to continue research without typing."
+    - "NEVER modify account settings, subscriptions, or library collections without explicit user approval."
+    - "NEVER delete threads or share conversations without explicit user approval."
+    - "Enable Pro Search toggle for complex questions requiring multi-step research."
+
   tips:
     - "Natural language questions get better results than keyword searches — ask complete questions"
     - "Hover over citation numbers [1], [2] to preview the source before clicking"

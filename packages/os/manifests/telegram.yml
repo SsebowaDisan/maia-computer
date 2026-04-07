@@ -91,6 +91,18 @@ navigation:
       - "Example: @gif funny cat — shows GIF results inline"
       - "Click a result to send it in the current chat"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for messaging, groups, channels, and bots only."
+    - "Before sending any message, verify the recipient chat and content. Messages cannot be unsent in most cases."
+    - "Click a conversation in the left panel chat list to open it. Use the search icon at the top of the left panel to find contacts or chats."
+    - "Type messages in the message input at the bottom of the right panel. Press Enter to send, Shift+Enter for a new line."
+    - "Distinguish between groups (two-way conversation with members) and channels (broadcast-only by admins). Do not attempt to post in channels unless the user is an admin."
+    - "To edit a sent message, right-click it and select Edit. Telegram has no time limit on editing your own messages."
+    - "When sharing files, click the paperclip icon. Select Document for any file type (up to 2GB) or Photo/Video for media with compression."
+    - "Use the hamburger menu (three lines) at the top-left to access Saved Messages, Settings, and other navigation options."
+    - "For bot interactions, follow the bot's inline keyboard buttons. Type @botname in any chat input to use inline bot mode."
+    - "Use Cmd+K for global search across all chats and Cmd+F for search within the current conversation."
+
   tips:
     - "Saved Messages (hamburger > Saved Messages) is your personal cloud notepad — forward anything there"
     - "Telegram supports files up to 2GB — much larger than most messaging platforms"

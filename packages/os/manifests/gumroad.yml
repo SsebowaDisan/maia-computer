@@ -59,6 +59,16 @@ navigation:
       - "View revenue chart and recent purchases"
       - "Click a product to see its specific sales data"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing Gumroad products and sales only."
+    - "NEVER make payments or transfers without explicit user approval."
+    - "NEVER create, publish, or delete products without explicit user approval."
+    - "NEVER modify pricing, product descriptions, or payout settings without explicit user approval."
+    - "Click 'Home' in the navigation to see the sales dashboard with revenue chart and recent purchases."
+    - "Click 'Products' in the navigation to see all listed products with sales counts and revenue."
+    - "Click a product to edit its details, see its shareable purchase link, and review sales data."
+    - "Products must be published to be visible to customers — drafts are not purchasable."
+
   tips:
     - "Products must be published to be purchasable — drafts are not visible to customers"
     - "The purchase link is the primary way customers buy — share it via email, social media, or your website"

@@ -110,6 +110,18 @@ navigation:
       - "Select 'Past Broadcasts' tab for full stream recordings"
       - "Click a video to watch — supports seeking and speed control"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for watching Twitch live streams and VODs only."
+    - "Check the left sidebar for followed channels with green dots indicating they are currently live."
+    - "Use the search bar to find channels by streamer name or game title."
+    - "Click 'Browse' in the top nav to browse categories and find live streams by game or topic."
+    - "On stream pages, the video player is on the left and live chat is on the right."
+    - "Use the gear icon in the player to change stream quality if the connection is slow."
+    - "NEVER follow channels, subscribe, send chat messages, or gift subs without explicit user approval."
+    - "NEVER create clips, send Bits, or interact with channel points without explicit user approval."
+    - "Use Alt+T to toggle theater mode for a larger video view."
+    - "Click the 'Videos' link on a channel page to watch past broadcasts and highlights."
+
   url_patterns:
     home: "twitch.tv"
     channel: "twitch.tv/CHANNEL_NAME"

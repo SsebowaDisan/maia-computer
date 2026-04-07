@@ -92,6 +92,18 @@ navigation:
       - "Drag emails from the list onto folder names to move them"
       - "Or right-click an email and select 'Move to' for folder selection"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing Outlook email and calendar only."
+    - "Use the search bar at the top to find emails by keywords, sender name, or subject line."
+    - "Check both the 'Focused' and 'Other' tabs to ensure important emails are not missed."
+    - "Click an email in the list to view its full content in the reading pane on the right."
+    - "NEVER send emails, reply, or forward messages without explicit user approval."
+    - "NEVER delete, archive, or move emails without explicit user approval."
+    - "NEVER create, modify, or cancel calendar events without explicit user approval."
+    - "Use the bottom-left icons to switch between Mail, Calendar, People, and To Do views."
+    - "Use keyboard shortcuts: N for new mail, R for reply, Ctrl+E to focus search."
+    - "Check the folder sidebar for Drafts, Sent Items, and custom folders when looking for specific emails."
+
   tips:
     - "Focused Inbox separates important emails from noise — check the 'Other' tab for newsletters and automated messages"
     - "Keyboard shortcuts: N for new mail, R for reply, Shift+R for reply all, Ctrl+E to focus search"

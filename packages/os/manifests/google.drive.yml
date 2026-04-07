@@ -119,6 +119,18 @@ navigation:
     open: "Enter — open selected file"
     details: "D — open details pane"
 
+  rules:
+    - "Double-click folders to open them. Double-click files to open them in their native app (Docs, Sheets, Slides, etc.)."
+    - "Use the left sidebar to navigate between sections: My Drive, Shared with me, Recent, Starred, Trash."
+    - "To upload files, click '+ New' > 'File upload' or drag and drop files into the Drive window."
+    - "To create a new Google document, click '+ New' and select Google Docs, Sheets, Slides, or Forms."
+    - "NEVER try to search the web from inside Google Drive. This app is for file storage and organization only."
+    - "Use the search bar with operators (type:pdf, owner:me, title:'Report') for precise file searches."
+    - "To share a file, right-click it and select 'Share'. Set permissions to Viewer, Commenter, or Editor."
+    - "To organize files, right-click > 'Move to' to place them in folders. Use 'Add to Starred' for quick access."
+    - "Single-click a file to select it (shows details in info panel). Double-click to open it."
+    - "Navigate folder hierarchy using the breadcrumb path at the top of the file area."
+
   url_patterns:
     my_drive: "drive.google.com/drive/u/0/my-drive"
     shared_with_me: "drive.google.com/drive/u/0/shared-with-me"

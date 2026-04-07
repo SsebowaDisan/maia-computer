@@ -110,6 +110,18 @@ navigation:
       - "Set labels, milestone, assignee, due date, and weight"
       - "Click 'Create issue'"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing Git repositories, merge requests, and CI/CD pipelines only."
+    - "Use the left sidebar for all navigation — it is context-sensitive and changes between global, group, and project views."
+    - "Press '/' to focus the search bar from anywhere. Use scope selectors to limit search to the current project or group."
+    - "Navigate code via Code > Repository > Files in the left sidebar. Use the branch/tag selector dropdown to switch branches."
+    - "Merge requests are GitLab's pull requests. Access them via Code > Merge Requests in the project sidebar."
+    - "When reviewing a merge request, click the 'Changes' tab to see the code diff and add inline comments by clicking on lines."
+    - "Check CI/CD pipeline status via Build > Pipelines. Click a job circle to see its log output for debugging."
+    - "Use Quick Actions in comments for fast operations: /assign @user, /label ~bug, /close, /milestone %v1.0."
+    - "When creating issues, use Plan > Issues > 'New issue'. Set labels, milestone, assignee, and due date before submitting."
+    - "Wait for the left sidebar to fully load after navigating to a project before clicking sidebar items."
+
   url_patterns:
     project: "gitlab.com/{group}/{project}"
     files: "gitlab.com/{group}/{project}/-/tree/{branch}"

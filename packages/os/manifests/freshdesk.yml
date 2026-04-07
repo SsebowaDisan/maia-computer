@@ -99,6 +99,18 @@ navigation:
       - "Click 'New Article' and write the help article"
       - "Publish it — customers can find it in the self-service portal"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing support tickets and customer queries only."
+    - "Before sending any reply, verify the composer mode: 'Reply' sends to the customer via email, 'Note' is internal only. Sending an internal note as a reply exposes private information."
+    - "Before sending any message, verify the recipient and content. Replies are sent as emails to the customer and cannot be unsent."
+    - "Navigate using the left sidebar: Tickets for the ticket list, Contacts for customer records, Solutions for the knowledge base."
+    - "Use the filter view tabs (Unresolved, Overdue, Due Today, New) at the top of the ticket list to prioritize work."
+    - "When opening a ticket, read the full conversation thread before responding. Set Priority, Agent, Group, and Type in the right sidebar."
+    - "Use canned responses from the composer toolbar for common replies. Templates support dynamic placeholders like {{ticket.requester_name}}."
+    - "Search tickets by ID (e.g., #1234), subject keywords, or customer name using the search bar at the top of the ticket list."
+    - "After replying, set the correct ticket status in the right sidebar: Open, Pending (waiting for customer), Resolved, or Closed."
+    - "Use Merge to combine duplicate tickets into a single thread. Never respond to duplicates separately."
+
   tips:
     - "Reply sends to the customer, Note is internal-only — always verify the composer mode before sending"
     - "Overdue and Due Today views help prioritize tickets at risk of SLA breach"

@@ -80,11 +80,20 @@ export type {
 export type {
   SubTask,
   SubTaskStatus,
+  AgentRole,
   TheatreLayout,
   AgentPersonalityConfig,
+  AgentCapability,
+  AgentBid,
+  AgentState,
+  AgentFinding,
+  SharedDecision,
+  SharedTaskState,
+  DebateExchange,
+  DebateRound,
 } from './type/orchestrator'
 
-export { SUB_TASK_STATUS } from './type/orchestrator'
+export { SUB_TASK_STATUS, AGENT_ROLE } from './type/orchestrator'
 
 // Types — Intelligence (Page Scraper, Research Memory, Smart Navigation, Visual Performance)
 export type {

@@ -126,6 +126,18 @@ navigation:
     undo: "z — undo last action"
     settings: "s — open settings"
 
+  rules:
+    - "To create an event, press 'c' or click '+ Create' in the sidebar. Always fill in the title first."
+    - "Click an empty time slot in Week or Day view to quick-create an event at that specific time."
+    - "ALWAYS set both the date and time for events. Click the date field for the date picker and the time field for the time dropdown."
+    - "When adding guests, type their full email address and wait for autocomplete suggestions before confirming."
+    - "Use 'Find a time' tab when scheduling with multiple guests to check everyone's availability."
+    - "NEVER try to search the web from inside Google Calendar. This app is for scheduling and calendar management only."
+    - "Click 'More options' in the quick event dialog to access the full event editor with all fields (location, description, repeat, notifications)."
+    - "To navigate dates, use the mini calendar in the left sidebar or press 't' to jump to today."
+    - "For recurring events, click 'Does not repeat' dropdown in the full event editor and select the frequency."
+    - "After saving an event with guests, choose whether to send invitation emails when prompted."
+
   url_patterns:
     week_view: "calendar.google.com/calendar/u/0/r/week"
     day_view: "calendar.google.com/calendar/u/0/r/day"

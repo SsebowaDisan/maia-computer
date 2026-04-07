@@ -46,6 +46,15 @@ navigation:
       - "Type a product name or category"
       - "Browse results and click to view details"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for browsing Product Hunt launches only."
+    - "Use the search icon in the top navigation to find products by name, category, or keyword."
+    - "Click a product card to open its full detail page with description, media, and discussion thread."
+    - "Use date navigation to browse past days' launches, not just today's products."
+    - "Read the comment/discussion thread on product pages for maker responses and community feedback."
+    - "NEVER upvote, comment, or submit products without explicit user approval."
+    - "Browse the Topics section for category-based discovery (AI, Developer Tools, Design, etc.)."
+
   tips:
     - "The home page shows only today's launches — use date navigation for past days"
     - "Products with high upvote counts in the first few hours tend to be the most notable"

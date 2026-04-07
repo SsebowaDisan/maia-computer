@@ -62,6 +62,17 @@ navigation:
       - "Set the date range"
       - "The report generates with the financial data"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing QuickBooks accounting only."
+    - "NEVER make payments or transfers without explicit user approval."
+    - "NEVER create, send, or modify invoices without explicit user approval."
+    - "NEVER record expenses, write checks, or modify financial records without explicit user approval."
+    - "Use the green '+New' button at top-left for quick creation of invoices, expenses, and other records."
+    - "Click the magnifying glass in the top bar to search by transaction amount, customer name, or invoice number."
+    - "Navigate using the left sidebar: Dashboard for overview, Sales for invoices, Expenses for bills, Reports for financials."
+    - "Click 'Reports' in the sidebar and select Profit & Loss, Balance Sheet, or Cash Flow to generate financial reports."
+    - "The Dashboard shows income vs expense charts and bank account balances at a glance."
+
   tips:
     - "The '+New' button is the fastest way to create anything — invoices, expenses, checks, etc."
     - "Reports may take a moment to load with large datasets — wait for the data to render"

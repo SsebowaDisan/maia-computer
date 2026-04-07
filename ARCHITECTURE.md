@@ -9,12 +9,12 @@
 1. [Vision](#1-vision)
 2. [Core Principles](#2-core-principles)
 3. [System Overview](#3-system-overview)
-4. [The 10 Core Features](#4-the-10-core-features)
-5. [Intelligence Layer (The Kernel)](#5-intelligence-layer-the-kernel)
+4. [Core Features](#4-the-10-core-features)
+5. [Intelligence Layer — Brain Vision System](#5-intelligence-layer-the-kernel)
 6. [Smart Navigation System](#6-smart-navigation-system)
 7. [Visual Performance System](#7-visual-performance-system)
 8. [App System](#8-app-system)
-9. [Brain & Orchestrator](#9-brain--orchestrator)
+9. [Brain, App Agents & Orchestrator](#9-brain-app-agents--orchestrator)
 10. [Theatre (The Desktop Environment)](#10-theatre-the-desktop-environment)
 11. [Team Communication](#11-team-communication)
 12. [Tech Stack](#12-tech-stack)
@@ -192,28 +192,7 @@ Apps talk to each other through AI. No API integrations needed. No Zapier. The A
 - Drag a Sheets chart → drop on Slack → AI posts the chart to the channel
 - AI automatically: "You got an invoice email. Want me to add it to your budget spreadsheet?"
 
-### 4.4 Ghost Mode
-
-AI works while the user is away. Set tasks that run in the background.
-
-**Examples:**
-- "Monitor my email. If anything urgent from the CEO, WhatsApp me."
-- "Keep checking this product page. Notify me when the price drops below $500."
-- "Every hour, check Slack for messages in #urgent and summarize them."
-
-Ghost Mode respects the user's approval level. It will never send emails or make purchases without permission (unless explicitly authorized).
-
-### 4.5 Time Travel
-
-Maia records the state of every app continuously — DOM snapshots, network data, screenshots. Users can rewind any app to any point in time.
-
-**Examples:**
-- "What did that email from Sarah say yesterday? I deleted it."
-- "Undo what I did in Sheets 30 minutes ago."
-- "Show me what Slack #general looked like last Friday."
-- "When did I last edit this Notion page?"
-
-### 4.6 Spaces
+### 4.4 Spaces
 
 Separate desktops for different contexts. Each space has its own apps, accounts, AI personality, and context.
 
@@ -224,18 +203,6 @@ Separate desktops for different contexts. Each space has its own apps, accounts,
 Users can create custom spaces: "Side Project", "Job Search", "Wedding Planning"
 
 Switching spaces changes everything — different apps, different accounts, different AI context. Like having multiple computers in one.
-
-### 4.7 Workflows
-
-Users build automations by doing things normally. Maia watches, learns, and offers to replay.
-
-**How it works:**
-1. User does a multi-step task manually (across multiple apps)
-2. Maia detects the pattern: "You've done this 3 times. Save as a workflow?"
-3. User names it: "Monthly Invoice Processing"
-4. Next time: "Run Monthly Invoice Processing" → Maia does it all in seconds
-
-No code. No flow builders. No configuration. Just use your apps normally and Maia learns.
 
 ### 4.8 Spotlight AI
 
@@ -263,33 +230,68 @@ Share a Maia space with your team. Shared apps, shared AI brain, shared workflow
 
 ## 5. Intelligence Layer (The Kernel)
 
-The Intelligence Layer is what makes Maia an OS, not just a browser. Every app's input/output passes through it. The AI can read and act on everything.
+The Intelligence Layer is what makes Maia an OS, not just a browser. It's designed as a **vision system** — the page lives inside the Brain. The Brain doesn't "scan" or "query" the page. It maintains continuous awareness of everything on every page, like how human eyes are always connected to the brain.
 
-The Intelligence Layer has six subsystems:
+### 5.0 Architecture: Brain-Page Fusion
+
+The key insight: the Brain and the browser are not separate systems that communicate. They are ONE system. The page is the Brain's visual field.
 
 ```
 ┌─ Intelligence Layer ────────────────────────────────────────────────┐
 │                                                                      │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐              │
-│  │ Network Brain │  │  DOM Brain   │  │ Vision Brain │              │
-│  │ (API traffic) │  │ (page DOM)   │  │ (screenshots)│              │
-│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘              │
-│         │                 │                  │                       │
-│         ▼                 ▼                  ▼                       │
-│  ┌─────────────────────────────────────────────────┐                │
-│  │              Page Scraper                        │                │
-│  │  Combines all sources into structured page model │                │
-│  └──────────────────────┬──────────────────────────┘                │
-│                         │                                            │
-│         ┌───────────────┼───────────────┐                           │
-│         ▼               ▼               ▼                           │
-│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐                │
-│  │  Research     │ │   Smart      │ │   Visual     │                │
-│  │  Memory       │ │  Navigator   │ │  Performer   │                │
-│  │ (scratchpad)  │ │ (navigation) │ │ (animations) │                │
-│  └──────────────┘ └──────────────┘ └──────────────┘                │
+│  ┌─ Page Nerve (lives in each webview) ──────────────────────────┐  │
+│  │  Continuous signals — not snapshots:                           │  │
+│  │  • IntersectionObserver: element visibility                    │  │
+│  │  • MutationObserver: DOM changes                               │  │
+│  │  • Scroll events: viewport position                            │  │
+│  │  Every element announces itself to the Awareness Field         │  │
+│  └──────────────────────────┬────────────────────────────────────┘  │
+│                              │ live element events                   │
+│  ┌──────────────────────────▼────────────────────────────────────┐  │
+│  │  Awareness Field (always current, never queried)               │  │
+│  │                                                                │  │
+│  │  Elements scored by relevance to current goal:                 │  │
+│  │    ★★★ 0.95  "Uganda - Wikipedia" [in viewport]               │  │
+│  │    ★★★ 0.90  "Uganda - BBC News" [in viewport]                │  │
+│  │    ★★☆ 0.60  "Uganda Travel" [below fold]                     │  │
+│  │                                                                │  │
+│  │  Obstacles: auto-dismissed before Brain notices                │  │
+│  │  Page state: type, scroll %, loading status                    │  │
+│  └──────────────────────────┬────────────────────────────────────┘  │
+│                              │ awareness (instant read)              │
+│  ┌──────────────────────────▼────────────────────────────────────┐  │
+│  │  Brain (three-speed decision maker)                            │  │
+│  │                                                                │  │
+│  │  ⚡ INSTANT (<10ms): scroll, dismiss, wait — no LLM           │  │
+│  │  🔄 FAST (<100ms): pick result by credibility — rules only    │  │
+│  │  🧠 SLOW (~1-2s): extract content, synthesize — LLM call     │  │
+│  └──────────────────────────┬────────────────────────────────────┘  │
+│                              │ intentions (not actions)              │
+│  ┌──────────────────────────▼────────────────────────────────────┐  │
+│  │  Performance Layer (for the USER's eyes, not the Brain's)      │  │
+│  │  Cursor movement, element glow, typing animation, scroll      │  │
+│  │  All visual — the Brain decided before animations start        │  │
+│  └───────────────────────────────────────────────────────────────┘  │
+│                                                                      │
+│  Supporting subsystems:                                              │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐              │
+│  │ Network  │ │   DOM    │ │  Vision  │ │  Memory  │              │
+│  │  Brain   │ │  Brain   │ │  Brain   │ │  Brain   │              │
+│  │(API data)│ │(elements)│ │(fallback)│ │(learning)│              │
+│  └──────────┘ └──────────┘ └──────────┘ └──────────┘              │
 │                                                                      │
 └──────────────────────────────────────────────────────────────────────┘
+```
+
+**How it differs from every other AI agent:**
+
+```
+Anthropic Computer Use:  Screenshot → LLM → act   = 3-5s per action (blind between shots)
+OpenAI Operator:         Screenshot → LLM → act   = 3-5s per action (same approach)
+Current AI agents:       Scrape → text dump → LLM = 1-2s per action (stale data)
+
+Maia:                    Continuous awareness → instant mechanical actions,
+                         LLM only for judgment = <100ms for most actions
 ```
 
 ### 5.1 Network Brain
@@ -1124,47 +1126,366 @@ Target App (e.g., Sheets)
 
 ---
 
-## 9. Brain & Orchestrator
+## 9. Brain, App Agents & Orchestrator
 
-### 9.1 Brain
+### 9.1 Design Philosophy: App Agents
 
-The Brain is the AI reasoning engine. It decides WHAT to do. The Intelligence Layer handles HOW to do it.
+Every other AI agent works like this: one brain controls the browser, making every decision — what to click, when to scroll, what to type. The brain micromanages every keystroke. This fails because the LLM forgets steps, makes 8+ sequential decisions where each can fail, and has no real understanding of the app it's controlling.
 
-```
-User: "Find the cheapest flight to Tokyo and email it to my boss"
-
-Brain (one LLM call):
-  Plan:
-    1. Open Chrome, navigate to Google Flights
-    2. Search NYC → Tokyo in March
-    3. Read the results (via Network Brain — instant)
-    4. Find the cheapest option
-    5. Open Gmail
-    6. Compose email to boss with the flight details
-    7. Send
-
-Each step uses DOM/Network Brain for execution (instant).
-Total LLM calls: 2-3 (planning + verification)
-Total time: 15-30 seconds for a task that would take a human 5 minutes
-```
-
-**Key difference from other agents:** The Brain calls the LLM for THINKING (text-based, cheap, fast). It does NOT call the LLM for SEEING (vision-based, expensive, slow). The Intelligence Layer provides structured text data instead of screenshots.
-
-### 9.2 Orchestrator (Phase 2)
-
-For complex tasks, the Orchestrator decomposes the task and coordinates multiple parallel operations.
+Maia inverts this with **App Agents** — specialized agents that know their app inside out, like hiring an expert:
 
 ```
-User: "Plan a team offsite in Tokyo"
+Other agents:
+  Brain → "click textarea[name=q]" → "type Uganda" → "press Enter" →
+          "scroll down" → "click Wikipedia link" → ...
+  
+  8+ LLM decisions per source. Each one can fail. Brain micromanages.
+
+Maia:
+  Brain → "Research Uganda from 5 credible sources"
+  ChromeAgent → "I know Google. I'll handle the searching, scrolling,
+                 clicking, reading. Here are the findings from 5 sources."
+  
+  1 Brain decision. Agent handles everything else with built-in skills.
+```
+
+**The key principle: the Brain is the strategist, the Agent is the skilled worker.**
+
+- **Brain** (Orchestrator): WHAT to do and WHY — "research Uganda", "write a report", "download as PDF"
+- **App Agent**: HOW to use the app — searching, scrolling, clicking, typing, navigating. Born knowing its app. No LLM needed for mechanical operations.
+
+Like a real company:
+- CEO (Orchestrator) doesn't tell employees which keys to press
+- Manager (Brain) gives the task: "get info from 5 sources"
+- Employee (ChromeAgent) knows Google, handles everything, returns results
+
+### 9.2 App Agent Architecture
+
+Each app gets its own agent class with hardcoded, deterministic skills:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      ORCHESTRATOR                            │
+│  Decomposes task → assigns sub-tasks → coordinates agents    │
+└──────────────────────┬──────────────────────────────────────┘
+                       │ sub-tasks
+          ┌────────────┼────────────┐
+          ▼            ▼            ▼
+┌──────────────┐ ┌──────────────┐ ┌──────────────┐
+│ ChromeAgent  │ │  DocsAgent   │ │  GmailAgent  │
+│              │ │              │ │              │
+│ Skills:      │ │ Skills:      │ │ Skills:      │
+│ • search     │ │ • createDoc  │ │ • compose    │
+│ • pickResult │ │ • nameDoc    │ │ • fillTo     │
+│ • readPage   │ │ • writeText  │ │ • fillSubject│
+│ • extract    │ │ • addHeading │ │ • writeBody  │
+│ • goBack     │ │ • downloadPDF│ │ • send       │
+│              │ │              │ │              │
+│ Knows Google │ │ Knows Docs   │ │ Knows Gmail  │
+│ inside out   │ │ inside out   │ │ inside out   │
+└──────────────┘ └──────────────┘ └──────────────┘
+```
+
+**What makes App Agents different from action-by-action Brain control:**
+
+| | Brain (old) | App Agent (new) |
+|---|---|---|
+| Who decides to scroll? | LLM (often forgets) | Agent code (always scrolls) |
+| Who presses Enter after search? | LLM (often forgets) | Agent code (always presses) |
+| Who dismisses popups? | LLM (often misses) | Agent code (always dismisses) |
+| Who picks search results? | LLM (scans raw page dump) | Agent (pre-filters, scores credibility, LLM picks from clean list) |
+| Who reads page content? | LLM (often skips scrolling) | Agent (scrolls through, captures text, LLM extracts meaning) |
+| LLM calls per source | 8-10 (one per keystroke) | 2 (extract content + assess completeness) |
+
+### 9.3 App Agent Skills
+
+Each agent has deterministic skills — code that executes without LLM involvement:
+
+**ChromeAgent (Google Search):**
+```
+search(query)     → clear box, type query, press Enter, wait for results,
+                    scroll to results — all deterministic, can't fail
+pickResult()      → read all links, filter visited, score credibility,
+                    present top 5 to LLM → LLM picks one number
+clickResult(link) → scroll to element, click, wait for page, dismiss popups
+readPage()        → scroll through content (3-5 scrolls), capture text
+extract()         → [LLM] extract key facts from captured text
+goBack()          → navigate back, scroll past seen results
+```
+
+**DocsAgent (Google Docs):**
+```
+createDoc()       → click "Blank document", wait for editor to load
+nameDoc(title)    → click title field, type name, press Enter
+writeHeading(text, level) → select heading style, type text
+writeParagraph(text)      → type in document body
+downloadPDF()     → File menu → Download → PDF Document
+```
+
+**GmailAgent (Gmail):**
+```
+compose()         → click Compose button, wait for compose window
+fillTo(email)     → click To field, type email
+fillSubject(text) → click Subject field, type text
+writeBody(text)   → click body area, type content
+send()            → click Send button
+searchInbox(q)    → click search bar, type query, press Enter
+```
+
+Skills are:
+- **Deterministic** — no LLM, can't forget steps
+- **Tested** — each skill is a function that always executes the same steps
+- **App-specific** — written using knowledge from the app's manifest (navigation guide + rules)
+- **Composable** — the Brain chains skills: `search → pickResult → readPage → extract → goBack`
+
+### 9.4 When the LLM IS Needed
+
+The App Agent handles mechanics. The LLM handles judgment:
+
+| Decision | Who decides | Why |
+|---|---|---|
+| How to search Google | Agent (code) | Same steps every time |
+| WHAT to search for | Brain (LLM) | Requires understanding the task |
+| How to scroll results | Agent (code) | Same steps every time |
+| WHICH result to click | Brain (LLM) | Requires evaluating relevance |
+| How to read a page | Agent (code) | Scroll + capture |
+| WHAT facts to extract | Brain (LLM) | Requires comprehension |
+| How to go back | Agent (code) | Always the same |
+| WHETHER to continue or stop | Brain (LLM) | Requires assessing completeness |
+| How to write in Docs | Agent (code) | Same steps every time |
+| WHAT to write | Brain (LLM) | Requires synthesis |
+
+**The rule: if a human expert would do it the same way every time, it's agent code. If it requires thinking, it's LLM.**
+
+### 9.5 AgentFactory
+
+When the Orchestrator assigns a sub-task to an app, the AgentFactory creates the right agent:
+
+```
+AgentFactory.create(appId, appUrl) →
+  google.com     → ChromeAgent
+  docs.google    → DocsAgent
+  mail.google    → GmailAgent
+  sheets.google  → SheetsAgent
+  slack.com      → SlackAgent
+  notion.so      → NotionAgent
+  unknown URL    → GenericAgent (reads manifest, uses basic skills)
+```
+
+Custom apps installed by the user get a **GenericAgent** that:
+- Reads the app's manifest (auto-generated by ManifestGenerator if custom)
+- Has basic skills: click by text, type in inputs, scroll, go back
+- Doesn't have app-specific skills but can still operate
+
+### 9.6 Example: Full Task Flow
+
+```
+User: "Research Uganda and write the report in Google Docs, download the PDF"
 
 Orchestrator:
-  Parallel task 1: Search flights (in Chrome)
-  Parallel task 2: Check team calendars (in Calendar)
-  Parallel task 3: Check budget (in Sheets)
-  
-  All three run simultaneously in separate app windows.
-  User can watch via Picture-in-Picture.
-  Results are combined and presented in the chat sidebar.
+  Sub-task 1: "Research Uganda from 5 credible sources" → Web Browser
+  Sub-task 2: "Write structured report" → Google Docs (depends on 1)
+  Sub-task 3: "Download as PDF" → Google Docs (depends on 2)
+
+Sub-task 1 → AgentFactory creates ChromeAgent:
+  ChromeAgent.search("Uganda 2026")              ← deterministic skill
+  ChromeAgent.pickResult()                         ← LLM picks from scored list
+  ChromeAgent.clickResult("Uganda - Wikipedia")    ← deterministic skill
+  ChromeAgent.readPage()                           ← deterministic skill  
+  ChromeAgent.extract()                            ← LLM extracts facts
+  ChromeAgent.goBack()                             ← deterministic skill
+  ... repeats 4 more times ...
+  → Returns: research findings from 5 sources
+
+Sub-task 2 → AgentFactory creates DocsAgent:
+  DocsAgent.createDoc()                            ← deterministic skill
+  DocsAgent.nameDoc("Uganda Research Report")      ← deterministic skill
+  DocsAgent.writeHeading("Introduction", 1)        ← deterministic skill
+  DocsAgent.writeParagraph(synthesized content)     ← LLM writes the content
+  DocsAgent.writeHeading("Economy", 1)             ← deterministic skill
+  DocsAgent.writeParagraph(economy content)         ← LLM writes the content
+  ... continues for each section ...
+
+Sub-task 3 → AgentFactory creates DocsAgent:
+  DocsAgent.downloadPDF()                          ← deterministic skill
+  → Done
+```
+
+Total LLM calls: ~12 (5 extractions + 1 result pick per source + synthesis)
+Total deterministic actions: ~60 (all handled by agent code, zero failures)
+
+### 9.7 Orchestrator
+
+The Orchestrator decomposes tasks, assigns the right App Agent to each sub-task, and coordinates sequential/parallel execution. One agent per app at a time — no two agents can control the same browser simultaneously.
+
+#### 9.7.1 Capability-Aware Routing
+
+Each specialist agent declares structured capabilities. The Orchestrator matches task semantics to capabilities:
+
+```
+Agent Capabilities (declared per agent):
+
+  travel:
+    domains: [flights, hotels, transportation, visas, itineraries]
+    verbs: [book, search, compare, reserve, cancel]
+    apps: [google.flights, booking.com, expedia, airbnb]
+    complexity: multi-step
+
+  budget:
+    domains: [expenses, costs, pricing, budgets, invoices]
+    verbs: [track, compare, calculate, approve, report]
+    apps: [google.sheets, airtable, quickbooks]
+    complexity: analytical
+
+  email:
+    domains: [email, communication, drafts, replies, follow-ups]
+    verbs: [compose, reply, forward, search, organize]
+    apps: [google.gmail, outlook]
+    complexity: single-step
+
+  ...etc for all 7 agents
+```
+
+**How routing works:**
+1. Task arrives: "Book a flight to Tokyo under $800"
+2. Orchestrator sends task + all agent capabilities to LLM
+3. LLM returns ranked agent matches with reasoning
+4. Top match becomes primary agent
+5. Secondary matches get observer roles (can jump in)
+
+No keyword substring matching. No defaulting to "research" for everything. The LLM understands that "budget for this flight" needs travel (primary) AND budget (observer).
+
+#### 9.2.3 Agent Bidding System
+
+For complex tasks, agents bid on sub-tasks:
+
+```
+Orchestrator broadcasts: "Plan a team trip to Tokyo — flights, hotels, budget"
+
+  Travel agent bids:  confidence 0.95 — "I handle flights and hotels"
+  Budget agent bids:  confidence 0.90 — "I handle cost tracking and limits"
+  Calendar agent bids: confidence 0.80 — "I can check team availability"
+  Research agent bids: confidence 0.40 — "I can search for general info"
+  Policy agent bids:  confidence 0.70 — "I can check travel policy compliance"
+
+Orchestrator assigns:
+  Primary:    Travel (flights + hotels)
+  Secondary:  Budget (cost validation)
+  Supporting: Calendar (availability check)
+  Observer:   Policy (compliance watch — speaks up if needed)
+  Skipped:    Research (not needed, specialists cover it)
+```
+
+Bids include:
+- **Confidence score** (0-1): how well the agent can handle this
+- **Reasoning**: why the agent thinks it's a good fit
+- **Estimated complexity**: simple / multi-step / analytical
+- **Relevant apps**: which apps the agent would use
+
+#### 9.2.4 Adaptive Plans
+
+Plans are living documents, not rigid scripts. After each step, the Brain re-evaluates:
+
+```
+Initial plan:
+  Step 1: Search Google Flights for Tokyo      [completed]
+  Step 2: Compare top 3 results                [completed]
+  Step 3: Check hotel options                  [in progress]
+
+After step 2, Brain discovers: "All flights are over $800"
+
+Re-evaluated plan:
+  Step 1: Search Google Flights for Tokyo      [completed]
+  Step 2: Compare top 3 results                [completed]
+  Step 2b: Search budget carriers (Zipair, Peach) ← NEW
+  Step 2c: Check flexible dates (±3 days) ← NEW
+  Step 3: Check hotel options                  [pending — moved]
+
+The plan adapts to reality. The agent doesn't blindly follow step 3
+when step 2 revealed a problem.
+```
+
+**Re-evaluation triggers:**
+- Step completed — "Given what I just learned, is this plan still right?"
+- Unexpected finding — "This changes my approach"
+- Agent challenge — "Budget agent says we're over limit, need to adjust"
+- User intervention — "User said skip hotels, just flights"
+
+#### 9.2.5 Shared State Between Agents
+
+Agents are not isolated. They share a live research state:
+
+```
+Shared Task State:
+  task: "Plan team trip to Tokyo"
+  status: in_progress
+
+  agents:
+    travel:   { status: working, findings: ["ANA $620", "JAL $750"] }
+    budget:   { status: watching, alert: "Q2 budget 73% spent, $840 remaining" }
+    calendar: { status: done, findings: "March 17-24 works for all 8 people" }
+    policy:   { status: observing, flag: "14-day advance booking required" }
+
+  shared_findings:
+    - { source: "google.flights", data: [...], agent: "travel" }
+    - { source: "company.sheets", data: [...], agent: "budget" }
+
+  decisions:
+    - { question: "Economy or business?", decided_by: "user", answer: "economy" }
+    - { question: "Include hotel?", decided_by: "travel", answer: "yes, user confirmed" }
+```
+
+Every agent can read every other agent's findings. When travel finds a $620 flight, budget immediately knows and can validate it against the remaining budget. No agent works in a vacuum.
+
+#### 9.2.6 Orchestrator Lifecycle
+
+```
+1. DECOMPOSE
+   Task arrives → LLM decomposes into sub-tasks with dependencies
+
+2. BID
+   Sub-tasks broadcast to agents → agents return confidence bids
+
+3. ASSIGN
+   Orchestrator picks winners → primary + secondary + observers
+
+4. EXECUTE
+   Agents run in parallel (respecting dependencies)
+   Shared state updates in real-time
+   Team chat shows all activity
+
+5. COLLABORATE
+   Agents react to each other's findings
+   Debates happen naturally in team chat
+   Orchestrator watches for convergence or deadlock
+
+6. SYNTHESIZE
+   All findings merged → final answer composed from Research Memory
+   Presented in team chat with structured comparison
+
+7. DELIVER
+   User gets the answer + the reasoning + the team's debate history
+```
+
+#### 9.2.7 Failure Recovery
+
+```
+Sub-task fails:
+  1. Mark sub-task as failed (not silently stuck)
+  2. Notify dependent sub-tasks — they re-plan or skip
+  3. Failing agent explains in team chat: "Couldn't load Google Flights, trying Skyscanner"
+  4. If retry fails: Orchestrator reassigns to a different agent or asks user
+
+Agent deadlock (going in circles):
+  1. Orchestrator detects 3+ consecutive no-progress iterations
+  2. Posts in team chat: "Travel is stuck on the booking page. Anyone have ideas?"
+  3. Other agents can suggest approaches
+  4. If no resolution: escalate to user
+
+Team deadlock (agents disagree, no convergence):
+  1. Orchestrator detects 3+ rounds of back-and-forth with no agreement
+  2. Posts: "Team's split on this one. @User, want to weigh in?"
+  3. User decides, agents fall in line
 ```
 
 ### 9.3 LLM Provider Abstraction
@@ -1180,39 +1501,64 @@ Budget guardrails: Auto-pause at 80% of budget, hard stop at 100%
 
 ### 9.4 Adaptive Browsing Loop
 
-The Brain no longer follows a rigid step-by-step plan. Instead, it operates in an adaptive research loop:
+The Brain operates in an adaptive research loop:
 
 ```
-Traditional (rigid plan):
-  Step 1: Search Google → Step 2: Click result → Step 3: Read → Step 4: Report
-  Problem: Can't backtrack, can't refine, can't explore
-
-Adaptive loop:
-  LOOP:
-    1. What do I know? (read Research Memory)
-    2. What do I see? (read Page Scraper output)
-    3. What do I still need? (compare knowledge vs user's goal)
-    4. What should I do next? (choose from full action vocabulary)
-       → Search with better terms?
-       → Click into a result to read more?
-       → Go back because this page is useless?
-       → Scroll down to see more options?
-       → Use filters to narrow results?
-       → I have enough — synthesize and share findings?
-    5. Do it → observe result → back to step 1
-  UNTIL: confident enough to answer, or user intervenes
+LOOP:
+  1. What do I know? (read Research Memory + shared state)
+  2. What do I see? (read Page Scraper output)
+  3. What does my team know? (read other agents' findings)
+  4. What do I still need? (compare knowledge vs user's goal)
+  5. Should I re-evaluate the plan? (check if findings changed assumptions)
+  6. What should I do next? (choose from full action vocabulary)
+     → Search with better terms?
+     → Click into a result to read more?
+     → Go back because this page is useless?
+     → Scroll down to see more options?
+     → Use filters to narrow results?
+     → Challenge another agent's finding?
+     → I have enough — synthesize and share findings?
+  7. Do it → observe result → share update in team chat → back to step 1
+UNTIL: confident enough to answer, or user intervenes
 ```
 
-The TaskPlanner still creates an initial plan for structure, but the Brain can deviate from it at any time. The plan is a guide, not a script.
+The TaskPlanner creates an initial plan for structure, but the Brain can deviate and re-evaluate at any time. The plan is a guide, not a script.
 
 **Decision factors:**
 - Research Memory completeness — "Do I have enough data to compare?"
 - Source diversity — "I've only checked one site, should I verify elsewhere?"
 - Confidence level — "All sources agree → high confidence → ready to report"
+- Team state — "Budget agent flagged a problem, I need to adjust"
 - Time spent — "I've been researching for 30 seconds, should I wrap up?"
 - User patience — "The user is watching, I should share progress updates"
 
-### 9.5 Self-Healing
+### 9.5 Personality-Driven Behavior
+
+Agent personality doesn't just affect chat tone — it drives browsing behavior. Each agent's expertise shapes HOW it interacts with apps:
+
+```
+Budget agent browsing a hotel listing:
+  → Clicks "Price" sort first
+  → Reads cost columns before reviews
+  → Flags anything over budget immediately
+  → Ignores amenities unless cost-relevant
+
+Travel agent browsing the same listing:
+  → Reads location and transport links first
+  → Checks distance to conference venue
+  → Reads reviews about comfort and service
+  → Notes check-in/check-out flexibility
+
+Analyst agent browsing the same listing:
+  → Looks for data tables and statistics
+  → Compares ratings across multiple dimensions
+  → Builds structured comparison from raw data
+  → Exports findings to a spreadsheet format
+```
+
+The personality config feeds into the ActionDecider prompt, not just the chat prompt. The navigation guide + agent expertise = behavioral specialization.
+
+### 9.6 Self-Healing
 
 When an action fails, the Brain doesn't retry blindly:
 
@@ -1221,7 +1567,8 @@ When an action fails, the Brain doesn't retry blindly:
 2. Diagnose: what went wrong (element missing? page changed? popup?)
 3. Adapt: try a different approach
 4. Retry: max 3 attempts with different strategies
-5. Escalate: ask user if all retries fail
+5. Share: tell the team what happened and what you're trying
+6. Escalate: ask user if all retries fail
 ```
 
 ---
@@ -1406,37 +1753,193 @@ In Chat:    💬 "Book the ANA flight, use my Amex"
 
 ## 11. Team Communication
 
-### 11.1 Chat Sidebar
+### 11.1 Multi-Brain Page Vision
 
-The chat sidebar shows all AI activity — what it's thinking, what it's doing, what it needs. The user and AI communicate here like teammates.
-
-### 11.2 Message Structure
+When any agent visits a web page, ALL agents see it simultaneously through the shared Awareness Field. Each agent notices different things based on their expertise:
 
 ```
+Research agent visits World Bank page about Uganda:
+
+  Research sees: "GDP growth 5.3%, population 48M, capital Kampala"
+  Budget sees:   "aid dependency 40%, debt-to-GDP 48% — fiscal risk"
+  Policy sees:   "governance indicators declining since 2020"
+  Analyst sees:  "GDP numbers don't match IMF data from last week"
+
+Four perspectives. One page visit. Richer extraction.
+The debate starts DURING the reading, not after.
+```
+
+This means fewer page visits but deeper understanding. One visit to the World Bank page extracts economic data (Research), flags fiscal risks (Budget), notes governance concerns (Policy), and catches data inconsistencies (Analyst) — all at once.
+
+### 11.2 Team Chat — The Coordination Mechanism
+
+Team Chat is not a log. It is the **actual decision-making process**. Agents think out loud, challenge each other, share findings, and arrive at better answers through debate. The user watches their team work — and can jump in at any moment.
+
+```
+The user gives a task. Then watches:
+
+  Travel agent:  "Found a flight to Tokyo for $750 on ANA, departing Tuesday"
+  Budget agent:  "That's under the $800 limit but there's no return flight cost yet.
+                  What's the round trip total?"
+  Travel agent:  "Round trip is $1,400"
+  Budget agent:  "That's over budget. The limit was $800 total, not one-way.
+                  Can you find something cheaper?"
+  Analyst agent: "I looked at historical prices — $1,400 is average for this route.
+                  Budget carriers like Zipair run $600 round trip"
+  Travel agent:  "Good call. Searching Zipair now"
+  Policy agent:  "Flagging — company policy requires 14-day advance booking.
+                  Is Tuesday more than 14 days out?"
+
+That's a real team. Each agent reacts, challenges, adds context.
+```
+
+### 11.2 Proactive Agent Participation
+
+Agents don't wait to be addressed. They **jump in when they spot something relevant** to their expertise. This is the core "wow" factor — nobody asked budget, policy, or calendar to speak, they just did.
+
+**Proactive triggers (per agent):**
+
+| Agent | Jumps in when... |
+|---|---|
+| Budget | A price is mentioned, a purchase is being made, spending exceeds thresholds |
+| Policy | A rule might be violated, compliance is relevant, approvals are needed |
+| Calendar | A date/time is mentioned, scheduling conflicts exist, timezone issues |
+| Travel | Transportation or accommodation is discussed, logistics matter |
+| Email | Communication needs to happen, follow-ups are mentioned |
+| Analyst | Data needs interpretation, comparisons are being made, numbers don't add up |
+| Research | Facts need verification, more sources are needed, claims are unsubstantiated |
+
+**When agents stay quiet:**
+
+Each agent also has `staysQuiet` rules — they don't chime in on everything:
+- Budget stays quiet during pure research phases (no costs involved yet)
+- Calendar stays quiet when no dates are being discussed
+- Policy stays quiet unless a rule is actually at risk
+
+The balance: agents feel alive and helpful, not noisy and annoying.
+
+### 11.3 Agent Debates
+
+Agents disagree. This is a feature, not a bug. Disagreements surface problems that a single agent would miss.
+
+**Debate rules:**
+
+| Rule | Details |
+|---|---|
+| Max rounds | 2-3 exchanges per debate. Sharp, not circular. |
+| Tone | Direct, not corporate. "That's over budget" not "I respectfully disagree with the cost assessment" |
+| Evidence required | Agents back claims with data. "Zipair runs $600" not just "find something cheaper" |
+| Personality-driven | Budget challenges on price. Policy challenges on compliance. Analyst challenges on data accuracy. |
+| Resolution | Agents converge naturally, or Orchestrator escalates to user |
+
+**Debate flow:**
+
+```
+1. Agent A makes a claim or decision
+2. Agent B spots an issue from their expertise → challenges
+3. Agent A responds with data or adjusts
+4. Either:
+   a. Convergence: agents agree → acting agent proceeds
+   b. Deadlock: 3 rounds, no agreement → Orchestrator asks user
+```
+
+**What makes debates feel real:**
+
+- `challengesOften` — Budget challenges Travel on price. Policy challenges everyone on rules.
+- `challengesTrigger` — each agent has specific things that trigger a challenge
+- `deferenceTo` — Budget defers to Travel on logistics. Travel defers to Budget on cost.
+- Agents use each other's names: "Good call @Analyst" or "That's not right @Travel"
+
+### 11.4 Message Structure
+
+```typescript
 {
-  sender: "computer" | "user" | agent_id,
-  receiver: "user" | "all" | agent_id,
-  intent: "question" | "update" | "approval_request" | "challenge" | ...,
-  message: "Found $487 flight on ANA. Book it?",
-  context: { app: "chrome", task: "flight-search" },
-  timestamp: ...
+  sender: 'computer' | 'user' | AgentId,
+  receiver: 'user' | 'all' | AgentId,
+  intent: MessageIntent,
+  message: string,
+  context: {
+    app: string,
+    task: string,
+    replyTo?: string,          // message ID this is responding to
+    findings?: ResearchFinding, // structured data being shared
+    confidence?: 'low' | 'medium' | 'high',
+  },
+  timestamp: number,
 }
 ```
 
-### 11.3 Agent Personalities (Phase 2)
+**Message intents:**
 
-In multi-agent mode, different agents have different roles and priorities. They discuss, challenge each other, and collaborate — visible in the chat sidebar.
+| Intent | Used for | Example |
+|---|---|---|
+| `update` | Sharing progress or findings | "Found 3 flights under $700" |
+| `question` | Asking the user or another agent | "What dates are you flexible on?" |
+| `challenge` | Disagreeing with another agent's finding | "That price doesn't include taxes" |
+| `recommendation` | Suggesting a course of action | "I'd go with the Zipair option" |
+| `correction` | Fixing another agent's mistake | "Actually, that hotel is 4-star, not 5" |
+| `approval_request` | Needs user sign-off before proceeding | "Ready to book. Confirm?" |
+| `agreement` | Endorsing another agent's finding | "Budget checks out, proceed" |
+| `flag` | Proactive warning from an observer agent | "Heads up — this needs manager approval" |
+| `casual` | Natural team banter | "Your call. Noted for the expense report" |
 
-### 11.4 Graduated Human Control
+### 11.5 User Authority Model
+
+The user is the boss. Default mode: **observer who can become manager at any moment.**
+
+```
+Default: User watches the team work. Chat scrolls with agent discussions.
+         User sees them think, disagree, correct. Feels like having a team.
+
+Intervention: The moment the user types, everything shifts.
+              User messages have AUTHORITY — agents voice concerns but comply.
+
+  User:   "Skip the policy stuff, I already got approval"
+  Policy: "Got it, noted"
+  Travel: "Proceeding with booking"
+
+  User:   "Actually, make it business class"
+  Budget: "That'll blow the Q2 budget by about $1,200"
+  User:   "I know. Do it anyway"
+  Budget: "Your call. Noted for the expense report"
+  Travel: "Searching business class options"
+```
+
+**Authority levels — what the user can do:**
+
+| Action | Effect |
+|---|---|
+| Type a message | All agents see it, relevant agents respond |
+| Direct an agent ("@Travel check Zipair") | That agent prioritizes the instruction |
+| Override a concern ("do it anyway") | Agents comply but note their objection |
+| Redirect ("forget hotels, just flights") | Orchestrator kills hotel sub-tasks, agents adjust |
+| Pause ("hold on, let me think") | All agents pause, wait for user |
+| Take over ("I'll do this part myself") | Active agent yields control of the app |
+
+### 11.6 Discussion Resolution
+
+How team discussions end — without feeling robotic:
+
+| Scenario | Resolution |
+|---|---|
+| **Convergence** | Agents stop disagreeing. Acting agent proceeds: "Alright, booking the $180 hotel" |
+| **Deadlock** | 3 rounds of back-and-forth. Orchestrator: "Team's split on this. @User, want to weigh in?" |
+| **User decides** | User types a decision. All agents comply. No more debate on that point. |
+| **Time-based** | No response from user in 30s on low-severity question → agent proceeds with default action |
+| **Authority cascade** | If the question is high-severity (money, irreversible), wait up to 2 minutes for user |
+
+The user never sees "Discussion concluded" or "Debate resolved." Agents just naturally move on — like real teammates.
+
+### 11.7 Graduated Human Control
 
 | Level | Name | Behavior |
 |---|---|---|
-| 1 | Full auto | AI works independently |
-| 2 | Notify | AI notifies on key decisions |
-| 3 | Approve major | AI pauses for major decisions (default) |
-| 4 | Approve all | AI pauses for every decision |
-| 5 | Collaborative | User actively participates |
-| 6 | Step-by-step | User approves every action |
+| 1 | Full auto | AI works independently, team debates internally |
+| 2 | Notify | AI notifies on key decisions, user sees debate summary |
+| 3 | Approve major | AI pauses for major decisions — user watches team work (default) |
+| 4 | Approve all | AI pauses for every decision, full team visibility |
+| 5 | Collaborative | User actively participates as an equal teammate |
+| 6 | Step-by-step | User approves every action, agents explain each step |
 
 ---
 
@@ -1500,16 +2003,17 @@ Ship a working OS that people download and use.
 Make it smarter and more powerful.
 
 **Build:**
+- Brain Vision System (Page Nerve + Awareness Field + three-speed decisions)
+- Living Goals (goals that evolve with knowledge and declare completion)
+- Predictive Browsing (Brain predicts sources before search results load)
+- Intention-based Actions (Brain speaks in goals, system resolves mechanics)
+- Multi-Brain Vision (all agents see every page simultaneously)
+- Learning Web (sites get smarter with every visit)
 - App Fusion (drag data between apps)
 - Ghost Mode (AI works while you're away)
-- Time Travel (rewind any app to any point)
-- Spaces (Work, Personal, custom contexts)
 - Workflows (learn from user behavior, replay automatically)
 - Picture-in-Picture (watch AI work while you work)
-- Orchestrator (multi-task parallel execution)
-- Agent personalities + team chat
 - Memory Brain (learned patterns, preferences)
-- Vision Brain fallback (screenshots only when needed)
 
 **Goal:** Power users. Enterprise interest. "My computer is smarter than yours."
 
@@ -1518,6 +2022,7 @@ Make it smarter and more powerful.
 Open it up.
 
 **Build:**
+- Time Travel (rewind any app to any point using recorded state)
 - Team Spaces (shared workspaces)
 - Maia App SDK (developers build Maia-native apps)
 - App Store marketplace (community-contributed manifests)

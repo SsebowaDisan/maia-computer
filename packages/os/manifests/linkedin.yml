@@ -118,6 +118,18 @@ navigation:
       - "Type recipient name, select from autocomplete"
       - "Type message, press Enter to send"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for browsing LinkedIn content only."
+    - "Use the search bar with Boolean operators (AND, OR, NOT, quotes) for precise people and job searches."
+    - "Always click the appropriate tab (People, Posts, Jobs, Companies) after searching to filter result types."
+    - "When searching for people, use filters like Location, Current company, and Connection degree to narrow results."
+    - "Click into a full profile to read Experience and Skills sections before summarizing a person's background."
+    - "NEVER send connection requests, messages, or InMail without explicit user approval."
+    - "NEVER apply to jobs or click Easy Apply without explicit user approval."
+    - "NEVER post updates, comment, react, or endorse skills without explicit user approval."
+    - "When browsing job listings, click into the full job detail panel to read the complete description."
+    - "Use the messaging panel in the bottom-right corner only when the user explicitly asks to send a message."
+
   tips:
     - "Boolean search works: \"product manager\" AND (Google OR Meta) NOT intern"
     - "Easy Apply jobs use your LinkedIn profile as a resume — keep it updated"

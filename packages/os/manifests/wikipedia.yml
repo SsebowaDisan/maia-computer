@@ -98,6 +98,18 @@ navigation:
       - "Click the source URL to visit the original publication"
       - "Check 'View history' to see when the claim was added and by whom"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for reading and searching Wikipedia articles only."
+    - "Use the search box (#searchInput) to find articles — exact title matches open directly, otherwise browse search results."
+    - "Read the lead section (first paragraphs) first for the most concise summary of any topic."
+    - "Use the table of contents to jump to specific sections rather than scrolling through the entire article."
+    - "Check the infobox on the right side for structured quick-reference data (dates, stats, key facts)."
+    - "Follow blue links to navigate to related Wikipedia articles for deeper research."
+    - "Click superscript citation numbers [1][2] to check the original sources in the References section."
+    - "NEVER edit articles, add content, or modify any Wikipedia pages without explicit user approval."
+    - "Use the Categories at the bottom of articles to discover related articles in the same topic area."
+    - "Navigate directly to articles using the URL pattern: en.wikipedia.org/wiki/Article_Title (spaces as underscores)."
+
   url_patterns:
     article: "en.wikipedia.org/wiki/Article_Title"
     search: "en.wikipedia.org/w/index.php?search=your+query"

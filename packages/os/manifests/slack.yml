@@ -99,6 +99,18 @@ navigation:
       - "Choose Public or Private"
       - "Set name (lowercase, hyphens, no spaces), description, and invite members"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for team messaging only."
+    - "Before sending any message, verify the recipient channel or DM and content. Messages cannot be unsent in most cases."
+    - "Use Cmd+K to quickly switch channels or DMs instead of scrolling the sidebar — it is the fastest navigation method."
+    - "Click the channel name in the left sidebar to switch channels. Do not try to type a URL to navigate between channels."
+    - "Type messages in the message input at the bottom of the pane. Press Enter to send, Shift+Enter for a new line — never confuse the two."
+    - "When replying in a thread, click the speech bubble icon on the message first. Do not post thread replies in the main channel unless explicitly asked."
+    - "Use @username for targeted notifications. Never use @channel or @here unless the user specifically requests it — these notify many people."
+    - "To search conversations, use Cmd+G or click the search bar. Use filters like from:@person and in:#channel for precise results."
+    - "When sharing files, use the + icon or Cmd+U. Always add context in the accompanying message about what the file is."
+    - "After sending a message, wait for the message to appear in the thread before taking the next action. Do not rapid-fire multiple messages."
+
   url_patterns:
     workspace: "app.slack.com/client/TWORKSPACE_ID"
     channel: "app.slack.com/client/TWORKSPACE_ID/CCHANNEL_ID"

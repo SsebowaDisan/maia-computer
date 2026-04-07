@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 
-import type { ChatMessage } from '@maia/shared'
+import { MESSAGE_INTENT, type ChatMessage } from '@maia/shared'
 
 import { AgentMessage } from './AgentMessage'
+import { DebateThread } from './DebateThread'
 import { UserMessage } from './UserMessage'
 import { formatDayLabel, isMessageContinuation, isSameCalendarDay } from './chatMeta'
 
@@ -11,10 +12,99 @@ interface MessageListProps {
   onReply: (message: ChatMessage) => void
 }
 
+interface IndexedMessage {
+  index: number
+  message: ChatMessage
+}
+
+interface SingleRenderItem {
+  kind: 'single'
+  item: IndexedMessage
+}
+
+interface DebateRenderItem {
+  kind: 'debate'
+  items: IndexedMessage[]
+}
+
+type RenderItem = SingleRenderItem | DebateRenderItem
+
+const DEBATE_WINDOW_MS = 30_000
+const DEBATE_INTENTS = new Set([
+  MESSAGE_INTENT.CHALLENGE,
+  'correction',
+  'flag',
+  'recommendation',
+])
+
+function buildRenderItems(messages: ChatMessage[]): RenderItem[] {
+  const items: RenderItem[] = []
+  let index = 0
+
+  while (index < messages.length) {
+    const message = messages[index]
+    if (!message) {
+      break
+    }
+
+    if (message.sender === 'user') {
+      items.push({
+        kind: 'single',
+        item: { index, message },
+      })
+      index += 1
+      continue
+    }
+
+    const run: IndexedMessage[] = [{ index, message }]
+    let cursor = index + 1
+
+    while (cursor < messages.length) {
+      const previous = messages[cursor - 1]
+      const current = messages[cursor]
+      if (!previous || !current) {
+        break
+      }
+
+      if (current.sender === 'user') {
+        break
+      }
+
+      if (!isSameCalendarDay(previous.timestamp, current.timestamp)) {
+        break
+      }
+
+      if (current.timestamp - previous.timestamp > DEBATE_WINDOW_MS) {
+        break
+      }
+
+      run.push({ index: cursor, message: current })
+      cursor += 1
+    }
+
+    const uniqueAgents = new Set(run.map((entry) => entry.message.sender))
+    const hasDebateSignal = run.some((entry) => DEBATE_INTENTS.has(entry.message.intent))
+    const isDebate = run.length >= 2 && uniqueAgents.size >= 2 && hasDebateSignal
+
+    if (isDebate) {
+      items.push({ kind: 'debate', items: run })
+    } else {
+      for (const entry of run) {
+        items.push({ kind: 'single', item: entry })
+      }
+    }
+
+    index = cursor
+  }
+
+  return items
+}
+
 export function MessageList({ messages, onReply }: MessageListProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [autoScroll, setAutoScroll] = useState(true)
   const messagesById = new Map(messages.map((message) => [message.id, message]))
+  const renderItems = buildRenderItems(messages)
 
   useEffect(() => {
     if (autoScroll && containerRef.current) {
@@ -50,6 +140,50 @@ export function MessageList({ messages, onReply }: MessageListProps) {
     )
   }
 
+  const renderMessage = (entry: IndexedMessage, compact: boolean, allowDayDivider = true) => {
+    const previousMessage = messages[entry.index - 1]
+    const showDayDivider = allowDayDivider
+      && (!previousMessage || !isSameCalendarDay(previousMessage.timestamp, entry.message.timestamp))
+    const isContinuation = isMessageContinuation(previousMessage, entry.message)
+    const replyToMessage = entry.message.replyToId ? messagesById.get(entry.message.replyToId) : undefined
+
+    const content = entry.message.sender === 'user'
+      ? (
+          <UserMessage
+            isContinuation={isContinuation}
+            message={entry.message}
+            onJumpToMessage={jumpToMessage}
+            onReply={onReply}
+            replyToMessage={replyToMessage}
+          />
+        )
+      : (
+          <AgentMessage
+            compact={compact}
+            isContinuation={isContinuation}
+            message={entry.message}
+            onJumpToMessage={jumpToMessage}
+            onReply={onReply}
+            replyToMessage={replyToMessage}
+          />
+        )
+
+    return (
+      <div key={entry.message.id}>
+        {showDayDivider ? (
+          <div className="my-4 flex items-center gap-3 px-3">
+            <span className="h-px flex-1 bg-border" />
+            <span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-textMuted">
+              {formatDayLabel(entry.message.timestamp)}
+            </span>
+            <span className="h-px flex-1 bg-border" />
+          </div>
+        ) : null}
+        <div id={`chat-message-${entry.message.id}`}>{content}</div>
+      </div>
+    )
+  }
+
   return (
     <div
       ref={containerRef}
@@ -66,43 +200,33 @@ export function MessageList({ messages, onReply }: MessageListProps) {
               </p>
             </div>
           </div>
-        ) : messages.map((message, index) => {
-          const previousMessage = messages[index - 1]
-          const showDayDivider = !previousMessage || !isSameCalendarDay(previousMessage.timestamp, message.timestamp)
-          const isContinuation = isMessageContinuation(previousMessage, message)
-          const replyToMessage = message.replyToId ? messagesById.get(message.replyToId) : undefined
-          const content = message.sender === 'user'
-            ? (
-                <UserMessage
-                  isContinuation={isContinuation}
-                  message={message}
-                  onJumpToMessage={jumpToMessage}
-                  onReply={onReply}
-                  replyToMessage={replyToMessage}
-                />
-              )
-            : (
-                <AgentMessage
-                  isContinuation={isContinuation}
-                  message={message}
-                  onJumpToMessage={jumpToMessage}
-                  onReply={onReply}
-                  replyToMessage={replyToMessage}
-                />
-              )
+        ) : renderItems.map((item) => {
+          if (item.kind === 'single') {
+            return renderMessage(item.item, false)
+          }
 
           return (
-            <div key={message.id}>
-              {showDayDivider ? (
-                <div className="my-4 flex items-center gap-3 px-3">
-                  <span className="h-px flex-1 bg-border" />
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-textMuted">
-                    {formatDayLabel(message.timestamp)}
-                  </span>
-                  <span className="h-px flex-1 bg-border" />
-                </div>
-              ) : null}
-              <div id={`chat-message-${message.id}`}>{content}</div>
+            <div key={`debate-${item.items[0]?.message.id ?? 'group'}`}>
+              {item.items[0] ? (() => {
+                const first = item.items[0]
+                const previousMessage = messages[first.index - 1]
+                const showDayDivider = !previousMessage || !isSameCalendarDay(previousMessage.timestamp, first.message.timestamp)
+                if (!showDayDivider) {
+                  return null
+                }
+                return (
+                  <div className="my-4 flex items-center gap-3 px-3">
+                    <span className="h-px flex-1 bg-border" />
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-textMuted">
+                      {formatDayLabel(first.message.timestamp)}
+                    </span>
+                    <span className="h-px flex-1 bg-border" />
+                  </div>
+                )
+              })() : null}
+              <DebateThread>
+                {item.items.map((entry) => renderMessage(entry, true, false))}
+              </DebateThread>
             </div>
           )
         })}

@@ -91,6 +91,18 @@ navigation:
       - "Click the phone icon (voice) or camera icon (video) in the header"
       - "Call starts immediately — supports up to 32 participants in group calls"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for messaging contacts only."
+    - "Before sending any message, verify the recipient and content. Messages cannot be unsent in most cases."
+    - "Click a contact or conversation in the left panel chat list to open it. Do not try to navigate by typing URLs."
+    - "Type messages in the compose box at the bottom of the right panel. Press Enter to send, Shift+Enter for a new line."
+    - "To find a contact, use the search bar at the top of the left panel. Type the contact name or phone number and click the result."
+    - "If the QR code linking screen appears, stop and inform the user that WhatsApp Web needs to be linked to a phone first."
+    - "Never click the voice or video call buttons unless the user explicitly requests a call — calls connect immediately with no confirmation."
+    - "When sending attachments, click the paperclip icon and select the correct file type. Add a caption before clicking Send."
+    - "To search within a specific conversation, click the magnifying glass icon in the conversation header, not the main search bar."
+    - "Check delivery indicators (gray checks, blue checks) after sending to confirm the message was delivered before moving on."
+
   tips:
     - "Delivery indicators: single gray check = sent, double gray = delivered, double blue = read"
     - "Format text: *bold*, _italic_, ~strikethrough~, ```monospace```"

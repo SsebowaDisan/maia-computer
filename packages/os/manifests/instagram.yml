@@ -114,6 +114,18 @@ navigation:
       - "Access saved posts from your Profile > Saved (bookmark icon)"
       - "Organize saved posts into collections by topic"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for browsing Instagram content only."
+    - "Use the Search or Explore page to find accounts by username, hashtags with #, or locations."
+    - "Click the Accounts tab in search results to find specific profiles, or Tags tab for hashtag feeds."
+    - "When viewing a profile, check the Posts grid, bio, and Highlights to understand the account's content."
+    - "Double-tap or click photos to like only when the user explicitly asks to engage with content."
+    - "NEVER post, comment, like, follow, send DMs, or share content without explicit user approval."
+    - "NEVER create Stories, Reels, or any content without explicit user approval."
+    - "When browsing the feed, scroll through posts and click the comment icon to read discussions."
+    - "Tap through Stories carefully by clicking the right side to advance, left side to go back."
+    - "Use the bookmark icon to save posts only when the user explicitly asks to save content."
+
   tips:
     - "Double-tap any photo to like it instantly"
     - "Bookmark posts for later — organize into collections from Profile > Saved"

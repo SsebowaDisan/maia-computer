@@ -96,6 +96,17 @@ navigation:
       - "Find it in the Deployments tab or check the GitHub PR for the Vercel bot comment"
       - "Click the preview URL to test the changes"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for deploying projects, viewing deployments, and managing domains only."
+    - "Click project cards on the dashboard to open project details. Check the deployment status badge: Ready (green), Error (red), Building (yellow)."
+    - "Use the 'Deployments' tab to see deployment history. Click a deployment to view build logs and debug errors."
+    - "To add environment variables, go to the project's Settings > Environment Variables. Select which environments (Production, Preview, Development) each variable applies to."
+    - "Add custom domains via Settings > Domains. Configure DNS records as shown and wait for SSL certificate provisioning."
+    - "Use the team/account selector (top-left) to switch between personal and team accounts — each has its own projects."
+    - "Check the 'Logs' tab for real-time runtime logs from serverless and edge functions."
+    - "Use 'Analytics' and 'Speed Insights' tabs to monitor production performance and Core Web Vitals."
+    - "After changing environment variables, redeploy the project for changes to take effect."
+
   tips:
     - "Every PR automatically gets a unique preview URL — check GitHub PR comments for the Vercel bot link"
     - "Build logs auto-scroll — wait for the build to finish to see the final status and any errors"

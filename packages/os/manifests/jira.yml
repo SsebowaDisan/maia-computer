@@ -87,6 +87,18 @@ navigation:
       - "Set story points on each issue to track capacity"
       - "Click 'Start sprint' to begin the sprint with a name, goal, and dates"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing Jira issues and sprints only."
+    - "Use the search bar (press '/') to find issues by keyword or issue key (e.g., PROJ-123)."
+    - "Use JQL for advanced queries: 'assignee = currentUser() AND sprint in openSprints()' for precise filtering."
+    - "Click issue cards on the board to open full details with status, assignee, description, and comments."
+    - "Use the board view (sidebar > Board) to see team progress across status columns."
+    - "NEVER create, modify, or delete issues without explicit user approval."
+    - "NEVER change issue status, assignee, or priority without explicit user approval."
+    - "NEVER start, end, or modify sprints without explicit user approval."
+    - "Use Quick filters above the board to focus on specific assignees, types, or labels."
+    - "Check the Backlog view for unplanned issues and sprint planning."
+
   tips:
     - "Issue keys (like PROJ-123) are clickable from anywhere — type them in comments to auto-link"
     - "JQL (Jira Query Language) enables powerful searches: 'assignee = currentUser() AND sprint in openSprints()'"

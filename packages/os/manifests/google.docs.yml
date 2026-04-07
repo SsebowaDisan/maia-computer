@@ -143,6 +143,19 @@ navigation:
     print: "Cmd+P"
     version_history: "Cmd+Alt+Shift+H"
 
+  rules:
+    - "To create a new document, click 'Blank document' or '+ Blank' on the home page. Wait for the editor to load before typing."
+    - "ALWAYS name the document first — click 'Untitled document' at top-left, type the name, press Enter."
+    - "Use Heading styles (Heading 1, Heading 2, etc.) to structure the document. Don't just use bold text for headings."
+    - "When writing a report, follow this structure: Title (use Title style) → Introduction (Normal text) → Sections (Heading 1 for each) → Sub-sections (Heading 2) → Conclusion."
+    - "Type content directly into the document body. Click the white page area to place your cursor."
+    - "For long content, write section by section. Don't try to paste everything at once."
+    - "To download as PDF: File menu → Download → PDF Document (.pdf). Or use the export URL pattern."
+    - "NEVER try to search the web from inside Google Docs. This app is for WRITING only."
+    - "If you need to insert research findings, they should already be in your research memory from a previous sub-task."
+    - "Use bullet points (Cmd+Shift+8) and numbered lists (Cmd+Shift+7) to organize information clearly."
+    - "After finishing the document, scroll through it to verify the content looks correct before downloading."
+
   url_patterns:
     home: "docs.google.com"
     editor: "docs.google.com/document/d/DOC_ID/edit"

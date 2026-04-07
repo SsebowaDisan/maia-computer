@@ -92,6 +92,18 @@ navigation:
       - "Click the phone icon (voice) or video icon (video) in the header"
       - "Call is end-to-end encrypted — verify by comparing the two-word code shown during the call"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for private encrypted messaging only."
+    - "Before sending any message, verify the recipient and content. Messages cannot be unsent in most cases."
+    - "Click a conversation in the left panel to open it. Use Cmd+N to start a new message or the pencil icon at the top of the left panel."
+    - "Type messages in the message input at the bottom. Press Enter to send, Shift+Enter for a new line."
+    - "If the QR code linking screen appears, stop and inform the user that Signal Desktop needs to be linked to a phone first."
+    - "Never click the phone or video call buttons unless the user explicitly asks — calls connect immediately and are end-to-end encrypted."
+    - "Be aware of disappearing messages: if a timer icon is visible in the conversation header, messages will auto-delete after the set duration."
+    - "Do not attempt to change safety number verification or encryption settings unless the user explicitly requests it."
+    - "Use the + icon to the left of the message input for attachments including photos, files, GIFs, and stickers."
+    - "Note to Self is a personal encrypted notepad — use it only when the user wants to save personal notes, not to message others."
+
   tips:
     - "All messages are end-to-end encrypted by default — Signal cannot read any messages"
     - "Safety Numbers verify encryption — check them when you see a 'safety number changed' alert"

@@ -62,6 +62,17 @@ navigation:
       - "Change status, assignee, priority, or other fields in the right sidebar"
       - "Add comments in the activity section"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing Linear issues and projects only."
+    - "Press Cmd+K to open the command palette for fast searching and navigation across issues, projects, and views."
+    - "Click issues in any list to open the detail view with status, assignee, priority, and description."
+    - "Use the left sidebar to navigate: Inbox for notifications, My Issues for assigned work, team names for team views."
+    - "NEVER create, modify, or delete issues without explicit user approval."
+    - "NEVER change issue status, assignee, priority, or cycle assignments without explicit user approval."
+    - "NEVER modify project settings or team configurations without explicit user approval."
+    - "Press 'C' to open the issue composer only when the user explicitly asks to create an issue."
+    - "Check active filters and views if an issue seems missing — filters may be hiding it."
+
   tips:
     - "Press 'C' anywhere to create a new issue — the fastest way"
     - "Cmd+K opens the command palette for searching and navigating everything"

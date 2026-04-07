@@ -63,6 +63,17 @@ navigation:
       - "The course appears in 'My Learning'"
       - "Start watching lectures and completing assignments"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for browsing and taking Coursera courses only."
+    - "Use the search bar at the top to find courses by subject, skill, or course name."
+    - "Use the filter sidebar (Subject, Level, Language, Duration) on search results to narrow course options."
+    - "Click a course card to see its full detail page with description, syllabus, instructor info, and reviews."
+    - "Check course ratings, review counts, and syllabus before recommending a course to the user."
+    - "NEVER enroll in courses or start free trials without explicit user approval."
+    - "NEVER make payments for certificates or subscriptions without explicit user approval."
+    - "Use the Explore dropdown in the top navigation to browse courses by subject category."
+    - "Check 'My Learning' for the user's enrolled courses and their progress."
+
   tips:
     - "Free audit mode gives access to video lectures but not graded assignments or certificates"
     - "Specializations are sequences of related courses — enrolling in a specialization covers all courses in it"

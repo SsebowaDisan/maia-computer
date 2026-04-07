@@ -120,6 +120,18 @@ navigation:
     - "Ctrl+` — Toggle terminal (desktop/github.dev only)"
     - "Cmd+\\ — Split editor"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for editing code, searching files, and using the integrated terminal only."
+    - "Use Cmd+P (Ctrl+P) Quick Open for fast file navigation — type partial filenames for fuzzy matching instead of clicking through the Explorer."
+    - "Use Cmd+Shift+P (Ctrl+Shift+P) Command Palette to access any editor command. This is the fastest way to perform any action."
+    - "Navigate the file tree using the Explorer sidebar (top icon in Activity Bar). Click files to open, right-click for context menu."
+    - "Use Cmd+Shift+F (Ctrl+Shift+F) for find-across-files. Do not try to search files by scrolling through the Explorer."
+    - "Edit code by clicking in the editor area. Save with Cmd+S (Ctrl+S). Unsaved files show a dot on the tab."
+    - "Use the Source Control panel (branch icon in Activity Bar) for Git operations — stage files with '+', type commit message, click checkmark to commit."
+    - "Switch branches by clicking the branch name in the bottom Status Bar."
+    - "Use split view (right-click tab > Split Right) to view two files side by side for comparison."
+    - "Wait for the editor to fully load a file before attempting to edit — large files may take a moment."
+
   tips:
     - "Cmd+P (Quick Open) is the fastest way to open files — type partial names for fuzzy matching"
     - "Cmd+Shift+P (Command Palette) gives access to every editor command — learn this first"

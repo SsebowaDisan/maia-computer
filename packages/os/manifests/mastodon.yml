@@ -102,6 +102,18 @@ navigation:
       - "Type a brief warning in the CW field (e.g., 'movie spoiler', 'food', 'politics')"
       - "Type the full post content below — readers must click to expand"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for browsing Mastodon and the Fediverse only."
+    - "Use the search bar to find hashtags (always works across Fediverse) or accounts by @handle@instance."
+    - "Browse the Local timeline to discover people on the same instance, or Federated for wider content."
+    - "Check the Explore tab for trending posts, hashtags, and news links on the instance."
+    - "All timelines are strictly chronological with no algorithm — scroll to find content by recency."
+    - "NEVER post, boost, favorite, follow, or reply without explicit user approval."
+    - "NEVER send direct messages or change post visibility settings without explicit user approval."
+    - "When reading posts, respect Content Warning (CW) labels — click to reveal hidden content only when needed."
+    - "Remember that full-text post search availability depends on instance configuration."
+    - "Follow hashtags by searching for them and clicking Follow to add topic-based posts to the home timeline."
+
   tips:
     - "All timelines are strictly chronological — no algorithm, no ads, no promoted content"
     - "Content Warnings (CW) are a community norm — use them for spoilers, sensitive topics, and long posts"

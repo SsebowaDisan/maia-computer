@@ -122,6 +122,18 @@ navigation:
       - "Select an existing playlist or click '+ Create new playlist'"
       - "Name the playlist and set visibility (Public/Unlisted/Private)"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for watching and searching YouTube videos only."
+    - "Press / to focus the search box and type queries to find videos efficiently."
+    - "Use the Filters button on search results to narrow by Upload date, Duration, Type, and Sort order."
+    - "Check video descriptions for timestamps/chapters to find specific sections within long videos."
+    - "Use keyboard shortcuts for playback: spacebar for play/pause, J/L for 10s skip, Shift+>/< for speed control."
+    - "When researching a topic, check the right sidebar for related videos and explore multiple perspectives."
+    - "NEVER subscribe to channels, like/dislike videos, or post comments without explicit user approval."
+    - "NEVER create playlists, save to Watch Later, or upload content without explicit user approval."
+    - "Click channel names to visit the full channel page and browse their Videos, Playlists, and About tabs."
+    - "Number keys 0-9 on the watch page jump to 0%-90% of the video for fast navigation."
+
   url_patterns:
     home: "youtube.com"
     search: "youtube.com/results?search_query=your+query"

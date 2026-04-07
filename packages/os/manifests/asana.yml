@@ -98,6 +98,18 @@ navigation:
       - "Click a result to open that task"
       - "Use filters to narrow by project, assignee, or status"
 
+  rules:
+    - "To create a task, click the orange '+ Create' button at the top and select 'Task'. Fill in the title, assignee, due date, and project."
+    - "ALWAYS assign a task to a project when creating it. Use the project field to place the task in the correct project."
+    - "Click the checkmark circle next to a task name to mark it complete. The task fades out and moves to completed."
+    - "NEVER try to search the web from inside Asana. This app is for project and task management only."
+    - "Use the left sidebar to navigate: Home for activity feed, My Tasks for your assigned work, Inbox for notifications."
+    - "Press Tab+/ to quickly open search from anywhere in Asana. Type keywords to find tasks, projects, or people."
+    - "Click a task name to open the task detail pane on the right with description, subtasks, attachments, and comments."
+    - "Switch between project views (List, Board, Timeline, Calendar) using the view tabs at the top of a project."
+    - "Add subtasks to break down work — each subtask can have its own assignee and due date."
+    - "Click '+ Add task' at the bottom of a section in List view to create a task inline within that section."
+
   tips:
     - "Tab+/ is the fastest way to open search from anywhere in Asana"
     - "The 'My Tasks' view with 'Today, Upcoming, Later' sections helps prioritize daily work"

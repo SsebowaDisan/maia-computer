@@ -98,6 +98,18 @@ navigation:
       - "Select a different season from the dropdown"
       - "Click any episode to switch to it"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for browsing and watching Netflix content only."
+    - "Click the magnifying glass icon in the top-right navigation to search for movies and shows by name."
+    - "Hover over title cards for quick previews showing match percentage, maturity rating, and genre tags."
+    - "Click 'More Info' or the down-chevron on a title card to open the full detail modal with synopsis and episodes."
+    - "For TV shows, use the season dropdown in the detail modal to browse episodes across seasons."
+    - "Use keyboard shortcuts in the player: spacebar for play/pause, left/right arrows for 10s skip."
+    - "NEVER change profiles, modify My List, or adjust account settings without explicit user approval."
+    - "NEVER start playback of a title without confirming the user wants to watch it."
+    - "Browse category rows by scrolling horizontally and check 'Continue Watching' for in-progress content."
+    - "Use the speech bubble icon in the player to change subtitle language or audio track."
+
   url_patterns:
     browse: "netflix.com/browse"
     search: "netflix.com/search?q=query"

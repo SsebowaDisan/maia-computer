@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-import type { SnapZone } from '@maia/shared'
+import type { IPCEvents, SnapZone } from '@maia/shared'
 
 import { useIPC } from './useIPC'
 import { useChatStore } from '../store/chatStore'
@@ -9,12 +9,28 @@ import { type ShellWindow, useWindowStore } from '../store/windowStore'
 import { getSnapBounds, getViewportBounds } from '../windowLayout'
 import { getBuiltinWindow } from '../windowFactory'
 
+type SharedStateSnapshot = {
+  status: 'planning' | 'bidding' | 'executing' | 'synthesizing' | 'done' | 'failed'
+  agents: Record<string, {
+    agentId: string
+    role: 'primary' | 'secondary' | 'observer'
+    status: 'idle' | 'working' | 'watching' | 'done' | 'failed'
+  }>
+}
+
+type SharedStatePayload = {
+  state: SharedStateSnapshot
+}
+
 export function useBrainEvents() {
   const { invoke, on } = useIPC()
   const setThought = useTaskStore((state) => state.setThought)
   const setPlan = useTaskStore((state) => state.setPlan)
   const updatePlanStep = useTaskStore((state) => state.updatePlanStep)
   const setStatus = useTaskStore((state) => state.setStatus)
+  const setTaskPhase = useTaskStore((state) => state.setTaskPhase)
+  const setAgentStatus = useTaskStore((state) => state.setAgentStatus)
+  const setPrimaryAgentIds = useTaskStore((state) => state.setPrimaryAgentIds)
   const rebuildResearch = useTaskStore((state) => state.rebuildResearch)
   const resetResearch = useTaskStore((state) => state.resetResearch)
   const addAgent = useTaskStore((state) => state.addAgent)
@@ -30,6 +46,31 @@ export function useBrainEvents() {
   windowsRef.current = windows
 
   useEffect(() => {
+    const syncSharedTaskState = (state: SharedStateSnapshot) => {
+      setTaskPhase(state.status)
+
+      const primaryIds = Object.values(state.agents)
+        .filter((agent) => agent.role === 'primary')
+        .map((agent) => agent.agentId)
+
+      setPrimaryAgentIds(primaryIds)
+
+      for (const [agentId, agent] of Object.entries(state.agents)) {
+        addAgent(agentId)
+        setAgentStatus(agentId, agent.status)
+      }
+    }
+
+    const onSharedState = (
+      channel: string,
+      listener: (state: SharedStateSnapshot) => void,
+    ) => on(channel as keyof IPCEvents, (_, payload) => {
+      const sharedPayload = payload as unknown as SharedStatePayload
+      if (sharedPayload.state) {
+        listener(sharedPayload.state)
+      }
+    })
+
     const unsubs = [
       on('brain:thinking', (_, payload) => {
         setThought(payload.thought)
@@ -45,7 +86,8 @@ export function useBrainEvents() {
       }),
 
       on('brain:taskCompleted', (_, payload) => {
-        setStatus(false, '')
+        setTaskPhase('done')
+        setStatus(false, useTaskStore.getState().taskDescription)
         setThought('')
         resetResearch()
         addMessage({
@@ -60,6 +102,8 @@ export function useBrainEvents() {
       }),
 
       on('brain:error', (_, payload) => {
+        setTaskPhase('failed')
+        setStatus(false, useTaskStore.getState().taskDescription)
         setThought('')
         resetResearch()
         addMessage({
@@ -75,11 +119,30 @@ export function useBrainEvents() {
 
       on('brain:agentStarted', (_, payload) => {
         addAgent(payload.agentId)
+        setAgentStatus(payload.agentId, 'working')
+        setPrimaryAgentIds([
+          ...useTaskStore.getState().primaryAgentIds,
+          payload.agentId,
+        ])
+        setTaskPhase('executing')
         void invoke('app:open', { appId: payload.appId })
       }),
 
       on('brain:agentCompleted', (_, payload) => {
         removeAgent(payload.agentId)
+        setAgentStatus(payload.agentId, 'done')
+      }),
+
+      onSharedState('orchestrator.shared_state.agent_registered', (state) => {
+        syncSharedTaskState(state)
+      }),
+
+      onSharedState('orchestrator.shared_state.agent_status_changed', (state) => {
+        syncSharedTaskState(state)
+      }),
+
+      onSharedState('orchestrator.shared_state.task_status_changed', (state) => {
+        syncSharedTaskState(state)
       }),
 
       on('theatre:arrange', (_, payload) => {
@@ -128,5 +191,5 @@ export function useBrainEvents() {
         unsub()
       }
     }
-  }, [addAgent, addMessage, focusWindow, invoke, on, rebuildResearch, removeAgent, resetResearch, setPlan, setStatus, setThought, updatePlanStep, updateSnapZone, upsertWindow])
+  }, [addAgent, addMessage, focusWindow, invoke, on, rebuildResearch, removeAgent, resetResearch, setAgentStatus, setPlan, setPrimaryAgentIds, setStatus, setTaskPhase, setThought, updatePlanStep, updateSnapZone, upsertWindow])
 }

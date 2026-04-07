@@ -121,6 +121,16 @@ navigation:
       - "Copy the link or share directly to social/messaging platforms"
       - "The URL encodes the exact location and zoom level"
 
+  rules:
+    - "To search for a location, click the search box (input#searchboxinput), type the place name or address, and press Enter."
+    - "Wait for autocomplete suggestions to appear after typing. Click a suggestion or press Enter for full search results."
+    - "To get directions, click 'Directions' on a place panel or the directions icon, enter start and end points, and select a transport mode."
+    - "NEVER try to search the web from inside Google Maps. This app is for maps, navigation, and location search only."
+    - "Click+drag to pan the map. Use scroll wheel or +/- buttons to zoom in and out."
+    - "Click a red pin on the map to see place details (name, rating, hours, reviews) in the left panel."
+    - "For Street View, drag the yellow pegman icon onto a blue-highlighted road to enter ground-level panoramic view."
+    - "Use the Layers button (bottom-left) to toggle Traffic, Transit, and Satellite views."
+
   url_patterns:
     location: "google.com/maps/@LAT,LNG,ZOOM_LEVELz"
     search: "google.com/maps/search/QUERY/@LAT,LNG,ZOOMz"

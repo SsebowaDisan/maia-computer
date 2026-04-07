@@ -483,29 +483,107 @@ brain:stop           → stop current task
 brain:getStatus      → is brain running? what step?
 ```
 
-### B8. Team Chat Backend
+### B8. Team Chat Backend — Agent Collaboration Engine
 
 | Task | Details |
 |---|---|
-| `MessageBus.ts` | Routes messages between agents, orchestrator, and user |
-| `MessageHistory.ts` | Stores all messages in SQLite |
-| `IntentClassifier.ts` | Classifies user messages: question, instruction, approval |
+| `MessageBus.ts` | Routes messages between agents, orchestrator, and user. Supports directed messages (@agent), broadcasts (all), and user authority (user messages override). |
+| `MessageHistory.ts` | Stores all messages in SQLite. Indexes by task, agent, intent, and timestamp. |
+| `IntentClassifier.ts` | Two-tier classification: regex for short messages (≤6 words), LLM-based for complex messages. Classifies: question, instruction, approval, redirect, takeover, handoff, challenge, casual, context. |
+| `DebateManager.ts` | Manages agent-to-agent debates. Tracks rounds per debate (max 3). Detects convergence (agents stop disagreeing) and deadlock (circular arguments). Escalates deadlocks to user. |
+| `ProactiveEngine.ts` | Monitors shared task state. When a finding triggers an agent's `speaksWhen` rules, prompts that agent to contribute. Respects `staysQuiet` rules to prevent noise. |
+| `DiscussionResolver.ts` | Resolves pending questions. Severity-based timeouts: low=15s, medium=30s, high=60s, critical=120s. On timeout, proceeds with default action. On user response, resolves immediately. Only resolves from relevant messages (not any random chat). |
+
+**Agent participation rules:**
+
+```
+When an agent's Brain posts a finding to team chat:
+  1. DebateManager checks: does any observer agent's challengesTrigger match?
+  2. If yes: observer agent gets the finding + chat context → LLM generates response
+  3. Observer can: challenge, agree, flag, correct, or SKIP (nothing to add)
+  4. If challenge: original agent gets the challenge → responds with evidence
+  5. Max 3 rounds per debate. Convergence or escalation.
+
+When user types a message:
+  1. IntentClassifier classifies intent
+  2. REDIRECT: kill current tasks, restart with new goal
+  3. OVERRIDE: all agents comply, dissenting agent notes objection
+  4. QUESTION: relevant agent responds (findRelevantAgent uses capability matching)
+  5. INSTRUCTION: directed agent prioritizes it
+  6. CASUAL: agent responds in character, no action change
+```
 
 **IPC channels exposed:**
 ```
 chat:send            → user sends a message
 chat:getHistory      → get all messages for current task
 chat:onMessage       → event: new message from agent
+chat:debate          → event: agent-to-agent debate exchange
+chat:resolution      → event: debate resolved (convergence/user/timeout)
 ```
 
-### B9. Orchestrator (Multi-Agent)
+### B9. Orchestrator — Inverted Multi-Agent System
 
 | Task | Details |
 |---|---|
-| `Orchestrator.ts` | Decomposes complex tasks. Spawns multiple Brain instances. Each Brain controls a different app. |
-| `AgentPersonality.ts` | Defines role, priorities, communication style per agent. |
+| `Orchestrator.ts` | Inverted orchestrator. Decomposes tasks via LLM. Broadcasts sub-tasks to agents for bidding. Assigns based on confidence scores. Manages parallel execution with dependency tracking. Monitors shared state. Detects convergence and deadlock. Synthesizes final answer from all agents' Research Memory. |
+| `AgentCapabilities.ts` | Structured capability declarations per agent: domains, verbs, apps, complexity type. Used by the Orchestrator for semantic matching instead of keyword search. |
+| `AgentBidding.ts` | Bidding system. Each agent evaluates a sub-task and returns: confidence score (0-1), reasoning, estimated complexity, relevant apps. Orchestrator picks winners by highest confidence. |
+| `SharedTaskState.ts` | Live shared state across all agents. Tracks: per-agent status, per-agent findings, shared decisions, team debates. All agents can read all other agents' state. Event-driven updates (not polling). |
+| `AgentPersonality.ts` | Personality configs that drive BOTH chat behavior AND browsing behavior. `tone`, `quirks` for chat. `priorities`, `biases`, `challengesTrigger` for action decisions. Personality feeds into ActionDecider prompt, not just chat prompt. |
+| `PlanReviser.ts` | After each Brain step, evaluates whether the plan needs adjustment. Triggers: unexpected finding, agent challenge, user intervention, step failure. Produces revised plan without restarting the task. |
+| `AnswerSynthesizer.ts` | Takes all agents' Research Memory + shared state + debate history. Produces a structured final answer. Includes: recommendation, alternatives, reasoning, sources, confidence, and any unresolved team disagreements. |
 
-### B10. Event Bus + Recording
+**Orchestrator lifecycle:**
+
+```
+1. DECOMPOSE    — Task → LLM → sub-tasks with dependencies
+2. BID          — Sub-tasks → agents bid with confidence
+3. ASSIGN       — Primary + secondary + observer roles per sub-task
+4. EXECUTE      — Agents run in parallel, shared state updates live
+5. COLLABORATE  — Agents debate in team chat, challenge findings
+6. SYNTHESIZE   — All findings merged into structured answer
+7. DELIVER      — Answer + reasoning + debate history to user
+```
+
+**Failure recovery:**
+
+```
+Sub-task fails → mark failed, notify dependents, agent explains in chat
+                → dependents re-plan or skip, not silently stuck
+Agent stuck    → 3 no-progress iterations → team chat asks for help
+                → other agents suggest approaches → if no fix, escalate to user
+Team deadlock  → 3 debate rounds, no convergence → ask user to decide
+```
+
+### B10. App Agents — Specialized per App
+
+Each app gets its own agent class with hardcoded, deterministic skills. The Brain gives the task, the agent knows HOW to use the app. No LLM for mechanical operations.
+
+| Task | Details |
+|---|---|
+| `AppAgent.ts` | Base class for all app agents. Defines the skill interface: `execute(task) → result`. Handles common operations: wait for page, dismiss popups, capture page text. |
+| `ChromeAgent.ts` | Google Search specialist. Skills: `search(query)`, `pickResult()`, `clickResult(title)`, `readPage()`, `extract()`, `goBack()`. Handles the full research cycle autonomously — type, Enter, scroll to results, click, read, extract, back. LLM only picks which result and what to extract. |
+| `DocsAgent.ts` | Google Docs specialist. Skills: `createDoc()`, `nameDoc(title)`, `writeHeading(text, level)`, `writeParagraph(text)`, `downloadPDF()`. Handles document creation and formatting autonomously. LLM only decides what content to write. |
+| `GmailAgent.ts` | Gmail specialist. Skills: `compose()`, `fillTo(email)`, `fillSubject(text)`, `writeBody(text)`, `send()`, `searchInbox(query)`. |
+| `SheetsAgent.ts` | Google Sheets specialist. Skills: `createSheet()`, `clickCell(ref)`, `typeInCell(value)`, `addFormula(formula)`. |
+| `SlackAgent.ts` | Slack specialist. Skills: `switchChannel(name)`, `typeMessage(text)`, `sendMessage()`. |
+| `GenericAgent.ts` | Fallback for apps without a specialized agent. Reads the app manifest for guidance. Has basic skills: click by text, type in inputs, scroll, go back. |
+| `AgentFactory.ts` | Creates the right agent class based on app URL: google.com → ChromeAgent, docs.google → DocsAgent, etc. Falls back to GenericAgent for unknown apps. |
+
+**Agent lifecycle:**
+```
+1. Orchestrator assigns sub-task to an app
+2. AgentFactory.create(appUrl) → returns the right agent class
+3. Agent receives task description + context from previous sub-tasks
+4. Agent executes using hardcoded skills (no LLM for mechanics)
+5. Agent returns results (findings, written content, etc.)
+6. Orchestrator passes results to the next sub-task's agent
+```
+
+**One agent per app at a time.** If 4 research sub-tasks all need the browser, they run sequentially — not in parallel (which caused garbled text).
+
+### B11. Event Bus + Recording
 
 | Task | Details |
 |---|---|
@@ -695,16 +773,17 @@ Where backend and frontend must align:
 
 ## 6. Milestone Checkpoints
 
-| Milestone | Backend step | Frontend step | What works |
-|---|---|---|---|
-| M1 | B1 | F1-F3 | Electron launches. Dark theme. Dock. Home screen. |
-| M2 | B2 | F4-F6 | Install Gmail. Sign in. Stays logged in. App window with title bar. |
-| M3 | B3-B5 | — | Network + DOM Brain read Gmail data instantly. No screenshots. |
-| M3b | B5b-B5e | — | **Intelligence Upgrade.** Page Scraper reads full pages. Research Memory persists across navigations. Smart Navigator clicks by text, waits reactively, dismisses popups. Visual Performer shows human-like cursor, typing, highlights. Agent browses like a smart human. |
-| M4 | B6-B7 | F4 (command bar) | "Reply to John" works in Gmail via command bar. |
-| M5 | B8-B9 | F7 | Agents talk in Team Chat. User participates. |
-| M6 | — | F5, F8-F9 | Window snapping. Spotlight search. Spaces. |
-| M7 | B10-B12 | F10-F13 | Recording. Settings. Polish. **Ship it.** |
+| Milestone | Backend step | Frontend step | Status | What works |
+|---|---|---|---|---|
+| M1 | B1 | F1-F3 | ✅ Done | Electron launches. Dark theme. Dock. Home screen. |
+| M2 | B2 | F4-F6 | ✅ Done | Install apps. Sign in. Stays logged in. App windows with title bars. |
+| M3 | B3-B5 | — | ✅ Done | Network + DOM Brain read app data instantly. No screenshots. |
+| M3b | B5b-B5e | — | ✅ Done | Page Scraper, Research Memory, Smart Navigator, Visual Performer. Agent browses like a smart human. |
+| M4 | B6-B7 | F4 | ✅ Done | AI commands work via command bar. LLM reasoning with text input. |
+| M5 | B8-B9 | F7 | ✅ Done | **Team Intelligence.** Inverted orchestrator with capability-based routing, agent bidding, proactive agents, debates, shared state, answer synthesis. |
+| M5b | B10 | — | 🔄 Next | **App Agents.** ChromeAgent (Google Search skills), DocsAgent (Docs skills), GmailAgent, SheetsAgent, SlackAgent, GenericAgent. AgentFactory auto-selects the right agent per app. Deterministic skills — no LLM for mechanics. Brain gives tasks, agents execute autonomously. |
+| M6 | — | F5, F8-F9 | ○ Pending | Window snapping. Spotlight search. Spaces. |
+| M7 | B11-B13 | F10-F13 | ○ Pending | Recording. Settings. Polish. **Ship it.** |
 
 ---
 

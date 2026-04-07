@@ -1,149 +1,450 @@
 name: Web Browser
 id: web-browser
-icon: "https://www.google.com/s2/favicons?domain=google.com&sz=128"
-url: https://www.google.com/webhp
+url: "https://www.google.com/webhp?hl=en&gl=GB"
 category: other
-ai_description: "Browse the web. Search for information. Navigate to any website. Fill forms. Extract data."
-help_url: "https://support.google.com/websearch/answer/134479"
-
+ai_description: >
+  A strict, selector-first manifest for an AI agent controlling a real Chrome browser (inside Electron) to use Google Search:
+  open google.com, handle EU consent, type queries, read SERPs, detect/skip ads, use AI Overview / Knowledge Panel / PAA
+  when present, click organic results, read webpages, go back, and repeat. This manifest assumes the agent can execute
+  atomic browser actions (click/type/press_key/scroll/wait/read/evaluate/navigate/go_back).
+metadata:
+  preferred_ui_language: "en-GB"
+  preferred_google_params:
+    hl: "en"
+    gl: "GB"
+    pws: "0"
+  serp_pagination:
+    results_per_page: 10
+    start_param: "start"
+    num_param_status: "dead/ignored since Sep 2025"
+  volatility_warning: >
+    Google frequently A/B tests UI and uses dynamically generated classes. Prefer stable attributes:
+    name="q", form[action="/search"], role-based selectors, data-attrid, aria-*.
+    Some selectors below are best-known and verified from public DOM snapshots/tutorials; any selector marked
+    UNVERIFIED must be treated as a last-resort heuristic and re-validated in your own runtime.
 navigation:
   overview: >
-    Google Search is the default homepage. It processes over 8.5 billion searches per day.
-    The interface is deliberately minimal — a search box with autocomplete, and results
-    organized by relevance with optional featured snippets, knowledge panels, and rich results.
-
+    Google Search is a JavaScript-heavy, frequently changing web app. The agent must:
+    (1) Always handle EU consent dialogs before interacting with the page.
+    (2) Prefer submitting searches with Enter rather than clicking buttons (buttons can swap/relayout).
+    (3) On results pages, read AI Overview (if present) without expanding by default, then scan organic results.
+    (4) Never click ads (Sponsored) and avoid special-case destinations (PDF viewers, video-only pages) per rules.
+    (5) Use URL pagination (start=10/20/...) instead of relying on pagination DOM, which is less stable.
+  global_patterns:
+    url_patterns:
+      homepage:
+        canonical: "https://www.google.com/webhp"
+        recommended: "https://www.google.com/webhp?hl=en&gl=GB"
+      search:
+        canonical: "https://www.google.com/search?q={{query}}"
+        recommended: "https://www.google.com/search?q={{query}}&hl=en&gl=GB&pws=0"
+      search_web_only_no_ai:
+        recommended: "https://www.google.com/search?q={{query}}&hl=en&gl=GB&pws=0&udm=14"
+    critical_selectors:
+      search_box_css_preferred: "textarea[name='q']"
+      search_box_css_fallbacks:
+        - "#APjFqb"
+        - "textarea.gLFyf"
+        - "form[action='/search'] textarea[name='q']"
+      search_form_css: "form[action='/search']"
+      eu_cookie_dialog_css: "[role='dialog']"
   pages:
     homepage:
-      description: "Minimal page: logo, search box, two buttons. Language may vary by region (Dutch, French, German, etc.) — functionality is identical."
+      description: >
+        Google Search homepage (webhp). Contains the central search bar (textarea name=q), optional icons
+        (voice, image/lens), and buttons. Autocomplete suggestions appear under the search bar after typing.
+      url: "https://www.google.com/webhp?hl=en&gl=GB"
       layout:
-        - "Top-right: 'Gmail' link, 'Images' link, Google Apps grid (3x3 dots), Sign in button"
-        - "Center: Google logo, search textarea (name='q'), two buttons below"
-        - "Bottom: region name, language switcher, footer links"
-      search_box:
-        selector: "textarea[name='q']"
-        type: "textarea (not input — Google switched to textarea in 2023)"
-        behavior: "Click or focus to activate. Type query. Autocomplete dropdown appears after ~200ms showing suggestions. Press Enter to search. Press Down arrow to select an autocomplete suggestion, then Enter."
-        keyboard: "The search box auto-focuses on page load in most cases. Just start typing."
-      google_search_button:
-        text: "Regional variations: 'Google Search', 'Google Zoeken' (Dutch), 'Recherche Google' (French), 'Google Suche' (German), 'Buscar con Google' (Spanish)"
-        behavior: "Submits the query. Same effect as pressing Enter in the search box."
-      feeling_lucky_button:
-        text: "Regional: 'I'm Feeling Lucky', 'Ik doe een gok' (Dutch), 'J'ai de la chance' (French)"
-        behavior: "Bypasses search results and navigates directly to the first result URL. Useful when you know the exact site you want."
-      google_apps_grid:
-        selector: "a[aria-label='Google apps'], a[aria-label='Google-apps']"
-        behavior: "Opens a floating panel with icons for Google services: Gmail, Drive, Maps, YouTube, Calendar, Meet, Chat, Translate, Photos, etc. Click any icon to navigate there."
-      gmail_link:
-        behavior: "Opens Gmail in the same tab. Located in the top-right corner."
-      images_link:
-        behavior: "Switches to Google Images search. The search box changes to image search mode."
-
+        - "Top: navigation links + account/sign-in + Google apps grid"
+        - "Center: Google logo + search form + buttons"
+        - "Bottom: region/language links + footer"
+      elements:
+        search_form:
+          selector: "form[action='/search']"
+          type: "form"
+          behavior: "Submitting this form navigates to /search?q=..."
+          verified: true
+        search_box:
+          selector: "textarea[name='q']"
+          type: "textarea"
+          attributes_expected:
+            name: "q"
+            role: "combobox"
+          known_ids_or_classes:
+            id: "APjFqb"
+            class: "gLFyf"
+            jsname: "yZiJbe"
+          behavior:
+            on_click: "Focuses the textarea; aria-expanded toggles when autocomplete opens."
+            on_type: "Autocomplete dropdown renders below; suggestions update per keystroke."
+            on_submit: "Prefer Enter key. Clicking buttons is secondary."
+          selector_fallbacks:
+            - "#APjFqb"
+            - "textarea.gLFyf"
+            - "textarea[aria-label='Search']"
+          verified: true
+        autocomplete_dropdown:
+          description: "Container that appears under the search box with suggestions."
+          container_selector: "div.aajZCb[jsname='aajZCb']"
+          listbox_selector: "ul[role='listbox']"
+          id_hint_selector: "#Alh6id ul[role='listbox']"
+          behavior:
+            appears_when: "User types; searchbox aria-expanded becomes true."
+            items_count: "Typically 4-10 suggestions."
+          verified: true
+        autocomplete_item:
+          container_selector: "li.sbct.PZPZlf[role='presentation']"
+          option_selector: "div[role='option'][aria-label]"
+          text_extraction:
+            preferred: "Read option @aria-label (clean text)."
+            entity_hint: "Entity suggestions may additionally expose @aria-description."
+          verified: true
+        submit_search:
+          preferred_method: "press_key: Enter"
+          alternate_buttons:
+            google_search_button:
+              selector_best_known: "input[name='btnK']"
+              notes: "Button existence is historical; UI can swap visible button after autocomplete."
+              verified_partial: true
+            feeling_lucky_button:
+              selector_best_known: "input[name='btnI']"
+              notes: "Often present but may be hidden; do NOT rely on it."
+              verified_partial: true
+        eu_consent_dialog:
+          description: >
+            For EU/EEA IPs, Google shows a GDPR cookie consent dialog before interaction.
+            The dialog is selectable via [role='dialog']; buttons have unstable classes, so select by text.
+          dialog_selector: "[role='dialog']"
+          accept_button_xpath: "//button[contains(., 'Accept')]"
+          verified: true
     search_results:
-      description: "The SERP (Search Engine Results Page). Google returns ~10 organic results per page plus optional rich features."
-      url_pattern: "google.com/search?q=your+query"
+      description: >
+        Standard Google SERP (google.com/search?q=...). Layout varies by query.
+      url_pattern: "https://www.google.com/search?q={{query}}"
       layout:
-        - "Top: search box (editable, pre-filled with query), filter tabs (All, Images, News, Maps, Videos, Shopping, Books)"
-        - "Below tabs: 'About X results (Y seconds)' count"
-        - "Main column: organic results, each with site favicon+name, URL breadcrumb, blue title link, gray snippet"
-        - "Right column (optional): knowledge panel with structured info, images, key facts"
-        - "Bottom: pagination (Gooooooogle with page numbers), Related searches"
-      organic_result:
-        structure: "Each result has: (1) site favicon + site name, (2) URL in green/gray breadcrumb format, (3) blue clickable title — THIS is what you click, (4) snippet — 2-3 lines of gray text describing the page content"
-        behavior: "Click the blue title to navigate to that page. The URL breadcrumb shows where the link goes. The snippet gives a preview of what the page contains."
-      featured_snippet:
-        description: "A prominent box at the very top of results with a direct answer extracted from a webpage. May be a paragraph, list, or table."
-        behavior: "Contains the answer text, often sufficient without clicking through. Source link below the snippet leads to the full page. Also called 'Position Zero'."
-      knowledge_panel:
-        description: "A card on the right side for entities (people, places, companies, movies). Shows image, description, key facts in structured format."
-        behavior: "Contains quick facts. 'More about' link leads to Google's knowledge graph. Sub-links go to official sites, social profiles, etc."
-      people_also_ask:
-        description: "Expandable FAQ-style questions related to your search. Each expands to show a brief answer with source."
-        behavior: "Click a question to expand. Reading one question triggers more related questions to appear below. Useful for exploring a topic."
-      ads:
-        label: "Marked 'Sponsored' in bold text above the result"
-        behavior: "Paid advertisements. Appear at top and bottom. Look like organic results but have the 'Sponsored' label. May be relevant, may not."
-      tabs:
-        all: "Default — shows web results"
-        images: "Shows image results with thumbnails"
-        news: "Shows recent news articles"
-        maps: "Shows map with local results"
-        videos: "Shows video results (mainly YouTube)"
-        shopping: "Shows product listings with prices"
-        books: "Shows book results"
-      tools_button:
-        behavior: "Opens time filter: Past hour, Past 24 hours, Past week, Past month, Past year, Custom range. Also includes verbatim search option."
-      pagination:
-        behavior: "Click 'Next' or page numbers at the bottom. Each page shows ~10 results. URL parameter: &start=10 for page 2, &start=20 for page 3."
-
+        - "Top: search box + tabs/filters"
+        - "Main column: AI Overview (optional) - Featured Snippet (optional) - PAA (optional) - Organic results - Pagination"
+        - "Right column (desktop): Knowledge Panel (optional)"
+      elements:
+        search_box_top:
+          selector: "textarea[name='q']"
+          type: "textarea"
+          behavior: "Same as homepage; supports editing query then Enter."
+          verified: true
+        result_stats:
+          description: "About X results (Y seconds). Sometimes absent."
+          selector_best_known: "#result-stats"
+          verified: true
+        filter_tabs:
+          description: "Tabs targeted by href parameters (tbm for verticals)."
+          images_tab:
+            selector: "a[href*='tbm=isch']"
+            verified: true
+          news_tab:
+            selector: "a[href*='tbm=nws']"
+            verified: true
+          videos_tab:
+            selector: "a[href*='tbm=vid']"
+            verified: true
+          shopping_tab:
+            selector: "a[href*='tbm=shop']"
+            verified: true
+        ai_overview:
+          description: >
+            AI Overview (AIO) is an AI-generated summary above organic results.
+            Often partially collapsed with a Show more control.
+          detection:
+            title_selector: "div[jsname][role='heading'] strong"
+            title_text_must_include: "AI Overview"
+          show_more_selector:
+            css: "div[aria-label='Show more AI Overview']"
+          content_selector:
+            css: "div[jsname][data-rl] div"
+          behavior:
+            default_rule: "Read visible AI Overview text only. Do NOT click Show more unless explicitly required."
+            when_expanded: "Expands AIO section and pushes classic results further down."
+          verified: true
+        organic_result:
+          description: "Standard web result (blue link) block."
+          container_selector_preferred: ".tF2Cxc"
+          container_selector_fallbacks:
+            - ".g"
+            - "div[data-hveid]"
+            - "a:has(h3)"
+          title_selector_preferred: "h3"
+          title_selector_alternates:
+            - ".DKV0Md"
+          link_selector_preferred: ".yuRUbf a"
+          link_selector_fallbacks:
+            - "a:has(h3)"
+          snippet_selector_preferred:
+            - "[data-sncf]"
+          snippet_selector_fallbacks:
+            - ".VwiC3b"
+          sitelinks_selector_best_effort:
+            within_container: "a[href]"
+          how_to_click:
+            instruction: "Click the h3 title (or its parent <a>)."
+            selector: "a:has(h3)"
+          verified_partial: true
+        featured_snippet:
+          description: "Position-zero extracted answer box."
+          detection_selectors:
+            primary_css: "[data-attrid='wa:/description']"
+            alternates:
+              - "div.LGOjhe[data-attrid='wa:/description']"
+          content_extraction:
+            preferred: "Read all visible text inside the detected featured snippet container."
+          verified_partial: true
+        people_also_ask:
+          description: "Accordion list of questions. Expanding one may load more."
+          detection_xpath:
+            xpath: "//div[@jscontroller and @jsname and @jsaction][.//div[@role='heading' and contains(., 'People also ask')]]"
+          inner_container_selector:
+            css: "[data-sgrd='true']"
+          question_item_detection:
+            best_effort_css:
+              - "[aria-expanded]"
+              - "[jsname='Cpkphb']"
+          expand_action:
+            instruction: "Click the question row (element that toggles aria-expanded)."
+          verified: true
+        knowledge_panel:
+          description: "Right-side entity panel on desktop."
+          container_selectors:
+            - ".kp-wholepage"
+            - "#rhs .kp-wholepage"
+          title_selector: "[data-attrid='title']"
+          subtitle_selector: "[data-attrid='subtitle']"
+          description_selector: ".kno-rdesc span"
+          website_link_selector: "a[data-attrid='visit_official_site']"
+          facts_selector_best_effort:
+            - "div[data-attrid^='kc:/']"
+            - "div[data-attrid^='ss:/']"
+          verified_partial: true
+        ads:
+          description: "Paid placements. Must be detected and skipped."
+          detection:
+            top_ads_container: "#tads"
+            bottom_ads_container: "#bottomads"
+            ad_block_attribute: "div[data-text-ad='1']"
+            sponsored_label_text: "Sponsored"
+          skip_rule: "Never click ads."
+          verified_partial: true
+        pagination:
+          preferred_strategy: "Modify URL &start={{offset}} instead of clicking Next."
+          url_param:
+            name: "start"
+            values:
+              page_2: 10
+              page_3: 20
+          verified: true
     any_website:
-      description: "After clicking a search result, you navigate to a third-party website."
-      common_elements:
-        cookie_banners: "Most EU sites show cookie consent banners. Look for 'Accept', 'Accept all', 'I agree', 'Agree' buttons. Some have 'Reject all' or 'Manage preferences' options."
-        navigation_bar: "Usually at the top with logo, menu links, search, and account options."
-        main_content: "The article/page content, usually in a <main> or <article> element. This is what you want to read."
-        sidebar: "Optional — may contain related articles, ads, or table of contents."
-        footer: "Links to about, contact, privacy policy, terms. Usually not useful for content."
-        paywall: "Some sites hide content behind a subscription wall after showing 1-2 paragraphs. Look for 'Subscribe', 'Sign in to read', or content fading to white. Go back and try another source."
-        popup_overlays: "Newsletter signup, cookie consent, app download prompts. Look for close button (X), 'No thanks', or press Escape."
-
+      description: "Generic website reading after clicking an organic result."
+      elements:
+        main_content:
+          selectors:
+            - "main"
+            - "article"
+            - "[role='main']"
+            - ".post-content"
+            - ".entry-content"
+            - ".article-content"
+          behavior: "Prefer extracting text from the most content-dense element."
+        headings:
+          selectors: "h1, h2, h3, h4, h5, h6"
+          behavior: "Use headings for page structure; jump to relevant sections."
+        table_of_contents:
+          selectors:
+            - "#toc"
+            - ".toc"
+            - "[class*='table-of-contents' i]"
+            - "nav[aria-label*='Contents' i]"
+          behavior: "Click section links to jump rather than scrolling blindly."
+        cookie_banners:
+          detection_selectors:
+            - "[role='dialog']"
+            - "[class*='cookie' i]"
+            - "[class*='consent' i]"
+            - "[class*='gdpr' i]"
+            - "[id*='cookie' i]"
+            - "[id*='consent' i]"
+          dismiss_button_texts_en:
+            - "Accept"
+            - "Accept all"
+            - "Allow all"
+            - "I agree"
+            - "OK"
+            - "Got it"
+            - "Continue"
+          dismiss_button_texts_fr:
+            - "Tout accepter"
+            - "Accepter"
+          dismiss_button_texts_nl:
+            - "Alles accepteren"
+            - "Accepteren"
+          dismiss_button_texts_de:
+            - "Alle akzeptieren"
+            - "Akzeptieren"
+          behavior: "Click the most permissive accept/continue button."
+        paywall:
+          detection_clues:
+            - "overlay blocking scroll"
+            - "blurred/truncated article body"
+            - "Subscribe to continue"
+          behavior: "Go back immediately and choose another source."
+        login_wall:
+          detection_clues:
+            - "Sign in to continue"
+            - "Create an account"
+            - "Log in"
+          behavior: "Go back immediately and choose another source."
+        dynamic_loading:
+          detection_clues:
+            - "infinite scroll"
+            - "loading spinners in main content"
+          behavior: "Scroll gradually; wait briefly after each scroll; re-check for new text."
   workflows:
+    open_google_homepage:
+      description: "Open Google homepage in stable UI language."
+      steps:
+        - action: "navigate"
+          url: "https://www.google.com/webhp?hl=en&gl=GB"
+          notes: "Force English UI for stable selectors."
+        - action: "wait"
+          for: "dom_ready"
+          duration_ms: 1500
+    handle_eu_consent_if_present:
+      description: "Dismiss EU cookie/GDPR consent dialog if blocking."
+      steps:
+        - action: "detect"
+          target: "[role='dialog']"
+          store_as: "cookie_dialog_present"
+        - action: "click_if_present_xpath"
+          target: "//button[contains(., 'Accept')]"
+        - action: "wait"
+          for: "overlay_gone"
+          duration_ms: 800
     basic_search:
-      - "Type query in the search box (textarea[name='q'])"
-      - "Press Enter"
-      - "Scan the results — check featured snippet first, then read titles and snippets of organic results"
-      - "Click the most relevant result by its blue title text"
-      - "Read the page, scroll to find the information you need"
-      - "If the page isn't useful, go back and try the next result"
-
-    research_multiple_sources:
-      - "Search for your topic"
-      - "Click the first credible result, read thoroughly, extract key data"
-      - "Go back to search results"
-      - "Click a second source, read and compare with what you found"
-      - "If needed, refine the search with different terms"
-      - "Synthesize findings from 2-3 sources into a comprehensive answer"
-
-    refine_search:
-      - "Click the search box at the top of the results page"
-      - "Clear or modify the query"
-      - "Press Enter to search with new terms"
-
-    site_specific_search:
-      - "Type: site:wikipedia.org quantum computing"
-      - "This searches only within wikipedia.org"
-      - "Useful for targeting specific trusted sources"
-
-    find_recent_info:
-      - "Search your query"
-      - "Click 'Tools' below the search box"
-      - "Select time range: Past hour, Past 24 hours, Past week, Past month, Past year"
-      - "Results are filtered to only show content from that time period"
-
-  search_operators:
-    quotes: "\"exact phrase\" — finds pages with this exact phrase"
-    minus: "-word — excludes pages containing this word"
-    site: "site:domain.com — searches only within a specific website"
-    filetype: "filetype:pdf — finds only PDF documents"
-    intitle: "intitle:word — finds pages with this word in the title"
-    OR: "word1 OR word2 — finds pages with either word"
-    wildcard: "\"largest * in the world\" — asterisk acts as placeholder for any word"
-    range: "camera $200..$500 — finds results within a price range"
-
-  url_patterns:
-    search: "google.com/search?q=your+query"
-    page_2: "google.com/search?q=your+query&start=10"
-    image_search: "google.com/search?q=your+query&tbm=isch"
-    news_search: "google.com/search?q=your+query&tbm=nws"
-    time_filter: "google.com/search?q=your+query&tbs=qdr:w (w=week, d=day, m=month, y=year)"
-
+      description: "Search for a query on Google."
+      inputs:
+        - name: "query"
+          type: "string"
+      steps:
+        - action: "click"
+          target: "textarea[name='q']"
+          notes: "Focus the search box (textarea, not input)."
+        - action: "select_all"
+          notes: "Ctrl+A / Cmd+A to select existing text."
+        - action: "type"
+          target: "textarea[name='q']"
+          value: "{{query}}"
+          notes: "Typing triggers autocomplete; ignore it."
+        - action: "press_key"
+          key: "Enter"
+          notes: "Preferred submission method."
+        - action: "wait"
+          for: "dom_ready"
+          duration_ms: 2000
+    read_search_results:
+      description: "Read SERP modules in priority order then scan organic results."
+      steps:
+        - action: "detect"
+          target: "div[jsname][role='heading'] strong"
+          store_as: "ai_overview_title_present"
+        - action: "read_if_present"
+          target: "div[jsname][data-rl] div"
+          notes: "Read visible AI Overview content; do not expand."
+        - action: "read_if_present"
+          target: ".kp-wholepage"
+          notes: "Extract Knowledge Panel title/description/facts."
+        - action: "detect"
+          target: "[data-attrid='wa:/description']"
+          store_as: "featured_snippet_present"
+        - action: "read_if_present"
+          target: "[data-attrid='wa:/description']"
+          notes: "Read snippet text."
+        - action: "scroll_down"
+          amount: "one_viewport"
+          notes: "Scroll to ensure organic results are visible."
+        - action: "read"
+          target: "all_visible_organic_results"
+          notes: "For each .tF2Cxc: read h3, href (.yuRUbf a), snippet ([data-sncf]). Skip ads."
+    choose_organic_result:
+      description: "Pick the best organic result based on credibility and relevance."
+      steps:
+        - action: "evaluate"
+          notes: "Prefer reputable sources; avoid duplicates, PDFs, video-only sources."
+    click_chosen_result:
+      description: "Click a chosen organic result safely."
+      inputs:
+        - name: "result_index"
+          type: "integer"
+      steps:
+        - action: "scroll_to"
+          target: "organic_result[{{result_index}}]"
+          notes: "Bring result into view before clicking."
+        - action: "click"
+          target: "organic_result[{{result_index}}] a:has(h3)"
+          notes: "Click the title link."
+        - action: "wait"
+          for: "dom_ready"
+          duration_ms: 2500
+    read_any_website:
+      description: "Dismiss popups then extract main content."
+      steps:
+        - action: "dismiss_popups"
+          notes: "Handle cookie banners/dialogs first."
+        - action: "detect"
+          target: "paywall_or_login_wall"
+          store_as: "blocked"
+          notes: "If blocked, go back."
+        - action: "read_page_structure"
+          notes: "Extract headings outline from h1-h6."
+        - action: "detect"
+          target: "table_of_contents"
+          store_as: "toc_present"
+          notes: "If TOC exists, navigate to relevant section."
+        - action: "scroll_and_read"
+          notes: "Scroll gradually; extract text from main/article."
+    go_back_to_results:
+      description: "Return to SERP and continue."
+      steps:
+        - action: "go_back"
+          notes: "Browser history back."
+        - action: "wait"
+          for: "dom_ready"
+          duration_ms: 2000
+        - action: "scroll_to"
+          target: "last_seen_result_or_anchor"
+          notes: "Resume from where you left off."
+    paginate_results_by_url:
+      description: "Move to next SERP page by URL parameter."
+      inputs:
+        - name: "current_start"
+          type: "integer"
+      steps:
+        - action: "navigate"
+          url: "https://www.google.com/search?q={{current_query}}&hl=en&gl=GB&pws=0&start={{current_start + 10}}"
+        - action: "wait"
+          for: "dom_ready"
+          duration_ms: 2000
+  rules:
+    - "Always set hl=en for Google URLs to stabilise headings/ARIA labels."
+    - "Always handle EU consent dialogs before interacting: if [role='dialog'] exists, click Accept and wait."
+    - "Use textarea[name='q'] as the search box. Do NOT target input[name='q'] on modern Google Search."
+    - "Prefer submitting searches with Enter key; buttons may swap or be invisible after autocomplete."
+    - "Never click ads: skip anything inside #tads/#bottomads or matching div[data-text-ad='1']."
+    - "If AI Overview is present, read only visible content; do NOT click Show more by default."
+    - "If URL ends with .pdf OR link text indicates PDF, do NOT click."
+    - "Never click YouTube/video-only results as first choice; prefer readable HTML pages."
+    - "If a page shows paywall/login wall, go back immediately."
+    - "Always scroll target result into view before clicking."
+    - "After going back to results, continue from next unvisited organic result."
+    - "Stop after 5 high-quality sources or when sufficient information collected."
   tips:
-    - "Adding the current year to queries (e.g., 'best laptops 2026') returns more recent results"
-    - "Wikipedia is often the most comprehensive source for factual topics"
-    - "Official sites (.gov, .edu, company domains) are more authoritative than blogs"
-    - "If a page is in another language, Google may show a 'Translate this page' link"
-    - "The 'Tools' button lets you filter by time — essential for finding current information"
-    - "Google Search Console data shows that the first 3 results get ~55% of all clicks — check those first"
-    - "For product research, Google Shopping (Shopping tab) shows prices across retailers"
-    - "Google Scholar (scholar.google.com) is better for academic and research papers"
-    - "If you see a featured snippet with the answer, verify it — snippets are auto-extracted and occasionally wrong"
-    - "Autocomplete suggestions reflect popular searches — they can inspire better query phrasing"
+    - "Use pws=0 to reduce personalisation variance."
+    - "Use start=10/start=20 pagination; do not rely on num=100."
+    - "If SERP is dominated by AI/rich modules, use &udm=14 for web-only classic links."
+    - "Knowledge Panel fields extracted using data-attrid keys and .kno-rdesc for descriptions."
+    - "Autocomplete suggestions can be extracted via [role='option'][aria-label] within the listbox."

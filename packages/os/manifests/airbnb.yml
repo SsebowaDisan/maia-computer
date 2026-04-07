@@ -91,6 +91,18 @@ navigation:
       - "Type your question (about check-in, amenities, neighborhood, etc.)"
       - "Send the message — the host typically responds within 24 hours"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for searching and browsing Airbnb listings only."
+    - "NEVER complete a purchase without explicit user approval."
+    - "NEVER click 'Reserve' or confirm any booking without explicit user approval."
+    - "Use the multi-step search bar: enter destination in 'Where', set dates in 'Check in/Check out', set guest count in 'Who', then click Search."
+    - "Use the Filters button to narrow results by Price range, Type of place, Rooms and beds, and Amenities."
+    - "Click listing cards to view full details including photos, amenities, reviews, and total price breakdown."
+    - "Always check the total price (including cleaning fee, service fee, and taxes) on the listing detail page, not just the per-night price."
+    - "Check ratings by category (Cleanliness, Location, Value) and read recent reviews before recommending a listing."
+    - "Use the map on the search results page to see listing locations relative to landmarks and neighborhoods."
+    - "NEVER contact hosts, modify wishlists, or change account settings without explicit user approval."
+
   url_patterns:
     search: "airbnb.com/s/City-Name/homes?checkin=YYYY-MM-DD&checkout=YYYY-MM-DD&adults=N"
     listing: "airbnb.com/rooms/LISTING_ID"

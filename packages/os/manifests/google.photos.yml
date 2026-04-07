@@ -116,6 +116,16 @@ navigation:
       - "Archive removes from main grid without deleting — photos still searchable and in albums"
       - "Favorites (heart icon in viewer) bookmarks photos for quick access"
 
+  rules:
+    - "Use the search bar at the top to find photos — type person names, places, objects, activities, or dates. AI matches visual content, not just metadata."
+    - "Click a photo thumbnail to open it in full-screen viewer. Use left/right arrow keys to navigate between photos."
+    - "NEVER try to search the web from inside Google Photos. This app is for photo browsing, organizing, and editing only."
+    - "To select multiple photos, hover over thumbnails and click the circular checkbox at top-left of each. Do not click the photo itself or it will open."
+    - "To create an album, click 'Albums' in the sidebar, then '+ Create album', give it a title, and add photos."
+    - "To upload photos, click the upload button (cloud icon) at the top or drag files into the browser window."
+    - "To edit a photo, open it in the viewer and click the Edit button. Use tabs for Suggestions, Filters, Crop, and Adjust."
+    - "Click the heart icon in the photo viewer to favorite a photo for quick access via the Favorites section."
+
   tips:
     - "AI search understands concepts — search 'sunset', 'food', 'selfie', 'documents', 'receipts', or even colors like 'red'"
     - "Name faces in Explore > People & Pets to enable searching by person name"

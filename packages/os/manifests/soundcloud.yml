@@ -54,6 +54,16 @@ navigation:
       - "Click play on tracks that interest you"
       - "The bottom player persists as you browse"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for searching and playing music on SoundCloud only."
+    - "Use the search bar at the top and type an artist or track name, then click the 'Tracks' tab to filter results."
+    - "Click the play button on any track card to start playback in the persistent bottom player."
+    - "Click anywhere on the waveform visualization to jump to that point in the track."
+    - "The bottom player persists across pages — browse freely while music continues playing."
+    - "Click an artist name to visit their profile and see all their tracks."
+    - "NEVER upload tracks, create playlists, follow artists, or like tracks without explicit user approval."
+    - "NEVER repost or comment on tracks without explicit user approval."
+
   tips:
     - "The waveform doubles as a progress bar — click anywhere to jump to that point"
     - "The bottom player persists across pages — navigate freely while music plays"

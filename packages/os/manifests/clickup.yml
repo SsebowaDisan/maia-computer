@@ -68,6 +68,17 @@ navigation:
       - "Create Lists within Folders for task categories"
       - "Add tasks to Lists and manage them through statuses"
 
+  rules:
+    - "To create a task, navigate to the correct List in the sidebar, then click '+ Add Task' in the desired status section."
+    - "Type the task name and press Enter to save. Then click the task to open it and set assignee, priority, due date, and description."
+    - "ALWAYS navigate to the correct Space > Folder > List before creating a task. Tasks belong to Lists."
+    - "NEVER try to search the web from inside ClickUp. This app is for project and task management only."
+    - "Use the left sidebar to expand Spaces, Folders, and Lists in the workspace hierarchy. Click a List to view its tasks."
+    - "Press Cmd+K (Ctrl+K) to open universal search for finding tasks, docs, and people quickly."
+    - "Switch between view tabs (List, Board, Gantt, Calendar) at the top to see the same tasks in different formats."
+    - "Click a task name in the list to open the task detail view with description, subtasks, checklists, and comments."
+    - "Change task status by clicking the status field on the task row and selecting from the dropdown."
+
   tips:
     - "Cmd+K (Ctrl+K) is the fastest way to find anything in ClickUp"
     - "Press 'T' as a shortcut to create a task in the current view"

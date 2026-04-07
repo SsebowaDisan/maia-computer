@@ -110,6 +110,18 @@ navigation:
       - "Access Favorites from your Profile > Favorites tab"
       - "Organize into collections by topic"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for browsing TikTok videos only."
+    - "Use the search icon or search bar to find specific content by keyword, hashtag, creator, or sound."
+    - "Use tabs in search results (Top, Videos, Users, Sounds, Hashtags) to filter by content type."
+    - "Scroll down on the For You page to advance to the next video, scroll up for previous."
+    - "Click the spinning audio disc on a video to discover all videos using the same sound."
+    - "Click the @username or avatar on a video to visit the creator's profile and see all their content."
+    - "NEVER like, comment, follow, share, or bookmark videos without explicit user approval."
+    - "NEVER create or upload videos without explicit user approval."
+    - "Switch to the Following tab in the left sidebar for a chronological feed from followed creators."
+    - "Click the comment icon to read the comment section for additional context on a video."
+
   tips:
     - "Videos auto-play with sound — click the video to pause, scroll to move on"
     - "The For You algorithm learns from watch time — watching a video fully signals interest"

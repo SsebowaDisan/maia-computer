@@ -60,6 +60,15 @@ navigation:
       - "Type a keyword, style, or creator name"
       - "Browse results and click projects to view them"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for browsing creative portfolios and design projects only."
+    - "Click the search icon in the top navigation to open the search bar. Type keywords, styles, or creator names to find projects."
+    - "Use the category links (Graphic Design, Photography, UI/UX, etc.) to filter the Discover feed by creative discipline."
+    - "Click project cards in the grid to open the full project page. Scroll down fully — projects can be very long with many images."
+    - "Check the 'Tools used' and tags at the bottom of project pages to discover similar work and related techniques."
+    - "Click creator names to visit their profile and see their full portfolio of projects."
+    - "Use the Discover feed for curated and trending work. Scroll the feed to browse beyond the initial results."
+
   tips:
     - "Projects can be very long — scroll fully to see all the creator's assets"
     - "The Discover feed is algorithmically curated, showing trending and featured work"

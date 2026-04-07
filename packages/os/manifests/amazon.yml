@@ -113,6 +113,18 @@ navigation:
       - "Find the order in the list"
       - "Click 'Track package' to see delivery status, carrier, and estimated arrival"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for searching and browsing Amazon products only."
+    - "NEVER complete a purchase without explicit user approval."
+    - "NEVER click 'Buy Now', 'Add to Cart', or 'Place your order' without explicit user approval."
+    - "Use the search bar (#twotabsearchtextbox) to search for products by name, category, or keyword."
+    - "Use left sidebar filters (Brand, Price range, Star rating, Prime) to narrow search results."
+    - "Sort results using the dropdown: by Price, Customer Reviews, Newest Arrivals, or Best Sellers."
+    - "Click a product title to view full details including images, bullet points, and customer reviews."
+    - "Check star rating, review count, and seller info ('Ships from' and 'Sold by') before recommending products."
+    - "Read the star histogram and both positive and critical reviews to assess product quality."
+    - "NEVER modify account settings, payment methods, or shipping addresses without explicit user approval."
+
   url_patterns:
     search: "amazon.com/s?k=your+query"
     product: "amazon.com/dp/ASIN"

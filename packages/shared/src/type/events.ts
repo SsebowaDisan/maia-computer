@@ -39,6 +39,7 @@ export type OrchestratorEvent =
   | { type: 'orchestrator.discussion_started'; questionId: string; agentId: string; question: string; timestamp: number }
   | { type: 'orchestrator.theatre_arrange'; layout: unknown[]; focusAppId?: string; timestamp: number }
   | { type: 'orchestrator.theatre_focus'; appId: string; timestamp: number }
+  | { type: `orchestrator.shared_state.${string}`; state: unknown; timestamp: number }
 
 export type MaiaEvent =
   | BrainEvent

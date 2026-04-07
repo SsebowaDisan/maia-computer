@@ -6,6 +6,7 @@ import {
   AppRegistry,
   SessionStore,
   loadManifests,
+  ManifestGenerator,
   EventBus,
   NetworkBrain,
   DOMBrain,
@@ -19,6 +20,7 @@ import {
   OpenAIAdapter,
   MessageBus,
   CostTracker,
+  WorkspaceRegistry,
 } from '@maia/os'
 import type { WebContainerAPI, DOMElement } from '@maia/os'
 import type { AppBounds, IPCCommands, InstalledApp } from '@maia/shared'
@@ -35,6 +37,7 @@ const BRIDGE_SCRIPT_PATH = join(OS_DIR, 'src', 'bridge', 'bridge.js')
 const SCRAPER_SCRIPT_PATH = join(OS_DIR, 'src', 'bridge', 'scraper.js')
 const NAVIGATOR_SCRIPT_PATH = join(OS_DIR, 'src', 'bridge', 'navigator.js')
 const PERFORMER_SCRIPT_PATH = join(OS_DIR, 'src', 'bridge', 'performer.js')
+// pageNerve.js removed — App Agents use direct bridge calls instead
 
 // ── State (initialized in init()) ──────────────────────────────
 
@@ -55,6 +58,8 @@ let visionBrain: VisionBrain
 let intelligence: IntelligenceRouter
 let bridgeScript = ''
 let appManifests: Awaited<ReturnType<typeof loadManifests>> = []
+let manifestGenerator: ManifestGenerator
+const workspaceRegistry = new WorkspaceRegistry()
 
 function normalizeBounds(bounds: AppBounds): AppBounds {
   const x = Math.floor(bounds.x)
@@ -121,6 +126,24 @@ const containerAPI: WebContainerAPI = {
 
     mainWindow.addBrowserView(view)
     view.setBounds(normalizeBounds(config.bounds))
+
+    // Prevent links from opening in new windows — everything stays in the webview
+    view.webContents.setWindowOpenHandler(({ url }) => {
+      view.webContents.loadURL(url)
+      return { action: 'deny' }
+    })
+
+    // Prevent new-window events (catches PDFs, target=_blank, window.open)
+    view.webContents.on('will-navigate', (_event, url) => {
+      // PDFs and downloads stay in the webview — Chromium renders PDFs natively
+    })
+
+    // Block any child windows that slip through
+    view.webContents.on('did-create-window' as string, (childWindow: BrowserWindow) => {
+      const childUrl = childWindow.webContents.getURL()
+      childWindow.close()
+      view.webContents.loadURL(childUrl)
+    })
 
     // Inject bridge script on every page load
     view.webContents.on('did-finish-load', () => {
@@ -529,9 +552,25 @@ function setupIPC(): void {
   ipcMain.handle('app:install', async (_event, payload: { url: string; name: string; icon: string; manifestId?: string }) => {
     const appId = `app_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`
 
+    // Check if we have a pre-built manifest for this app
+    let manifestId = payload.manifestId
+    const hasManifest = manifestId && appManifests.some((m) => m.id === manifestId)
+
+    // If no manifest exists, generate one using LLM knowledge
+    if (!hasManifest && manifestGenerator) {
+      try {
+        const generated = await manifestGenerator.generate(payload.url, payload.name)
+        appManifests.push(generated)
+        manifestId = generated.id
+        console.log(`Generated manifest for custom app: ${payload.name} → ${manifestId}`)
+      } catch (error) {
+        console.warn('Failed to generate manifest for custom app:', error)
+      }
+    }
+
     registry.installApp({
       id: appId,
-      manifestId: payload.manifestId ?? appId,
+      manifestId: manifestId ?? appId,
       name: payload.name,
       icon: payload.icon,
       url: payload.url,
@@ -570,16 +609,25 @@ function setupIPC(): void {
               if (bridgeScript) {
                 wc.executeJavaScript(bridgeScript).then(() => {
                   console.log('Bridge injected successfully for', payload.appId)
-                  // Verify bridge works
                   return wc.executeJavaScript('typeof window.__maia_bridge')
                 }).then((result) => {
                   console.log('Bridge check:', result)
+                  // Register workspace — app is ready for agents
+                  workspaceRegistry.register({
+                    appId: payload.appId,
+                    appName: appData?.name ?? '',
+                    appUrl: appData?.url ?? '',
+                    webContentsId: wc.id,
+                    bridgeReady: true,
+                    lastActivity: Date.now(),
+                  })
                 }).catch((e) => {
                   console.log('Bridge injection failed:', (e as Error).message)
                 })
                 wc.on('did-finish-load', () => {
                   wc.executeJavaScript(bridgeScript).then(() => {
                     console.log('Bridge re-injected on navigation')
+                    workspaceRegistry.markReady(payload.appId)
                   }).catch(() => {})
                 })
               }
@@ -692,6 +740,7 @@ function setupIPC(): void {
         intelligence, eventBus, llm, messageBus,
         () => registry.getAllApps(),
         appManifests,
+        workspaceRegistry,
       )
       console.log('Orchestrator created, apps:', registry.getAllApps().length)
     } catch (e) {
@@ -825,8 +874,31 @@ function setupEventForwarding(): void {
 
 async function loadAppStore(): Promise<void> {
   appManifests = await loadManifests(MANIFEST_DIR)
+  manifestGenerator = new ManifestGenerator(llm, MANIFEST_DIR)
   // Store manifests for the app store UI
   ipcMain.handle('appstore:getManifests', () => appManifests)
+}
+
+// ── Register installed apps as workspaces ──────────────────────
+// Installed = ready. The user shouldn't think about bridge states.
+
+function registerInstalledApps(): void {
+  const apps = registry.getAllApps()
+  for (const app of apps) {
+    // Check if this app already has a webContents (still open from previous session)
+    const existingWcId = appWebContentsIds.get(app.id)
+    const alreadyOpen = existingWcId !== undefined
+
+    workspaceRegistry.register({
+      appId: app.id,
+      appName: app.name,
+      appUrl: app.url,
+      webContentsId: existingWcId ?? 0,
+      bridgeReady: alreadyOpen, // If already open, bridge was already injected
+      lastActivity: Date.now(),
+    })
+  }
+  console.log(`Registered ${apps.length} installed apps as workspaces (${apps.filter((a) => appWebContentsIds.has(a.id)).length} already open)`)
 }
 
 // ── Window Creation ────────────────────────────────────────────
@@ -865,11 +937,21 @@ function createWindow(): void {
 
 // ── App Lifecycle ──────────────────────────────────────────────
 
+// Prevent ALL new windows from any webContents — everything stays inline
+app.on('web-contents-created', (_event, wc) => {
+  wc.setWindowOpenHandler(({ url }) => {
+    // Navigate the originating webContents to the URL instead of opening a popup
+    wc.loadURL(url)
+    return { action: 'deny' }
+  })
+})
+
 app.whenReady().then(async () => {
   init()
   setupIPC()
   setupEventForwarding()
   await loadAppStore()
+  registerInstalledApps()
   createWindow()
 
   app.on('activate', () => {

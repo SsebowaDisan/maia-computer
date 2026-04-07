@@ -124,6 +124,18 @@ navigation:
       - "Copy the Project URL, anon (public) key, and service role (secret) key"
       - "Or check the API Docs for table-specific endpoints and examples"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing databases, authentication, storage, and edge functions only."
+    - "Use the left sidebar for all navigation: Table Editor, SQL Editor, Database, Authentication, Storage, Edge Functions, Settings."
+    - "Browse and edit data using the Table Editor — click a table name in the left panel, then click cells to edit values inline."
+    - "Run SQL queries in the SQL Editor — write SQL in the Monaco editor and press Cmd+Enter (or click 'Run'). Results appear in a table below."
+    - "Always enable Row Level Security (RLS) on tables — check the shield icon on each table. Create policies to control access."
+    - "Find API keys and the project URL in Settings > API. The anon key is safe for client-side use; the service role key is server-only."
+    - "Create new tables via Table Editor > 'New table'. Define columns with types (text, int4, uuid, bool, jsonb), defaults, and constraints."
+    - "Manage authentication providers in Authentication > Providers. Enable OAuth providers (Google, GitHub) and configure client credentials."
+    - "Use Storage for file management — create buckets, upload files via drag-and-drop, and set buckets as public or private."
+    - "Use SQL Editor templates (left panel) for common operations like creating tables, functions, triggers, and policies."
+
   tips:
     - "Table Editor is best for quick data browsing and editing — SQL Editor for complex queries and DDL"
     - "Cmd+Enter runs the SQL query — no need to click the Run button"

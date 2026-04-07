@@ -59,6 +59,16 @@ navigation:
       - "Click an album or playlist to see its tracks"
       - "Click Play or click individual tracks"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for searching and playing music on Apple Music only."
+    - "Click 'Search' in the left sidebar and type artist, album, or song names to find music."
+    - "Use tabs in search results (Top Results, Artists, Albums, Songs, Playlists) to filter by type."
+    - "Click an album or playlist to see its track list, then click Play or individual tracks to start playback."
+    - "Use the player controls at the top of the page for play/pause, skip, and volume adjustment."
+    - "NEVER add songs to Library, create playlists, or follow artists without explicit user approval."
+    - "Browse the 'Browse' section for featured content, new releases, and curated playlists."
+    - "Click 'Listen Now' in the sidebar for personalized recommendations based on listening history."
+
   tips:
     - "The web player requires an Apple Music subscription for full playback"
     - "Library shows only music you've added — Browse shows the full catalog"

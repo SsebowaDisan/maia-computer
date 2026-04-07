@@ -51,6 +51,16 @@ navigation:
       - "Click a currency card for transaction history"
       - "The total at the top shows the aggregate in your primary currency"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing Wise transfers and balances only."
+    - "NEVER make payments or transfers without explicit user approval."
+    - "NEVER send money, convert currencies, or add recipients without explicit user approval."
+    - "Check currency balance cards on the home page to view balances in each held currency."
+    - "Click a currency card to see its transaction history and account details."
+    - "When the user requests a transfer, always review the exchange rate, fees, and delivery time before confirming."
+    - "The transfer flow shows real-time exchange rates and the exact amount the recipient will receive."
+    - "NEVER modify account settings, add payment methods, or change recipient details without explicit user approval."
+
   tips:
     - "Exchange rates and fees are shown transparently during the transfer flow"
     - "Recipient details vary by country — the form adapts based on the destination"

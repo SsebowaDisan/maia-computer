@@ -40,6 +40,15 @@ navigation:
       - "Ask about the code: 'Explain this function', 'How can I improve this?', 'Find bugs in this code'"
       - "Copilot analyzes the visible code context and responds"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for AI code suggestions and coding assistance only."
+    - "To open Copilot Chat, click the Copilot icon in the bottom-right corner of any GitHub page."
+    - "Type coding questions clearly and specifically in the chat input — include the language, framework, and context."
+    - "When analyzing code, first navigate to the relevant file in the GitHub repository before opening Copilot Chat so it has context."
+    - "Copy code suggestions using the copy button on code blocks — do not manually select and copy text."
+    - "Ask follow-up questions to refine suggestions rather than starting a new conversation from scratch."
+    - "Do not attempt to use Copilot Chat for non-coding tasks like web browsing or general knowledge questions."
+
   tips:
     - "Copilot Chat on GitHub.com has context about the repository you're viewing"
     - "Code blocks in responses have copy buttons for quick use"

@@ -143,6 +143,18 @@ navigation:
       - "Click 'Review changes' button, choose Approve/Request changes/Comment"
       - "Click 'Submit review'"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for browsing repositories, issues, and pull requests only."
+    - "Use the search bar (press '/' to focus) to find repositories, issues, and code. Always prefer search over manual navigation."
+    - "When navigating to a repository, click the repository name link directly — do not type URLs into the address bar."
+    - "To browse files in a repo, use the file tree on the Code tab. Press 't' for fuzzy file finder for fast navigation."
+    - "When reading code, click file names in the file list to open them. Use the breadcrumb path segments to navigate back up."
+    - "To find a specific issue or PR, use the Issues or Pull requests tab and the filter bar (e.g., 'is:open label:bug')."
+    - "When reviewing a pull request, always click the 'Files changed' tab to see the diff before approving or commenting."
+    - "Use the branch selector dropdown to switch branches — do not modify the URL to change branches."
+    - "When creating issues or PRs, fill in the right sidebar fields (labels, assignees, milestone) before submitting."
+    - "Wait for page loads after clicking tabs (Code, Issues, Pull requests, Actions) before interacting with content."
+
   url_patterns:
     repository: "github.com/{owner}/{repo}"
     issues_list: "github.com/{owner}/{repo}/issues"

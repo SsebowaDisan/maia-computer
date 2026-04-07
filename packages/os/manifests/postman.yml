@@ -104,6 +104,18 @@ navigation:
       - "Add test scripts to validate responses"
       - "Use Collection Runner to execute all requests and verify tests pass"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for testing APIs, sending HTTP requests, and managing collections only."
+    - "To send a request, select the HTTP method from the dropdown (GET, POST, PUT, DELETE), enter the URL in the URL bar, and click the blue 'Send' button."
+    - "Use the tabs below the URL bar (Params, Authorization, Headers, Body) to configure the request before sending."
+    - "For JSON request bodies, select Body > raw > JSON, then type the JSON payload in the editor."
+    - "Use environment variables ({{variable_name}}) in URLs and headers. Switch environments via the dropdown in the top-right."
+    - "Read the response in the bottom panel: check the status code, Body tab for response data, and Test Results tab for assertion outcomes."
+    - "Save requests into collections (Cmd+S) for organization. Create collections via the sidebar."
+    - "Write test assertions in the Tests tab using pm.test() to validate responses automatically."
+    - "Use the Postman Console (View > Show Postman Console) to debug requests — it shows raw HTTP traffic."
+    - "Expand collections in the left sidebar by clicking the arrow to see folders and requests. Click a request to load it."
+
   tips:
     - "Environment variables ({{var}}) let you switch between dev/staging/prod without editing URLs or headers"
     - "The 'Tests' tab snippets (right sidebar) provide ready-made assertions — click to insert"

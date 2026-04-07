@@ -84,6 +84,18 @@ navigation:
       - "Type your feedback and press Enter"
       - "Reply to existing comments by clicking on their markers"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for viewing and editing designs, browsing components, and leaving comments only."
+    - "Use the Layers panel (left side) to select elements — it is more reliable than clicking directly on the canvas for nested or overlapping elements."
+    - "Click elements on the canvas to select them. Double-click to drill into groups and frames to access nested elements."
+    - "Use the properties panel (right side) to inspect selected element properties: position, size, colors, fonts, and effects."
+    - "Navigate between pages using the page selector at the top-left of the editor."
+    - "Zoom with Ctrl+scroll (Cmd+scroll) and pan by scrolling. Hold Space and drag for precise panning."
+    - "To leave comments, click the comment icon (speech bubble) in the toolbar, then click on the canvas where you want to place the comment."
+    - "Use the search bar on the home page to find specific files or projects by name."
+    - "Check the view-only badge in the header — if present, you can inspect but not edit the design."
+    - "Select toolbar tools (V for select, F for frame, R for rectangle, T for text) before clicking on the canvas."
+
   tips:
     - "Ctrl+scroll (Cmd+scroll) zooms in and out on the canvas — much faster than using zoom controls"
     - "Press Ctrl+\\ (Cmd+\\) to toggle the UI panels for a clean view of just the canvas"

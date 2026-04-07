@@ -202,15 +202,39 @@ export class Brain {
         appState.scrapedPage?.title ?? '',
         true, // Will update to false if agent goes back
       )
+
+      // Check for duplicate content — if this page says the same thing as one we already read, skip it
+      const isSearchPage = currentUrl.includes('/search') || appState.scrapedPage?.pageType === 'search_results'
+      if (!isSearchPage && this.research.getState().findings.length > 0) {
+        const pageText = appState.pageDescription ?? ''
+        const duplicateOf = this.research.isDuplicateContent(pageText)
+        if (duplicateOf) {
+          logger.info({ currentUrl, duplicateOf }, 'Duplicate content detected — going back')
+          this.publishChatMessage(`this page has the same info as ${duplicateOf} — going back to find a different source`)
+          await this.intelligence.act(this.appId, 'go_back', '')
+          this.research.addPageVisit(currentUrl, appState.scrapedPage?.title ?? '', false, `duplicate of ${duplicateOf}`)
+          this.stepActionCount++
+          await this.sleep(1500)
+          return
+        }
+      }
     }
 
     // Get decision from LLM
     let decision
     try {
       // Build extra context for the LLM
-      const scrollWarning = this.scrollCount >= this.maxScrollsPerStep - 1
-        ? '\nYou have scrolled many times on this page. Consider extracting what you found, clicking a link, or going back.'
-        : ''
+      let scrollWarning = ''
+      if (this.scrollCount >= this.maxScrollsPerStep - 1) {
+        scrollWarning = '\nYou have scrolled many times on this page. Consider extracting what you found, clicking a link, or going back.'
+      } else if (this.scrollCount >= 2) {
+        // If scrolled 2+ times on search results without clicking, push the agent to click
+        const isSearchResults = (appState.scrapedPage?.url ?? '').includes('/search')
+          || (appState.scrapedPage?.pageType === 'search_results')
+        if (isSearchResults) {
+          scrollWarning = '\n⚠️ You have scrolled through the search results. STOP SCROLLING. Pick the best result you\'ve seen and CLICK it NOW. Do not scroll again or search again.'
+        }
+      }
 
       // Get navigation lessons for current domain
       const currentDomain = appState.scrapedPage?.url
@@ -250,14 +274,28 @@ export class Brain {
       this.eventBus.publish({ type: 'brain.thinking', thought: decision.thinking, timestamp: Date.now() })
     }
 
-    // Update research memory with findings
+    // Update research memory with findings + page content
     if (decision.researchUpdate && decision.researchUpdate.length > 0 && currentUrl) {
       const hostname = new URL(currentUrl).hostname.replace('www.', '')
+
+      // Capture the actual page content for later use (writing reports, etc.)
+      // Use the page description which contains the readable text
+      const pageContent = appState.scrapedPage?.content
+        ? appState.scrapedPage.content
+            .map((item: { type?: string; title?: string; text?: string }) =>
+              item.title ? `${item.title}: ${item.text ?? ''}` : item.text ?? '',
+            )
+            .filter(Boolean)
+            .join('\n')
+            .slice(0, 3000) // Cap at 3000 chars to avoid context overflow
+        : ''
+
       this.research.addFinding(
         hostname,
         currentUrl,
         decision.researchUpdate,
         appState.scrapedPage?.pageType ?? 'unknown',
+        pageContent,
       )
 
       // Show extraction pulse for visual feedback
@@ -267,6 +305,33 @@ export class Brain {
     // Highlight important text on the page (progressive)
     if (decision.highlights && decision.highlights.length > 0) {
       await this.intelligence.highlightKeywords(this.appId, decision.highlights)
+    }
+
+    // HARDCODED: Block clicks on already-visited domains BEFORE any visuals or chat.
+    // Silently discard the decision and let the next loop iteration pick a different result.
+    // The user never sees a failed click — the agent just picks something else.
+    if (decision.action?.type === 'click' && decision.action.target) {
+      const isOnSearchResults = (appState.scrapedPage?.url ?? '').includes('/search')
+        || appState.scrapedPage?.pageType === 'search_results'
+
+      if (isOnSearchResults) {
+        const visitedDomains = this.research.getState().pagesVisited
+          .map((p) => { try { return new URL(p.url).hostname.replace('www.', '') } catch { return '' } })
+          .filter(Boolean)
+
+        const targetLower = decision.action.target.toLowerCase()
+        const matchedDomain = visitedDomains.find((domain) =>
+          targetLower.includes(domain.split('.')[0] ?? ''),
+        )
+
+        if (matchedDomain) {
+          logger.warn({ target: decision.action.target, matchedDomain }, 'Silently blocked revisit — forcing new decision')
+          // Don't show anything to user — just silently retry with a hint
+          this.recentActions.push(`BLOCKED: tried to click "${decision.action.target}" but already visited ${matchedDomain}`)
+          this.stepActionCount++
+          return // Next executeStep() will get a new decision with the BLOCKED action in recent history
+        }
+      }
     }
 
     // Post team message
@@ -347,6 +412,30 @@ export class Brain {
           return
         }
         this.research.addSearch(decision.action.value)
+
+        // AUTO-PRESS ENTER after typing in a search box.
+        // The LLM frequently forgets to press Enter after typing a search query.
+        // This is hardcoded — not a prompt instruction — so it always happens.
+        const isSearchBox = decision.action.target?.includes('[name=')
+          || decision.action.target?.includes('search')
+          || decision.action.target?.includes('textarea')
+          || decision.action.target?.includes('input')
+          || decision.action.target?.toLowerCase().includes('q')
+        if (isSearchBox) {
+          logger.info({ query: decision.action.value }, 'Auto-pressing Enter after search query')
+          await this.sleep(200)
+          await this.intelligence.act(this.appId, 'press_key', 'Enter')
+          this.recentActions.push('press_key(Enter) [auto]')
+
+          // The Enter triggers a page navigation (search results load).
+          // Wait for the new page to settle before continuing.
+          await this.sleep(1500)
+          await this.waitForPageReady()
+          await this.sleep(500)
+          logger.info('Page settled after auto-Enter search submission')
+          this.stepActionCount++
+          return // Exit early — the page changed, next executeStep() will read the new state
+        }
       }
 
       // If going back, mark previous page as not useful and learn from the failure
@@ -524,7 +613,19 @@ export class Brain {
     if (!nav) return ''
 
     const parts: string[] = [`\nApp navigation guide for ${appName ?? 'this app'}:`]
+
+    // Put RULES first so the LLM sees them before anything else
+    const rules = nav['rules']
+    if (Array.isArray(rules)) {
+      parts.push(`\n  ⚠️ RULES FOR THIS APP (you MUST follow these):`)
+      for (const rule of rules) {
+        parts.push(`    - ${rule}`)
+      }
+      parts.push('')
+    }
+
     for (const [key, value] of Object.entries(nav)) {
+      if (key === 'rules') continue // Already handled above
       if (Array.isArray(value)) {
         parts.push(`  ${key}:`)
         for (const item of value) {

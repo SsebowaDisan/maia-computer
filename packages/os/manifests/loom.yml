@@ -57,6 +57,16 @@ navigation:
       - "Or browse tabs (My Videos, Shared with me)"
       - "Click a video card to open the player"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for recording, browsing, and sharing video messages only."
+    - "Before sharing any video link, verify the correct video is selected. Shared links are accessible to anyone with the URL."
+    - "To find a specific video, use the search bar at the top of the library page. Browse tabs (My Videos, Shared with me) to filter by ownership."
+    - "Never click 'New video' or 'Record' unless the user explicitly asks to start a recording — it will request screen and microphone permissions."
+    - "When recording, choose the correct mode (Screen + Camera, Screen Only, Camera Only) before clicking Record."
+    - "After recording, the video uploads automatically. Copy the share link from the player page to send to others."
+    - "Click a video card in the library to open the player page with share link, analytics, and comments."
+    - "Videos can be trimmed and edited from the player page after recording — do not re-record unless the user asks."
+
   tips:
     - "Videos upload automatically after recording — there is no manual upload step"
     - "Share links work without the recipient needing a Loom account"

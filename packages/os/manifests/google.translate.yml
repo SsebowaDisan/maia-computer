@@ -86,6 +86,16 @@ navigation:
       - "Google detects text in the image and shows translation overlaid or below"
       - "Useful for signs, menus, and handwritten text"
 
+  rules:
+    - "Click the source text area on the left to focus it, then type or paste the text to translate. Translation happens instantly — no submit button needed."
+    - "ALWAYS set the target language before entering text if the default is not correct. Click the target language selector above the right panel."
+    - "Use 'Detect language' as the source language when unsure of the input language — Google will auto-identify it."
+    - "NEVER try to search the web from inside Google Translate. This app is for translation only."
+    - "Click the swap button (double arrows) to reverse source and target languages for back-translation verification."
+    - "Click the copy icon below the translation output to copy the translated text to the clipboard."
+    - "For document translation, click the 'Documents' tab and upload a file (PDF, DOCX, PPTX, XLSX up to 10MB)."
+    - "For single words, scroll below the translation to see alternative translations, definitions, and example sentences."
+
   url_patterns:
     basic: "translate.google.com"
     with_text: "translate.google.com/?sl=en&tl=es&text=hello"

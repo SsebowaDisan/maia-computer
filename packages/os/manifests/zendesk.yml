@@ -106,6 +106,18 @@ navigation:
       - "Use the bulk action bar that appears at the top"
       - "Apply a macro, change status, or reassign in bulk"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing support tickets and customer service only."
+    - "Before sending any reply, verify the composer mode: 'Public reply' sends to the customer, 'Internal note' (yellow background) is agent-only. Sending an internal note as a public reply exposes private information."
+    - "Before sending any message, verify the recipient and content. Public replies are sent to the customer and cannot be unsent."
+    - "Navigate using the left sidebar: Views is the primary work area for filtered ticket lists. Click a view to load its ticket queue."
+    - "Always use the 'Submit as' button with the correct status: Open, Pending (waiting for customer), Solved, or On-hold. This sends the reply and changes status in one action."
+    - "Read the full conversation thread before responding. Check the channel indicator (email, chat, phone) to understand how the customer contacted support."
+    - "Use macros from the ticket toolbar for common workflows like 'Escalate to tier 2' or 'Request more info'. Review the macro output before submitting."
+    - "Search tickets using the search icon in the top bar. Use operators like status:open, priority:urgent, tags:billing for precise results."
+    - "Multiple tickets can be open in tabs simultaneously. Check unsaved changes (dot indicator on tab) before switching tickets."
+    - "Set Tags in the right sidebar for categorization — tags drive automation triggers and help with reporting."
+
   tips:
     - "'Public reply' sends to the customer; 'Internal note' is visible only to agents — always check the toggle"
     - "'Submit as' changes the ticket status when you send — use 'Submit as Pending' when waiting for customer response"

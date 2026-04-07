@@ -135,6 +135,18 @@ navigation:
     date: "=TODAY(), =NOW(), =DATE(2026, 4, 6), =DATEDIF(A1, B1, 'D'), =WEEKDAY(A1), =EOMONTH(A1, 0)"
     array: "=ARRAYFORMULA(A1:A10 * B1:B10), =FILTER(A1:C10, C1:C10>100), =SORT(A1:C10, 3, FALSE), =UNIQUE(A1:A100), =QUERY(A1:D100, 'SELECT A, SUM(D) GROUP BY A')"
 
+  rules:
+    - "ALWAYS click a cell to select it before typing data. Never type without first clicking the target cell."
+    - "Press Enter to confirm data and move down one row. Press Tab to confirm and move right one column."
+    - "To enter a formula, click the target cell, type '=' followed by the function (e.g., =SUM(A1:A10)), then press Enter."
+    - "Double-click a cell or press F2 to edit existing cell content. Single-click selects the cell but overwrites on typing."
+    - "Use the Name Box (top-left, shows 'A1') to navigate directly to a cell — type the cell reference and press Enter."
+    - "NEVER try to search the web from inside Google Sheets. This app is for spreadsheet editing only."
+    - "When entering data in multiple cells, work row by row using Tab, or column by column using Enter."
+    - "To select a range, click the first cell and drag to the last cell, or type the range in the Name Box (e.g., A1:D10)."
+    - "After creating a formula, verify the result appears in the cell. If you see an error like #REF! or #VALUE!, fix the formula."
+    - "Use sheet tabs at the bottom to switch between sheets. Click '+' to add a new sheet."
+
   url_patterns:
     home: "sheets.google.com"
     editor: "docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit"

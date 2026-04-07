@@ -90,6 +90,18 @@ navigation:
       - "Or right-click the message > Add Reaction"
       - "Type : in the message input to search emoji inline"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for server and channel communication only."
+    - "Before sending any message, verify the correct server and channel. Messages cannot be unsent in most cases."
+    - "Navigate by clicking a server icon in the far-left column first, then click the target text channel in the channel list."
+    - "Type messages in the message input at the bottom. Press Enter to send, Shift+Enter for a new line."
+    - "Use Cmd+K to quickly jump to any server, channel, or DM instead of scrolling through the server and channel lists."
+    - "Never click a voice channel unless the user explicitly asks to join voice — clicking connects immediately with no confirmation dialog."
+    - "When using threads, click the # icon or right-click a message to create a thread. Reply in the thread panel, not the main channel."
+    - "Use @username for mentions. Never use @everyone or @here unless the user specifically requests it — these notify all members."
+    - "To search within a channel, press Cmd+F. Use filters like from:user, has:link, has:file for precise results."
+    - "The DM home is accessed by clicking the Discord logo at the top of the server list. Do not confuse DMs with server channels."
+
   url_patterns:
     server_channel: "discord.com/channels/SERVER_ID/CHANNEL_ID"
     dm: "discord.com/channels/@me/DM_CHANNEL_ID"

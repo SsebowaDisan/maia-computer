@@ -61,6 +61,16 @@ navigation:
       - "Browse result cards with live preview thumbnails"
       - "Click a pen to view and edit it"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for creating and editing HTML, CSS, and JavaScript demos only."
+    - "Type code directly into the correct panel: HTML in the HTML panel, CSS in the CSS panel, JavaScript in the JS panel."
+    - "The live preview updates automatically as you type — do not look for a 'Run' button."
+    - "To add external libraries (jQuery, React, etc.), click the gear icon in the panel header and use the Settings dialog — do not add script tags manually."
+    - "Click 'Save' in the top bar to save your work. A CodePen account is required to save."
+    - "Use 'Fork' to create a copy of any pen for editing without affecting the original."
+    - "When searching for pens, use the search icon in the top navigation and type keywords."
+    - "Click pen cards in search results or the feed to open them in the editor."
+
   tips:
     - "The preview updates in real time as you type — useful for rapid prototyping"
     - "External libraries (jQuery, React, etc.) are added via Settings, not script tags"

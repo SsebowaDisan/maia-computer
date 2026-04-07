@@ -59,6 +59,16 @@ navigation:
       - "View upcoming meetings chronologically"
       - "Click any event to see details, reschedule, or cancel"
 
+  rules:
+    - "NEVER try to search the web from inside this app. This app is for managing Calendly scheduling only."
+    - "Click 'Event Types' in the navigation to see all configured booking templates with durations and links."
+    - "Click 'Scheduled Events' to view all upcoming and past meetings chronologically."
+    - "Copy the booking link from an event type card to share with others for scheduling."
+    - "NEVER create, modify, or delete event types without explicit user approval."
+    - "NEVER cancel or reschedule meetings without explicit user approval."
+    - "NEVER modify availability rules or integration settings without explicit user approval."
+    - "Click any scheduled event to see full details including attendee info, meeting link, and notes."
+
   tips:
     - "Event types are templates — creating one generates a reusable booking link"
     - "Availability rules control which times are offered — set them per event type or globally"
