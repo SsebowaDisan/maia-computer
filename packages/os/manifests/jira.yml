@@ -3,94 +3,42 @@ id: jira
 icon: "https://www.google.com/s2/favicons?domain=atlassian.com&sz=128"
 url: https://www.atlassian.com/software/jira
 category: developer
-ai_description: "Project tracking for agile teams. Manage sprints, stories, and bugs."
+ai_description: "Project management and issue tracking for agile teams."
+help_url: "https://support.atlassian.com/jira-software-cloud"
 
 navigation:
   overview: >
-    Jira is an agile project management tool for tracking issues, sprints, and workflows.
-    It uses boards (Kanban or Scrum) to visualize work in progress across team members.
-
+    Jira is Atlassian's project management tool used by 75,000+ companies. It supports Scrum and
+    Kanban workflows. Issues have types (Epic, Story, Task, Bug, Sub-task), statuses (To Do, In Progress,
+    Done), priorities, and custom fields. JQL (Jira Query Language) enables powerful searching.
   pages:
     board:
-      description: "The Kanban or Scrum board showing issues as cards in status columns."
-      layout:
-        - "Left sidebar: project name, Board, Backlog, Roadmap, Reports, Settings links"
-        - "Top: board name, search/filter bar, quick filters"
-        - "Center: vertical columns for each status (To Do, In Progress, In Review, Done), with issue cards in each"
-      status_columns:
-        text: "Vertical columns like To Do, In Progress, Done"
-        behavior: "Each column represents a workflow status. Issues appear as cards within their current status column. Drag cards between columns to change their status."
-      issue_card:
-        text: "Individual issue cards within columns"
-        behavior: "Shows issue key (e.g., PROJ-123), summary title, priority icon, assignee avatar, and story points. Click to open the full issue detail view."
-      quick_filters:
-        text: "Filter buttons above the board (Only My Issues, Recently Updated, etc.)"
-        behavior: "Click to toggle filters on the board. Shows only issues matching the filter criteria."
-
+      description: "Kanban or Scrum board showing issues as cards in columns (To Do, In Progress, Done)."
+      behavior: "Drag cards between columns to change status. Click a card to open issue detail. Filter bar at top."
     backlog:
-      description: "List of all issues not yet in the current sprint, plus sprint planning."
-      layout:
-        - "Top: sprint section (if using Scrum) showing current sprint issues"
-        - "Below: backlog section with all unassigned issues"
-        - "Each issue shows key, summary, type icon, priority, assignee, story points"
-      sprint_section:
-        text: "Sprint container at the top"
-        behavior: "Shows issues assigned to the current sprint. Click 'Start sprint' to begin a sprint. Drag issues from the backlog into the sprint."
-      backlog_list:
-        text: "Issues listed below the sprint"
-        behavior: "All unplanned issues. Drag to reorder priority. Drag into a sprint to schedule them."
-
+      description: "List of all issues not yet in a sprint (Scrum) or unstarted (Kanban)."
+      behavior: "Drag issues into a sprint. Right-click for quick actions. Create issues inline with '+ Create issue' at bottom."
     issue_detail:
-      description: "Full view of a single issue with all its fields and activity."
+      description: "Full issue view with summary, description, status, assignee, priority, labels, sprint, story points, linked issues, comments, activity log."
+    project_sidebar:
       layout:
-        - "Top: issue key and type icon, summary title (editable)"
-        - "Left: description, child issues/subtasks, activity log (comments and history)"
-        - "Right sidebar: Status dropdown, Assignee, Reporter, Priority, Sprint, Story Points, Labels, Due date"
-      status_dropdown:
-        text: "Status button in the right sidebar (e.g., 'To Do', 'In Progress')"
-        behavior: "Click to change the issue's status. Shows available transitions based on the workflow (e.g., To Do -> In Progress -> Done)."
-      comment_box:
-        text: "Comment input in the Activity section"
-        behavior: "Click to open a rich text editor. Type a comment with formatting, mentions, and attachments. Click 'Save' to post."
-      assignee_field:
-        text: "'Assignee' in the right sidebar"
-        behavior: "Click to assign the issue to a team member. Searchable dropdown of team members."
-
-    search_results:
-      description: "Results page from searching or using JQL filters."
-      layout:
-        - "Top: search/JQL input"
-        - "Center: list of matching issues with columns for key, summary, type, status, assignee"
-
+        - "Top: project name, star"
+        - "Sections: Board, Backlog, Timeline, Code, Project pages, Add item"
+        - "Bottom: Project settings"
   workflows:
     create_issue:
-      - "Click the blue 'Create' button in the top navigation"
-      - "A modal opens — select the Project and Issue Type (Bug, Story, Task, Epic)"
-      - "Fill in the Summary field (required) and Description"
-      - "Set optional fields: Assignee, Priority, Sprint, Labels, Story Points"
-      - "Click 'Create' at the bottom of the modal"
-
-    search_issues:
-      - "Click the search bar at the top (or press '/')"
-      - "Type a keyword or issue key (e.g., 'PROJ-123')"
-      - "Press Enter to see results"
-      - "For advanced queries, use JQL: 'project = PROJ AND status = \"In Progress\" AND assignee = currentUser()'"
-
-    update_status:
-      - "On the board, drag an issue card from one column to another"
-      - "Or open the issue and click the Status dropdown in the right sidebar"
-      - "Select the new status from the available transitions"
-
-    sprint_planning:
-      - "Go to the Backlog view in the left sidebar"
-      - "Drag issues from the Backlog section into the Sprint section"
-      - "Set story points on each issue to track capacity"
-      - "Click 'Start sprint' to begin the sprint with a name, goal, and dates"
-
+      - "Click blue 'Create' button (top nav) or press C"
+      - "Select project and issue type (Story, Task, Bug, Epic)"
+      - "Fill Summary (required), Description (optional, supports Markdown)"
+      - "Set Assignee, Priority, Labels, Sprint, Story Points"
+      - "Click 'Create'"
+    search_with_jql:
+      - "Click search bar or press /"
+      - "Type JQL: project = PROJ AND status = 'In Progress' AND assignee = currentUser()"
+      - "Common operators: =, !=, IN, NOT IN, ~(contains), ORDER BY"
+      - "Common fields: project, status, assignee, reporter, priority, created, updated, labels, sprint"
   tips:
-    - "Issue keys (like PROJ-123) are clickable from anywhere — type them in comments to auto-link"
-    - "JQL (Jira Query Language) enables powerful searches: 'assignee = currentUser() AND sprint in openSprints()'"
-    - "The board view is the quickest way to see team progress — drag cards to update status"
-    - "Use 'Quick filters' above the board to focus on specific types, assignees, or labels"
-    - "Child issues (subtasks) help break large stories into smaller, trackable pieces"
-    - "The Reports section provides burndown charts, velocity tracking, and sprint retrospective data"
+    - "JQL is the most powerful way to find issues: assignee = currentUser() AND sprint in openSprints()"
+    - "Use keyboard shortcut / to focus search from anywhere"
+    - "Epics group related stories — use the Roadmap view to see epic timelines"
+    - "Board columns map to workflow statuses — customize in Project Settings > Board"

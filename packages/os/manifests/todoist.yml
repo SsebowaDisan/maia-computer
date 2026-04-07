@@ -1,66 +1,27 @@
 name: Todoist
 id: todoist
 icon: "https://www.google.com/s2/favicons?domain=todoist.com&sz=128"
-url: https://app.todoist.com
+url: https://todoist.com
 category: productivity
-ai_description: "Manage tasks and to-do lists. Set priorities and deadlines."
+ai_description: "Task manager with natural language input"
+help_url: "https://todoist.com/help"
 
 navigation:
-  overview: >
-    Todoist is a task management app for organizing personal and work to-dos. Tasks are organized
-    in projects with priorities, due dates, labels, and natural language date parsing.
-
+  overview: "Todoist — Task manager with natural language input Key features: q=quick add, p1-p4 priorities, natural language dates, labels, filters, projects, sections, comments, Karma points"
   pages:
-    inbox:
-      description: "The default view showing tasks in your Inbox."
+    main:
+      description: "Main page after login showing primary interface."
       layout:
-        - "Left sidebar: Inbox, Today, Upcoming, Filters & Labels, Projects"
-        - "Center: task list with checkbox, task name, due date, and project tag"
-        - "Bottom: '+ Add task' button"
-      sidebar:
-        text: "Left navigation"
-        behavior: "Inbox shows uncategorized tasks. Today shows tasks due today. Upcoming shows a calendar view of upcoming tasks. Projects lists user-created project folders."
-      task_row:
-        text: "Individual task in the list"
-        behavior: "Circle checkbox on the left — click to complete. Task name in the center. Due date and project label on the right. Click the task name to edit details."
-      add_task:
-        text: "'+ Add task' button (or press 'q' for quick add)"
-        behavior: "Opens a text input. Type the task name. Set due date, priority, project, and labels using icons below the input. Press Enter or click 'Add task' to save."
-
-    today:
-      description: "Tasks due today and overdue tasks."
-      layout:
-        - "Center: tasks grouped as Overdue and Today"
-
-    project:
-      description: "Tasks within a specific project."
-      layout:
-        - "Center: task list filtered to the selected project"
-        - "Sections can be created to group tasks within a project"
-
+        - "Sidebar or top navigation with main sections"
+        - "Center content area with primary data"
+        - "Action buttons for creating/editing"
   workflows:
-    add_task:
-      - "Click '+ Add task' (or press 'q' for quick add)"
-      - "Type the task name"
-      - "Type a natural language date like 'tomorrow' or 'next Monday' in the date field"
-      - "Set priority (P1-P4) using the flag icon"
-      - "Press Enter to save"
-
-    complete_task:
-      - "Click the circle checkbox next to a task"
-      - "The task is marked complete and removed from view"
-      - "View completed tasks via the activity log or 'Show completed' option"
-
-    organize_tasks:
-      - "Create projects from the sidebar ('+ Add project')"
-      - "Assign tasks to projects when creating them"
-      - "Add labels for cross-project categorization"
-      - "Use sections within projects to group related tasks"
-
+    primary_action:
+      - "Navigate to the main section using sidebar or top nav"
+      - "Use the search function to find specific items"
+      - "Click items to view details"
+      - "Use create/add buttons for new entries"
   tips:
-    - "Natural language date parsing works in the date field: 'tomorrow', 'next Friday', 'every Monday', 'Jan 15'"
-    - "Priorities: P1 (urgent/red), P2 (high/orange), P3 (medium/blue), P4 (low/no color)"
-    - "The quick add shortcut 'q' opens a floating input from anywhere"
-    - "Today view is the best daily planning tool — shows all tasks due today plus overdue"
-    - "Recurring tasks support 'every day', 'every weekday', 'every 2 weeks', etc."
-    - "Filters let you create custom views like 'P1 tasks due this week'"
+    - "Use keyboard shortcuts where available for faster navigation"
+    - "Search is usually the fastest way to find anything"
+    - "q=quick add, p1-p4 priorities, natural language dates, labels, filters, projects, sections, comments, Karma points"

@@ -3,56 +3,25 @@ id: coda
 icon: "https://www.google.com/s2/favicons?domain=coda.io&sz=128"
 url: https://coda.io
 category: productivity
-ai_description: "All-in-one doc. Combine documents, spreadsheets, and apps."
+ai_description: "All-in-one doc with tables and automations"
+help_url: "https://help.coda.io"
 
 navigation:
-  overview: >
-    Coda is a document platform that combines text, tables, buttons, and automations into a
-    single doc. It opens to a gallery of your docs with options to create new ones.
-
+  overview: "Coda — All-in-one doc with tables and automations Key features: docs/pages, slash commands, packs (integrations), formulas, buttons, automations, cross-doc"
   pages:
-    home:
-      description: "The home page showing your docs and folders."
+    main:
+      description: "Main page after login showing primary interface."
       layout:
-        - "Top: '+ New doc' button, search bar"
-        - "Center: grid of doc cards with names, icons, and last edited times"
-      new_doc_button:
-        text: "'+ New doc' button"
-        behavior: "Creates a new blank doc and opens it. Type a title at the top, then add content below."
-      doc_cards:
-        text: "Cards representing each doc"
-        behavior: "Click to open the doc. Each doc can contain multiple pages."
-
-    editor:
-      description: "The doc editor with block-based content, tables, and interactive elements."
-      layout:
-        - "Left sidebar: page list within the doc"
-        - "Top: doc title, formatting toolbar"
-        - "Center: page content area with blocks (text, tables, buttons, charts)"
-      page_list:
-        text: "Left sidebar showing pages within the doc"
-        behavior: "Click a page to navigate to it. Docs can have many pages organized hierarchically."
-      content_area:
-        text: "Main content area"
-        behavior: "Click to place the cursor and type. Press '/' to open the slash command menu for inserting tables, buttons, formulas, charts, and other building blocks."
-      slash_menu:
-        text: "Type '/' in the content area"
-        behavior: "Opens the block insertion menu. Choose from text formatting, tables, views, buttons, automations, and integrations."
-
+        - "Sidebar or top navigation with main sections"
+        - "Center content area with primary data"
+        - "Action buttons for creating/editing"
   workflows:
-    create_doc:
-      - "Click '+ New doc' on the home page"
-      - "Type a title at the top"
-      - "Start typing content below"
-      - "Use '/' to insert tables, buttons, and other blocks"
-
-    search:
-      - "Press Cmd+K to open the search and command palette"
-      - "Type your query to find docs, pages, or content"
-      - "Click a result to navigate to it"
-
+    primary_action:
+      - "Navigate to the main section using sidebar or top nav"
+      - "Use the search function to find specific items"
+      - "Click items to view details"
+      - "Use create/add buttons for new entries"
   tips:
-    - "The '/' slash command menu is the primary way to add non-text content"
-    - "Tables in Coda are interactive databases with formulas, filters, and views"
-    - "Buttons can trigger automations — clicking a button can update data, send emails, etc."
-    - "Pages within a doc act like tabs — use them to organize different sections"
+    - "Use keyboard shortcuts where available for faster navigation"
+    - "Search is usually the fastest way to find anything"
+    - "docs/pages, slash commands, packs (integrations), formulas, buttons, automations, cross-doc"

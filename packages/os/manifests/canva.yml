@@ -1,77 +1,26 @@
 name: Canva
 id: canva
 icon: "https://www.google.com/s2/favicons?domain=canva.com&sz=128"
-url: https://www.canva.com
+url: https://canva.com
 category: productivity
-ai_description: "Design presentations, social media posts, logos, and graphics with templates."
+ai_description: "Online graphic design platform"
+help_url: "https://www.canva.com/help"
 
 navigation:
-  overview: >
-    Canva is a graphic design tool with templates for presentations, social media, logos,
-    and more. It opens to a home page with recent designs and template browsing.
-
+  overview: "Canva — Online graphic design platform Key features: template search, design types (presentation/social/doc/video), editor (left: templates/elements/text/uploads, center: canvas, top: toolbar), resize, brand kit"
   pages:
-    home:
-      description: "The home page with recent designs, templates, and a create button."
+    main:
+      description: "Main interface after loading."
       layout:
-        - "Top-right: purple 'Create a design' button"
-        - "Top center: search bar for finding templates"
-        - "Center: recent designs grid, recommended templates, and category sections"
-      create_button:
-        text: "Purple 'Create a design' button (top-right)"
-        behavior: "Opens a dropdown with design types: Presentation, Instagram Post, Poster, Logo, Video, Custom size, and more. Selecting one opens the editor."
-      search_bar:
-        text: "Search bar at top center"
-        behavior: "Type a keyword to search templates (e.g., 'birthday card', 'resume'). Results show template cards. Click a template to start editing from it."
-      recent_designs:
-        text: "Grid of recent design cards"
-        behavior: "Shows designs you've worked on recently. Click to open in the editor. Right-click for options: duplicate, move, share, delete."
-
-    editor:
-      description: "The full-screen design editor with canvas, side panels, and toolbar."
-      layout:
-        - "Left panel: tabs for Templates, Elements, Text, Uploads, Draw, Apps"
-        - "Center: the design canvas showing the current page/slide"
-        - "Top toolbar: undo/redo, resize, file name, download, share"
-        - "Bottom: page thumbnails (for multi-page designs like presentations)"
-      canvas:
-        text: "The main design area in the center"
-        behavior: "Click elements to select them. Drag to move. Resize with corner handles. Double-click text to edit. Click empty space to deselect."
-      templates_tab:
-        text: "'Templates' tab in left panel"
-        behavior: "Browse templates matching the current design format. Click a template to apply it to the current page."
-      elements_tab:
-        text: "'Elements' tab in left panel"
-        behavior: "Search and add shapes, lines, graphics, stickers, photos, and frames. Click or drag to add to the canvas."
-      text_tab:
-        text: "'Text' tab in left panel"
-        behavior: "Add headings, subheadings, and body text. Click a text style to add it to the canvas."
-      uploads_tab:
-        text: "'Uploads' tab in left panel"
-        behavior: "Upload your own images, videos, and audio files. Drag uploaded files onto the canvas."
-      download_button:
-        text: "'Share' or 'Download' button in top-right"
-        behavior: "Download the design as PNG, JPG, PDF, MP4, or other formats. Share via link or directly to social media."
-
+        - "Navigation at top or sidebar with main sections"
+        - "Center content area"
+        - "Action buttons for primary tasks"
   workflows:
-    create_from_template:
-      - "Search for a template using the home page search bar"
-      - "Click a template to open it in the editor"
-      - "Edit text by double-clicking text elements"
-      - "Replace images by clicking them and uploading new ones"
-      - "Download when finished"
-
-    create_from_scratch:
-      - "Click 'Create a design' and select a format (or 'Custom size')"
-      - "Use the Elements tab to add shapes, photos, and graphics"
-      - "Use the Text tab to add headings and body text"
-      - "Customize colors, fonts, and layout"
-      - "Download or share the finished design"
-
+    primary_action:
+      - "Use the main navigation to find what you need"
+      - "Search is usually available at the top"
+      - "Click items to view details or interact"
   tips:
-    - "Templates are the fastest way to create professional designs — search and customize"
-    - "Double-click text to edit it, single-click to select and move"
-    - "The Elements tab has millions of graphics — use the search bar within it to find specific items"
-    - "Page thumbnails at the bottom let you add and manage multiple pages (useful for presentations)"
-    - "Pro elements have a crown icon — they require a Canva Pro subscription"
-    - "Download supports multiple formats: PNG for images, PDF for print, MP4 for video"
+    - "Use keyboard shortcuts where available"
+    - "Search is the fastest way to find content"
+    - "template search, design types (presentation/social/doc/video), editor (left: templates/elements/text/uploads, center: canvas, top: toolbar), resize, brand kit"

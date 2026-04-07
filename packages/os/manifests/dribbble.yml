@@ -2,60 +2,25 @@ name: Dribbble
 id: dribbble
 icon: "https://www.google.com/s2/favicons?domain=dribbble.com&sz=128"
 url: https://dribbble.com
-category: productivity
-ai_description: "Design inspiration. Browse portfolios, shots, and creative work."
+category: media
+ai_description: "Design portfolio and inspiration platform"
+help_url: "https://support.dribbble.com"
 
 navigation:
-  overview: >
-    Dribbble is a design community for showcasing creative work. Designers share "shots" (design
-    samples), and the platform serves as a portfolio and inspiration source.
-
+  overview: "Dribbble — Design portfolio and inspiration platform Key features: shot grid (design thumbnails), shot detail (likes/views/comments/collections), search with filters, upload shot, following feed"
   pages:
-    home:
-      description: "The feed showing popular design shots in a masonry grid."
+    main:
+      description: "Main interface after loading."
       layout:
-        - "Top: search bar, navigation (Explore, Hire, Find Work), category tabs"
-        - "Center: masonry grid of design shot cards"
-      shot_card:
-        text: "Individual shot cards in the grid"
-        behavior: "Shows a thumbnail image, designer name, and like count. Hover to see additional options (like, save). Click to open the full shot view."
-      search_bar:
-        text: "Search input at the top"
-        behavior: "Type a keyword, style, or tool name. Results show matching shots in a grid."
-      category_tabs:
-        text: "Tabs like Popular, New & Noteworthy, Following"
-        behavior: "Filter the feed by popularity, recency, or your followed designers."
-
-    shot_detail:
-      description: "Full view of a single design shot."
-      layout:
-        - "Center: full-size shot image"
-        - "Below: designer info, description, tags, related shots"
-        - "Side: like, save, and share buttons"
-      like_button:
-        text: "Heart icon"
-        behavior: "Click to like the shot."
-
-    designer_profile:
-      description: "A designer's portfolio page."
-      layout:
-        - "Top: name, bio, location, followers"
-        - "Below: grid of their shots"
-
+        - "Navigation at top or sidebar with main sections"
+        - "Center content area"
+        - "Action buttons for primary tasks"
   workflows:
-    browse_designs:
-      - "Scroll the home feed to see popular shots"
-      - "Click category tabs to switch between Popular, New, and Following"
-      - "Click any shot to see it full-size"
-
-    search_inspiration:
-      - "Click the search bar"
-      - "Type a keyword (e.g., 'landing page', 'dark mode', 'dashboard')"
-      - "Browse the results grid"
-      - "Click shots to see full details and designer info"
-
+    primary_action:
+      - "Use the main navigation to find what you need"
+      - "Search is usually available at the top"
+      - "Click items to view details or interact"
   tips:
-    - "The Popular tab shows the most liked shots — great for seeing design trends"
-    - "Use color filters on search results to find designs matching a specific color palette"
-    - "Shots may be animated GIFs or videos — the full view shows the complete content"
-    - "Designer profiles show their full portfolio — useful for finding consistent style"
+    - "Use keyboard shortcuts where available"
+    - "Search is the fastest way to find content"
+    - "shot grid (design thumbnails), shot detail (likes/views/comments/collections), search with filters, upload shot, following feed"

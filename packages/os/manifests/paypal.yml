@@ -1,63 +1,27 @@
 name: PayPal
 id: paypal
 icon: "https://www.google.com/s2/favicons?domain=paypal.com&sz=128"
-url: https://www.paypal.com
+url: https://paypal.com
 category: finance
-ai_description: "Send and receive payments. Manage transactions and invoices."
+ai_description: "Online payments and money transfers"
+help_url: "https://www.paypal.com/us/cshelp"
 
 navigation:
-  overview: >
-    PayPal is an online payment platform for sending, receiving, and managing money.
-    It opens to a dashboard showing your balance and recent transactions.
-
+  overview: "PayPal — Online payments and money transfers Key features: dashboard balance, send money, request money, activity log, invoicing, checkout, business tools"
   pages:
-    dashboard:
-      description: "The home page showing balance and recent activity."
+    main:
+      description: "Main page after login showing primary interface."
       layout:
-        - "Top: navigation (Dashboard, Activity, Send & Request, Wallet)"
-        - "Center: balance card, Send/Request buttons, recent transactions"
-      balance_card:
-        text: "Balance display on the dashboard"
-        behavior: "Shows available and pending balances. Click to expand for multi-currency balances."
-      send_request_buttons:
-        text: "Send and Request buttons"
-        behavior: "Send opens a form to send money to an email/phone. Request opens a form to request payment from someone."
-      recent_transactions:
-        text: "Recent transactions list"
-        behavior: "Shows the latest transactions with type, name, amount, and date. Click 'Activity' in the nav for the full history."
-
-    activity:
-      description: "Full transaction history."
-      layout:
-        - "Top: search bar, date range filter, status filter"
-        - "Center: transaction list with type, name, amount, status, and date"
-      search_bar:
-        text: "Search input at top of Activity page"
-        behavior: "Search by name, email, or transaction ID."
-      transaction_row:
-        text: "Individual transactions"
-        behavior: "Click to see full details: amount, fees, sender/recipient, date, and transaction ID."
-
-    wallet:
-      description: "Your payment methods and balance details."
-      layout:
-        - "Center: linked bank accounts, cards, and balance breakdown"
-
+        - "Sidebar or top navigation with main sections"
+        - "Center content area with primary data"
+        - "Action buttons for creating/editing"
   workflows:
-    check_transactions:
-      - "Click 'Activity' in the top navigation"
-      - "Browse recent transactions or use the search bar"
-      - "Adjust the date range filter for older transactions"
-      - "Click any transaction for full details"
-
-    send_money:
-      - "Click 'Send' on the dashboard (or Send & Request in the nav)"
-      - "Enter the recipient's email or phone number"
-      - "Enter the amount"
-      - "Review and confirm the payment"
-
+    primary_action:
+      - "Navigate to the main section using sidebar or top nav"
+      - "Use the search function to find specific items"
+      - "Click items to view details"
+      - "Use create/add buttons for new entries"
   tips:
-    - "The Activity page loads with a default date range — expand it to find older transactions"
-    - "Pending transactions appear separately from completed ones"
-    - "Transaction IDs are useful for resolving disputes — find them in the transaction details"
-    - "The Wallet section shows all linked bank accounts and cards"
+    - "Use keyboard shortcuts where available for faster navigation"
+    - "Search is usually the fastest way to find anything"
+    - "dashboard balance, send money, request money, activity log, invoicing, checkout, business tools"

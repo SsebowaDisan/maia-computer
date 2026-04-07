@@ -3,64 +3,40 @@ id: stripe
 icon: "https://www.google.com/s2/favicons?domain=stripe.com&sz=128"
 url: https://dashboard.stripe.com
 category: finance
-ai_description: "Payment processing dashboard. Manage payments, subscriptions, and invoices."
+ai_description: "Payment processing platform. View payments, customers, subscriptions, and revenue."
+help_url: "https://docs.stripe.com"
 
 navigation:
   overview: >
-    Stripe is a payment processing platform. The dashboard shows revenue, payments, customers,
-    and subscriptions with tools for managing the entire payment lifecycle.
-
+    Stripe Dashboard is the control center for payment processing. It shows real-time payment data,
+    customer information, and financial reports. The dashboard has a test mode (orange header bar)
+    and live mode toggle. API keys are in Developers section.
   pages:
     dashboard:
-      description: "The home page showing revenue metrics and recent activity."
+      description: "Home showing payment volume chart, recent payments, and key metrics."
       layout:
-        - "Left sidebar: Payments, Balances, Customers, Products, Subscriptions, Invoices, Connect, Reports, Developers"
-        - "Center: revenue chart, gross volume, recent payments, activity feed"
-        - "Top-left: test/live mode toggle"
-      sidebar:
-        text: "Left navigation"
-        behavior: "Click any section to navigate. Payments shows transaction list. Customers shows customer records. Developers has API logs and webhooks."
-      mode_toggle:
-        text: "Test/Live mode switch (top-left area)"
-        behavior: "Switches between test mode (fake transactions for development) and live mode (real transactions). The dashboard color changes to indicate the active mode."
-      search:
-        text: "Search icon in the top bar (or press '/')"
-        behavior: "Search by payment ID, customer email, amount, or description. Results grouped by Payments, Customers, Invoices."
-
+        - "Top: Stripe logo, search bar, test/live mode toggle, notifications, settings"
+        - "Left sidebar: Home, Payments, Balances, Customers, Products, Subscriptions, Invoices, Payment links, Connect, Billing, Revenue recognition, Tax, Sigma, Radar, Developers, Settings"
+        - "Center: charts (gross volume, net revenue, new customers) and recent activity"
     payments:
-      description: "List of all payment transactions."
-      layout:
-        - "Center: table with status, amount, description, customer, and date columns"
-        - "Top: filter and date range options"
-      payment_row:
-        text: "Individual payment entries"
-        behavior: "Click to see full payment details: amount, customer, payment method, metadata, events timeline, and refund options."
-
-    customer_detail:
-      description: "Detail page for a single customer."
-      layout:
-        - "Top: customer name/email, balance"
-        - "Center: payment history, subscriptions, invoices, payment methods"
-
+      description: "List of all payment intents with status (Succeeded, Failed, Incomplete, Refunded)."
+      behavior: "Click a payment to see full details: amount, customer, payment method, timeline, metadata, logs."
+    customers:
+      description: "List of all customers with email, name, spend, and creation date."
+      behavior: "Click a customer to see their profile: payment methods, subscriptions, invoices, payment history."
+    developers:
+      description: "API keys, webhooks, logs, events."
+      api_keys: "Publishable key (pk_test_...) and Secret key (sk_test_...) for test mode. Click 'Reveal' to show secret key."
   workflows:
-    search_payments:
-      - "Press '/' to open search"
-      - "Type a payment ID, customer email, or amount"
-      - "Click a result for full details"
-
-    check_revenue:
-      - "The dashboard home page shows gross volume and recent activity"
-      - "Use date range selectors to view different periods"
-      - "Click 'Payments' in the sidebar for the full transaction list"
-
-    manage_customers:
-      - "Click 'Customers' in the sidebar"
-      - "Browse or search customer records"
-      - "Click a customer to see their payment history, subscriptions, and payment methods"
-
+    search_payment:
+      - "Click the search bar at the top or press /"
+      - "Type: payment amount, customer email, payment ID (pi_...), or description"
+      - "Click a result to view full payment details"
+    check_test_vs_live:
+      - "Look at the top bar — orange bar means TEST mode, no bar means LIVE mode"
+      - "Click 'Test mode' / 'Live mode' toggle in the top right to switch"
   tips:
-    - "Always verify test vs live mode — the mode toggle is at the top-left"
-    - "The '/' shortcut opens global search from any page"
-    - "Payment detail pages show a timeline of events (created, confirmed, succeeded, etc.)"
-    - "The Developers section has API logs for debugging integration issues"
-    - "Webhooks (Developers > Webhooks) show event deliveries and failures"
+    - "Test mode uses test API keys (pk_test_, sk_test_) — no real charges are made"
+    - "The Developers > Events section shows all webhook events in real time"
+    - "Use Radar for fraud detection rules and risk settings"
+    - "Sigma allows SQL queries against your Stripe data"

@@ -1,65 +1,26 @@
 name: Loom
 id: loom
 icon: "https://www.google.com/s2/favicons?domain=loom.com&sz=128"
-url: https://www.loom.com
+url: https://loom.com
 category: productivity
-ai_description: "Record and share video messages. Screen recording with narration."
+ai_description: "Video messaging and screen recording"
+help_url: "https://support.loom.com"
 
 navigation:
-  overview: >
-    Loom is a video messaging tool for recording screen, camera, or both. Recordings are
-    automatically uploaded and shareable via link. It opens to a library of your videos.
-
+  overview: "Loom — Video messaging and screen recording Key features: record button (screen/camera/both), library of recordings, video page (player/comments/transcript/reactions), sharing link, trimming editor"
   pages:
-    library:
-      description: "The home page showing your recorded and shared videos."
+    main:
+      description: "Main interface after loading."
       layout:
-        - "Top: 'New video' button, search bar"
-        - "Tabs: My Videos, Shared with me, All Videos"
-        - "Center: grid of video cards with thumbnails, titles, view counts, and dates"
-      new_video_button:
-        text: "'New video' or 'Record' button"
-        behavior: "Starts the recording flow. Choose mode: Screen and Camera, Screen Only, or Camera Only. Select screen/window to share. Click Record to begin."
-      search_bar:
-        text: "Search input at top"
-        behavior: "Type a video title to find specific recordings."
-      video_card:
-        text: "Individual video cards"
-        behavior: "Shows thumbnail, title, view count, and creation date. Click to open the video player page."
-      tabs:
-        text: "My Videos, Shared with me, All Videos"
-        behavior: "Filter the library by ownership: your recordings, videos shared with you, or all workspace videos."
-
-    player:
-      description: "Video player page with sharing options and analytics."
-      layout:
-        - "Center: video player"
-        - "Below: video title, share link, viewer analytics (who watched, for how long)"
-        - "Right: comments section"
-      share_link:
-        text: "Shareable link displayed on the player page"
-        behavior: "Copy and share this URL — recipients can watch the video without logging in."
-      analytics:
-        text: "Viewer analytics below the video"
-        behavior: "Shows who watched, how much they watched, and when."
-
+        - "Navigation at top or sidebar with main sections"
+        - "Center content area"
+        - "Action buttons for primary tasks"
   workflows:
-    record_video:
-      - "Click 'New video' in the library"
-      - "Choose recording mode (Screen + Camera, Screen Only, Camera Only)"
-      - "Select the screen or window to record"
-      - "Click Record — a countdown begins"
-      - "Click Stop when finished — the video uploads automatically"
-      - "Copy the share link to send to others"
-
-    find_video:
-      - "Use the search bar to search by title"
-      - "Or browse tabs (My Videos, Shared with me)"
-      - "Click a video card to open the player"
-
+    primary_action:
+      - "Use the main navigation to find what you need"
+      - "Search is usually available at the top"
+      - "Click items to view details or interact"
   tips:
-    - "Videos upload automatically after recording — there is no manual upload step"
-    - "Share links work without the recipient needing a Loom account"
-    - "Recording requires browser permissions for screen sharing and microphone"
-    - "Viewer analytics show exactly who watched your video and how much"
-    - "Videos can be trimmed and edited after recording from the player page"
+    - "Use keyboard shortcuts where available"
+    - "Search is the fastest way to find content"
+    - "record button (screen/camera/both), library of recordings, video page (player/comments/transcript/reactions), sharing link, trimming editor"

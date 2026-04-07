@@ -3,69 +3,48 @@ id: linear
 icon: "https://www.google.com/s2/favicons?domain=linear.app&sz=128"
 url: https://linear.app
 category: developer
-ai_description: "Create and manage issues. Track project progress. Update sprint status."
+ai_description: "Issue tracking and project management for software teams."
+help_url: "https://linear.app/docs"
 
 navigation:
   overview: >
-    Linear is a project management tool designed for software teams. It organizes work as issues
-    within teams and projects, with a fast keyboard-driven interface.
-
+    Linear is a keyboard-first issue tracker for software teams. It's designed for speed —
+    most actions have single-key shortcuts. Issues flow through states (Backlog → Todo →
+    In Progress → Done → Canceled). Issues belong to teams and can be grouped into projects,
+    cycles (sprints), and roadmaps.
   pages:
-    my_issues:
-      description: "The default view showing issues assigned to you."
+    sidebar:
       layout:
-        - "Left sidebar: Inbox, My Issues, team names (expandable), Views, Settings"
-        - "Center: issue list with status icons, titles, assignees, and priority indicators"
-      sidebar:
-        text: "Left panel with navigation"
-        behavior: "Inbox shows notifications. My Issues shows your assigned items. Click a team name to expand and see its Issues, Projects, Cycles, and Views."
-      issue_list:
-        text: "Rows of issues in the center"
-        behavior: "Each row shows a status icon (circle with color), issue ID, title, assignee avatar, and priority indicator. Click an issue to open its detail view."
-      create_button:
-        text: "'+' icon at top of sidebar (or press 'C')"
-        behavior: "Opens the new issue composer. Type a title, select team, set project, assignee, priority, and labels. Press Cmd+Enter to create."
-
+        - "Top: workspace name, search (Cmd+K), create issue (C), notifications bell"
+        - "Sections: My Issues, Inbox, Views, your Team(s) — each team has Issues, Projects, Cycles, Roadmaps"
+    issue_list:
+      description: "Main view showing issues in a filterable, sortable list."
+      grouping: "Issues can be grouped by Status, Priority, Assignee, Label, Project, or Cycle"
+      filters: "Click 'Filter' to add filter rules. Combine multiple filters."
     issue_detail:
-      description: "Full detail view of a single issue."
-      layout:
-        - "Top: issue ID and title (editable)"
-        - "Right sidebar: Status, Assignee, Priority, Project, Cycle, Labels, Due date"
-        - "Center: description editor, sub-issues, activity and comments"
-      status:
-        text: "Status field in the right sidebar"
-        behavior: "Click to change: Backlog, Todo, In Progress, Done, Cancelled. Changes reflect immediately on all views."
-      description:
-        text: "Description area below the title"
-        behavior: "Supports markdown editing. Add detailed information about the issue."
-
-    project:
-      description: "A project view showing all issues within a project."
-      layout:
-        - "Top: project name, progress bar, views (List, Board)"
-        - "Center: issues grouped by status"
-
+      description: "Full issue view with title, description (Markdown), status, priority, assignee, labels, project, cycle."
+      properties: "Right sidebar shows: Status, Priority (Urgent/High/Medium/Low/No priority), Assignee, Labels, Project, Cycle, Estimate, Due date"
   workflows:
     create_issue:
-      - "Press 'C' to open the issue composer"
-      - "Type the issue title"
-      - "Set team, project, assignee, and priority"
-      - "Press Cmd+Enter to create"
-
+      - "Press C anywhere (or Cmd+K then type 'Create issue')"
+      - "Type title, press Tab to move to description"
+      - "Set status, priority, assignee, labels using the dropdowns"
+      - "Press Cmd+Enter to save"
     search:
-      - "Press Cmd+K to open the command palette"
-      - "Type a query — results show issues, projects, and views"
-      - "Click a result or press Enter to navigate"
-
-    update_issue:
-      - "Open an issue by clicking it in any list"
-      - "Change status, assignee, priority, or other fields in the right sidebar"
-      - "Add comments in the activity section"
-
+      - "Press Cmd+K to open command palette"
+      - "Type to search issues, projects, or commands"
+  keyboard_shortcuts:
+    - "C — create issue"
+    - "Cmd+K — command palette / search"
+    - "J/K — move up/down in list"
+    - "X — select issue"
+    - "S — set status"
+    - "P — set priority"
+    - "A — set assignee"
+    - "L — set labels"
+    - "D — set due date"
+    - "Cmd+Shift+P — set project"
   tips:
-    - "Press 'C' anywhere to create a new issue — the fastest way"
-    - "Cmd+K opens the command palette for searching and navigating everything"
-    - "Keyboard shortcuts are extensive — Linear is designed for keyboard-first usage"
-    - "Cycles are Linear's equivalent of sprints — issues are assigned to cycles for time-boxed work"
-    - "Filters and views change which issues are visible — check active filters if an issue seems missing"
-    - "Sub-issues help break large items into smaller, trackable pieces"
+    - "Linear is fastest with keyboard — learn C, Cmd+K, S, P, A shortcuts"
+    - "Views let you save custom filtered lists for quick access"
+    - "Cycles are time-boxed sprints — drag issues into the active cycle"

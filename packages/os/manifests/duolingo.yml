@@ -1,64 +1,26 @@
 name: Duolingo
 id: duolingo
 icon: "https://www.google.com/s2/favicons?domain=duolingo.com&sz=128"
-url: https://www.duolingo.com
+url: https://duolingo.com
 category: other
-ai_description: "Learn languages with interactive lessons. Practice reading, writing, and speaking."
+ai_description: "Language learning gamified platform"
+help_url: "https://support.duolingo.com"
 
 navigation:
-  overview: >
-    Duolingo is a language learning platform with interactive lessons. It uses a gamified learning
-    path with exercises for vocabulary, grammar, reading, writing, and listening.
-
+  overview: "Duolingo — Language learning gamified platform Key features: home (skill tree/units organized by topic), lesson types (translate/match/listen/speak/fill), streaks (daily goal), hearts (mistake limit), leagues, XP, stories"
   pages:
-    learn:
-      description: "The main learning path showing lesson nodes and progress."
+    main:
+      description: "Main interface after loading."
       layout:
-        - "Left sidebar: Learn, Practice, Leaderboards, Shop, Profile links"
-        - "Center: vertical learning path with lesson nodes (circles) showing progression"
-        - "Top bar: streak count (fire icon), gems, hearts, and profile"
-      lesson_node:
-        text: "Circular lesson nodes on the learning path"
-        behavior: "The next available lesson is highlighted. Click it to see lesson details and a 'Start' button. Completed lessons show a gold/complete indicator."
-      streak_counter:
-        text: "Fire icon with number in the top bar"
-        behavior: "Shows your daily streak — consecutive days of practice. Maintaining streaks is a core motivation feature."
-      hearts:
-        text: "Heart icon with count in the top bar"
-        behavior: "Free users have limited hearts (attempts). Each mistake costs a heart. Hearts regenerate over time or can be refilled in the Shop."
-      sidebar:
-        text: "Left navigation"
-        behavior: "Learn returns to the lesson path. Practice offers review exercises. Leaderboards shows weekly competition. Shop lets you spend gems on power-ups. Profile shows your stats."
-
-    lesson:
-      description: "An active lesson with interactive exercises."
-      layout:
-        - "Top: progress bar showing how many exercises remain"
-        - "Center: exercise content (multiple choice, translation, matching, listening)"
-        - "Bottom: answer input or selection area, Check/Continue button"
-      exercise:
-        text: "Interactive exercise in the center"
-        behavior: "Each exercise presents a prompt — translate a sentence, select the correct word, match pairs, or type what you hear. Select or type your answer and click 'Check' to verify."
-      progress_bar:
-        text: "Progress bar at top of the lesson"
-        behavior: "Fills as you complete exercises. Shows how far through the lesson you are."
-
+        - "Navigation at top or sidebar with main sections"
+        - "Center content area"
+        - "Action buttons for primary tasks"
   workflows:
-    start_lesson:
-      - "Click the highlighted lesson node on the learning path"
-      - "Click 'Start' to begin the lesson"
-      - "Complete each exercise by selecting or typing answers"
-      - "Click 'Check' after each answer"
-      - "Complete all exercises to finish the lesson"
-
-    practice_review:
-      - "Click 'Practice' in the left sidebar"
-      - "Practice exercises review previously learned material"
-      - "Completing practice restores hearts and reinforces knowledge"
-
+    primary_action:
+      - "Use the main navigation to find what you need"
+      - "Search is usually available at the top"
+      - "Click items to view details or interact"
   tips:
-    - "Daily streaks encourage consistent practice — even a short session counts"
-    - "Lessons must be completed in order on the learning path"
-    - "Free users have limited hearts — practice mode restores hearts without losing them"
-    - "The Shop offers streak freezes (protect your streak on off days) purchasable with gems"
-    - "Listening exercises require audio — ensure your volume is on"
+    - "Use keyboard shortcuts where available"
+    - "Search is the fastest way to find content"
+    - "home (skill tree/units organized by topic), lesson types (translate/match/listen/speak/fill), streaks (daily goal), hearts (mistake limit), leagues, XP, stories"

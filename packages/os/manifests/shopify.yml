@@ -1,69 +1,27 @@
 name: Shopify
 id: shopify
-icon: "https://www.google.com/s2/favicons?domain=shopify.com&sz=128"
+icon: "https://www.google.com/s2/favicons?domain=admin.shopify.com&sz=128"
 url: https://admin.shopify.com
 category: finance
-ai_description: "E-commerce platform. Manage products, orders, and online store."
+ai_description: "E-commerce platform for online stores"
+help_url: "https://help.shopify.com"
 
 navigation:
-  overview: >
-    Shopify is an e-commerce platform for managing online stores. The admin dashboard provides
-    tools for products, orders, customers, analytics, and store customization.
-
+  overview: "Shopify — E-commerce platform for online stores Key features: admin sidebar (Home/Orders/Products/Customers/Analytics), theme editor, app store, shipping, payments, discounts"
   pages:
-    dashboard:
-      description: "The admin home page with store overview and sales metrics."
+    main:
+      description: "Main page after login showing primary interface."
       layout:
-        - "Left sidebar: Home, Orders, Products, Customers, Content, Analytics, Marketing, Discounts, Online Store, Settings"
-        - "Center: sales chart, recent orders, store performance metrics"
-        - "Top: search bar"
-      sidebar:
-        text: "Left navigation"
-        behavior: "Click any section to navigate. Sections expand to show sub-items. Orders shows order management. Products shows product catalog. Online Store has theme editor and pages."
-      search_bar:
-        text: "Search input at the top (or press '/')"
-        behavior: "Search for products, orders, customers, and admin pages. Results show matching items across all types."
-
-    orders:
-      description: "Order management page."
-      layout:
-        - "Top: tabs (All, Unfulfilled, Unpaid, Open)"
-        - "Center: order table with order number, date, customer, total, fulfillment status"
-      order_row:
-        text: "Individual order entries"
-        behavior: "Click to open order details: items, payment info, shipping address, and fulfillment status. 'Fulfill items' button starts the fulfillment process."
-
-    products:
-      description: "Product catalog management."
-      layout:
-        - "Center: product list with thumbnail, title, status (Active/Draft), inventory count, price"
-        - "Top: 'Add product' button"
-      add_product:
-        text: "'Add product' button"
-        behavior: "Opens the product creation form: title, description, images, price, variants, inventory, and SEO settings."
-
+        - "Sidebar or top navigation with main sections"
+        - "Center content area with primary data"
+        - "Action buttons for creating/editing"
   workflows:
-    manage_orders:
-      - "Click 'Orders' in the sidebar"
-      - "Use tabs to filter by status (Unfulfilled, Unpaid, etc.)"
-      - "Click an order to view full details"
-      - "Click 'Fulfill items' to process the shipment"
-
-    add_product:
-      - "Click 'Products' in the sidebar"
-      - "Click 'Add product'"
-      - "Fill in title, description, price, and upload images"
-      - "Set inventory and variants if applicable"
-      - "Click 'Save' — set status to Active to publish"
-
-    search:
-      - "Press '/' to focus the search bar"
-      - "Type product names, order numbers, or customer info"
-      - "Click a result to navigate directly"
-
+    primary_action:
+      - "Navigate to the main section using sidebar or top nav"
+      - "Use the search function to find specific items"
+      - "Click items to view details"
+      - "Use create/add buttons for new entries"
   tips:
-    - "The admin URL is admin.shopify.com — the storefront is a separate view"
-    - "Draft products are not visible to customers — set status to Active to publish"
-    - "The search bar (press '/') is the fastest way to find anything"
-    - "The Online Store section contains the theme editor for customizing store appearance"
-    - "Analytics shows sales, conversion rates, and traffic data"
+    - "Use keyboard shortcuts where available for faster navigation"
+    - "Search is usually the fastest way to find anything"
+    - "admin sidebar (Home/Orders/Products/Customers/Analytics), theme editor, app store, shipping, payments, discounts"

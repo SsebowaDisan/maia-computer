@@ -2,58 +2,25 @@ name: Pocket
 id: pocket
 icon: "https://www.google.com/s2/favicons?domain=getpocket.com&sz=128"
 url: https://getpocket.com
-category: media
-ai_description: "Save articles and videos to read later. Organize and discover content."
+category: productivity
+ai_description: "Save articles and read later"
+help_url: "https://support.mozilla.org/products/pocket"
 
 navigation:
-  overview: >
-    Pocket is a read-it-later service. Save articles and videos from the web to read offline
-    or later, organized with tags and a recommendation engine.
-
+  overview: "Pocket — Save articles and read later Key features: article list (My List), save URL button, tags, archive, favorites, clean reading view, text-to-speech, search, highlights"
   pages:
-    my_list:
-      description: "The main view showing all saved articles."
+    main:
+      description: "Main interface after loading."
       layout:
-        - "Left sidebar: My List, Archive, Favorites, Highlights, Tags, Discover"
-        - "Center: saved items as cards with title, source, and thumbnail"
-        - "Top: search bar, '+' save button"
-      article_card:
-        text: "Individual saved article cards"
-        behavior: "Shows title, source domain, and optional thumbnail. Click to open in Pocket's reader view. Hover for quick actions: archive, favorite, tag, delete."
-      save_button:
-        text: "'+' button in the navigation"
-        behavior: "Opens a URL input. Paste a link and press Enter to save it to your list."
-      search_bar:
-        text: "Search input at top"
-        behavior: "Search saved articles by title, URL, or tag."
-      sidebar:
-        text: "Left navigation"
-        behavior: "My List shows unread items. Archive shows previously archived items. Favorites shows starred items. Tags shows items by tag. Discover shows recommended articles."
-
-    reader:
-      description: "The clean reading view for a saved article."
-      layout:
-        - "Center: article content in a clean, distraction-free layout"
-        - "Top: back button, archive, favorite, tag, share buttons"
-
+        - "Navigation at top or sidebar with main sections"
+        - "Center content area"
+        - "Action buttons for primary tasks"
   workflows:
-    save_article:
-      - "Click the '+' button"
-      - "Paste a URL"
-      - "Press Enter — the article is saved to your list"
-
-    read_later:
-      - "Open My List to see saved articles"
-      - "Click an article to read it in Pocket's clean reader"
-      - "Archive it when done (removes from My List but keeps it saved)"
-
-    organize:
-      - "Add tags to articles by hovering and clicking the tag icon"
-      - "Favorite important articles with the star icon"
-      - "Use Tags in the sidebar to browse by category"
-
+    primary_action:
+      - "Use the main navigation to find what you need"
+      - "Search is usually available at the top"
+      - "Click items to view details or interact"
   tips:
-    - "Archived items are hidden from My List but not deleted — find them in Archive"
-    - "Tags help organize articles by topic for easy retrieval"
-    - "The Discover section recommends articles based on your reading history"
-    - "Pocket's reader view strips ads and formatting for clean reading"
+    - "Use keyboard shortcuts where available"
+    - "Search is the fastest way to find content"
+    - "article list (My List), save URL button, tags, archive, favorites, clean reading view, text-to-speech, search, highlights"

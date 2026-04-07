@@ -1,64 +1,27 @@
-name: Monday.com
+name: monday.com
 id: monday
 icon: "https://www.google.com/s2/favicons?domain=monday.com&sz=128"
 url: https://monday.com
 category: productivity
-ai_description: "Work management platform. Track projects, workflows, and tasks."
+ai_description: "Work management platform"
+help_url: "https://support.monday.com"
 
 navigation:
-  overview: >
-    Monday.com is a work management platform. Work is organized in boards with items (tasks) in
-    rows, grouped by status sections, with customizable columns for tracking.
-
+  overview: "monday.com — Work management platform Key features: boards, column types (status/people/date/numbers), automations, dashboards, integrations, Monday WorkDocs"
   pages:
-    home:
-      description: "The My Work view showing tasks assigned to you and workspace overview."
+    main:
+      description: "Main page after login showing primary interface."
       layout:
-        - "Left sidebar: workspaces, boards, dashboards, favorites"
-        - "Center: My Work view with tasks grouped by board and due date"
-      sidebar:
-        text: "Left panel with workspace hierarchy"
-        behavior: "Click workspaces to expand and see boards. Click a board to open it. Favorites shows starred boards."
-
-    board:
-      description: "A board showing items in a table-like grid grouped by status."
-      layout:
-        - "Top: board name, view tabs (Main Table, Kanban, Timeline, Calendar, Chart)"
-        - "Center: table grid with rows (items) grouped under status section headers"
-        - "Columns: Item name, Person, Status, Date, and custom columns"
-      item_row:
-        text: "Individual rows in the board"
-        behavior: "Each row is a work item. Click a cell to edit its value. The item name cell opens the item detail view. Status cells show colored labels — click to change."
-      add_item:
-        text: "'+ Add item' at the bottom of each status group"
-        behavior: "Click to add a new item. Type the name and press Enter. Fill in column values by clicking each cell."
-      status_groups:
-        text: "Colored section headers grouping items by status"
-        behavior: "Groups organize items by status (e.g., Working on it, Stuck, Done). Items are added within a specific group."
-      view_tabs:
-        text: "View tabs at top (Main Table, Kanban, Timeline, Calendar)"
-        behavior: "Switch how the same data is displayed. Main Table is the default grid. Kanban shows cards in columns. Timeline shows a Gantt chart."
-
+        - "Sidebar or top navigation with main sections"
+        - "Center content area with primary data"
+        - "Action buttons for creating/editing"
   workflows:
-    create_item:
-      - "Open a board from the sidebar"
-      - "Click '+ Add item' in the desired status group"
-      - "Type the item name and press Enter"
-      - "Click each cell in the row to set Person, Status, Date, etc."
-
-    search:
-      - "Click the search icon in the left sidebar (or press Cmd+F)"
-      - "Type keywords"
-      - "Results show matching items, boards, and updates"
-
-    update_status:
-      - "Click the Status cell on any item row"
-      - "Select a new status from the dropdown (Working on it, Stuck, Done, etc.)"
-      - "The color updates immediately"
-
+    primary_action:
+      - "Navigate to the main section using sidebar or top nav"
+      - "Use the search function to find specific items"
+      - "Click items to view details"
+      - "Use create/add buttons for new entries"
   tips:
-    - "Cells are directly editable — click any cell to change its value"
-    - "Items are added within a status group — the group determines the item's initial status"
-    - "Boards belong to workspaces — switch workspaces in the sidebar if a board is missing"
-    - "The Timeline view is useful for seeing overlapping tasks and deadlines visually"
-    - "Automations can trigger actions when status changes, dates arrive, or items are created"
+    - "Use keyboard shortcuts where available for faster navigation"
+    - "Search is usually the fastest way to find anything"
+    - "boards, column types (status/people/date/numbers), automations, dashboards, integrations, Monday WorkDocs"

@@ -1,71 +1,26 @@
 name: Coursera
 id: coursera
 icon: "https://www.google.com/s2/favicons?domain=coursera.org&sz=128"
-url: https://www.coursera.org
+url: https://coursera.org
 category: other
-ai_description: "Online courses from universities. Learn skills and earn certificates."
+ai_description: "Online learning platform with university courses"
+help_url: "https://www.coursera.support"
 
 navigation:
-  overview: >
-    Coursera is an online learning platform offering courses, specializations, and degree programs
-    from universities and companies. It opens to a browse page with recommended courses.
-
+  overview: "Coursera — Online learning platform with university courses Key features: course catalog (search/filters: subject/level/language/duration), course page (about/syllabus/reviews/enroll), video player, assignments, certificates, degrees"
   pages:
-    browse:
-      description: "The home page showing recommended courses, popular topics, and featured programs."
+    main:
+      description: "Main interface after loading."
       layout:
-        - "Top: search bar, Explore dropdown, My Learning link, profile"
-        - "Center: recommended courses, trending topics, featured specializations"
-      search_bar:
-        text: "Search input at the top"
-        behavior: "Type a subject, skill, or course name. Press Enter to see results."
-      explore_dropdown:
-        text: "'Explore' in top navigation"
-        behavior: "Opens a dropdown with subject categories (Data Science, Computer Science, Business, etc.). Click a category to browse courses in that field."
-
-    search_results:
-      description: "Results page showing matching courses and programs."
-      layout:
-        - "Left: filter sidebar (Subject, Level, Language, Duration, Partner)"
-        - "Center: course cards with title, provider, rating, and enrollment info"
-      course_card:
-        text: "Individual course cards"
-        behavior: "Shows course title, university/company name, star rating, number of reviews, and duration. Click to open the course detail page."
-      filters:
-        text: "Filter sidebar on the left"
-        behavior: "Check boxes to filter by subject, difficulty level (Beginner, Intermediate, Advanced), language, and duration."
-
-    course_detail:
-      description: "Full detail page for a course."
-      layout:
-        - "Top: course title, provider, rating, enrollment count, 'Enroll for Free' button"
-        - "Center: course description, syllabus, instructor info, skills gained"
-        - "Below: reviews, related courses"
-      enroll_button:
-        text: "'Enroll for Free' or 'Enroll' button"
-        behavior: "Starts the enrollment process. Some courses offer a free audit option (link below the main button) for accessing course materials without certification."
-
-    my_learning:
-      description: "Your enrolled courses and progress."
-      layout:
-        - "Center: cards for each enrolled course showing progress bar, next lesson, and completion percentage"
-
+        - "Navigation at top or sidebar with main sections"
+        - "Center content area"
+        - "Action buttons for primary tasks"
   workflows:
-    search_courses:
-      - "Click the search bar at the top"
-      - "Type a subject or skill"
-      - "Press Enter and use filters to narrow results"
-      - "Click a course card to see its details"
-
-    enroll_in_course:
-      - "Open a course detail page"
-      - "Click 'Enroll for Free' (or look for the 'Audit' link for free access)"
-      - "The course appears in 'My Learning'"
-      - "Start watching lectures and completing assignments"
-
+    primary_action:
+      - "Use the main navigation to find what you need"
+      - "Search is usually available at the top"
+      - "Click items to view details or interact"
   tips:
-    - "Free audit mode gives access to video lectures but not graded assignments or certificates"
-    - "Specializations are sequences of related courses — enrolling in a specialization covers all courses in it"
-    - "Course ratings and review counts help identify high-quality courses"
-    - "The syllabus section on the course page shows exactly what each week covers"
-    - "Financial aid is available for paid courses through an application on the enrollment page"
+    - "Use keyboard shortcuts where available"
+    - "Search is the fastest way to find content"
+    - "course catalog (search/filters: subject/level/language/duration), course page (about/syllabus/reviews/enroll), video player, assignments, certificates, degrees"

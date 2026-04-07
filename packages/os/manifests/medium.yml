@@ -3,76 +3,24 @@ id: medium
 icon: "https://www.google.com/s2/favicons?domain=medium.com&sz=128"
 url: https://medium.com
 category: media
-ai_description: "Read and write articles. Follow writers and publications."
+ai_description: "Online publishing platform for articles"
+help_url: "https://help.medium.com"
 
 navigation:
-  overview: >
-    Medium is a publishing platform for long-form articles and essays. It shows a personalized
-    feed of recommended articles with options to search, follow writers, and read publications.
-
+  overview: "Medium — Online publishing platform for articles Key features: reading view (clap up to 50x, highlight text, comment), write (title/body/publish), publications, paywall for member-only content"
   pages:
-    home_feed:
-      description: "The main page showing recommended articles based on your interests."
+    main:
+      description: "Main interface after loading."
       layout:
-        - "Top: Medium logo, search icon, Write button, notifications bell, profile avatar"
-        - "Center: article feed with cards showing title, author, publication, preview text, and reading time"
-        - "Right sidebar: staff picks, recommended topics (tags), suggested writers"
-      search_icon:
-        text: "Magnifying glass icon in the top navigation"
-        behavior: "Click to expand a search input. Type a query and press Enter. Results show articles, people, publications, and tags in separate tabs."
-      article_card:
-        text: "Individual article cards in the feed"
-        behavior: "Each card shows the article title, author name, publication name, preview image, and estimated reading time. Click the title or card to open the full article."
-      topic_tags:
-        text: "Topic tags in the right sidebar or below the navigation"
-        behavior: "Click a tag (e.g., Technology, Science, Programming) to see articles in that topic."
-      write_button:
-        text: "'Write' button in the top navigation"
-        behavior: "Opens the Medium editor to compose and publish a new article."
-
-    article:
-      description: "A full article page with the complete text."
-      layout:
-        - "Top: article title (large heading), author info (name, photo, publish date, reading time)"
-        - "Center: article body with text, images, code blocks, and embedded media"
-        - "Bottom/Side: clap button (hand icon), comment count, bookmark, share"
-        - "Below article: author bio, more from this publication, related articles"
-      clap_button:
-        text: "Hand icon (clap) at the bottom or floating on the left side"
-        behavior: "Click to 'clap' for the article — this is Medium's equivalent of a like. You can clap multiple times (up to 50) to show appreciation."
-      bookmark_button:
-        text: "Bookmark icon"
-        behavior: "Saves the article to your reading list for later."
-      comment_section:
-        text: "Response/comments section at the bottom of the article"
-        behavior: "Click to view reader responses. Add your own response by clicking 'Write a response'."
-      paywall_banner:
-        text: "Membership banner that may appear during reading"
-        behavior: "Some articles are behind Medium's paywall. Free readers get a limited number of articles per month. The banner appears asking to subscribe for unlimited access."
-
+        - "Navigation at top or sidebar with main sections"
+        - "Center content area"
+        - "Action buttons for primary tasks"
   workflows:
-    search_articles:
-      - "Click the search icon in the top navigation"
-      - "Type your topic or keyword in the search input"
-      - "Press Enter to see results"
-      - "Click the 'Stories' or 'Articles' tab to filter for written content"
-      - "Click an article to read it"
-
-    browse_by_topic:
-      - "Click a topic tag on the home page or in the sidebar"
-      - "Browse the curated feed of articles in that topic"
-      - "Click any article card to read the full text"
-
-    read_article:
-      - "Click an article from the feed or search results"
-      - "Read the article — scroll down for the full content"
-      - "Clap (hand icon) to show appreciation"
-      - "Bookmark (flag icon) to save for later"
-
+    primary_action:
+      - "Use the main navigation to find what you need"
+      - "Search is usually available at the top"
+      - "Click items to view details or interact"
   tips:
-    - "Reading time is shown on every article card — useful for choosing what to read"
-    - "Clapping multiple times (up to 50) signals stronger appreciation to the author"
-    - "Some articles are paywalled after a monthly limit — private/incognito mode may help for occasional access"
-    - "Follow specific writers or publications to customize your feed"
-    - "The 'Staff Picks' section in the sidebar highlights editorially curated quality articles"
-    - "Medium supports code blocks, making it popular for technical tutorials"
+    - "Use keyboard shortcuts where available"
+    - "Search is the fastest way to find content"
+    - "reading view (clap up to 50x, highlight text, comment), write (title/body/publish), publications, paywall for member-only content"

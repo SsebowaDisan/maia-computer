@@ -1,54 +1,27 @@
 name: Coinbase
 id: coinbase
 icon: "https://www.google.com/s2/favicons?domain=coinbase.com&sz=128"
-url: https://www.coinbase.com
+url: https://coinbase.com
 category: finance
-ai_description: "Cryptocurrency exchange. Buy, sell, and manage crypto assets."
+ai_description: "Cryptocurrency exchange and wallet"
+help_url: "https://help.coinbase.com"
 
 navigation:
-  overview: >
-    Coinbase is a cryptocurrency exchange for buying, selling, and managing digital assets.
-    It shows your portfolio value, asset holdings, and market data.
-
+  overview: "Coinbase — Cryptocurrency exchange and wallet Key features: portfolio (total balance, asset list with 24h change), trade (buy/sell/convert), price charts, recurring buys, staking, wallet, earn rewards"
   pages:
-    portfolio:
-      description: "The home page showing your total portfolio value and asset holdings."
+    main:
+      description: "Main page after login showing primary interface."
       layout:
-        - "Top: navigation with Home, Trade, Earn, Pay links and 'Buy / Sell' button"
-        - "Center: total portfolio value with chart showing value over time"
-        - "Below: list of held assets with name, balance, current price, and 24h change"
-      trade_button:
-        text: "'Buy / Sell' button in the top navigation"
-        behavior: "Opens the trade modal. Choose Buy or Sell, select the cryptocurrency, enter the amount, choose payment method, review fees, and confirm."
-      portfolio_chart:
-        text: "Portfolio value chart"
-        behavior: "Shows your total portfolio value over time. Click date range options (1H, 1D, 1W, 1M, 1Y, ALL) to change the time period."
-      asset_list:
-        text: "List of held cryptocurrencies"
-        behavior: "Each row shows coin name, balance, current price, and 24-hour price change. Click an asset to see its detailed price chart and transaction history."
-
-    asset_detail:
-      description: "Detail page for a single cryptocurrency."
-      layout:
-        - "Top: asset name, current price, 24h change"
-        - "Center: interactive price chart with time range selectors"
-        - "Below: market stats, your holdings, and transaction history"
-
+        - "Sidebar or top navigation with main sections"
+        - "Center content area with primary data"
+        - "Action buttons for creating/editing"
   workflows:
-    check_portfolio:
-      - "The home page shows your total value and all holdings"
-      - "Click an asset to see its price chart and history"
-      - "Use date range selectors on charts to view different time periods"
-
-    buy_crypto:
-      - "Click 'Buy / Sell' in the top navigation"
-      - "Select 'Buy' and choose the cryptocurrency"
-      - "Enter the amount in USD or crypto units"
-      - "Select payment method"
-      - "Review the preview (including fees) and click 'Confirm'"
-
+    primary_action:
+      - "Navigate to the main section using sidebar or top nav"
+      - "Use the search function to find specific items"
+      - "Click items to view details"
+      - "Use create/add buttons for new entries"
   tips:
-    - "The preview step before trade confirmation shows exact fees — always review before confirming"
-    - "24-hour price change gives a quick sense of recent market movement"
-    - "Transaction history on each asset shows all your buys, sells, and transfers"
-    - "Market prices fluctuate — the execution price may differ slightly from the displayed price"
+    - "Use keyboard shortcuts where available for faster navigation"
+    - "Search is usually the fastest way to find anything"
+    - "portfolio (total balance, asset list with 24h change), trade (buy/sell/convert), price charts, recurring buys, staking, wallet, earn rewards"

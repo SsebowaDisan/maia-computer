@@ -1,102 +1,26 @@
 name: Reddit
 id: reddit
 icon: "https://www.google.com/s2/favicons?domain=reddit.com&sz=128"
-url: https://www.reddit.com
+url: https://reddit.com
 category: social
-ai_description: "Browse communities, posts, and comments. Search topics and discussions."
+ai_description: "Community forums and discussions"
+help_url: "https://support.reddithelp.com"
 
 navigation:
-  overview: >
-    Reddit is a platform of communities (subreddits) organized by topic. The home page shows
-    a feed of popular posts, and each subreddit has its own feed, rules, and community.
-
+  overview: "Reddit — Community forums and discussions Key features: front page (Hot/New/Top/Rising), subreddits r/, posts (upvote/downvote/comments), threaded comments, search, create post, awards, karma"
   pages:
-    home_feed:
-      description: "The main page showing a feed of posts from popular subreddits or your subscriptions."
+    main:
+      description: "Main interface after loading."
       layout:
-        - "Top: Reddit logo, search bar (center), create post (+) button, notifications bell, profile avatar"
-        - "Below top bar: sort tabs — Best, Hot, New, Top, Rising"
-        - "Center: vertical list of post cards"
-        - "Right sidebar: trending topics, community recommendations, and Reddit premium info"
-      search_bar:
-        text: "Search input at top center"
-        behavior: "Click to focus, type a query, press Enter. Results page shows tabs for Posts, Comments, Communities, People. Use 'r/' prefix to search for subreddit names directly."
-      sort_tabs:
-        text: "Best, Hot, New, Top, Rising tabs above the feed"
-        behavior: "Best is algorithmic ranking. Hot shows trending posts. New shows most recent. Top shows highest voted (with time filter: Today, This Week, This Month, This Year, All Time). Rising shows posts gaining momentum."
-      post_card:
-        text: "Each post in the feed"
-        behavior: "Shows subreddit name (r/name), author (u/name), title, vote count (left), content preview (text, image, or link), comment count. Click the title to open the full post with comments."
-      create_post_button:
-        text: "+ icon or 'Create Post' button"
-        behavior: "Opens the post creation page. Choose a subreddit, write a title, add text/image/link/poll content, and submit."
-
-    subreddit:
-      description: "A community page showing posts specific to one topic."
-      layout:
-        - "Top: subreddit banner and icon, subreddit name and description, member count, Join/Leave button"
-        - "Below: sort tabs (Hot, New, Top, Rising), post list"
-        - "Right sidebar: community rules, description, related subreddits, moderators"
-      join_button:
-        text: "'Join' button at the top of the subreddit"
-        behavior: "Subscribes to the subreddit so its posts appear in your home feed."
-      community_rules:
-        text: "Rules section in the right sidebar"
-        behavior: "Lists the subreddit's posting rules. Useful for understanding what kind of content is expected."
-
-    post_page:
-      description: "A single post with its full content and comment thread."
-      layout:
-        - "Top: post title, author, subreddit, timestamp"
-        - "Below title: full post content (text, image, video, or embedded link)"
-        - "Below content: vote buttons, comment count, share, save, more options"
-        - "Below: comment thread — threaded/nested comments with vote counts"
-      comment_thread:
-        text: "Nested comments below the post"
-        behavior: "Comments are threaded — replies are indented under their parent. Click the vertical line or collapse icon to collapse a thread. Click 'reply' on any comment to respond to it specifically."
-      vote_buttons:
-        text: "Up arrow and down arrow on posts and comments"
-        behavior: "Upvote increases the score, downvote decreases it. The score appears between the arrows. Voting affects how prominently content is displayed."
-      sort_comments:
-        text: "Sort dropdown above comments (Best, Top, New, Controversial, Q&A)"
-        behavior: "Changes the order of comments. Best is the default algorithmic sort. New shows most recent. Top shows highest voted."
-
-    search_results:
-      description: "Search results page with tabs for different content types."
-      layout:
-        - "Top: search bar with your query"
-        - "Tabs: Posts, Comments, Communities, People"
-        - "Below tabs: sort and time filters"
-        - "Center: matching results"
-      time_filter:
-        text: "Time filter (Past Hour, Past 24 Hours, Past Week, Past Month, Past Year, All Time)"
-        behavior: "Filters results by when they were posted. Useful for finding recent discussions on a topic."
-
+        - "Navigation at top or sidebar with main sections"
+        - "Center content area"
+        - "Action buttons for primary tasks"
   workflows:
-    search_topic:
-      - "Click the search bar at the top"
-      - "Type your topic and press Enter"
-      - "Click the 'Posts' tab to see relevant posts"
-      - "Use the time filter to find recent discussions"
-      - "Click a post title to read the full discussion and comments"
-
-    browse_subreddit:
-      - "Search for a subreddit name (e.g., 'r/technology') or click a subreddit link on any post"
-      - "The subreddit page loads with its feed of posts"
-      - "Use sort tabs (Hot, Top, New) to find the content you want"
-      - "Click any post to read it and its comments"
-
-    read_comments:
-      - "Open a post by clicking its title"
-      - "Scroll down to the comment section"
-      - "Comments are nested — follow the indentation to track conversation threads"
-      - "Use the sort dropdown to switch between Best, New, or Top comments"
-      - "Collapse long threads by clicking the vertical line on the left of a comment"
-
+    primary_action:
+      - "Use the main navigation to find what you need"
+      - "Search is usually available at the top"
+      - "Click items to view details or interact"
   tips:
-    - "Adding 'reddit' to Google searches often finds relevant Reddit discussions on any topic"
-    - "The 'Top > All Time' sort on a subreddit shows the most popular posts ever in that community"
-    - "Reddit search can be limited to a subreddit by searching within the subreddit page"
-    - "Comments with gold/platinum awards are often high-quality or particularly helpful"
-    - "The 'save' button on posts and comments bookmarks them for later — find saved items in your profile"
-    - "Many subreddits have wiki pages with curated information — check the sidebar or menu for links"
+    - "Use keyboard shortcuts where available"
+    - "Search is the fastest way to find content"
+    - "front page (Hot/New/Top/Rising), subreddits r/, posts (upvote/downvote/comments), threaded comments, search, create post, awards, karma"

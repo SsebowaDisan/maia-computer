@@ -1,67 +1,26 @@
 name: Behance
 id: behance
 icon: "https://www.google.com/s2/favicons?domain=behance.net&sz=128"
-url: https://www.behance.net
-category: productivity
-ai_description: "Creative portfolio platform. Browse and showcase design projects."
+url: https://behance.net
+category: media
+ai_description: "Creative portfolio showcase platform"
+help_url: "https://help.behance.net"
 
 navigation:
-  overview: >
-    Behance is Adobe's creative portfolio platform. It showcases design projects from graphic
-    design, photography, UI/UX, illustration, and more.
-
+  overview: "Behance — Creative portfolio showcase platform Key features: discover feed, project pages (multi-image showcase), creative fields filter, appreciation (like button), search, profile/portfolio"
   pages:
-    discover:
-      description: "The home feed showing curated and trending creative projects."
+    main:
+      description: "Main interface after loading."
       layout:
-        - "Top: navigation with Discover, Live, Hiring, Assets links and search icon"
-        - "Center: grid of project cards with cover images, titles, creator names, and like counts"
-        - "Top filter: category and field filters"
-      project_card:
-        text: "Individual project cards in the grid"
-        behavior: "Shows cover image, project title, creator name, and appreciation (like) count. Click to open the full project page."
-      search:
-        text: "Search icon in the top navigation"
-        behavior: "Click to open the search bar. Type keywords, styles, or creator names. Results show projects, people, and assets."
-      category_nav:
-        text: "Category links (Graphic Design, Photography, UI/UX, etc.)"
-        behavior: "Click to filter the feed by creative discipline."
-
-    project:
-      description: "A full project page showing all assets and details."
-      layout:
-        - "Top: project title, creator info"
-        - "Center: vertically scrolling gallery of project images, videos, and text"
-        - "Bottom: tools used, tags, related projects, comments"
-      project_images:
-        text: "Images and media in the project"
-        behavior: "Scroll down to see all assets. Projects can be very long with many images."
-      appreciate_button:
-        text: "Thumbs up / heart icon"
-        behavior: "Click to 'appreciate' (like) the project."
-
-    profile:
-      description: "A creator's profile page."
-      layout:
-        - "Top: profile photo, name, bio, follower count, location"
-        - "Below: grid of their projects"
-      follow_button:
-        text: "'Follow' button"
-        behavior: "Follow the creator to see their new projects in your feed."
-
+        - "Navigation at top or sidebar with main sections"
+        - "Center content area"
+        - "Action buttons for primary tasks"
   workflows:
-    browse_projects:
-      - "Scroll the Discover feed to see trending and curated projects"
-      - "Click category filters to focus on a specific creative field"
-      - "Click any project card to view the full project"
-
-    search_creative_work:
-      - "Click the search icon in the top navigation"
-      - "Type a keyword, style, or creator name"
-      - "Browse results and click projects to view them"
-
+    primary_action:
+      - "Use the main navigation to find what you need"
+      - "Search is usually available at the top"
+      - "Click items to view details or interact"
   tips:
-    - "Projects can be very long — scroll fully to see all the creator's assets"
-    - "The Discover feed is algorithmically curated, showing trending and featured work"
-    - "Creative Fields filters help narrow browsing to specific disciplines"
-    - "Tools used and tags at the bottom of projects help discover similar work"
+    - "Use keyboard shortcuts where available"
+    - "Search is the fastest way to find content"
+    - "discover feed, project pages (multi-image showcase), creative fields filter, appreciation (like button), search, profile/portfolio"
